@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <record id="view_order_form_inherited" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="presta_order_ref"/>
+                     <field name="to_be_exported" readonly="0"/>
+                    <field name="prestashop_order" invisible="1"/>
+                    <!--<field name="shop_id"/>-->
+                    <!--<field name="shop_ids" readonly="1"/>-->
+                    <field name="token" invisible="1" />
+                </xpath>
+
+                <xpath expr="//field[@name='price_unit']" position="after">
+                    <field name='gift'/>
+                    <field name='gift_message' attrs="{'invisible':[('gift','!=',True)]}"/>
+                    <field name='wrapping_cost' attrs="{'invisible':[('gift','!=',True)]}"/>
+                </xpath>
+                <xpath expr="//page[2]" position="after">
+                    <page string="Prestashop Shipping Information">
+                        <form string="Shipping">
+                            <group col="2">
+                                <field name='order_status'/>
+                                <separator colspan="2" string="Shipping Details"/>
+                                <!--<field name="total_wght_product"/>-->
+                                <field name="carrier_prestashop" required="0"/>
+                                <separator colspan="2" string="Payment Details"/>
+                                <field name="pretsa_payment_mode"/>
+                                <field name="pretsa_payment_mode"/>
+                            </group>
+                        </form>
+                    </page>
+                    <page string="Prestashop Messages">
+                        <group name="messages">
+                            <field name="message_order_ids" nolabel="1" colspan="1">
+                                <tree >
+                                    <field name="customer_id"/>
+                                    <field name="employee_id"/>
+                                    <field name="status"/>
+                                    <field name="email" invisible="1"/>
+                                    <field name="new_id" invisible="1"/>
+                                    <field name="msg_prest_id" invisible="1"/>
+                                    <field name="token" invisible="1" />
+                                    <field name="message"/>
+                                    <button name="upload_customer_message" string="Send Message" type="object" attrs="{'invisible':[('msg_prest_id','!=',0)]}"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="customer_id"/>
+                                        <field name="employee_id"/>
+                                        <field name="status"/>
+                                        <field name="email" invisible="1"/>
+                                        <field name="new_id" invisible="1"/>
+                                        <field name="msg_prest_id" invisible="1"/>
+                                        <field name="token" invisible="1" />
+                                        <field name="message"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+<!--Manish new done group by shop working-->
+        <!-- by me<record id="view_order_filter_inherited" model="ir.ui.view">
+            <field name="name">sale.order.filter</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/filter[3]" position="after">
+                    <filter string="Shop" domain="[]" context="{'group_by':'shop_id'}"/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <record id="inherit_action_quotations" model="ir.actions.act_window">
+            <field name="name">Quotations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+<!--             <field name="view_type">form</field>
+ -->            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="context">{}</field>
+            <field name="domain">[('state','in',('draft','sent','cancel')),('presta_id', '!=', False)]</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a Quotation, the first step of a new sale.
+                </p><p>
+                Your next actions should flow efficiently: confirm the Quotation
+                to a Sale Order, then create the Invoice and collect the Payment.
+            </p><p>
+                Note that once a Quotation becomes a Sale Order, it will be moved
+                from the Quotations list to the Sales Order list.
+            </p>
+            </field>
+        </record>
+
+        <record id="inherit_action_orders" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+<!--             <field name="view_type">form</field>
+ -->            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="context">{'show_sale': True,'default_to_be_exported' : True}</field>
+
+            <field name="domain">['|',('to_be_exported', '=', True),('state', 'not in', ('draft', 'sent', 'cancel')),('presta_id', '!=', False)]</field>
+        </record>
+
+
+
+        <record id="inherit_product_template_action" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">kanban,tree,form</field>
+<!--             <field name="view_type">form</field>
+ -->            <field name="domain">['|',('presta_id', '!=', False),('product_to_be_exported', '=', True)]</field>
+            <!--<field name="view_id" ref="product.product_template_kanban_view"/>-->
+            <field name="context">{"search_default_filter_to_sell":1,'default_product_to_be_exported': True}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new product.
+                </p><p>
+                You must define a product for everything you sell, whether it's a physical product, a consumable or a service you offer to  customers.
+            </p><p>
+                The product form contains information to simplify the sale process: price, notes in the quotation, accounting data, procurement methods, etc.
+            </p>
+            </field>
+        </record>
+
+
+
+        <record id="inherit_action_partner_form" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+<!--             <field name="view_type">form</field>
+ -->            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{"search_default_customer":1}</field>
+            <field name="domain">[('prestashop_customer','=',True)]</field>
+            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a contact in your address book.
+                </p><p>
+                Odoo helps you easily track all activities related to
+                a customer; discussions, history of business opportunities,
+                documents, etc.
+            </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>
