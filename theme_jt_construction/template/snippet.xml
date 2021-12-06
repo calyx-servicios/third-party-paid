@@ -1,0 +1,1446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="snippets" inherit_id="website.snippets">
+		<xpath expr="//div[@id='snippet_structure']" position="before">
+			<div id="snippet_structure" class="o_panel">
+				<div class="o_panel_header">Construction</div>
+				<div class="o_panel_body">
+                    <t t-snippet="theme_jt_construction.about_company_snippets" t-thumbnail="/theme_jt_construction/static/src/assets/images/const1.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.our_services_snippets" t-thumbnail="/theme_jt_construction/static/src/assets/images/const2.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.quote_snippets" t-thumbnail="/theme_jt_construction/static/src/assets/images/const3.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.our_team_snippets" t-thumbnail="/theme_jt_construction/static/src/assets/images/const4.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.our_project_snippets" t-thumbnail="/theme_jt_construction/static/src/assets/images/const5.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.counter_snippets" t-thumbnail="/theme_jt_construction/static/src/assets/images/const6.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.our_testimonial_snippets" t-thumbnail="/theme_jt_construction/static/src/assets/images/const7.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.blog_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const8.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.header_intro_page_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const9.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.our_mission_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const10.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.our_journey_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const11.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.mission_section_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const12.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.our_partner_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const13.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.side_menu_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const14.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.faq_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const15.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.history_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const16.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.partnerships_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const17.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.leadership_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const18.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.project_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const19.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.project_related_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const20.png">
+                    </t>
+                    <!-- <t t-snippet="theme_jt_construction.project_related_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/about_us.png">
+                    </t> -->
+                    <t t-snippet="theme_jt_construction.blog_snippet" t-thumbnail="/theme_jt_construction/static/src/assets/images/const21.png">
+                    </t>
+                    <t t-snippet="theme_jt_construction.testimonial_snippets" t-thumbnail="/theme_jt_construction/static/src/assets/images/const22.png">
+                    </t>
+                </div>
+			</div>
+		</xpath>
+	</template>
+	<template id="about_company_snippets" name="About Comapny Snippets">
+		<section id="about_us" class="padding ptb-xs-40 gray-bg">
+			<div class="container">
+				<div class="row d-flex align-items-center">
+					<div class="col-md-12 col-lg-7 about-left">
+
+						<div class="sec_hedding">
+							<h2><span>About </span>Comppany</h2>
+							<span class="b-line l-left"></span>
+						</div>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim aquis
+							nostrud exercitatio ullamco laboris nisi ut aliquip ex ea commodo consequat orem ipsum dolor sit ametconsectetur adipis cing elit sed do
+							eiusmod tempor incididunt
+						</p>
+						<div class="row mt-30">
+							<div class="col-lg-4 col-md-4 process mb-40">
+								<div class="icon-lf float-left">
+									<i class="ion-ios-paperplane-outline"></i>
+								</div>
+								<div class="right-txt float-right">
+									<h3>Quick Help</h3>
+									<p>
+										Lorem Ipsum Dolor Sit Amet
+									</p>
+								</div>
+							</div>
+
+							<div class="col-lg-4 col-md-4 process mb-40">
+								<div class="icon-lf float-left">
+									<i class="ion-ios-bolt-outline"></i>
+								</div>
+								<div class="right-txt float-right">
+									<h3>Country</h3>
+									<p>
+										Lorem Ipsum Dolor Sit Amet
+									</p>
+								</div>
+							</div>
+
+							<div class="col-lg-4 col-md-4 process mb-40">
+								<div class="icon-lf float-left">
+									<i class="ion-ios-gear-outline"></i>
+								</div>
+								<div class="right-txt float-right">
+									<h3>Events</h3>
+									<p>
+										Lorem Ipsum Dolor Sit Amet
+									</p>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-md-12 col-lg-5">
+						<img src="/theme_jt_construction/static/src/assets/images/about_us.png" class="repo-full" alt="" />
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+	</template>
+	<template id="our_services_snippets" name="Our Services">
+		<section id="service_section" class="padding ptb-xs-40">
+			<div class="container-fluid">
+				<div class="row text-center mb-30">
+					<div class="col-sm-12">
+						<div class="sec_hedding">
+							<h2><span>Our</span> Service</h2>
+							<span class="b-line"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xl-3 col-lg-4 col-md-6 mb-xs-30 margin_bott">
+						<div class="maine_box">
+							<div class="items_picher">
+								<img src="/theme_jt_construction/static/src/assets/images/service/img_1.jpg" alt="" />
+							</div>
+
+							<div class="box_detail">
+								<div class="use_detail">
+									<div class="event_detail">
+										<i class="flaticon-tool-1"></i>
+									</div>
+								</div>
+								<div class="datail_show">
+									<h3>Construction Management</h3>
+									<p>
+										Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+									</p>
+									<a href="#!">Read More</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-lg-4 col-md-6 mb-xs-30 margin_bott">
+						<div class="maine_box">
+							<div class="items_picher">
+								<img src="/theme_jt_construction/static/src/assets/images/service/img_2.jpg" alt="" />
+							</div>
+
+							<div class="box_detail">
+								<div class="use_detail">
+									<div class="event_detail">
+										<i class="flaticon-tool"></i>
+									</div>
+								</div>
+								<div class="datail_show">
+									<h3>Reconstruction Services</h3>
+									<p>
+										Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+									</p>
+									<a href="#!">Read More</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-lg-4 col-md-6 mb-xs-30">
+						<div class="maine_box">
+							<div class="items_picher">
+								<img src="/theme_jt_construction/static/src/assets/images/service/img_3.jpg" alt="" />
+							</div>
+
+							<div class="box_detail">
+								<div class="use_detail">
+									<div class="event_detail">
+										<i class="flaticon-worker-of-construction-working-with-a-shovel-beside-material-pile"></i>
+									</div>
+								</div>
+								<div class="datail_show">
+									<h3>Building Information</h3>
+									<p>
+										Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+									</p>
+									<a href="#!">Read More</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="col-xl-3 col-lg-4 col-md-6 margin_reponsive">
+						<div class="maine_box">
+							<div class="items_picher">
+								<img src="/theme_jt_construction/static/src/assets/images/service/img_4.jpg" alt="" />
+							</div>
+
+							<div class="box_detail">
+								<div class="use_detail">
+									<div class="event_detail">
+										<i class="flaticon-helmet"></i>
+									</div>
+								</div>
+								<div class="datail_show">
+									<h3>Project Partnering</h3>
+									<p>
+										Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+									</p>
+									<a href="#!">Read More</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+		<!-- OUR_Service END-->
+	</template>
+	<template id="quote_snippets" name="Quick Quote">
+		<!--Quick Quote Section start-->
+		<section id="feadback" class="padding ptb-xs-40 img_bg1">
+			<div class="container">
+				<div class="row text-center mb-30  light-color">
+					<div class="col-sm-12">
+						<div class="sec_hedding">
+							<h2><span>Quick</span> Quote</h2>
+							<span class="b-line"></span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+
+					<div class=" col-md-12 col-lg-12">
+
+						<!-- Contact FORM -->
+						<form class="quote-form" id="contact">
+							<!-- IF MAIL SENT SUCCESSFULLY -->
+							<div id="success">
+								<div role="alert" class="alert alert-success">
+									<strong>Thanks</strong> for using our template. Your message has been sent.
+								</div>
+							</div>
+							<!-- END IF MAIL SENT SUCCESSFULLY -->
+							<div class="row">
+								<div class="col-md-4 col-lg-4">
+									<div class="form-field">
+										<input class="input-sm form-full" id="name" type="text" name="form-name" placeholder="Your Name"/>
+									</div>
+								</div>
+
+								<div class="col-md-4 col-lg-4">
+									<div class="form-field">
+										<input class="input-sm form-full" id="email" type="text" name="form-email" placeholder="Email"/>
+									</div>
+								</div>
+
+								<div class="col-md-4 col-lg-4">
+									<div class="form-field">
+										<input class="input-sm form-full" id="sub" type="text" name="form-subject" placeholder="Subject"/>
+									</div>
+								</div>
+
+								<div class="col-md-10 col-lg-10">
+									<div class="form-field">
+										<textarea class="form-full" id="message" rows="7" name="form-message" placeholder="Your Message"></textarea>
+									</div>
+								</div>
+								<div class="col-md-2 col-lg-2 d-flex align-items-center">
+									<button class="bnt btn-text sent-but mt-xs-30" type="button" id="submit" name="button">
+										Send
+									</button>
+								</div>
+							</div>
+						</form>
+						<!-- END Contact FORM -->
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+		<!--Quick Quote Section end-->
+	</template>
+	<template id="our_team_snippets" name="Our Team">
+		<!-- Team Section -->
+		<section id="team" class="padding ptb-xs-40 text-center gray-bg">
+			<div class="container">
+				<div class="row text-center mb-30">
+					<div class="col-sm-12">
+						<div class="sec_hedding">
+							<h2><span>Our</span> Team</h2>
+							<span class="b-line"></span>
+						</div>
+					</div>
+				</div>
+
+				<!--Team Carousel -->
+				<div class="row mt-10">
+					<div class="col-3 team_head">
+						<div class="team_view">
+							<figure>
+								<img src="/theme_jt_construction/static/src/assets/images/team/01.jpg" alt=""/>
+							</figure>
+							<div class="team_hover text-center">
+								<div>
+									<ul>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-twitter"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-google-plus"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-instagram"></i></a>
+										</li>
+									</ul>
+									<p class="text-white">
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="team_discoption text-center mt-15">
+							<span class="team_name">Kevin Peterson</span>
+							<span class="postion">Engineer</span>
+						</div>
+					</div>
+					<div class="col-3 team_head">
+						<div class="team_view">
+							<figure>
+								<img src="/theme_jt_construction/static/src/assets/images/team/02.jpg" alt=""/>
+							</figure>
+
+							<div class="team_hover text-center">
+								<div>
+									<ul>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-twitter"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-google-plus"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-instagram"></i></a>
+										</li>
+									</ul>
+									<p class="text-white">
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="team_discoption text-center mt-15">
+							<span class="team_name">Kevin Peterson</span>
+							<span class="postion">Engineer</span>
+						</div>
+					</div>
+					<div class="col-3 team_head">
+						<div class="team_view">
+							<figure>
+								<img src="/theme_jt_construction/static/src/assets/images/team/03.jpg" alt=""/>
+							</figure>
+
+							<div class="team_hover text-center">
+								<div>
+									<ul>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-twitter"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-google-plus"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-instagram"></i></a>
+										</li>
+									</ul>
+									<p class="text-white">
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="team_discoption text-center mt-15">
+							<span class="team_name">Kevin Peterson</span>
+							<span class="postion">Engineer</span>
+						</div>
+					</div>
+					<div class="col-3 team_head">
+						<div class="team_view">
+							<figure>
+								<img src="/theme_jt_construction/static/src/assets/images/team/04.jpg" alt=""/>
+							</figure>
+
+							<div class="team_hover text-center">
+								<div>
+									<ul>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-facebook"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-twitter"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-google-plus"></i></a>
+										</li>
+										<li>
+											<a href="#" target="_blank" class="text-white"><i class="fa fa-instagram"></i></a>
+										</li>
+									</ul>
+									<p class="text-white">
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="team_discoption text-center mt-15">
+							<span class="team_name">Kevin Peterson</span>
+							<span class="postion">Engineer</span>
+						</div>
+					</div>
+				</div>
+				<!--End Team Carousel -->
+			</div>
+		</section>
+		<!-- End Team Section -->
+	</template>
+	<template id="our_project_snippets" name="Our Project">
+		<!-- Project_Section -->
+		<section class="padding ptb-xs-40">
+			<div class="container">
+				<div class="row text-center mb-30">
+					<div class="col-sm-12">
+						<div class="sec_hedding">
+							<h2><span>Our</span> Project</h2>
+							<span class="b-line"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-4 mb-sm-30 mb-xs-30">
+						<div class="position_relative img-scale max_size">
+							<figure class="picher_doc">
+								<img src="/theme_jt_construction/static/src/assets/images/project/img_11.jpg" alt=""/>
+								<div class="opacity-medium bg-extra-black"></div>
+								<div class="date_top">
+									<span>Office Building</span>
+								</div>
+								<div class="inner_text">
+									<h3 class="show_tital">Big bugets for startup</h3>
+
+									<p class="display_block">
+										A Rich Heritage &amp; Brand History
+									</p>
+									<button class="btn btn-text" type="button" name="button">
+										view More
+									</button>
+								</div>
+							</figure>
+						</div>
+					</div>
+
+					<div class="col-lg-4 mb-sm-30 mb-xs-30">
+						<div class="position_relative img-scale max_size">
+							<figure class="picher_doc">
+								<img src="/theme_jt_construction/static/src/assets/images/project/img_22.jpg" alt=""/>
+								<div class="opacity-medium bg-extra-black"></div>
+								<div class="date_top">
+									<span>Shopping Mall</span>
+								</div>
+								<div class="inner_text">
+									<h3 class="show_tital">Big bugets for startup</h3>
+
+									<p class="display_block">
+										A Rich Heritage &amp; Brand History
+									</p>
+									<button class="btn btn-text" type="button" name="button">
+										view More
+									</button>
+								</div>
+							</figure>
+						</div>
+					</div>
+
+					<div class="col-lg-4">
+						<div class="position_relative img-scale max_size">
+							<figure class="picher_doc">
+								<img src="/theme_jt_construction/static/src/assets/images/project/img_33.jpg" alt=""/>
+								<div class="opacity-medium bg-extra-black"></div>
+								<div class="date_top">
+									<span>Private Estate</span>
+								</div>
+								<div class="inner_text">
+									<h3 class="show_tital">Big bugets for startup</h3>
+
+									<p class="display_block">
+										A Rich Heritage &amp; Brand History
+									</p>
+									<button class="btn btn-text" type="button" name="button">
+										view More
+									</button>
+								</div>
+							</figure>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- Project_Section_End-->
+	</template>
+	<template id="counter_snippets" name="Counter">
+		<section>
+		<!-- Counter Section -->
+		<div class="fact-counter-wrapper padding ptb-xs-40">
+			<div class="container text-center">
+				<div class="row">
+					<div class="col-lg-3 col-md-6 mb-sm-30 mb-xs-30">
+						<div class="single-fact">
+							<div class="icon-boxed">
+								<i class="ion-ios-list"></i>
+							</div>
+							<span class="counter" data-count="3562">0</span>
+							<p>
+								Total Projects
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6 mb-sm-30 mb-xs-30">
+						<div class="single-fact">
+							<div class="icon-boxed">
+								<i class="ion-happy"></i>
+							</div>
+							<span class="counter" data-count="1054">0</span>
+							<p>
+								Happy Clients
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6 mb-xs-30">
+						<div class="single-fact">
+							<div class="icon-boxed">
+								<i class="ion-person-stalker"></i>
+							</div>
+							<span class="counter" data-count="400">0</span>
+							<p>
+								Active Member
+							</p>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-6">
+						<div class="single-fact">
+							<div class="icon-boxed">
+								<i class="ion-trophy"></i>
+							</div>
+							<span class="counter" data-count="67">0</span>
+							<p>
+								Won Award
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Counter Section End-->
+	</section>
+	</template>
+	<template id="our_testimonial_snippets" name="Testimonial">
+		<!--Testimonial Section Start-->
+		<section class="testimonial_wrapper__block padding ptb-xs-40">
+			<div class="container">
+				<div class="row text-center mb-30">
+					<div class="col-sm-12">
+						<div class="sec_hedding">
+							<h2><span>Our</span> Testimonial</h2>
+							<span class="b-line"></span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="">
+							<div class="single_carousel pt-40">
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod [..]
+								</p>
+								<div class="author_img__block">
+									<div class="author_tablecell__block">
+										<img src="/theme_jt_construction/static/src/assets/images/author.jpg" alt=""/>
+										<p>
+											John Doe <span>CEO</span>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--Testimonial Section End-->
+	</template>
+	<template id="blog_snippet" name="Blog">
+		<!-- Blog -->
+		<section id="blog" class="blog padding ptb-xs-40">
+			<div class="container">
+				<!-- section head -->
+				<div class="row text-center mb-30">
+					<div class="col-sm-12">
+						<div class="sec_hedding">
+							<h2><span>Our</span> Blog</h2>
+							<span class="b-line"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+
+					<!-- posts -->
+					<div class="col-lg-4 mb-sm-30 mb-xs-30">
+						<div class="post">
+							<div class="post-img img-fluid">
+								<a href="#!"> <img src="/theme_jt_construction/static/src/assets/images/blog/home_blog_1.jpg" alt="image"/> </a>
+							</div>
+							<div class="post-content">
+								<a href="#!" class="blog_tital"> Blog Title Goes Here</a>
+								<p>
+									Lorem ipsum dolor sit amet, consec tetur elit. In maximus ligula semper.
+								</p>
+								<a href="#!" class="read_more">Read More..</a>
+
+								<div class="info">
+									<ul>
+										<li>
+											<a href="#"> <span class="ion-person"></span> Admin </a>
+										</li>
+										<li>
+											<a href="#!"> <span class="icon-clock"></span> 6 August </a>
+										</li>
+										<li>
+											<a href="#!"> <span class="flaticon-doctor-stethoscope"></span> Health Care </a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-4 mb-sm-30 mb-xs-30">
+						<div class="post">
+							<div class="post-img img-fluid">
+								<a href="#!"> <img src="/theme_jt_construction/static/src/assets/images/blog/home_blog_2.jpg" alt="image"/> </a>
+							</div>
+							<div class="post-content">
+								<a href="#!" class="blog_tital"> Blog Title Goes Here</a>
+								<p>
+									Lorem ipsum dolor sit amet, consec tetur elit. In maximus ligula semper.
+								</p>
+								<a href="#!" class="read_more">Read More..</a>
+
+								<div class="info">
+									<ul>
+										<li>
+											<a href="#"> <span class="ion-person"></span> Admin </a>
+										</li>
+										<li>
+											<a href="#!"> <span class="icon-clock"></span> 6 August </a>
+										</li>
+										<li>
+											<a href="#!"> <span class="flaticon-doctor-stethoscope"></span> Health Care </a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-4">
+						<div class="post">
+							<div class="post-img img-fluid">
+								<a href="#!"> <img src="/theme_jt_construction/static/src/assets/images/blog/home_blog_3.jpg" alt="image"/> </a>
+							</div>
+							<div class="post-content">
+								<a href="#!" class="blog_tital"> Blog Title Goes Here</a>
+								<p>
+									Lorem ipsum dolor sit amet, consec tetur elit. In maximus ligula semper.
+								</p>
+								<a href="#!" class="read_more">Read More..</a>
+
+								<div class="info">
+									<ul>
+										<li>
+											<a href="#"> <span class="ion-person"></span> Admin </a>
+										</li>
+										<li>
+											<a href="#!"> <span class="icon-clock"></span> 6 August </a>
+										</li>
+										<li>
+											<a href="#!"> <span class="flaticon-doctor-stethoscope"></span> Health Care </a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+<!-- Blog End -->
+	</template>
+	<template id="header_intro_page_snippet" name="Header Intro Page">
+		<!-- Intro Section -->
+		<section class="inner-intro bg-img light-color overlay-before parallax-background">
+			<div class="container">
+				<div class="row title">
+					<div class="title_row">
+						<h1 data-title="About"><span>About</span></h1>
+						<div class="page-breadcrumb">
+							<a>Home</a>/ <span>About</span>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</section>
+		<!-- Intro Section End-->
+	</template>
+	<template id="our_mission_snippet" name="Our Mission">
+		<!-- Intro Section End-->
+		<section>
+			<!-- About Section -->
+			<div id="about-section" class="padding pt-xs-40">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 col-lg-8">
+							<div class="block-title v-line">
+								<h2><span>Our</span> MISSION</h2>
+								<p class="italic">
+									Aenean suscipit eget mi act
+								</p>
+							</div>
+							<div class="text-content">
+								<p>
+									Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt.
+									Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt.
+								</p>
+							</div>
+							<hr class="divider"/>
+							<div class="post-content">
+								<div class="post-img">
+									<img class="img-responsive" src="/theme_jt_construction/static/src/assets/images/blog.jpg" alt="Photo"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-lg-4">
+							<div class="dark-bg our-vision light-color padding-40">
+								<div class="block-title">
+									<h2><span>Our</span> VISION</h2>
+									<p class="italic">
+										Aenean suscipit eget mi act
+									</p>
+								</div>
+								<p>
+									Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt.
+									Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- About Section End-->
+		</section>
+	</template>
+	<template id="our_journey_snippet" name="Our Journey">
+		<section>
+		<!-- Story Section -->
+		<div id="story-section" class="ptb ptb-xs-60 gray-bg">
+			<div class="container">
+				<div class="row ">
+					<div class="col-md-12 col-lg-12">
+						<div class="block-title v-line mb-35">
+							<h2><span>Our</span> JOURNEY</h2>
+							<p class="italic">
+								Aenean suscipit eget mi act
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-12">
+						<div class="ui-timline-container">
+							<div class="ui-timeline">
+								<div class="tl-item">
+									<div class="tl-body">
+										<div class="tl-entry">
+											<div class="tl-caption">
+												<a href="javascript:;" class="btn btn-primary btn-block">JOURNEY</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tl-item">
+									<div class="tl-body">
+										<div class="tl-entry">
+											<div class="tl-time">
+												2013
+											</div>
+											<div class="tl-icon btn-icon-round btn-icon btn-icon-thin btn-info">
+												<i class="fa fa-asterisk"></i>
+											</div>
+											<div class="tl-content">
+												<h4 class="tl-tile text-primary">Go hiking</h4>
+												<p>
+													Consectetur adipisicing elit. Error, accusantium debitis voluptatem dolore excepturi ducimus fugiat nulla perspiciatis quo ipsum non eligendi nisi veniam maxime in quas atque omnis cumque!
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tl-item alt">
+									<div class="tl-body">
+										<div class="tl-entry">
+											<div class="tl-time">
+												2014
+											</div>
+											<div class="tl-icon btn-icon-round btn-icon btn-icon-thin btn-warning">
+												<i class="fa fa-shopping-cart"></i>
+											</div>
+											<div class="tl-content">
+												<h4 class="tl-tile text-danger">Buy some toys</h4>
+												<p>
+													Ullam, commodi, modi, impedit nostrum odio sit odit necessitatibus accusantium enim voluptates culpa cupiditate cum pariatur a recusandae tenetur aspernatur at beatae.
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tl-item">
+									<div class="tl-body">
+										<div class="tl-entry">
+											<div class="tl-time">
+												2015
+											</div>
+											<div class="tl-icon btn-icon-round btn-icon btn-icon-thin btn-success">
+												<i class="fa fa-camera"></i>
+											</div>
+											<div class="tl-content">
+												<h4 class="tl-tile text-warning">Soluta nihil</h4>
+												<p>
+													Incidunt, molestias odio soluta nihil accusantium sit nostrum doloremque. Recusandae, ullam, odio consequatur facere totam reiciendis similique dicta explicabo!
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tl-item alt">
+									<div class="tl-body">
+										<div class="tl-entry">
+											<div class="tl-time">
+												2016
+											</div>
+											<div class="tl-icon btn-icon-round btn-icon btn-icon-thin btn-danger">
+												<i class="fa fa-check"></i>
+											</div>
+											<div class="tl-content">
+												<h4 class="tl-tile text-success">Odio sit odit necessitatibus</h4>
+												<p>
+													Ullam, commodi, modi, impedit nostrum odio sit odit necessitatibus accusantium enim voluptates culpa cupiditate cum pariatur a recusandae tenetur aspernatur at beatae.
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</template>
+	<template id="mission_section_snippet" name="Misson Section">
+		<section>
+		<!-- Mission Section -->
+		<div id="mission-section" class="ptb ptb-xs-60">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-lg-12">
+						<div class="block-title v-line mb-35 ">
+							<h2><span>Thought </span> Leaders</h2>
+							<p class="italic">
+								Aenean suscipit eget mi act
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-12">
+						<div class="about-block clearfix">
+							<div class="fl width-25per box-shadow mt-15 mb-xs-15">
+								<img class="img-responsive" src="/theme_jt_construction/static/src/assets/images/about-1.jpg" alt="Photo"/>
+							</div>
+							<div class="text-box pt-45 pb-15 pl-70 pl-xs-0 width-75per fl">
+								<div class="box-title">
+									<h3>We Are On Mission</h3>
+								</div>
+								<div class="text-content">
+									<p>
+										Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget..
+										Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget
+									</p>
+									<p>
+										Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget..
+										Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="about-block mb-40  clearfix">
+							<div class="fr width-25per box-shadow-l mt-15 mb-xs-15">
+								<img class="img-responsive" src="/theme_jt_construction/static/src/assets/images/about-2.jpg" alt="Photo"/>
+							</div>
+							<div class="text-box text-right text-xs-left pt-45 pr-70 pr-xs-0 width-75per fl">
+								<div class="box-title">
+									<h3>We Are On Mission</h3>
+								</div>
+								<div class="text-content">
+									<p>
+										Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget..
+										Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget
+									</p>
+									<p>
+										Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget..
+										Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</template>
+	<template id="our_partner_snippet" name="Our Partners">
+		<section>
+		<!-- Partner Section -->
+		<div id="partner-section" class="ptb ptb-xs-60 gray-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-lg-12">
+						<div class="block-title v-line mb-35 ">
+							<h2><span>Our</span> Partner</h2>
+							<p class="italic">
+								Aenean suscipit eget mi act
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-lg-12">
+						<ul class="logo-group">
+							<li class="partner-logo border-b">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/1.png" alt=""/>
+							</li>
+							<li class="partner-logo border-b">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/2.png" alt=""/>
+							</li>
+							<li class="partner-logo border-b">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/3.png" alt=""/>
+							</li>
+							<li class="partner-logo border-b">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/4.png" alt=""/>
+							</li>
+							<li class="partner-logo border-b border-r">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/5.png" alt=""/>
+							</li>
+							<li class="partner-logo">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/6.png" alt=""/>
+							</li>
+							<li class="partner-logo">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/5.png" alt=""/>
+							</li>
+							<li class="partner-logo ">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/6.png" alt=""/>
+							</li>
+							<li class="partner-logo">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/5.png" alt=""/>
+							</li>
+							<li class="partner-logo border-r">
+								<img src="/theme_jt_construction/static/src/assets/images/client-logo/6.png" alt=""/>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	</template>
+	<template id="side_menu_snippet" name="Side Menu">
+		<section class="padding pt-xs-40">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-md-3 col-lg-3 mt-xs-40 pb-xs-40">
+		                <div class="tab-title">
+		                    <ul class="clearfix">
+		                        <li>
+		                            <a href="/const-about">Company</a>
+		                        </li>
+		                        <li>
+		                            <a href="/history">History</a>
+		                        </li>
+		                        <li>
+		                            <a href="/career" class="active">Careers</a>
+		                        </li>
+		                        <li>
+		                            <a href="/partnerships">Partnerships</a>
+		                        </li>
+		                        <li>
+		                            <a href="/leadership">Leadership</a>
+		                        </li>
+		                    </ul>
+		                </div>
+		                <div class="company-brochure mt-30">
+		                    <h4>Downlaod Brochure</h4>
+		                    <a href="#"><img src="/theme_jt_construction/static/src/assets/images/flyer.jpg" alt=""/></a>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</section>
+	</template>
+	<template id="faq_snippet" name="FAQ">
+		<section class="padding pt-xs-40">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-9 col-lg-9">
+						<!-- About Section -->
+		                <div class="anim-section creer_page mt-30">
+		                    <div id="accordion" role="tablist" aria-multiselectable="true">
+		                        <div class="card">
+		                            <div class="card-header" role="tab" id="headingOne">
+		                                <h5 class="mb-0 panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i> </a></h5>
+		                            </div>
+		                            <div id="collapseOne" class="collapse show bg-custom" role="tabpanel" aria-labelledby="headingOne">
+		                                <div class="card-block">
+		                                    <p>
+		                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
+		                                        cupidatat skateboard dolor brunch.
+		                                    </p>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        <div class="card">
+		                            <div class="card-header" role="tab" id="headingTwo">
+		                                <h5 class="mb-0 panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i> </a></h5>
+		                            </div>
+		                            <div id="collapseTwo" class="collapse bg-custom" role="tabpanel" aria-labelledby="headingTwo">
+		                                <div class="card-block">
+		                                    <p>
+		                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
+		                                        cupidatat skateboard dolor brunch.
+		                                    </p>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        <div class="card">
+		                            <div class="card-header" role="tab" id="headingThree">
+		                                <h5 class="mb-0 panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Duis aute irure dolor in reprehenderit <i class="fa fa-plus collape-plus"></i> </a></h5>
+		                            </div>
+		                            <div id="collapseThree" class="collapse bg-custom" role="tabpanel" aria-labelledby="headingThree">
+		                                <div class="card-block">
+		                                    <p>
+		                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non
+		                                        cupidatat skateboard dolor brunch.
+		                                    </p>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		                <!-- About Section End-->
+					</div>
+				</div>
+			</div>
+		</section>
+	</template>
+	<template id="history_snippet" name="Misson History">
+		<section class="padding pt-xs-40">
+		    <div class="container">
+		        <div class="row">
+		        	<div class="col-md-3 col-lg-3 mt-xs-40 pb-xs-40">
+		        	</div>
+		            <div class="col-lg-9 col-md-9">
+		                <!-- About Section -->
+		                <div class="pt-90 pt-xs-60">
+		                    <div class="history-timeline__block">
+		                        <ul class="history-timeline">
+		                            <li>
+		                                <div class="icon-dot"></div>
+		                                <p class="date text-block text-bold m-b-30">2012</p>
+		                                    <div class="abt-block__wrap">
+		                                        <div class="abt-block__left abt-block__bg">
+		                                            <h2>Meet our partners</h2>
+		                                            <p>
+		                                                Lorem ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim minim veniam quis nostrud exercitation ullamco laboris nisi aliquip exea commodo ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		                                            </p>
+		                                            <a href="#" class="abt-block_link"> Read More <i class="fa fa-chevron-circle-right abt-block_link-arrow" ></i></a>
+		                                        </div>
+		                                        <div class="abt-block__right abt-block__img3">
+		                                        </div>
+		                                    </div>
+		                                    <!--item 3-->
+		                            </li>
+		                            <li>
+		                                <div class="icon-dot"></div>
+		                                <p class="date text-block text-bold m-b-30">2013</p>
+		                                <div class="mv-block">
+		                                    <div class="mv-block__mission mv-block__mission-bg">
+		                                        <h3>Our Mission &amp; Values</h3>
+		                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim minim veniam quis nostrud exercitation ullamco laboris nisi aliquip</p>
+		                                        <a href="#" class="mv-block__mission_link"> Read More <i class="fa fa-chevron-circle-right mv-block__mission_link-arrow" ></i></a>
+		                                    </div>
+		                                    <div class="mv-block__vision mv-block__vision-bg">
+		                                        <h3>Our vision </h3>
+		                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et</p>
+		                                        <a href="#" class="mv-block__vision_link"> Read More <i class="fa fa-chevron-circle-right mv-block__vision_link-arrow" ></i></a>
+		                                    </div>
+		                                </div>
+		                            </li>
+		                            <li>
+		                                <div class="icon-dot"></div>
+		                                <p class="date text-block text-bold m-b-30">2014</p>
+		                                <div class="mv-block">
+		                                    <div class="mv-block__mission mv-block__mission-bg">
+		                                        <h3>Our Mission &amp; Values</h3>
+		                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim minim veniam quis nostrud exercitation ullamco laboris nisi aliquip</p>
+		                                        <a href="#" class="mv-block__mission_link"> Read More <i class="fa fa-chevron-circle-right mv-block__mission_link-arrow" ></i></a>
+		                                    </div>
+		                                    <div class="mv-block__vision mv-block__vision-bg">
+		                                        <h3>Our vision </h3>
+		                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et</p>
+		                                        <a href="#" class="mv-block__vision_link"> Read More <i class="fa fa-chevron-circle-right mv-block__vision_link-arrow" ></i></a>
+		                                    </div>
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </div>
+		                    <div class="abt-block">
+		                    </div>
+		                </div>
+		                <!-- About Section End-->
+		            </div>
+		        </div>
+		    </div>
+		</section>
+	</template>
+	<template id="partnerships_snippet" name="Partnerships">
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-lg-3">
+					</div>
+					<div class="col-md-9 col-lg-9">
+						<div class="pt-60 pt-xs-60 ">
+		                    <div class="row partner-blck__brdr mb-40">
+		                        <div class="col-sm-3 no-padding t_cell partner-blck__brdr-r text-center">
+		                            <img src="/theme_jt_construction/static/src/assets/images/2.png" alt=""/>
+		                        </div>
+		                        <div class="col-md-9 col-lg-9 no-padding t_cell">
+		                            <div class="partner__content partnership">
+		                                <h3>Our Partnerships</h3>
+		                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim minim veniam quis nostrud Lorem ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim minim veniam quis nostrud </p>
+		                                <a href="#" class="abt__link"> Read More <i class="fa fa-chevron-circle-right abt__link-arrow" aria-hidden="true"></i></a>
+		                            </div>
+		                        </div>
+		                    </div>
+	                	</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</template>
+	<template id="leadership_snippet" name="Leadership">
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-lg-3">
+					</div>
+					<div class="col-md-9 col-lg-9">
+						<div class="pt-60 pt-xs-60 ">
+							<div class="row mb-60 bottom__brdr pb-40">
+			                    <div class="col-md-3 col-lg-3 no-padding t_cell text-center">
+		                        	<img src="/theme_jt_construction/static/src/assets/images/quote-author.jpg" alt=""/>
+		                    	</div>
+		                    	<div class="col-md-9 col-lg-9  t_cell">
+		                        	<div class="partner__content">
+			                            <h3>Alex Blackwell</h3>
+			                            <span class="career_sub-title">Managing Director</span>
+			                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim minim veniam quis nostrud Lorem ipsum dolor sit amet consectetur adipisicing elit eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim minim veniam quis nostrud </p>
+			                            <a href="#" class="abt__link"> About Me <i class="fa fa-chevron-circle-right abt__link-arrow" ></i></a>
+		                        	</div>
+		                    	</div>
+		                	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</template>
+	<template id="project_snippet" name="Projects">
+		<section id="work">
+			<div class="container">
+				<div class="row container-grid nf-col-3">
+					<div class="nf-item branding coffee spacing">
+	                    <div class="item-box">
+	                        <a> <img alt="1" src="/theme_jt_construction/static/src/assets/images/project/project_1.jpg" class="item-container"/> </a>
+	                        <div class="link-zoom">
+	                            <a href="/project-details" class="project_links"> <i class="fa fa-link"> </i> </a>
+	                            <a href="/theme_jt_construction/static/src/assets/images/project/project_1.jpg" class="fancylight" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
+	                        </div>
+	                        <div class="gallery-heading">
+	                            <h4><a href="#">Construction Services</a></h4>
+	                            <p>
+	                                At vero eos et rebum
+	                            </p>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="nf-item photo spacing">
+	                    <div class="item-box">
+	                        <a> <img alt="1" src="/theme_jt_construction/static/src/assets/images/project/project_2.jpg" class="item-container"/> </a>
+	                        <div class="link-zoom">
+	                            <a href="project-details.html" class="project_links"> <i class="fa fa-link"> </i> </a>
+	                            <a href="/theme_jt_construction/static/src/assets/images/project/project_2.jpg" class="fancylight" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
+	                        </div>
+	                        <div class="gallery-heading">
+	                            <h4><a href="#">Construction Services</a></h4>
+	                            <p>
+	                                At vero eos et rebum
+	                            </p>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="nf-item branding coffee spacing">
+	                    <div class="item-box">
+	                        <a> <img alt="1" src="/theme_jt_construction/static/src/assets/images/project/project_3.jpg" class="item-container"/> </a>
+	                        <div class="link-zoom">
+	                            <a href="/project-details" class="project_links"> <i class="fa fa-link"> </i> </a>
+	                            <a href="/theme_jt_construction/static/src/assets/images/project/project_3.jpg" class="fancylight" data-fancybox-group="light" > <i class="fa fa-search-plus"></i> </a>
+	                        </div>
+	                        <div class="gallery-heading">
+	                            <h4><a href="#">Construction Services</a></h4>
+	                            <p>
+	                                At vero eos et rebum
+	                            </p>
+	                        </div>
+	                    </div>
+	                </div>
+            	</div>
+			</div>
+		</section>
+	</template>
+	<template id="project_related_snippet" name="Related Project">
+		<section>
+			<!-- Related Project-->
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col-sm-12 col-lg-4">
+                            <div class="project-item">
+                                <div class="about-block clearfix">
+                                    <figure>
+                                        <a href="#"><img class="img-responsive" src="/theme_jt_construction/static/src/assets/images/project/project_4.jpg" alt="Photo"/></a>
+                                    </figure>
+                                    <div class="text-box mt-25">
+                                        <div class="box-title mb-15">
+                                            <h3><a href="#">Project title Here</a></h3>
+                                        </div>
+                                        <div class="text-content">
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consec adipiscing nulla quis fermentum hendrerit, nisi diam viverra.
+                                            </p>
+                                            <a href="#" class="btn-text mt-15">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-4">
+                            <div class="project-item">
+                                <div class="about-block clearfix">
+                                    <figure>
+                                        <a href="#"><img class="img-responsive" src="/theme_jt_construction/static/src/assets/images/project/project_5.jpg" alt="Photo"/></a>
+                                    </figure>
+                                    <div class="text-box mt-25">
+                                        <div class="box-title mb-15">
+                                            <h3><a href="#">Project title Here</a></h3>
+                                        </div>
+                                        <div class="text-content">
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consec adipiscing nulla quis fermentum hendrerit, nisi diam viverra.
+                                            </p>
+                                            <a href="#" class="btn-text mt-15">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col-sm-12 col-lg-4">
+                            <div class="project-item">
+                                <div class="about-block clearfix">
+                                    <figure>
+                                        <a href="#"><img class="img-responsive" src="/theme_jt_construction/static/src/assets/images/project/project_6.jpg" alt="Photo"/></a>
+                                    </figure>
+                                    <div class="text-box mt-25">
+                                        <div class="box-title mb-15">
+                                            <h3><a href="#">Project title Here</a></h3>
+                                        </div>
+                                        <div class="text-content">
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consec adipiscing nulla quis fermentum hendrerit, nisi diam viverra.
+                                            </p>
+                                            <a href="#" class="btn-text mt-15">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+	                    </div>
+	                </div>
+	            </div>
+	        <!-- Related Project-->
+		</section>
+	</template>
+	<template id="blog_snippet" name="Blog">
+		<section class="padding pt-xs-40">
+	        <div class="container">
+	            <div class="row">
+	            	<div class="col-lg-9">
+	                    <div class="row">
+	                        <div class="col-md-12 col-lg-12 blog-post-hr">
+	                            <div class="blog-post mb-45">
+	                                <div class="post-media">
+	                                        <div class="item"> <img src="/theme_jt_construction/static/src/assets/images/blog/img2.jpg" alt="" /> </div>
+	                                    <span class="event-calender blog-date"> 21 <span>june</span> </span> 
+	                                </div>
+	                                <div class="post-meta">
+	                                    <span>by <a href="javascript:avoid(0);">Admin</a>,</span><span> <a href="javascript:avoid(0);"><i class="fa fa-comment-o"></i> 25</a>,</span><span> <a href="javascript:avoid(0);"><i class="fa fa-heart-o"></i> 57</a>,</span>
+	                                    <div class="post-more-link pull-right">
+	                                        <div class="icons-hover-black"> <a href="#" class="facebook-icon"> <i class="fa fa-facebook"></i> </a><a href="#" class="twitter-icon"> <i class="fa fa-twitter"></i> </a><a href="#" class="googleplus-icon"> <i class="fa fa-google-plus"></i> </a><a href="#" class="linkedin-icon"> <i class="fa fa-linkedin"></i> </a> </div>
+	                                        <a class="btn-text xs-hidden"> <i class="ion-android-share-alt"></i></a> 
+	                                    </div>
+	                                </div>
+	                                <div class="post-header">
+	                                    <h2><a href="blog-detail.html">Maecenas nec odio ante varcy tincidunt</a></h2>
+	                                </div>
+	                                <div class="post-entry">
+	                                    <p> Praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. </p>
+	                                    <p> Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. </p>
+	                                </div>
+	                                <div class="post-more-link pull-left"> <a href="blog-detail.html" class="btn-text">Read More</a> </div>
+	                            </div>
+	                            <hr/>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	</template>
+	<template id="testimonial_snippets" name="Testimonial">
+		<section>
+			<div class="padding pt-xs-40">
+			    <div class="container">
+			    	<div class="row mt-60">
+			            <div class="col-md-6 col-lg-6">
+			                <div class="about-block gray-bg   padding-40 clearfix">
+			                    <div class="client-avtar">
+			                        <img src="/theme_jt_construction/static/src/assets/images/user2-160x160.jpg" class="img-responsive" alt="Responsive image"/>
+			                    </div>
+			                    <div class="text-box">
+			                        <div class="text-content">
+			                            <p>
+			                                Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget..
+			                                Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget
+			                            </p>
+			                        </div>
+			                        <div class="box-title">
+			                            <h4 class="member_say"><span>By</span> Gary jack</h4>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			            <div class="col-md-6 col-lg-6">
+			                <div class="about-block dark-gray-bg  padding-40 clearfix">
+			                    <div class="client-avtar left-pos">
+			                        <img src="/theme_jt_construction/static/src/assets/images/user2-160x160.jpg" class="img-responsive" alt="Responsive image"/>
+			                    </div>
+			                    <div class="text-box">
+			                        <div class="text-content">
+			                            <p>
+			                                Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget..
+			                                Aenean suscipit eget mi act fermentum phasellus vulputate turpis tincidunt. Aenean suscipit eget
+			                            </p>
+			                        </div>
+			                        <div class="box-title">
+			                            <h4 class="member_say"><span>By</span> Gary jack</h4>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+				</div>
+			</div>
+		</section>
+	</template>
+</odoo> 

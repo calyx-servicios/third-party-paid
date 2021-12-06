@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="services_page" name="Services Page">
+		<t t-call="website.layout">
+			<div class="oe_structure oe_empty">
+				<!-- Intro Section -->
+		        <section class="inner-intro bg-img light-color overlay-before parallax-background">
+		            <div class="container">
+		                <div class="row title">
+		                    <div class="title_row">
+		                        <h1 data-title="Services"><span>Services</span></h1>
+		                        <div class="page-breadcrumb">
+		                            <a>Home</a>/ <span>Services</span>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </section>
+		        <!-- Intro Section --> 
+		        <!-- Service Section -->
+		        <section id="service_section" class="padding ptb-xs-40">
+		            <div class="container-fluid">
+		                <div class="row text-center mb-30">
+		                    <div class="col-sm-12">
+		                        <div class="sec_hedding">
+		                            <h2><span>Our</span> Service</h2>
+		                            <span class="b-line"></span>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="row">
+		                    <div class="col-xl-3 col-lg-4 col-md-6 mb-xs-30 margin_bott">
+		                        <div class="maine_box">
+		                            <div class="items_picher">
+		                                <img src="/theme_jt_construction/static/src/assets/images/service/img_1.jpg" alt="" />
+		                            </div>
+		                            <div class="box_detail">
+		                                <div class="use_detail">
+		                                    <div class="event_detail">
+		                                        <i class="flaticon-tool-1"></i>
+		                                    </div>
+		                                </div>
+		                                <div class="datail_show">
+		                                    <h3>Construction Management</h3>
+		                                    <p>
+		                                        Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+		                                    </p>
+		                                    <a href="#!">Read More</a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-lg-4 col-md-6 mb-xs-30 margin_bott">
+		                        <div class="maine_box">
+		                            <div class="items_picher">
+		                                <img src="/theme_jt_construction/static/src/assets/images/service/img_2.jpg" alt="" />
+		                            </div>
+		                            <div class="box_detail">
+		                                <div class="use_detail">
+		                                    <div class="event_detail">
+		                                        <i class="flaticon-tool"></i>
+		                                    </div>
+		                                </div>
+		                                <div class="datail_show">
+		                                    <h3>Reconstruction Services</h3>
+		                                    <p>
+		                                        Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+		                                    </p>
+		                                    <a href="#!">Read More</a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-lg-4 col-md-6 mb-xs-30">
+		                        <div class="maine_box">
+		                            <div class="items_picher">
+		                                <img src="/theme_jt_construction/static/src/assets/images/service/img_3.jpg" alt="" />
+		                            </div>
+		                            <div class="box_detail">
+		                                <div class="use_detail">
+		                                    <div class="event_detail">
+		                                        <i class="flaticon-worker-of-construction-working-with-a-shovel-beside-material-pile"></i>
+		                                    </div>
+		                                </div>
+		                                <div class="datail_show">
+		                                    <h3>Building Information</h3>
+		                                    <p>
+		                                        Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+		                                    </p>
+		                                    <a href="#!">Read More</a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-lg-4 col-md-6 margin_reponsive">
+		                        <div class="maine_box">
+		                            <div class="items_picher">
+		                                <img src="/theme_jt_construction/static/src/assets/images/service/img_4.jpg" alt="" />
+		                            </div>
+		                            <div class="box_detail">
+		                                <div class="use_detail">
+		                                    <div class="event_detail">
+		                                        <i class="flaticon-helmet"></i>
+		                                    </div>
+		                                </div>
+		                                <div class="datail_show">
+		                                    <h3>Project Partnering</h3>
+		                                    <p>
+		                                        Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+		                                    </p>
+		                                    <a href="#!">Read More</a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-lg-4 col-md-6 margin_top">
+		                        <div class="maine_box">
+		                            <div class="items_picher">
+		                                <img src="/theme_jt_construction/static/src/assets/images/service/img_5.jpg" alt="" />
+		                            </div>
+		                            <div class="box_detail">
+		                                <div class="use_detail">
+		                                    <div class="event_detail">
+		                                        <i class="flaticon-skyline"></i>
+		                                    </div>
+		                                </div>
+		                                <div class="datail_show">
+		                                    <h3>Roofing &amp; Flooring</h3>
+		                                    <p>
+		                                        Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+		                                    </p>
+		                                    <a href="#!">Read More</a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-lg-4 col-md-6 margin_top">
+		                        <div class="maine_box">
+		                            <div class="items_picher">
+		                                <img src="/theme_jt_construction/static/src/assets/images/service/img_6.jpg" alt="" />
+		                            </div>
+		                            <div class="box_detail">
+		                                <div class="use_detail">
+		                                    <div class="event_detail">
+		                                        <i class="flaticon-home-improvement"></i>
+		                                    </div>
+		                                </div>
+		                                <div class="datail_show">
+		                                    <h3>Program Management</h3>
+		                                    <p>
+		                                        Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+		                                    </p>
+		                                    <a href="#!">Read More</a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-lg-4 col-md-6 margin_top">
+		                        <div class="maine_box">
+		                            <div class="items_picher">
+		                                <img src="/theme_jt_construction/static/src/assets/images/service/img_1.jpg" alt="" />
+		                            </div>
+		                            <div class="box_detail">
+		                                <div class="use_detail">
+		                                    <div class="event_detail">
+		                                        <i class="flaticon-tool-1"></i>
+		                                    </div>
+		                                </div>
+		                                <div class="datail_show">
+		                                    <h3>Construction Management</h3>
+		                                    <p>
+		                                        Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+		                                    </p>
+		                                    <a href="#!">Read More</a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="col-xl-3 col-lg-4 col-md-6 margin_top">
+		                        <div class="maine_box">
+		                            <div class="items_picher">
+		                                <img src="/theme_jt_construction/static/src/assets/images/service/img_2.jpg" alt="" />
+		                            </div>
+		                            <div class="box_detail">
+		                                <div class="use_detail">
+		                                    <div class="event_detail">
+		                                        <i class="flaticon-tool"></i>
+		                                    </div>
+		                                </div>
+		                                <div class="datail_show">
+		                                    <h3>Reconstruction Services</h3>
+		                                    <p>
+		                                        Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Do Eiusmod Tempor...
+		                                    </p>
+		                                    <a href="#!">Read More</a>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </section>
+		        <!-- Service Section end -->
+			</div>
+		</t>
+	</template>
+</odoo>
