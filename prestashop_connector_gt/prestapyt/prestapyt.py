@@ -80,8 +80,9 @@ class PrestaShopAuthenticationError(PrestaShopWebServiceError): # noqa
 class PrestaShopWebService(object):
     """Interact with the PrestaShop WebService API, use XML for messages."""
 
+
     MIN_COMPATIBLE_VERSION = '1.4.0.17'
-    MAX_COMPATIBLE_VERSION = '1.7.5.2'
+    MAX_COMPATIBLE_VERSION = '1.7.7.5'
 
     def __init__(self, api_url, api_key, debug=False, session=None,
                  verbose=False):
@@ -551,7 +552,7 @@ class PrestaShopWebServiceDict(PrestaShopWebService):
             (one or more of 'filter', 'display', 'sort', 'limit', 'schema')
         :return: list of ids as int
         """
-        def dive(response, level=1):
+        def dive(response, level=1): 
             # not deterministic but we know that we only have one key
             # in the response for the first 2 levels like
             # {'addresses': {'address': ...} this method has just

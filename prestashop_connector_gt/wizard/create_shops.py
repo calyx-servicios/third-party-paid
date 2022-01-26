@@ -21,6 +21,7 @@ class CreatePrestashopShop(models.TransientModel):
     # @api.one
     def create_prestashop_shop_action(self):
         data_prestashop_shops = self
+
         for data_prestashop_shop in data_prestashop_shops:
             code=(data_prestashop_shop.name)[0:6]
             shop_vals = {

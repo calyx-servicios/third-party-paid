@@ -30,7 +30,7 @@
             'views/res_partner_view.xml',
             'views/prestashop_view.xml',
             'views/stock_view.xml',
-            'views/prestashop_category_view.xml',
+            'views/prestashop_view.xml',
             'views/product_view.xml',
             'views/cart_rules.xml',
 	        'views/prestashop_logs_view.xml',

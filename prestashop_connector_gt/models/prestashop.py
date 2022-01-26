@@ -151,55 +151,56 @@ class prestashop_instance(models.Model):
                     
     # @api.multi
     def create_prestashop_shop_action(self):
-       lang_obj = self.env['prestashop.language']
-       sale_shop_obj = self.env['sale.shop']
-       shop_ids = []
-       for instance in self:
-           prestashop = PrestaShopWebServiceDict(instance.location, instance.webservice_key)
-           shops = prestashop.get('shops')
-           # print "instance.shop_physical_url=====>",instance.shop_physical_url
 
-           if shops.get('shops') and shops.get('shops').get('shop'):
-               shops = shops.get('shops').get('shop')
-               if isinstance(shops, list):
-                   shops_val = shops
-               else:
-                   shops_val = [shops]
+        lang_obj = self.env['prestashop.language']
+        sale_shop_obj = self.env['sale.shop']
+        shop_ids = []
+        for instance in self:
+            prestashop = PrestaShopWebServiceDict(instance.location, instance.webservice_key)
+            shops = prestashop.get('shops')
+            # print "instance.shop_physical_url=====>",instance.shop_physical_url
 
-               for shop_id in shops_val:
-                   id = shop_id.get('attrs').get('id')
-                   data = prestashop.get('shops', id)
-                   if data.get('shop'):
-                       shop_id = sale_shop_obj.search([('presta_id','=',self.get_value_data(data.get('shop').get('id'))[0])])
-                       if not shop_id:
-                            shop_ids.append(instance.create_shop(data.get('shop')))
-               
-               languages = prestashop.get('languages')
-               lan_vals = languages.get('languages').get('language')
-               if isinstance(lan_vals, list):
-                   lan_vals = languages.get('languages').get('language')
-               else:
-                   lan_vals = [languages.get('languages').get('language')]
-               for lang in lan_vals:
-                   logger.info('lang ===> %s', lang)
-                   lang_vals = prestashop.get('languages', lang.get('attrs').get('id'))
-                   logger.info('lang_vals===> %s', lang_vals)
-                   # vals = {
-                   #     'name': lang_vals.get('language').get('name').get('value'),
-                   #     'code': lang_vals.get('language').get('iso_code').get('value'),
-                   #     'presta_id' : lang_vals.get('language').get('id').get('value'),
-                   #     'presta_instance_id' : instance.id
-                   # }
-                   vals = {
-                       'name': self.get_value_data(lang_vals.get('language').get('name')),
-                       'code': self.get_value_data(lang_vals.get('language').get('iso_code')),
-                       'presta_id' : self.get_value_data(lang_vals.get('language').get('id')),
-                       'presta_instance_id' : instance.id
-                   }
-                   # l_ids = lang_obj.search([('presta_id','=', lang_vals.get('language').get('id').get('value')),('presta_instance_id','=', instance.id)])
-                   l_ids = lang_obj.search([('presta_id','=', self.get_value_data(lang_vals.get('language').get('id'))[0]),('presta_instance_id','=', instance.id)])
-                   if not l_ids:
-                       lang_obj.create(vals)
-#                 if shop_ids:
-#                     shop_ids.import_product_attributes()
-       return True
+            if shops.get('shops') and shops.get('shops').get('shop'):
+                shops = shops.get('shops').get('shop')
+                if isinstance(shops, list):
+                    shops_val = shops
+                else:
+                    shops_val = [shops]
+
+                for shop_id in shops_val:
+                    id = shop_id.get('attrs').get('id')
+                    data = prestashop.get('shops', id)
+                    if data.get('shop'):
+                        shop_id = sale_shop_obj.search([('presta_id','=',self.get_value_data(data.get('shop').get('id'))[0])])
+                        if not shop_id:
+                                shop_ids.append(instance.create_shop(data.get('shop')))
+                
+                languages = prestashop.get('languages')
+                lan_vals = languages.get('languages').get('language')
+                if isinstance(lan_vals, list):
+                    lan_vals = languages.get('languages').get('language')
+                else:
+                    lan_vals = [languages.get('languages').get('language')]
+                for lang in lan_vals:
+                    logger.info('lang ===> %s', lang)
+                    lang_vals = prestashop.get('languages', lang.get('attrs').get('id'))
+                    logger.info('lang_vals===> %s', lang_vals)
+                    # vals = {
+                    #     'name': lang_vals.get('language').get('name').get('value'),
+                    #     'code': lang_vals.get('language').get('iso_code').get('value'),
+                    #     'presta_id' : lang_vals.get('language').get('id').get('value'),
+                    #     'presta_instance_id' : instance.id
+                    # }
+                    vals = {
+                        'name': self.get_value_data(lang_vals.get('language').get('name')),
+                        'code': self.get_value_data(lang_vals.get('language').get('iso_code')),
+                        'presta_id' : self.get_value_data(lang_vals.get('language').get('id')),
+                        'presta_instance_id' : instance.id
+                    }
+                    # l_ids = lang_obj.search([('presta_id','=', lang_vals.get('language').get('id').get('value')),('presta_instance_id','=', instance.id)])
+                    l_ids = lang_obj.search([('presta_id','=', self.get_value_data(lang_vals.get('language').get('id'))[0]),('presta_instance_id','=', instance.id)])
+                    if not l_ids:
+                        lang_obj.create(vals)
+    #                 if shop_ids:
+    #                     shop_ids.import_product_attributes()
+        return True

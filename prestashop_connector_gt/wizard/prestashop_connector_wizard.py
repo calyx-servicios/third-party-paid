@@ -64,7 +64,6 @@ class PrestashopConnectorWizard(models.Model):
     # @api.one
     def import_prestashop(self):
         shop_ids=self.shop_ids
-
         if self.import_product_attributes:
             for shop_id in shop_ids:
                 shop_id.import_product_attributes()

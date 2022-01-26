@@ -5,7 +5,6 @@
   Code from https://github.com/nkchenz/lhammer/blob/master/lhammer/xml2dict.py
   Distributed under GPL2 Licence
   CopyRight (C) 2009 Chen Zheng
-
   Adapted for Prestapyt by Guewen Baconnier
   Copyright 2012 Camptocamp SA
 """
@@ -34,7 +33,7 @@ def _parse_node(node):
 
     #Save childrens
     has_child = False
-    for child in node.getchildren():
+    for child in list(node):
         has_child = True
         ctag = child.tag
         ctree = _parse_node(child)

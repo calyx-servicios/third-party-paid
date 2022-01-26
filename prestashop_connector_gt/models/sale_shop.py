@@ -170,7 +170,6 @@ class SaleShop(models.Model):
 		else:
 			return value
 
-
 	# @api.one
 	def create_attribute(self, attribute, prestashop):
 		attrs_id=False
@@ -178,8 +177,8 @@ class SaleShop(models.Model):
 			prod_att_obj = self.env['product.attribute']
 			prod_attr_vals_obj = self.env['product.attribute.value']
 			attribute_value = {
-							'name':attribute.get('name').get('language')[0].get('value'),
-							'public_name':attribute.get('public_name').get('language')[0].get('value'),
+							'name': attribute.get('name').get('language').get('value'),
+							'public_name':attribute.get('public_name').get('language').get('value'),
 							'presta_id': attribute.get('id'),
 							'display_type': attribute.get('group_type'),
 							'is_presta': True
@@ -218,7 +217,7 @@ class SaleShop(models.Model):
 					attribute_dict = prestashop.get('product_options', attributes_vlaue.get('id_attribute_group'))
 					attribute_id = self.create_attribute(attribute_dict.get('product_option'),prestashop)
 			attribute_value = {
-							'name':attributes_vlaue.get('name').get('language')[0].get('value'),
+							'name':attributes_vlaue.get('name').get('language').get('value'),
 							'presta_id': attributes_vlaue.get('id'),
 							'attribute_id': attribute_id.id,
 							'html_color': attributes_vlaue.get('color'),
@@ -251,21 +250,22 @@ class SaleShop(models.Model):
 		for shop in self:
 			try:
 				prestashop = PrestaShopWebServiceDict(shop.prestashop_instance_id.location, shop.prestashop_instance_id.webservice_key or None)
-				filters = {'display': 'full', 'filter[id]': '>[%s]' % self.last_product_attrs_id_import, 'limit': 1000}
-				product_options = prestashop.get('product_options', options=filters)
+				product_options = prestashop.get('product_options')
 				if product_options.get('product_options') and product_options.get('product_options').get('product_option'):
-					attributes = product_options.get('product_options').get('product_option')
-					if isinstance(attributes, list):
-						attributes = attributes
-					else:
-						attributes = [attributes]
-					for attribute in attributes:
-						shop.create_attribute(attribute, prestashop)
-						shop.write({'last_product_attrs_id_import': int(attribute.get('id'))})
-						self.env.cr.commit()
+					#for option in product_options.get('product_options').get('product_option'):
 
-				value_filters = {'display': 'full', 'filter[id]': '>[%s]' % self.last_product_attrs_values_id_import, 'limit': 2000}
-				product_options_vals = prestashop.get('product_option_values', options=value_filters)
+						attributes = product_options.get('product_options').get('product_option')
+						if isinstance(attributes, list):
+							attributes = attributes
+						else:
+							attributes = [attributes]
+						for attribute in attributes:
+							attr_id = attribute.get('attrs').get('id')
+							attr = prestashop.get(('product_options/' + attr_id)).get('product_option')
+							shop.create_attribute(attr, prestashop)
+							shop.write({'last_product_attrs_id_import': int(attribute.get('attrs').get('id'))})
+							self.env.cr.commit()
+				product_options_vals = prestashop.get('product_option_values')
 				if 'product_option_values' in product_options_vals and 'product_option_value' in product_options_vals.get('product_option_values'):
 					attributes_vlaues = product_options_vals.get('product_option_values').get('product_option_value')
 					if isinstance(attributes_vlaues, list):
@@ -273,8 +273,10 @@ class SaleShop(models.Model):
 					else:
 						attributes_vlaues = [attributes_vlaues]
 					for attributes_vlaue in attributes_vlaues:
-						shop._create_attribute_values(attributes_vlaue, prestashop)
-						shop.write({'last_product_attrs_values_id_import': int(attributes_vlaue.get('id'))})
+						attr_id = attributes_vlaue.get('attrs').get('id')
+						attr = prestashop.get(('product_option_values/' + attr_id)).get('product_option_value')
+						shop._create_attribute_values(attr, prestashop)
+						shop.write({'last_product_attrs_values_id_import': int(attr.get('id'))})
 						self.env.cr.commit()
 			except Exception as e:
 				raise ValidationError(_(str(e)))
@@ -805,7 +807,7 @@ class SaleShop(models.Model):
 		try:
 			manufacturers_id = supplier_id = False
 			prd_tmp_vals = {
-				'name': product_dict.get('name').get('language')[0].get('value'),
+				'name': product_dict.get('name').get('language').get('value'),
 				'type': 'product',
 				'list_price': product_dict.get('price'),
 				'default_code': product_dict.get('reference'),
@@ -1030,7 +1032,7 @@ class SaleShop(models.Model):
 		if not product_img_id:
 			try:
 				loc = (self.prestashop_instance_id.location).split('//')
-				url = "http://" + self.prestashop_instance_id.webservice_key + "@" + loc[1] + '/api/images/products/' + product_presta_id + '/' + img_id
+				url = "http://" + self.prestashop_instance_id.webservice_key + "@" + loc[1] + '/images/products/' + product_presta_id + '/' + img_id
 				client = PrestaShopWebServiceImage(self.prestashop_instance_id.location,self.prestashop_instance_id.webservice_key)
 				res = client.get_image(url)
 				if res.get('image_content'):
@@ -1048,6 +1050,9 @@ class SaleShop(models.Model):
 							product_image_obj.create(img_vals)
 			except Exception as e:
 				product_img_id =False
+		product_tmpl = self.env['product.template'].browse(product_id)
+		if product_img_id and not product_tmpl.image_1920:
+			product_tmpl.image_1920 = product_img_id.image
 
 		return product_img_id
 
@@ -1066,7 +1071,7 @@ class SaleShop(models.Model):
 			try:
 				product_categ_obj = self.env['product.category']
 				prestashop = PrestaShopWebServiceDict(shop.prestashop_instance_id.location,shop.prestashop_instance_id.webservice_key or None)
-				filters = {'display': 'full', 'filter[id]': '>[%s]' % self.last_product_id_import, 'limit': 2000}
+				filters = {'display': 'full', 'limit': 2000}
 				prestashop_product_data = prestashop.get('products', options=filters)
 				if prestashop_product_data.get('products') and prestashop_product_data.get('products').get('product'):
 					prestashop_product_list = prestashop_product_data.get('products').get('product')
@@ -1994,44 +1999,48 @@ class SaleShop(models.Model):
 				fetch_products = self.env.cr.fetchall()
 				if fetch_products is not None:
 					fetch_products = [i[0] for i in fetch_products]
-					if shop.prestashop_last_update_product_data_date:
-						product_data_ids = prod_templ_obj.search([('write_date', '>=',shop.prestashop_last_update_product_data_date),('id', 'in',fetch_products)])
-					else:
-						product_data_ids = prod_templ_obj.search([('id', 'in',fetch_products)])
+					product_data_ids = prod_templ_obj.search([('id', 'in',fetch_products)])
 
 					for each in product_data_ids:
 						product = prestashop.get('products', each.presta_id)
-						categ = [{'id': each.presta_categ_id.presta_id and str(each.presta_categ_id.presta_id)}]
-						parent_id = each.presta_categ_id.parent_id
+						categ = False
+						parent_id = False
+						if each.prestashop_product_category:
+							categ = [{'id': each.prestashop_product_category.presta_id and str(each.prestashop_product_category.presta_id)}]
+							parent_id = each.prestashop_product_category.parent_id
 						while parent_id:
 							categ.append({'id': parent_id.presta_id and str(parent_id.presta_id)})
 							parent_id = parent_id.parent_id
 						product.get('product').get('associations').update({'categories': {'attrs': {'node_type': 'category'}, 'category': categ},})
-						product.get('product').update({
-							'name': {'language': {'attrs': {'id': '1'}, 'value': each.name and str(each.name)}},
-							'active': '1',
-							'type': 'simple',
-							'on_sale':'1',
-							'state': '1',
-							'online_only': '1',
-							'reference': each.default_code and str(each.default_code),
-							'wholesale_price': each.wholesale_price and str(each.wholesale_price),
-							'price': each.list_price and str(each.list_price),
-							'depth': each.product_lngth and str(each.product_lngth),
-							'width': each.product_width and str(each.product_width),
-							'weight': each.product_wght and str(each.product_wght),
-							'height': each.product_hght and str(each.product_hght),
-							'available_now': ({'language': {'attrs': {'id': '1'}, 'value': each.product_instock and str(int(each.product_instock))}}),
-							'on_sale' : each.product_onsale and str(int(each.product_onsale)) ,
-							'id':  each.presta_id and str(each.presta_id),
-							'id_supplier': each.supplier_id and str(each.supplier_id.presta_id) or '0',
-							'id_manufacturer': each.manufacturer_id and str(each.manufacturer_id.presta_id) or '0',
-							'id_category_default':each.presta_categ_id and str(each.presta_categ_id.presta_id),
-							'position_in_category':'',
-							# 'description': {'language': {'attrs': {'id': '1'}, 'value': each.product_description}}
-							# 'name': {'language': {'attrs': {'id': '1'}, 'value': each.prd_label}},
-							# 'product_img_ids':product.get('associations').get('images').get('image') or False,
-						})
+						
+						prd_tmp_vals = {
+							'name': product.get('product').get('name').get('language').get('value'),
+							'type': 'product',
+							'list_price': product.get('product').get('price'),
+							'default_code': product.get('product').get('reference'),
+							'prestashop_product': True,
+							'wholesale_price': product.get('product').get('wholesale_price'),
+							'product_onsale': product.get('product').get('on_sale'),
+							'product_lngth': product.get('product').get('depth'),
+							'product_width': product.get('product').get('width'),
+							'product_wght': product.get('product').get('weight'),
+							'product_hght': product.get('product').get('height'),
+							'presta_id': product.get('product').get('id'),
+
+						}
+
+						each.update(prd_tmp_vals)
+
+						img_ids = product.get('product').get('associations').get('images').get('image')
+						if img_ids:
+							if isinstance(img_ids, list):
+								img_ids = img_ids
+							else:
+								img_ids = [img_ids]
+							for image in img_ids:
+								prest_product_id = product.get('product').get('id')
+								imag_odoo_data = self.return_image_data(prestashop, each.id, prest_product_id, image.get('id'))
+
 						product.get('product').pop('quantity')
 						combination_list = []
 						if each.attribute_line_ids:
@@ -2040,22 +2049,22 @@ class SaleShop(models.Model):
 								if variant.combination_id:
 									prod_variants_comb = prestashop.get('combinations', variant.combination_id)
 									option_values = []
-									for op in variant.product_template_attribute_value_ids:
-										option_values.append({'id': op.presta_id and str(op.presta_id)})
-									prod_variants_comb.get('combination').get('associations').get('product_option_values').update({
-										'product_option_value' : option_values[0]
-									})
-	#
-									prod_variants_comb.get('combination').update({
-										'is_virtual':'1',
-										'id_product': variant.product_tmpl_id and str(variant.product_tmpl_id.presta_id),
-										'reference': variant.default_code and str(variant.default_code),
-										'id': variant.combination_id and str(variant.combination_id),
-										'minimal_quantity': '1',
-										'price': variant.prdct_unit_price and str(variant.prdct_unit_price),
-									})
-									response_comb = prestashop.edit('combinations', prod_variants_comb)
-									combination_list.append({'id':  variant.combination_id})
+	# 								for op in variant.product_template_attribute_value_ids:
+	# 									option_values.append({'id': op.presta_id and str(op.presta_id)})
+	# 								prod_variants_comb.get('combination').get('associations').get('product_option_values').update({
+	# 									'product_option_value' : option_values[0]
+	# 								})
+	# #
+	# 								prod_variants_comb.get('combination').update({
+	# 									'is_virtual':'1',
+	# 									'id_product': variant.product_tmpl_id and str(variant.product_tmpl_id.presta_id),
+	# 									'reference': variant.default_code and str(variant.default_code),
+	# 									'id': variant.combination_id and str(variant.combination_id),
+	# 									'minimal_quantity': '1',
+	# 									'price': variant.prdct_unit_price and str(variant.prdct_unit_price),
+	# 								})
+	# 								response_comb = prestashop.edit('combinations', prod_variants_comb)
+	# 								combination_list.append({'id':  variant.combination_id})
 						if combination_list:
 							product.get('product').get('associations').get('combinations').update({
 											'combination' : combination_list
