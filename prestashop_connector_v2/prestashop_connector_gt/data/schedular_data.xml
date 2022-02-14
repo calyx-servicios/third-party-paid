@@ -1,0 +1,113 @@
+<odoo>
+	<data>
+
+        <record forcecreate="True" id="scedular_prestashop_import_address" model="ir.cron">
+			<field name="name">Prestashop Import Address</field>
+			<field name="model_id" ref="model_sale_shop"/>
+			<field name="state">code</field>
+            <field name="code">model.import_prestashop_import_address_scheduler()</field>
+            <field eval="False" name="active"/>
+			<field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+           <field eval="False" name="doall"/>
+        </record>
+
+        <record forcecreate="True" id="scedular_prestashop_import_order" model="ir.cron">
+			<field name="name">Prestashop Import Orders</field>
+			<field name="model_id" ref="model_sale_shop"/>
+			<field name="state">code</field>
+            <field name="code">model.import_prestashop_orders_scheduler()</field>
+            <field eval="False" name="active"/>
+			<field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+           <field eval="False" name="doall"/>
+        </record>
+
+        <record forcecreate="True" id="scedular_prestashop_import_product" model="ir.cron">
+			<field name="name">Prestashop Import Product</field>
+			<field name="model_id" ref="model_sale_shop"/>
+			<field name="state">code</field>
+            <field name="code">model.import_prestashop_product_scheduler()</field>
+            <field eval="False" name="active"/>
+			<field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+           <field eval="False" name="doall"/>
+        </record>
+
+        <record forcecreate="True" id="scedular_prestashop_import_inventory" model="ir.cron">
+			<field name="name">Prestashop Import Inventory</field>
+			<field name="model_id" ref="model_sale_shop"/>
+			<field name="state">code</field>
+            <field name="code">model.import_prestashop_product_inventory_scheduler()</field>
+            <field eval="False" name="active"/>
+			<field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+           <field eval="False" name="doall"/>
+        </record>
+
+        <record forcecreate="True" id="scedular_prestashop_import_customer" model="ir.cron">
+			<field name="name">Prestashop Import Customer</field>
+			<field name="model_id" ref="model_sale_shop"/>
+			<field name="state">code</field>
+            <field name="code">model.import_prestashop_customer_scheduler()</field>
+            <field eval="False" name="active"/>
+			<field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+           <field eval="False" name="doall"/>
+        </record>
+
+        <record forcecreate="True" id="schedular_prestashop_update_product" model="ir.cron">
+			<field name="name">Prestashop Update Product</field>
+			<field name="model_id" ref="model_sale_shop"/>
+			<field name="state">code</field>
+            <field name="code">model.prestashop_update_product_scheduler()</field>
+            <field eval="False" name="active"/>
+			<field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+           <field eval="False" name="doall"/>
+        </record>
+
+        <record forcecreate="True" id="schedular_prestashop_update_product_inventory" model="ir.cron">
+			<field name="name">Prestashop Update Inventory</field>
+			<field name="model_id" ref="model_sale_shop"/>
+			<field name="state">code</field>
+            <field name="code">model.prestashop_update_product_inventory_scheduler()</field>
+            <field eval="False" name="active"/>
+			<field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+           <field eval="False" name="doall"/>
+        </record>
+
+        <record forcecreate="True" id="schedular_prestashop_export_product" model="ir.cron">
+			<field name="name">Prestashop Export Product</field>
+			<field name="model_id" ref="model_sale_shop"/>
+			<field name="state">code</field>
+            <field name="code">model.prestashop_product_export_scheduler()</field>
+            <field eval="False" name="active"/>
+			<field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+           <field eval="False" name="doall"/>
+        </record>
+
+        <record forcecreate="True" id="schedular_prestashop_export_customer" model="ir.cron">
+			<field name="name">Prestashop Exprot Customer</field>
+			<field name="model_id" ref="model_sale_shop"/>
+			<field name="state">code</field>
+            <field name="code">model.pres_export_customer_scheduler()</field>
+            <field eval="False" name="active"/>
+			<field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+			<field name="numbercall">-1</field>
+           <field eval="False" name="doall"/>
+        </record>
+
+ </data>
+ </odoo>

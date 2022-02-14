@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+
+        <record id="view_order_message_form" model="ir.ui.view">
+            <field name="name">view.order.message.form</field>
+            <field name="model">order.message</field>
+            <field name="arch" type="xml">
+                <form string="Messages">
+                    <group>
+                        <field name="customer_id"/>
+                        <field name="employee_id"/>
+                         <field name="to_be_exported" readonly="0"/>
+                        <field name="shop_ids" readonly="0"/>
+                        <field name="status"/>
+                        <field name="email" />
+                        <field name="new_id" invisible="1"/>
+                        <field name="msg_prest_id" invisible="1"/>
+                        <field name="token" />
+                        <field name="message"/>
+                        <field name="new_id" domain="[('presta_id','!=',False)]"/>
+
+                    </group>
+                </form>
+            </field>
+         </record>
+
+         <record id="view_order_message_tree" model="ir.ui.view">
+            <field name="name">view.order.message.tree</field>
+            <field name="model">order.message</field>
+            <field name="arch" type="xml">
+                <tree string ="Messages">
+                    <field name="customer_id"/>
+                    <field name="employee_id"/>
+                    <field name="new_id"/>
+
+                    <!--<field name="shop_ids" readonly="1"/>-->
+                    <field name="status"/>
+                    <field name="email" invisible="1"/>
+                    <field name="new_id" invisible="1"/>
+                    <field name="msg_prest_id" invisible="1"/>
+                    <field name="token" invisible="1" />
+                    <!--<field name="message"/>-->
+                    <!--<button name="upload_customer_message" string="Send Message" type="object" attrs="{'invisible':[('msg_prest_id','!=',0)]}"/>-->
+                </tree>
+            </field>
+         </record>
+
+        <!-- <record id="view_order_message_search" model="ir.ui.view">
+            <field name="name">view.order.message.search</field>
+            <field name="model">order.message</field>
+            <field name="arch" type="xml">
+                <search string="message">
+                    <field name="status"/>
+                    <field name="email"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Customer" domain="[]" context="{'group_by':'customer_id'}"/>
+                        <filter name="status" string="Status" domain="[]" context="{'group_by':'status'}"/>
+                    </group>
+                </search>
+
+            </field>
+        </record> -->
+
+
+        <record id="action_order_messages" model="ir.actions.act_window">
+            <field name="name">Order Messages</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">order.message</field>
+<!--             <field name="view_type">form</field>
+ -->            <field name="view_mode">tree,form</field>
+            <!-- <field name="search_view_id" ref="view_order_message_search"/> -->
+             <field name="context">{'default_to_be_exported' : True }</field>
+            <field name="domain">['|',('msg_prest_id', '!=', False),('to_be_exported', '=', True)]</field>
+        </record>
+
+	</data>
+</odoo>
