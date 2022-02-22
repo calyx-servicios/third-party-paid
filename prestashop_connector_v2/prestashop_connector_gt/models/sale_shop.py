@@ -28,6 +28,7 @@ from odoo.addons.prestashop_connector_gt.prestapyt.prestapyt import PrestaShopWe
 
 logger = logging.getLogger('stock')
 
+dateFormatter = "%Y-%m-%d %H:%M:%S"
 
 class SaleShop(models.Model):
 	_inherit = "sale.shop"
@@ -431,7 +432,7 @@ class SaleShop(models.Model):
 			res_partner_obj=self.env['res.partner']
 			try:
 				prestashop = PrestaShopWebServiceDict(shop.prestashop_instance_id.location,shop.prestashop_instance_id.webservice_key or None)
-				filters = {'display': 'full', 'filter[id]': '>[%s]' % self.last_customer_id_import, 'limit': 2000}
+				filters = {'display': 'full', 'filter[id]': '>[%s]' % self.last_customer_id_import, 'limit': 10000}
 				customers_data = prestashop.get('customers',options=filters)
 				if 'customers' in customers_data and 'customer' in customers_data.get('customers'):
 					customers = customers_data.get('customers').get('customer')
@@ -667,7 +668,7 @@ class SaleShop(models.Model):
 				prestashop_state_data = prestashop.get('states', id_state)
 				state_dict = prestashop_state_data.get('state')
 				state_vals = {'presta_id': state_dict.get('id'), 'is_prestashop': True}
-				state_id = browse_state_obj.search([('name', '=', state_dict.get('name'))], limit=1)
+				state_id = browse_state_obj.search(['|', ('name', '=', state_dict.get('name')), ('code', '=', state_dict.get('iso_code'))], limit=1)
 				if not state_id:
 					state_vals.update({'name': state_dict.get('name'), 'country_id': id_country.id, 'code': state_dict.get('iso_code')})
 					browse_state_obj.create(state_vals)
@@ -678,7 +679,7 @@ class SaleShop(models.Model):
 			print('eee',str(e))
 
 
-	def create_address(self,address_dict,prestashop):
+	def create_address(self,address_dict,prestashop, address_type='contact'):
 
 		try:
 			address_id = False
@@ -708,6 +709,7 @@ class SaleShop(models.Model):
 				'prestashop_address': True,
 				'country_id': country_id.id if country_id else '',
 				'state_id': state_id,
+				'type' : address_type,
 			}
 			parent_id = False
 			if address_dict.get('id_customer') != '0':
@@ -715,7 +717,7 @@ class SaleShop(models.Model):
 				if not parent_id:
 					try:
 						cust_data = prestashop.get('customers', address_dict.get('id_customer'))
-						partner_id = self.create_customer(cust_data.get('customer'), prestashop)
+						parent_id = self.create_customer(cust_data.get('customer'), prestashop)
 						self.env.cr.commit()
 					except Exception as e:
 						logger.info('Error/Warning '+ str(e))
@@ -1537,25 +1539,30 @@ class SaleShop(models.Model):
 				try:
 					cust_data = prestashop.get('customers', order_detail.get('id_customer'))
 					id_customer = self.create_customer(cust_data.get('customer'),prestashop)
-					self.env.cr.commit()
 				except Exception as e:
 					id_customer = self.remove_record_prestashop_checked(res_partner_obj,'Removed Customer',{'name':'Removed Customer'})
-			id_address_delivery = res_partner_obj.search([('presta_id', '=', order_detail.get('id_address_delivery'))], limit=1)
+			
+			self.env.cr.commit()
+			id_address_delivery = res_partner_obj.search([('address_id', '=', order_detail.get('id_address_delivery')),('prestashop_address', '=', True)], limit=1)
 			if not id_address_delivery:
 				try:
 					address_data = prestashop.get('addresses', order_detail.get('id_address_delivery'))
-					id_address_delivery = self.create_address(address_data.get('address'), prestashop)
-					self.env.cr.commit()
+					id_address_delivery = self.create_address(address_data.get('address'), prestashop, 'contact')
 				except Exception as e:
 					id_address_delivery = self.remove_record_prestashop_checked(res_partner_obj, 'Removed Addresss',{'name': 'Removed Addresss'})
-			id_address_invoice = res_partner_obj.search([('presta_id', '=', order_detail.get('id_address_invoice'))],limit=1)
+			
+			self.env.cr.commit()
+			id_address_invoice = res_partner_obj.search([('address_id', '=', order_detail.get('id_address_invoice')),('prestashop_address', '=', True)],limit=1)
+
 			if not id_address_invoice:
 				try:
 					address_inv_data = prestashop.get('addresses', order_detail.get('id_address_invoice'))
-					id_address_invoice = self.create_address(address_inv_data.get('address'), prestashop)
-					self.env.cr.commit()
+					id_address_invoice = self.create_address(address_inv_data.get('address'), prestashop, 'contact')
 				except Exception as e:
 					id_address_invoice = self.remove_record_prestashop_checked(res_partner_obj, 'Removed Addresss',{'name': 'Removed Addresss'})
+			
+			self.env.cr.commit()
+
 			order_vals.update({'partner_id': id_customer.id,'partner_shipping_id':id_address_delivery.id,'partner_invoice_id': id_address_invoice.id})
 			state_id = status_obj.search([('presta_id', '=', self.get_value_data(order_detail.get('current_state')))],limit=1)
 			if not state_id:
@@ -1565,29 +1572,32 @@ class SaleShop(models.Model):
 				except Exception as e:
 					state_id = self.remove_record_prestashop_checked(status_obj, 'Removed Status',{'name': 'Removed Status'})
 
-			a = self.get_value_data(order_detail.get('payment'))
-			p_mode = False
-			if a[0] == 'Cash on delivery  COD':
-				p_mode = 'cod'
-			elif a[0] == 'Bank wire':
-				p_mode = 'bankwire'
-			elif a[0] == 'Payments by check':
-				p_mode = 'cheque'
-			elif a[0] == 'Bank transfer':
-				p_mode = 'banktran'
+			payment_ref = self.get_value_data(order_detail.get('payment'))
+
+			# p_mode = False
+			# if a[0] == 'Cash on delivery  COD':
+			# 	p_mode = 'cod'
+			# elif a[0] == 'Bank wire':
+			# 	p_mode = 'bankwire'
+			# elif a[0] == 'Payments by check':
+			# 	p_mode = 'cheque'
+			# elif a[0] == 'Bank transfer':
+			# 	p_mode = 'banktran'
+
+
 			order_vals.update({
+						'name': self.get_value_data(order_detail.get('reference')),
 						'reference': self.get_value_data(order_detail.get('reference')),
 						'presta_id': order_detail.get('id'),
 						'warehouse_id': self.warehouse_id.id,
 						'presta_order_ref': self.get_value_data(order_detail.get('reference')),
-						'pretsa_payment_mode': p_mode,
+						'presta_payment_reference': payment_ref,
 						'pricelist_id': self.pricelist_id.id,
 						'workflow_order_id': self.workflow_id.id,
-						# 'name':  self.get_value_data(order_detail.get('id')),
 						'order_status' : state_id.id,
 						'shop_id': self.id,
 						'prestashop_order': True,
-						#'presta_order_date': self.get_value_data(order_detail.get('date_add')),
+						'date_order': datetime.strptime(self.get_value_data(order_detail.get('date_add')), dateFormatter),
 						})
 			if self.workflow_id.picking_policy:
 				order_vals.update({'picking_policy' : self.workflow_id.picking_policy})
@@ -1641,10 +1651,16 @@ class SaleShop(models.Model):
 			for shop in self:
 				prestashop = PrestaShopWebServiceDict(shop.prestashop_instance_id.location,shop.prestashop_instance_id.webservice_key or None)
 				last_import_count = 0
-				filters = {'display': 'full', 'limit': 100}
-				prestashop_order_data = prestashop.get('orders', options=filters)
+				prestashop_order_data_qty = 0
+				last_date = self._context.get('last_order_import_date')
 
-				while len(prestashop_order_data['orders']['order']) != 0:
+				filters = {'display': 'full', 'limit': 100, 'sort': 'id_DESC'}
+				prestashop_order_data = prestashop.get('orders', options=filters)
+				if prestashop_order_data:
+					prestashop_order_data_qty = len(prestashop_order_data['orders']['order'])
+
+				#while len(prestashop_order_data['orders']['order']) != 0:
+				while prestashop_order_data_qty != 0:
 					
 					if prestashop_order_data.get('orders') and prestashop_order_data.get('orders').get('order'):
 						
@@ -1655,19 +1671,28 @@ class SaleShop(models.Model):
 						else:
 							orders = [orders]
 						for order in orders:
-							shop.create_presta_order(order, prestashop)
-							shop.write({'last_order_id_id_import': order.get('id')})
+							if last_date:
+								if datetime.strptime(self.get_value_data(order.get('date_add')), dateFormatter) < last_date:
+									prestashop_order_data_qty = 0
+									break
+									
+							sale_order_id = self.env['sale.order'].search([('presta_id','=', order.get('id')),('prestashop_order','=',True)],limit=1)
+							if not sale_order_id:
+								shop.create_presta_order(order, prestashop)
+								shop.write({'last_order_id_id_import': order.get('id')})
 							
 						self.env.cr.commit()
 
-					if len(prestashop_order_data['orders']['order']) == 100 :
+					if prestashop_order_data_qty == 100 :
 						last_import_count += 100
-						filters = {'display': 'full', 'limit': '%s, 100' % last_import_count}
+						filters = {'display': 'full', 'limit': '%s, 100' % last_import_count, 'sort': 'id_DESC'}
 						prestashop_order_data = prestashop.get('orders', options=filters)
 						try:
-							import_count = len(prestashop_order_data['orders']['order']) 
+							import_count = len(prestashop_order_data['orders']['order'])
+							prestashop_order_data_qty = len(prestashop_order_data['orders']['order'])
 						except Exception as e:
 							prestashop_order_data = []
+							prestashop_order_data_qty = 0
 							logger.info('##################################')
 							logger.info('NO HAY MAS RESULTADOS')
 							logger.info('##################################')
@@ -1685,6 +1710,8 @@ class SaleShop(models.Model):
 						logger.info('##################################')
 					else:
 						prestashop_order_data = []
+						prestashop_order_data_qty = 0
+						
 		except Exception as e:
 			raise ValidationError(_(str(e)))
 		return True
@@ -2324,9 +2351,9 @@ class SaleShop(models.Model):
 					for sale_order in sale_order_ids:
 						order = prestashop.get('orders', sale_order.presta_id)
 						order.get('order').update({
+													'name': sale_order.presta_order_ref and str(sale_order.presta_order_ref),
 													'reference': sale_order.presta_order_ref and str(sale_order.presta_order_ref),
-													# 'conversion_rate': '1.000000',
-													'module': str(sale_order.pretsa_payment_mode),
+													'module': str(sale_order.pretsa_paymentestae),
 													'id_customer':1,
 													'id_address_delivery':1,
 													'id_address_invoice' :1,
@@ -2341,7 +2368,6 @@ class SaleShop(models.Model):
 													'total_paid_real':sale_order.amount_total and str(sale_order.amount_total),
 													'total_products_wt': 1,
 													'conversion_rate': 1
-													# 'id_shop': '1',
 						})
 						if sale_order.invoice_status == 'invoiced':
 

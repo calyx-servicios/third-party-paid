@@ -109,7 +109,7 @@ class PrestashopConnectorWizard(models.Model):
                 
         if self.import_orders:
             for shop_id in shop_ids:
-                shop_id.with_context({'last_order_import_date': str(self.last_order_import_date)}).import_orders()
+                shop_id.with_context({'last_order_import_date': self.last_order_import_date}).import_orders()
         
         if self.import_messages:
             for shop_id in shop_ids:
@@ -123,13 +123,13 @@ class PrestashopConnectorWizard(models.Model):
             for shop_id in shop_ids:
                 shop_id.import_catalog_price_rules()
 
-        # if self.update_order_status:
-        #     for shop_id in shop_ids:
-        #         sale_ids=self.env['sale.order'].search([('shop_id','=',shop_id.id),('state','not in',('cancel','draft','sent'))])
-        #         sale_ids=[sale_id.id for sale_id in sale_ids]
-        #         presta_instance_id=shop_id.prestashop_instance_id
-        #         self.env['prestashop.upload.orders'].create({}).upload_orders(False,sale_ids,presta_instance_id)
-        #
+        if self.update_order_status:
+            for shop_id in shop_ids:
+                sale_ids=self.env['sale.order'].search([('shop_id','=',shop_id.id),('state','not in',('cancel','draft','sent'))])
+                sale_ids=[sale_id.id for sale_id in sale_ids]
+                presta_instance_id=shop_id.prestashop_instance_id
+                self.env['prestashop.upload.orders'].create({}).upload_orders(False,sale_ids,presta_instance_id)
+        
         if self.update_categories:
             self.shop_ids.update_prestashop_category()
 #             for shop_id in shop_ids:
@@ -178,8 +178,6 @@ class PrestashopConnectorWizard(models.Model):
 
         # if self.export_presta_product_inventory:
         #     self.shop_ids.export_presta_product_inventory()
-
-
 
         return True
     

@@ -30,8 +30,7 @@
                                 <!--<field name="total_wght_product"/>-->
                                 <field name="carrier_prestashop" required="0"/>
                                 <separator colspan="2" string="Payment Details"/>
-                                <field name="pretsa_payment_mode"/>
-                                <field name="pretsa_payment_mode"/>
+                                <field name="presta_payment_reference"/>
                             </group>
                         </form>
                     </page>

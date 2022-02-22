@@ -61,8 +61,7 @@ class sale_order(models.Model):
     shop_ids = fields.Many2many('sale.shop', 'saleorder_shop_rel', 'saleorder_id', 'shop_id', string="Shop")
     write_date = fields.Datetime(string="Write Date")
     to_be_exported = fields.Boolean(string="To be exported?")
-
-    
+    presta_payment_reference = fields.Char('Prestashop Payment Reference')
     
 class sale_order_line(models.Model):
     _inherit='sale.order.line'
