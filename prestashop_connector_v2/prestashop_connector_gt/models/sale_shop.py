@@ -594,8 +594,8 @@ class SaleShop(models.Model):
 		for shop in self:
 			try:
 				prestashop = PrestaShopWebServiceDict(shop.prestashop_instance_id.location,shop.prestashop_instance_id.webservice_key or None)
-				filters = {'display': 'full', 'filter[id]': '>[%s]' % self.last_country_id_import, 'limit': 1000}
-				state_filters = {'display': 'full', 'filter[id]': '>[%s]' % self.last_state_id_import, 'limit': 1000}
+				filters = {'display': 'full', 'limit': 2000}
+				state_filters = {'display': 'full', 'limit': 4000}
 				prestashop_country_data = prestashop.get('countries', options=filters)
 				if 'country' in prestashop_country_data.get('countries'):
 					country_list = prestashop_country_data.get('countries').get('country')
@@ -605,7 +605,7 @@ class SaleShop(models.Model):
 						country_list = [country_list]
 					for country in country_list:
 						country_vals={'presta_id': country.get('id'),'is_prestashop': True}
-						country_id=browse_country_obj.search([('code','=',country.get('iso_code'))],limit=1)
+						country_id=browse_country_obj.search(['|', ('code','=',country.get('iso_code'), ('name', '=', country.get('name').get('language').get('value')))],limit=1)
 						if not country_id:
 							country_vals.update({'name': country.get('name').get('language').get('value'), 'code': country.get('iso_code')})
 							browse_country_obj.create(country_vals)
@@ -623,7 +623,8 @@ class SaleShop(models.Model):
 						state_list = [state_list]
 					for state in state_list:
 						state_vals={'presta_id': state.get('id'),'is_prestashop': True}
-						country_id = browse_country_obj.search([('presta_id', '=', state.get('id_country')),('is_prestashop','=',True)], limit=1)
+
+						country_id = browse_country_obj.search(['|', ('code','=', state['id_country']), ('name', '=', country.get('name'))],limit=1)
 
 						state_id=browse_state_obj.search([('name','=',state.get('name'))],limit=1)
 						if state_id:
@@ -637,6 +638,7 @@ class SaleShop(models.Model):
 							state_id.write(state_vals)
 						shop.write({'last_state_id_import':int(state.get('id'))})
 						self.env.cr.commit()
+
 			except Exception as e:
 
 				if self.env.context.get('log_id'):
