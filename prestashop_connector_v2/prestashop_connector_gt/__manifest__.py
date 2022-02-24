@@ -5,7 +5,7 @@
 
 {
     "name" : "Prestashop Connector",
-    "version" : "13.1.0.4",
+    "version" : "13.1.0.5",
     "depends" : ["sale_stock",'delivery','account','sale_shop','product_images_olbs'],
     "author" : "Globalteckz",
     'summary': 'Manage all your prestashop operations in Odoo',

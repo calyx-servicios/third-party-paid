@@ -605,7 +605,7 @@ class SaleShop(models.Model):
 						country_list = [country_list]
 					for country in country_list:
 						country_vals={'presta_id': country.get('id'),'is_prestashop': True}
-						country_id=browse_country_obj.search(['|', ('code','=',country.get('iso_code'), ('name', '=', country.get('name').get('language').get('value')))],limit=1)
+						country_id = browse_country_obj.search(['|', ('code','=',country.get('iso_code')), ('name', '=', country.get('name').get('language').get('value'))],limit=1)
 						if not country_id:
 							country_vals.update({'name': country.get('name').get('language').get('value'), 'code': country.get('iso_code')})
 							browse_country_obj.create(country_vals)
