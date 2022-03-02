@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="product_template_form_view_magento">
+        <field name="name">product.template for.magento</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_code']" position="replace"/>
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="magento_id" attrs="{'invisible':[('magento_template','=',False)]}"/>
+                <field name="magento_sku" string="Magento SKU" attrs="{'invisible':[('magento_template','=',False)]}"/>
+                <field name="default_code" string="SKU" attrs="{'invisible':[('magento_template','=',False)]}"/>
+                <field name="magento_instance_ids" widget="many2many_tags" attrs="{'invisible':[('magento_template','=',False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='sale_ok']" position="after">
+                <div class="oe_left" name="options">
+                    <div>
+                        <field name="magento_template"/>
+                        <label for="magento_template" />
+                        <br></br>
+                        <field name="magento_exported" readonly="1"/>
+                        <label for="magento_exported" />
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

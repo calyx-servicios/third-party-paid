@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="product_product_form_view_magento1">
+        <field name="name">product.normal.form.for.magento1</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="magento_id" readonly="True"/>
+            </xpath>
+            <xpath expr="/form/sheet/notebook" position="inside">
+                <page string="Magento Attributes">
+                    <group>
+                        <field name="product_type"/>
+                        <field name="attribute_set" options="{'no_create': True}"/>
+                        <field name="magento_instance_ids" options="{'no_create': True}" widget="many2many_tags"/>
+                        <field name="website_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        <field name="store_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                        <field name="gt_magento_product_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Categories">
+                            <field name="prod_category_id" nolabel="1"  attrs="{'required':[('magento_product','=',True)]}" />
+                        </page>
+                        <page string="Selection Attributes">
+                            <group string="Global Scope">
+                                <field name="gl_sel_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Global">
+                                        <field name="gl_sel_att_id" domain="[('frontend_input_id','=','select'),('scope','=','global')]"/>
+                                        <field name="gl_sel_att_opt_id"/>
+                                        <field name="gl_sel_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Website Scope">
+                                <field name="wb_sel_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Website"> 
+                                        <field name="wb_sel_att_id" domain="[('frontend_input_id','=','select'),('scope','=','website')]"/>
+                                        <field name="wb_sel_att_opt_id"/>
+                                        <field name="wb_sel_mag_web_id"/>
+                                        <field name="wb_sel_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="StoreView Scope">
+                                <field name="sw_sel_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Store View">
+                                        <field name="sw_sel_att_id" domain="[('frontend_input_id','=','select'),('scope','=','store')]"/>
+                                        <field name="sw_sel_att_opt_id"/>
+                                        <field name="sw_sel_mag_str_id"/>
+                                        <field name="sw_sel_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        
+                        <page string="Multi-Select Attributes">
+                            <group string="Global Scope">
+                                <field name="gl_mul_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Global">
+                                        <field name="gl_mul_att_id" domain="[('frontend_input_id','=','multiselect'),('scope','=','global')]"/>
+                                        <field name="gl_mul_att_opt_id" widget="many2many_tags"/>
+                                        <field name="gl_mul_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Website Scope">
+                                <field name="wb_mul_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Website"> 
+                                        <field name="wb_mul_att_id" domain="[('frontend_input_id','=','multiselect'),('scope','=','website')]"/>
+                                        <field name="wb_mul_att_opt_id" widget="many2many_tags"/>
+                                        <field name="wb_mul_mag_web_id"/>
+                                        <field name="wb_mul_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="StoreView Scope">
+                                <field name="sw_mul_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Store View">
+                                        <field name="sw_mul_att_id" domain="[('frontend_input_id','=','multiselect'),('scope','=','store')]"/>
+                                        <field name="sw_mul_att_opt_id" widget="many2many_tags"/>
+                                        <field name="sw_mul_mag_str_id"/>
+                                        <field name="sw_mul_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        
+                        
+                        <page string="Text Attributes">
+                            <group string="Global Scope">
+                                <field name="gl_txt_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Global">
+                                        <field name="gl_txt_att_id" domain="[('frontend_input_id','=',('text','textarea')),('scope','=','global')]"/>
+                                        <field name="gl_txt_att_opt"/>
+                                        <field name="gl_txt_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Website Scope">
+                                <field name="wb_txt_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Website"> 
+                                        <field name="wb_txt_att_id" domain="[('frontend_input_id','=',('text','textarea')),('scope','=','website')]"/>
+                                        <field name="wb_txt_att_opt"/>
+                                        <field name="wb_txt_mag_web_id"/>
+                                        <field name="wb_txt_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="StoreView Scope">
+                                <field name="sw_txt_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Store View">
+                                        <field name="sw_txt_att_id" domain="[('frontend_input_id','=',('text','textarea')),('scope','=','store')]"/>
+                                        <field name="sw_txt_att_opt"/>
+                                        <field name="sw_txt_mag_str_id"/>
+                                        <field name="sw_txt_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+
+                        <page string="Float Attributes">
+                            <group string="Global Scope">
+                                <field name="gl_flt_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Global">
+                                        <field name="gl_flt_att_id" domain="[('frontend_input_id','=',('price','weight')),('scope','=','global')]"/>
+                                        <field name="gl_flt_att_opt"/>
+                                        <field name="gl_flt_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Website Scope">
+                                <field name="wb_flt_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Website"> 
+                                        <field name="wb_flt_att_id" domain="[('frontend_input_id','=',('price','weight')),('scope','=','website')]"/>
+                                        <field name="wb_flt_att_opt"/>
+                                        <field name="wb_flt_mag_web_id"/>
+                                        <field name="wb_flt_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="StoreView Scope">
+                                <field name="sw_flt_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Store View">
+                                        <field name="sw_flt_att_id" domain="[('frontend_input_id','=',('price','weight')),('scope','=','store')]"/>
+                                        <field name="sw_flt_att_opt"/>
+                                        <field name="sw_flt_mag_str_id"/>
+                                        <field name="sw_flt_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        
+                        <page string="Date Attributes">
+                            <group string="Global Scope">
+                                <field name="gl_dte_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Global">
+                                        <field name="gl_dte_att_id" domain="[('frontend_input_id','=','date'),('scope','=','global')]"/>
+                                        <field name="gl_dte_att_opt"/>
+                                        <field name="gl_dte_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Website Scope">
+                                <field name="wb_dte_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Website"> 
+                                        <field name="wb_dte_att_id" domain="[('frontend_input_id','=','date'),('scope','=','website')]"/>
+                                        <field name="wb_dte_att_opt"/>
+                                        <field name="wb_dte_mag_web_id"/>
+                                        <field name="wb_dte_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="StoreView Scope">
+                                <field name="sw_dte_att_ids" nolabel="1">
+                                    <tree editable="bottom" string="Store View">
+                                        <field name="sw_dte_att_id" domain="[('frontend_input_id','=','date'),('scope','=','store')]"/>
+                                        <field name="sw_dte_att_opt"/>
+                                        <field name="sw_dte_mag_str_id"/>
+                                        <field name="sw_dte_mag_inst_id" string="Magento Instance"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </page>
+                <page string=" Product Images" attrs="{'invisible':[('magento_product','=', False)]}">
+                    <field name="product_image_id">
+                        <form>
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="image" class="oe_avatar oe_left"/>
+                                    <field name="position"/>
+                                    <field name="image_extension"/>
+                                    <field name="magento_id"/>
+                                    <field name="is_exported"/>
+                                    
+                                </group>
+                                <group>
+                                    <field name="magento_instance_ids"/>
+                                    <field name="gt_magento_image_ids"/>
+                                    <field name="small_image"/>
+                                    <field name="thumbnail"/>
+                                    <field name="swatch_image"/>
+                                    <field name="base_image"/>
+                                </group>
+                            </group>
+                        </form>
+                        <tree>
+                            <field name="name"/>
+                            <field name="image"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='sale_ok']" position="after">
+                <div class="oe_left" name="options">
+                    <div>
+                        <field name="exported_magento"/>
+                        <label for="exported_magento" />
+                        <br></br>
+                        <field name="magento_product" />
+                        <label for="magento_product" />
+<!--                        <field name="product_exported" invisible="True" />-->
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    
+    
+    <record model="ir.ui.view" id="product_export_button_magento">
+        <field name="name">product.export.button</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="GtExportMagentoProducts" string="Export Product" type="object"
+                    attrs="{'invisible':[('exported_magento','=', True)]}" />
+                <button name="GtUpdateMagentoProducts" string="Update Product" type="object"
+                    attrs="{'invisible':[('exported_magento','=', False)]}" />
+                <button name="GtExportMagentoProductImage" string="Export Images" type="object"
+                    attrs="{'invisible':[('exported_magento','=', False)]}" />
+                <button name="GtExportSingleProductStock" string="Export Stock" type="object"
+                    attrs="{'invisible':[('exported_magento','=', False)]}" />
+<!--                <button name="update_products" string="Update Product" type="object"
+                    attrs="{'invisible':['|',('exported_magento','=', False)]}" />
+                <button name="update_stocks" string="Update Stock" type="object"
+                    attrs="{'invisible':['|',('exported_magento','=', False)]}" />
+                <button name="export_image" string="Export Image" type="object"
+                    attrs="{'invisible':['|',('exported_magento','=', False)]}" />-->
+            </xpath>
+        </field>
+    </record>
+    
+    
+    <record id="act_magento_products" model="ir.actions.act_window">
+        <field name="name">Magento Products</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('magento_product','=',True)]</field>
+        <!-- <field name="search_view_id" ref="product.product_search_form_view" /> -->
+        <field name="view_id" eval="False" />
+    </record>
+    
+    <record id="magento_products_not_exported" model="ir.actions.act_window">
+        <field name="name">Products Not Exported</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('magento_product','=',True),('exported_magento','=',False)] </field>
+        <field name="search_view_id" ref="product.product_search_form_view" />
+        <field name="view_id" eval="False" />
+    </record>
+
+
+    <record id="magento_products_exported" model="ir.actions.act_window">
+        <field name="name">Products Exported</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[('exported_magento','=',True),('magento_product','=',True)] </field>
+        <field name="search_view_id" ref="product.product_search_form_view" />
+        <field name="view_id" eval="False" /> 
+    </record>
+    
+</odoo>

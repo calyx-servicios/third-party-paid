@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="gt_magento_website_form_view" model="ir.ui.view">
+        <field name="name">Magento Website</field>
+        <field name="model">gt.magento.website</field>
+        <field name="arch" type="xml">
+            <form string="Magento Website View" version="11.0" create="false">
+                <sheet>
+                    <group string='Website Details' attrs="{'invisible':[('magento_website','=',False)]}" colspan="4">
+                        <field name="name"/>
+                        <field name="magento_instance_id"/>
+                        <field name="magento_website" invisible="1"/>
+                        <field name="website_id"/>
+                        <field name="code"/>
+                        <field name="default_group_id"/>                     
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="gt_magento_website_tree">
+        <field name="name">magento.website.tree</field>
+        <field name="model">gt.magento.website</field>
+        <field name="arch" type="xml">
+            <tree string="Magento Website" create="false">
+                <field name="name"/>
+                <field name="website_id"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="gt_act_magento_website" model="ir.actions.act_window">
+        <field name="name">Magento Website</field>
+        <field name="res_model">gt.magento.website</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="gt_magento_website_tree"/>
+        <field name="domain">[('magento_website', '=', True)]</field>
+    </record> 
+</odoo>

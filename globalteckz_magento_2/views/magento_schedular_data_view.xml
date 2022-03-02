@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<openerp>
+   <data noupdate="0">
+    
+        <record forcecreate="True" id="import_magento2_order_scheduler" model="ir.cron">
+            <field name="name">Import Orders</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Import_orderses_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+
+       
+        <record forcecreate="True" id="import_magento2_product_scheduler" model="ir.cron">
+            <field name="name">Import Product</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Import_product_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+        
+        <record forcecreate="True" id="update_product_schedular" model="ir.cron">
+            <field name="name">Update Product</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Update_product_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+        
+        <record forcecreate="True" id="update_magento2_stock_scheduler" model="ir.cron">
+            <field name="name">Update Stock</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Update_stock_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+        
+        
+       
+        <record forcecreate="True" id="import_magento2_stock_scheduler" model="ir.cron">
+            <field name="name">Import Stock</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Import_product_stock_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record> 
+        
+        <record forcecreate="True" id="import_magento2_image_scheduler" model="ir.cron">
+            <field name="name">Import Image</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Import_product_image_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record> 
+        
+        <record forcecreate="True" id="import_magento2_attribute_scheduler" model="ir.cron">
+            <field name="name">Import Attributes</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Import_product_attributes_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+        
+        <record forcecreate="True" id="update_invoice_schedular" model="ir.cron">
+            <field name="name">Update Invoice Status</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Update_invoice_status(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+        
+        <record forcecreate="True" id="update_shipment_schedular" model="ir.cron">
+            <field name="name">Update Shipment Status</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Update_shipment_status(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+        
+        <record forcecreate="True" id="import_magento2_attribute_set_scheduler" model="ir.cron">
+            <field name="name">Import AttributeSet</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Import_product_attributes_set_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+        
+        <record forcecreate="True" id="import_magento2_categories_scheduler" model="ir.cron">
+            <field name="name">Import Categories</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Import_product_categories_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+        
+        <record forcecreate="True" id="export_magento2_categories_scheduler" model="ir.cron">
+            <field name="name">Export Categories</field>
+            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="state">code</field>
+            <field name="code">model.Export_product_categories_scheduler(True)</field>
+            <field eval="False" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+        
+
+    </data>
+</openerp>
+		
+        
+        
