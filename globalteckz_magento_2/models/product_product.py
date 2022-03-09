@@ -511,7 +511,7 @@ class ProductProduct(models.Model):
         elif visibility_id and visibility_id.scope == 'website':
             option_id = prod_att_option_obj.search([('value','=',each_list.get('status')),('attribute_id','=',visibility_id.id)])
             if option_id:
-                visibility_ids = self.env['product.attribute.selection.wb'].search([('wb_sel_att_id','=',visibility_id.id),('wb_sel_mag_web_id','=',instance.id)
+                visibility_ids = self.env['product.attribute.selection.wb'].search([('wb_sel_att_id','=',visibility_id.id),('wb_sel_mag_web_id','=',instance.id),
                 ('wb_sel_att_opt_id','=',option_id.id),('wb_sel_att_idc','=',product_ids.id),('wb_sel_mag_web_id','=',website_id.id)])
                 if not visibility_ids:
                     self.env['product.attribute.selection.wb'].create({'wb_sel_att_id':visibility_id.id,'wb_sel_mag_web_id':instance.id,
