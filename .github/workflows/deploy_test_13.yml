@@ -1,0 +1,18 @@
+name: Update on odoo13-test
+
+on:
+    push:
+        branches:
+            - 13.0
+
+jobs:
+    deploy-test-13:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Git Pull and Restart Odoo
+              uses: garygrossgarten/github-action-ssh@release
+              with:
+                  command: cd /opt/odoo13/custom-addons/calyx/third-party-paid/.github/workflows ; chmod +x script.sh ; ./script.sh
+                  host: "${{ secrets.SSH_HOST }}"
+                  username: ${{ secrets.SSH_USER }}
+                  privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
