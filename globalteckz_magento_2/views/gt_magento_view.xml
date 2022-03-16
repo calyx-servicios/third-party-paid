@@ -121,6 +121,16 @@
                                 </group>
                             </group>
                         </page>
+                        <page string='Force Import SKU product'>
+                            <group>
+                                <group>
+                                    <field name="sku_reference_ids" widget="many2many_tags"/>
+                                </group>
+                                <group>
+                                    <button name="GtImportMagentoProductSkuForce" string="Import Products" type="object" class="btn-primary"/>
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
             </form>

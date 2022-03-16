@@ -260,9 +260,8 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">product.template</field>
         <field name="view_mode">kanban,tree,form</field>
-        <field name="domain">[('magento_product','=',True)]</field>
-        <!-- <field name="search_view_id" ref="product.product_search_form_view" /> -->
-        <field name="view_id" eval="False" />
+        <field name="domain">[('magento_template','=',True)]</field>
+        <field name="search_view_id" ref="product.product_template_search_view" />
     </record>
     
     <record id="magento_products_not_exported" model="ir.actions.act_window">

@@ -25,7 +25,7 @@ class ProductPhoto(models.Model):
     _name = 'product.photo'
     _description = 'Product photo'
     
-    product_id = fields.Many2one('product.product', 'Product')
+    product_id = fields.Many2one('product.template', 'Product')
     name= fields.Char('Name')
     description= fields.Text('Description')
     image_alt= fields.Text('Image Label')

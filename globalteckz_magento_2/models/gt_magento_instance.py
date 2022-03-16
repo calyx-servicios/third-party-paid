@@ -35,6 +35,12 @@ import re
 
 _logger = logging.getLogger(__name__)
 
+class SkuReferenceImport(models.Model):
+    _name = 'sku.reference.import'
+
+    name = fields.Char(string='SKU')
+    import_success = fields.Boolean('Import Success')
+
 class GtMagentoInstance(models.Model):
     _name='gt.magento.instance'
     _description = "GT Magento Instance"
@@ -61,7 +67,8 @@ class GtMagentoInstance(models.Model):
     cust_from_id = fields.Integer(string="Customer From ID", default=1)
     limit_simple_product_id = fields.Integer(string='Limit for Simple Product ID Import', default=1000)
     limit_configurable_product_id = fields.Integer(string='Limit for Configurable Product ID Import', default=1000)
-    
+    sku_reference_ids = fields.Many2many('sku.reference.import', string='Product Sku Reference Import')
+
     @api.depends('from_id')
     def _compute_simple_to_id(self):
         for record in self:
@@ -630,6 +637,7 @@ class GtMagentoInstance(models.Model):
         product_obj = self.env['product.product']
         store_obj = self.env['gt.magento.store']
         website_obj = self.env['gt.magento.website']
+
         if self.token:
             token = self.token
         else:
@@ -642,9 +650,11 @@ class GtMagentoInstance(models.Model):
             'content-type': "application/json",
             'cache-control': "no-cache",
             }
+
         url = str(self.location)+"/rest/V1/products?searchCriteria[filterGroups][0][filters][0][field]=type_id& searchCriteria[filterGroups][0][filters][0][value]=configurable& searchCriteria[filterGroups][0][filters][0][conditionType]=eq&searchCriteria[page_size]=0"
         response = requests.request("GET",url, headers=headers)
         product_list = json.loads(response.text)
+
         for products in product_list['items']:
             url=str(self.location)+"/rest/V1/products/"+str(products['sku']).encode('utf-8').decode()
             response = requests.request("GET",url, headers=headers, stream=True)
@@ -661,11 +671,35 @@ class GtMagentoInstance(models.Model):
                 for store_id in store_ids:
                     product_obj.create_configurable_magento_products(self, headers, products['sku'], store_id,website_id)
                     self._cr.commit()
-        
+
         if len(product_list['items']) == 0:
             self.write({'config_prod_from_id':self.config_prod_to_id})
         return True
-    
+
+    def GtImportMagentoProductSkuForce(self):
+        product_obj = self.env['product.product']
+        store_obj = self.env['gt.magento.store']
+        # import wdb
+        # wdb.set_trace()
+        if self.token:
+            token = self.token
+        else:
+            token = self.generate_token()
+
+        auth_token="Bearer "+token.strip()
+        auth_token=auth_token.replace("'",'"')
+        headers = {
+            'authorization':auth_token,
+            'content-type': "application/json",
+            'cache-control': "no-cache",
+            }
+
+        store_ids = store_obj.search([('magento_instance_id','=',self.id)])
+
+        for store in store_ids:
+            for sku_reference in self.sku_reference_ids:
+                product_obj.create_configurable_magento_products(self, headers, sku_reference.name, store, store.website_id)
+
     def GtImportMagentoCustomer(self):
         self.generate_token()
         token=self.token
@@ -792,7 +826,7 @@ class GtMagentoInstance(models.Model):
                         self.create_image(prod_data,list_prods)
         return True
     
-    def create_image(self,prod_data,list_prods):
+    def create_image(self, prod_data, list_prods):
         img_obj=self.env['product.photo']
         multi_instance = self.env['gt.magento.product.image.multi']
         for list_prod in list_prods:
@@ -803,13 +837,13 @@ class GtMagentoInstance(models.Model):
                 image_path = base64.encodestring(file_contain)
 
                 vals = {
-                        'magento_url':list_prod['file'],
-                        'name':image_name,
+                        'magento_url': list_prod['file'],
+                        'name': image_name,
                         'link': 1,
-                        'url':url,
+                        'url': url,
                         'product_id': prod_data.id,
-                        'is_exported':True,
-                        'magento_id':list_prod['id']
+                        'is_exported': True,
+                        'magento_id': list_prod['id']
                 }
                 if len(list_prod['types']):
                     for image_type in list_prod['types']:

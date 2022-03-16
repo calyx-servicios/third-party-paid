@@ -36,7 +36,10 @@ class ProductTemplate(models.Model):
     magento_template = fields.Boolean(string='Magento Template')
     magento_exported = fields.Boolean(string='Template Magento Exported')
     magento_instance_ids = fields.Many2many('gt.magento.instance','mage_temp_rel','instas_id','templt_id','Magento Instance')
-    
+    prod_category_id = fields.Many2many('product.category', string='Magento Categories')
+    prod_attr_category_id = fields.Many2one('gt.product.attribute.options', string='Magento Category')
+    prod_images = fields.One2many('product.photo', 'product_id', 'Magento Images')
+
     def _create_variant_ids(self):
         self.flush()
         Product = self.env["product.product"]

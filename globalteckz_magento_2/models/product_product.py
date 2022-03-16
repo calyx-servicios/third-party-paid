@@ -81,6 +81,8 @@ class ProductProduct(models.Model):
         variant_list = []
         attributes_name = []
         instance_ids = []
+        line_categ = []
+        categ_id = False
         product_id = prod_tmp_obj.search([('magento_sku', '=', str(sku))])
         if not product_id:
             print("*==> New product:: ", product_id.name)
@@ -132,7 +134,32 @@ class ProductProduct(models.Model):
                 for old_instance_id in self.magento_instance_ids:
                     instance_ids.append(old_instance_id.id)
             if instance.id not in instance_ids:
-                instance_ids.append(instance.id)   
+                instance_ids.append(instance.id) 
+
+            prod_cat_obj=self.env['product.category']
+            if each_product.get('custom_attributes'):
+                for attributes_child in each_product.get('custom_attributes'):
+                    if attributes_child['attribute_code'] == 'category_ids':
+                        categ_id = attributes_child['value']
+                        for each_category in categ_id:
+                            cat_ids=prod_cat_obj.search([
+                                ('magento_id','=',each_category),
+                                ('magento_instance_id','=',instance.id),
+                                ('shop_id','=',store_id.id),
+                            ])
+                            if cat_ids:
+                                line_categ.append(cat_ids.id)
+                    if attributes_child['attribute_code'] == 'ds_category':
+                        categ_att_id =  self.env['gt.product.attributes'].search([
+                            ('attribute_code', '=', 'ds_category'),
+                            ('referential_id', '=', instance.id),
+                        ])
+                        categ_att_option_id = self.env['gt.product.attribute.options'].search([
+                            ('value', '=', attributes_child['value']),
+                            ('referential_id', '=', instance.id),
+                            ('attribute_id', '=', categ_att_id.id)
+                        ])
+
             product_tmp_vals = {  
                 'default_code':str(sku),
                 'name':str(each_product.get('name')),
@@ -143,7 +170,9 @@ class ProductProduct(models.Model):
                 'magento_template':True,
                 'magento_exported':True,
                 'magento_sku': str(sku),
-                'magento_instance_ids':[(6,0,instance_ids)]
+                'magento_instance_ids':[(6,0,instance_ids)],
+                'prod_category_id':[(6,0,line_categ)],
+                'prod_attr_category_id': categ_att_option_id.id if categ_att_option_id else False,
             }
             product_tmp_id = prod_tmp_obj.create(product_tmp_vals)
             print("*==> create product template! ::",product_tmp_vals)

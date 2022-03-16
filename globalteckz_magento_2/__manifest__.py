@@ -126,6 +126,7 @@ import invoice from magento
                 'base',
                 'account',
                 'delivery',
+                'product',
             ],
     'data': [
             'security/gt_magento_security.xml',
