@@ -320,7 +320,9 @@ class ProductProduct(models.Model):
             response = requests.request("GET",url, headers=headers)
             if str(response.status_code)=="200":
                 each_product=json.loads(response.text)
-                product_id = self.create_main_order_products(instance,sku,store_id,website_id,each_product['items'][0])
+                if each_product['items']:
+                    product_id = self.create_main_order_products(instance,sku,store_id,website_id,each_product['items'][0])
+                
         else:
             each_product=json.loads(response.text)
             product_id = self.create_main_order_products(instance,sku,store_id,website_id,each_product)

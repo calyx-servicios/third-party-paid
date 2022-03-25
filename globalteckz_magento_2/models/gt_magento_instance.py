@@ -37,6 +37,7 @@ _logger = logging.getLogger(__name__)
 
 class SkuReferenceImport(models.Model):
     _name = 'sku.reference.import'
+    _description = "SKU Reference Import"
 
     name = fields.Char(string='SKU')
     import_success = fields.Boolean('Import Success')
@@ -261,11 +262,13 @@ class GtMagentoInstance(models.Model):
             if str(response.status_code)=="200":
                 self.write({'token':json.loads(response.text)})
                 self._cr.commit()
+            else:
+                raise UserError(_('Cant generate the token!'))
             return True
         else:
             return True
 
-    def gt_create_magento_website(self):        
+    def gt_create_magento_website(self):      
         website_obj = self.env['gt.magento.website']
         try:
             self.generate_token()
@@ -307,7 +310,7 @@ class GtMagentoInstance(models.Model):
                     if store['name'] != 'Admin':
                         website_id = website_obj.search([('website_id','=',store['website_id']),('magento_instance_id','=',self.id)])
                         if not len(website_id):
-                            raise UserError(_('Please Import Magento Website First'))
+                            raise UserError(_(' Import Magento Website First'))
                         if not store_id:
                             store_obj.create({'name':store['name'],'code':store['code'],'store_id':store['id'], 
                             'website_id':website_id.id,'magento_shop':True, 'magento_instance_id':self.id })
@@ -679,8 +682,6 @@ class GtMagentoInstance(models.Model):
     def GtImportMagentoProductSkuForce(self):
         product_obj = self.env['product.product']
         store_obj = self.env['gt.magento.store']
-        # import wdb
-        # wdb.set_trace()
         if self.token:
             token = self.token
         else:
