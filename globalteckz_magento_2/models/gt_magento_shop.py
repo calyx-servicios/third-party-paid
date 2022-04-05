@@ -18,11 +18,13 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.    #
 #                                                                             #   
 ###############################################################################
+from tempfile import TemporaryFile
 from odoo import fields,api,models,_
 from odoo.exceptions import UserError
 import requests
 import json
 import logging
+from datetime import date, datetime, time
 logger = logging.getLogger('product')
 from odoo.tests import Form
 from datetime import date
@@ -50,7 +52,6 @@ class GtMagentoStore(models.Model):
     magento_order_date_to = fields.Date(string="To Date")
     
     
-    
     def ActionGetOrders(self):
         #print "<================Calling===============>",
         magento_products = self.env['sale.order'].search([('magento_shop_id','=',self.id)])
@@ -67,8 +68,7 @@ class GtMagentoStore(models.Model):
         'domain': [('id', 'in', magento_products.ids)]
         }
 
-        return result
-    
+        return result  
     
     def GetOrdersCount(self):
         shop_obj = self.env['sale.order']
@@ -82,6 +82,11 @@ class GtMagentoStore(models.Model):
     
     
     def GtCreateMagentoOrders(self):
+        if not self.shipping_product:
+            raise UserError(_('Please, select a shipping product!'))
+
+        partner_id = []
+        name = ''
         partner_obj = self.env['res.partner']
         currency_obj=self.env['res.currency']
         payment_obj = self.env['account.payment.term']
@@ -97,263 +102,320 @@ class GtMagentoStore(models.Model):
             }
         value_date_from = str(self.magento_order_date)
         value_date_to = str(self.magento_order_date_to)
+        if (value_date_from and value_date_to) == 'False':
+            value_date_from = '0000-00-00'
+            value_date_to = str(date.today())
         if value_date_to and value_date_from:
             if value_date_to >= value_date_from:
                 url=str(self.magento_instance_id.location)+"/rest/V1/orders? searchCriteria[filterGroups][0][filters][0][field]=created_at& searchCriteria[filterGroups][0][filters][0][value]="+value_date_from+' 00:01:00'+"& searchCriteria[filterGroups][0][filters][0][conditionType]=from& searchCriteria[filterGroups][1][filters][0][field]=created_at& searchCriteria[filterGroups][1][filters][0][value]="+value_date_to+' 23:59:59'+"& searchCriteria[filterGroups][1][filters][0][conditionType]=to& searchCriteria[filterGroups][2][filters][0][field]=store_id& searchCriteria[filterGroups][2][filters][0][value]="+str(self.store_id)+"& searchCriteria[filterGroups][2][filters][0][conditionType]=eq"
-                print ("url_)_)_)_)_)_)_",url)
                 response = requests.request("GET",url, headers=headers)
                 items=response.json().get("items")
-                print ("response+_+_+_+_+_+_+_+_items",len(items))
-                for saleorder_list in items:
-                    print ("saleorder_list+_+_+_+_+_+_+_",saleorder_list)
-                    saleordervals = {}
-                    payment_term_id = []
-                    partner_ship_id = []
-                    partner_invoice_id = []
-                    saleorder_id=self.env['sale.order'].search([('mage_order_id','=',saleorder_list['increment_id']),('magento_shop_id','=',self.id)])
-                    if not saleorder_id:
-                        payment = payment_obj.search([('name','=','Immediate Payment')])
-                        if payment:
-                            payment_term_id = payment.id
-                        if saleorder_list['customer_is_guest'] == False:
-                            if 'customer_id' in saleorder_list:
-                                partner_id = partner_obj.search([('mag_cust_id','=',saleorder_list['customer_id']),('email','=',saleorder_list['customer_email'])])
-                                #print ("partner_id+++++++++++0",partner_id)
-                                if not partner_id:
-                                    url=str(self.magento_instance_id.location)+"rest/V1/customers/"+str(saleorder_list['customer_id'])
-                                    #print ("url+++++++++++++++++++++++c ustom",url)
-                                    response = requests.request("GET",url, headers=headers) 
-                                    #print ("response++++++++++++",response)
-                                    customer_list=json.loads(response.text)
-                                    #print ("customer_list++++++++++++++++",customer_list)
-                                    partner_id = self.magento_instance_id.CreateMagentoCustomer(customer_list)
-                                    #print ('partner_id++++++++++order',partner_id[0])
-                                    self._cr.commit()
-                                else:
-                                    partner_id = self.GuestCustomer(saleorder_list)
-                            billing_address = saleorder_list['billing_address']
-                            if billing_address.get('customer_address_id'):
+                if items:
+                    print("113===> response ok!  cant.ordenes: ",len(items) or False)
+                    print("114===> auth_token: ",auth_token or False)
+                    for saleorder_list in items:
+                        saleordervals = {}
+                        payment_term_id = []
+                        partner_ship_id = []
+                        partner_invoice_id = []
+                        saleorder_id = self.env['sale.order'].search([
+                            ('mage_order_id','=',saleorder_list['increment_id']),
+                            ('magento_shop_id','=',self.id)
+                            ])
+                        if not saleorder_id:
+                            payment = payment_obj.search([('name','=','Immediate Payment')])
+                            if payment:
+                                payment_term_id = payment.id
+                            if saleorder_list['customer_is_guest'] == False:
                                 if 'customer_id' in saleorder_list:
-                                    street,street1='',''
-                                    partner_invoice_id = partner_obj.search([('mag_cust_id','=',saleorder_list['customer_id']),('mag_address_id','=',billing_address.get('customer_address_id'))])
-                                    #print ("partner_invoice_id6++++++",partner_invoice_id)
-                                    if not partner_invoice_id:
-                                        #print ("billing_address++++++++++++++",billing_address)
-                                        if 'customer_address_id' in billing_address:
-                                            url=str(self.magento_instance_id.location)+"rest/V1/customers/addresses/"+str(billing_address.get('customer_address_id'))
-                                            #print ("url+++++++++++++++++++++++",url)
-                                            response = requests.request("GET",url, headers=headers) 
-            #                                print ("response++++++++",response)
-            #                                print ("response++++++++++++",json.loads(response.text))
-                                            partner_invoice_id = self.create_customer_address(json.loads(response.text),partner_id)
-                                        else:
-                                            #print ("billing_address++_+_+_+_+_+",billing_address)
-                                            if billing_address.get('street',False):
-                                                street=billing_address.get('street',False)[0]
-                                                if len(billing_address.get('street',False))==2:
-                                                    street1=cust_address.get('street',False)[1]
-                                                #print ("street+++++++++++",street,street1)
-                                        partner_invoice_id = partner_obj.search([('mag_cust_id','=',saleorder_list['customer_id']),('name','=',billing_address.get("firstname",False) + ' ' + billing_address.get("lastname",False)),('street','=',street),('street2','=',street1)])
-                                        #print ("partner_invoice_id|||||||",partner_invoice_id)
-                                        if not partner_invoice_id:
-                                            partner_invoice_id = self.temporary_address(billing_address,partner_id)
-                                else:
-                                    partner_invoice_id = self.GuestCustomerInvoice(saleorder_list['billing_address'],partner_id)
-                            shipping_address = saleorder_list['extension_attributes']['shipping_assignments'][0]
-                            #print ("shipping_address++++++++++",shipping_address)
-                            if 'shipping' in shipping_address:
-                                shipp_addre = shipping_address['shipping']
-                                if 'address' in shipp_addre:
-                                    shipp_address = shipp_addre['address']
-                                #print ("shipp_address++++++++++++",shipp_address)
-                                    if 'customer_id' in saleorder_list:
-                                        if shipp_address:
-                                            street,street1='',''
-                                            partner_ship_id = partner_obj.search([('mag_cust_id','=',saleorder_list['customer_id']),('mag_address_id','=',shipp_address.get('customer_address_id'))])
-                                            #print ("partner_invoice_id6++++++",partner_invoice_id)
-                                            if not partner_ship_id:
-                                                if shipp_address.get('customer_address_id') != 0 :
-                                                    url=str(self.magento_instance_id.location)+"/rest/V1/customers/addresses/"+str(shipp_address.get('customer_address_id'))
-                                                    #print ("url+++++++++++++++++",url)
-                                                    response = requests.request("GET",url, headers=headers) 
-                                                    #print ("response++++++++++++",json.loads(response.text))
-                                                    partner_ship_id = self.create_customer_address(json.loads(response.text),partner_id)
-                                                else:
-                                                    if len(shipp_address.get('street',False)):
-                                                        street,street1=False,False
-                                                        street=shipp_address.get('street',False)[0]
-                                                        if len(shipp_address.get('street',False))==2:
-                                                            street1=shipp_address.get('street',False)[1]
-                                                        #print ("street+++++++++++",street,street1)
-                                                        name = shipp_address.get("firstname",False) + ' ' + shipp_address.get("lastname",False)
-                                                    partner_ship_id = partner_obj.search([('mag_cust_id','=',saleorder_list['customer_id']),('name','=',name),('street','=',street),('street2','=',street1)])
-                                                    if not partner_ship_id:
-                                                        partner_ship_id = self.temporary_address(shipp_address,partner_id)
-                                else:
-                                    partner_ship_id = self.GuestCustomerDelivery(shipp_address,partner_id)
-                        else:
-                            partner_id = self.GuestCustomer(saleorder_list)
-                            if 'billing_address' in saleorder_list:
-                                partner_invoice_id = self.GuestCustomerInvoice(saleorder_list['billing_address'],partner_id)
-                            shipping_address = saleorder_list['extension_attributes']['shipping_assignments'][0]
-                            if 'shipping' in shipping_address:
-                                shipp = shipping_address['shipping']
-                                if 'address' in shipp:
-                                    shipp_address = shipp['address']
-                                    partner_ship_id = self.GuestCustomerDelivery(shipp_address,partner_id)
-                        logger.error('partner_id---------------  %s', partner_id)
-                        logger.error('partner_invoice_id---------------  %s', partner_invoice_id)
-                        logger.error('partner_ship_id---------------  %s', partner_ship_id)
-                        payment_method=saleorder_list['payment']['method']
-                        if payment_method:
-                            payment_magento_obj.create_payment_method(self,headers,saleorder_list['payment']['entity_id'])
-                            payment_id=payment_magento_obj.search([('code','=',payment_method)])
-                        delivery_id = []
-                        if 'shipping_description' in saleorder_list:
-                            delivery_id = delivery_obj.search([('name','=',str(saleorder_list['shipping_description']))])
-                            #print ("delivery_id+++++++++++",delivery_id)
-                            if not delivery_id:
-                                delivery_id = delivery_obj.create({'name': str(saleorder_list['shipping_description']), 'mage_delivery':True,'fixed_price':float(saleorder_list['base_shipping_amount']), 'product_id': self.shipping_product.id}).id
-                                #print ('delivery_id+++++create',delivery_id)
-                            else:
-                                delivery_id = delivery_id[0]
-                                delivery_id.write({'fixed_price':float(saleorder_list['base_shipping_amount'])})
-                                #print ("delivery_id+++++++++++",delivery_id.fixed_price)
-                                delivery_id = delivery_id.id
-                        else:
-                            delivery_id = delivery_obj.search([('name','=','Free delivery charges')])
-                            if not delivery_id:
-                                delivery_id = delivery_obj.create({'name': str(saleorder_list['shipping_description']),'product_id': self.shipping_product.id}).id
-                            else:
-                                delivery_id = delivery_id[0].id
-                        if partner_id:
-                            saleordervals.update({
-                                'partner_id': partner_id[0].id,
-                                'partner_invoice_id':partner_invoice_id[0].id if len(partner_invoice_id) > 0 else partner_id[0].id, 
-                                'partner_shipping_id':partner_ship_id[0].id if len(partner_ship_id) > 0 else partner_id[0].id,
-                                'name':str(saleorder_list['increment_id']),
-                                'mage_order_id':str(saleorder_list['increment_id']),
-                                'magento_shop_id':self.id,
-                                'order_status':str(saleorder_list['status']),
-                                'date_order':saleorder_list['created_at'],
-                                'order_date':saleorder_list['created_at'],
-                                'entity_id': saleorder_list.get('entity_id') or False,
-                                'ma_order_id':saleorder_list['items'][0]['order_id'],
-                                'magento_order': True,
-                                'payment_term_id':payment_term_id,
-                                'payment_method':payment_id.id,
-                                'carrier_id':delivery_id,
-                            })
-
-                            if self.warehouse_id:
-                                saleordervals.update({'warehouse_id':self.warehouse_id.id})
-
-                            if self.pricelist_id:
-                                saleordervals.update({'pricelist_id':self.pricelist_id.id})
-                            saleorder_id=self.env['sale.order'].create(saleordervals)
-                            disc_tax_id = []
-                            for each_result in saleorder_list['items']:
-                                if each_result.get('product_type')=='configurable':
-                                    continue
-                                else :
-                                    #print ("each_result++++++++++++",each_result)
-                                    product_id = []
-                                    orderlinevals={}
-                                    product_ids=self.env['product.product'].search([('default_code','=',str(each_result['sku']))])
-                                    print ("product_ids+++++++++++++++++",product_ids)
-                                    if not product_ids:
-                                        product_id=self.env['product.product'].create_simple_products_orders(self.magento_instance_id,headers,each_result['sku'],self,self.website_id,each_result['product_id'])
-                                        print ("product_id++++++++++++++",product_id)
+                                    partner_id = partner_obj.search([
+                                        ('mag_cust_id','=',saleorder_list['customer_id']),
+                                        ('email','=',saleorder_list['customer_email'])
+                                        ])
+                                    if not partner_id:
+                                        url=str(self.magento_instance_id.location)+"rest/V1/customers/"+str(saleorder_list['customer_id'])
+                                        response = requests.request("GET",url, headers=headers)
+                                        customer_list=json.loads(response.text)
+                                        if customer_list: ### VER URL!
+                                            partner_id = self.magento_instance_id.CreateMagentoCustomer(customer_list)
+                                            self._cr.commit()
                                     else:
-                                        product_id = product_ids
-                                    print ("product_ids+_+_+_+_+_+_+_+",product_id)
-                                    if not product_id:
-                                        product_ids = self.env['product.product'].search([('default_code','=','deleted_product')])
+                                        partner_id = self.GuestCustomer(saleorder_list)
+                                billing_address = saleorder_list['billing_address']
+                                if billing_address.get('customer_address_id'):
+                                    if 'customer_id' in saleorder_list:
+                                        street,street1='',''
+                                        partner_invoice_id = partner_obj.search([
+                                            ('mag_cust_id','=',saleorder_list['customer_id']),
+                                            ('mag_address_id','=',billing_address.get('customer_address_id'))
+                                            ])
+                
+                                        if not partner_invoice_id: ### NO ANDA EL URL
+                                            # if 'customer_address_id' in billing_address:
+                                            #     id = billing_address.get('parent_id') ### NO FUNCIONABA EL ID QUE TRAIA, LO COMPROBE EN POSTMAN
+                                            #     #id = billing_address.get('customer_address_id')
+                                            #     url=str(self.magento_instance_id.location)+"rest/V1/customers/addresses/"+str(id)
+                                            #     response = requests.request("GET",url, headers=headers)
+                                            #     if response.status_code == "200":
+                                            #         cust_address = json.loads(response.text)
+                                            #         if cust_address:
+                                            #             partner_invoice_id = self.create_customer_address(cust_address,partner_id)
+                                            #             self._cr.commit()
+                                            # else:
+                                            #     if billing_address.get('street',False):
+                                            #         street=billing_address.get('street',False)[0]
+                                            #         if len(billing_address.get('street',False))==2:
+                                            #             street1= billing_address.get('street',False)[1]
+                                                        # street1= cust_address.get('street',False)[1] ### NO IBA
+                                    
+                                            partner_invoice_id = partner_obj.search([
+                                                ('mag_cust_id','=',saleorder_list['customer_id']),
+                                                ('name','=',billing_address.get("firstname",False) + ' ' + billing_address.get("lastname",False)),
+                                                ('street','=',street),
+                                                ('street2','=',street1)
+                                                ])
+                                            
+                                            if not partner_invoice_id:
+                                                partner_invoice_id = self.temporary_address(billing_address,partner_id)
+                                    else:
+                                        partner_invoice_id = self.GuestCustomerInvoice(saleorder_list['billing_address'],partner_id)
+
+                                shipping_address = saleorder_list['extension_attributes']['shipping_assignments'][0]
+                                if 'shipping' in shipping_address:
+                                    shipp_addre = shipping_address['shipping']
+                                    if 'address' in shipp_addre:
+                                        shipp_address = shipp_addre['address']
+                                        if 'customer_id' in saleorder_list:
+                                            if shipp_address:
+                                                street,street1='',''
+                                                partner_ship_id = partner_obj.search([
+                                                    ('mag_cust_id','=',saleorder_list['customer_id']),
+                                                    ('mag_address_id','=',shipp_address.get('customer_address_id'))
+                                                    ])
+                                                if not partner_ship_id:
+                                                    if shipp_address.get('customer_address_id') != 0 :
+                                                        id = shipp_address.get('parent_id') ### NO FUNCIONABA EL ID QUE TRAIA, LO COMPROBE EN POSTMAN
+                                                        # id = shipp_address.get('customer_address_id')
+                                                        url=str(self.magento_instance_id.location)+"/rest/V1/customers/addresses/"+str(id)        
+                                                        response = requests.request("GET",url, headers=headers)
+                                                        if response.status_code == '200':
+                                                            cust_address = json.loads(response.text)
+                                                            if cust_address:
+                                                                partner_ship_id = self.create_customer_address(cust_address,partner_id)
+                                                    else:
+                                                        if len(shipp_address.get('street',False)):
+                                                            street,street1=False,False
+                                                            street=shipp_address.get('street',False)[0]
+                                                            if len(shipp_address.get('street',False))==2:
+                                                                street1=shipp_address.get('street',False)[1]
+                                                            name = shipp_address.get("firstname",False) + ' ' + shipp_address.get("lastname",False)
+                                                        partner_ship_id = partner_obj.search([
+                                                            ('mag_cust_id','=',saleorder_list['customer_id']),
+                                                            ('name','=',name),('street','=',street),
+                                                            ('street2','=',street1)
+                                                            ])
+                                                        if not partner_ship_id:
+                                                            if shipp_address and partner_id:
+                                                                partner_ship_id = self.temporary_address(shipp_address,partner_id)
+                                    else:
+                                        partner_ship_id = self.GuestCustomerDelivery(shipp_address,partner_id)
+                            else:
+                                partner_id = self.GuestCustomer(saleorder_list)
+                                if 'billing_address' in saleorder_list:
+                                    partner_invoice_id = self.GuestCustomerInvoice(saleorder_list['billing_address'],partner_id)
+                                shipping_address = saleorder_list['extension_attributes']['shipping_assignments'][0]
+                                if 'shipping' in shipping_address:
+                                    shipp = shipping_address['shipping']
+                                    if 'address' in shipp:
+                                        shipp_address = shipp['address']
+                                        partner_ship_id = self.GuestCustomerDelivery(shipp_address,partner_id)
+                            payment_method=saleorder_list['payment']['method']
+                            if payment_method:
+                                payment_magento_obj.create_payment_method(self,headers,saleorder_list['payment']['entity_id'])
+                                payment_id=payment_magento_obj.search([('code','=',payment_method)])
+                            delivery_id = []
+                            if 'shipping_description' in saleorder_list:
+                                delivery_id = delivery_obj.search([('name','=',str(saleorder_list['shipping_description']))])
+                                if not delivery_id:
+                                    value_delivery = {
+                                        'delivery_type': 'fixed', ## AGREGO: ES CAMPO REQUERIDO, VALORES: fixed o base_on_rule
+                                        'invoice_policy': 'real', ## AGREGO: ES CAMPO REQUERIDO, VALORES: real o estimated
+                                        'name': str(saleorder_list['shipping_description']),### REQUERIDO
+                                        'product_id': self.shipping_product.id, ### REQUERIDO
+                                        'mage_delivery':True,
+                                        'fixed_price':float(saleorder_list['base_shipping_amount'])
+                                        } 
+                                    delivery_id = delivery_obj.create(value_delivery).id
+                                    self.env.cr.commit()
+                                else:
+                                    delivery_id = delivery_id[0]
+                                    value_delivery = {
+                                        'fixed_price':float(saleorder_list['base_shipping_amount'])
+                                        }
+                                    delivery_id.write(value_delivery)
+                                    self.env.cr.commit()
+                                    delivery_id = delivery_id.id
+                            else:
+                                delivery_id = delivery_obj.search([('name','=','Free delivery charges')])
+                                if not delivery_id:
+                                    value = {
+                                        'name': str(saleorder_list['shipping_description']),### REQUERIDO
+                                        'product_id': self.shipping_product.id, ### REQUERIDO
+                                        'delivery_type': 'fixed', ## AGREGO: ES CAMPO REQUERIDO VALORES: fixed o base_on_rule
+                                        'invoice_policy': 'real', ## AGREGO: ES CAMPO REQUERIDO VALORES: real o estimated
+                                        }
+                                    delivery_id = delivery_obj.create(value).id
+                                    self.env.cr.commit()
+                                else:
+                                    delivery_id = delivery_id[0].id
+                            if partner_id:
+                                value_saleordervals = {
+                                    'partner_id': partner_id[0].id,
+                                    'partner_invoice_id':partner_invoice_id[0].id if len(partner_invoice_id) > 0 else partner_id[0].id, 
+                                    'partner_shipping_id':partner_ship_id[0].id if len(partner_ship_id) > 0 else partner_id[0].id,
+                                    'name':str(saleorder_list['increment_id']),
+                                    'mage_order_id':str(saleorder_list['increment_id']),
+                                    'magento_shop_id':self.id,
+                                    'order_status':str(saleorder_list['status']),
+                                    'date_order':saleorder_list['created_at'],### REQUERIDO
+                                    'order_date':saleorder_list['created_at'],
+                                    'entity_id': saleorder_list.get('entity_id') or False,
+                                    'ma_order_id':saleorder_list['items'][0]['order_id'],
+                                    'magento_order': True,
+                                    'payment_term_id':payment_term_id,
+                                    'payment_method':payment_id.id,
+                                    'carrier_id':delivery_id,
+                                    'company_id':self.env.company.id,### REQUERIDO
+                                    'currency_id':self.env.company.currency_id.id,### REQUERIDO
+                                }
+                                print("291===> WRITE SO: ", value_saleordervals['name'])
+                                saleordervals.update(value_saleordervals)
+                                self.env.cr.commit()
+                                if self.warehouse_id:
+                                    print("295===> WRITE WAREHOUSE-", self.warehouse_id.name)
+                                    saleordervals.update({'warehouse_id':self.warehouse_id.id})
+                                    self.env.cr.commit()
+                                if self.pricelist_id:
+                                    print("299===> WRITE PRICELIST - ")
+                                    saleordervals.update({'pricelist_id':self.pricelist_id.id})
+                                    self.env.cr.commit()
+                                print("302===> CREATE SO - ",saleordervals['name'])
+                                saleorder_id=self.env['sale.order'].create(saleordervals)
+                                self.env.cr.commit()
+                                disc_tax_id = []
+                                for each_result in saleorder_list['items']:
+                                    if each_result.get('product_type')=='configurable':
+                                        continue
+                                    else :
+                                        product_id = []
+                                        orderlinevals = {}
+                                        product_ids = self.env['product.product'].search([('default_code','=',str(each_result['sku']))])
                                         if not product_ids:
-                                            product_id = self.env['product.product'].create({'name':'Product Removed or Deleted','default_code':'deleted_product'})
+                                            sku = each_result['sku']
+                                            instance = self.magento_instance_id
+                                            store = self
+                                            website = self.website_id
+                                            magento_product_id = each_result['product_id']
+                                            if sku and instance and store and website and magento_product_id:
+                                                product_id = self.env['product.product'].create_simple_products_orders(instance,headers,sku,store,website,magento_product_id)
+                                                self.env.cr.commit()
                                         else:
                                             product_id = product_ids
-        #                            else:
-        #                                product_ids=self.env['product.product'].search([('default_code','=',str(each_result['sku']))])
-        #                                if not product_ids:
-        #                                    product_id=self.env['product.product'].create_simple_products(self.magento_instance_id,headers,each_result['sku'],self,self.website_id)
-        #                                else:
-        #                                    product_id = product_ids
-        #                        if product_id[0].default_code == 'RMPRD':
-        #                            name = '[' +each_result['sku'] + '] ' +each_result['name']
-        #                        else:
-        #                            name = each_result['name']
-                                if 'parent_item'in each_result:
-                                    parent_item = each_result['parent_item']
-                                    if 'base_price' in parent_item and  parent_item['base_price'] > 0:
-                                        unit_price = parent_item['base_price']
-                                else:
-                                    unit_price = each_result['base_price']
-                                print ("unit_price+_+_+_+_+_+__+_",unit_price)
-                                orderlinevals = {
-                                    'order_id' : saleorder_id.id,
-                                    'product_uom_qty' : float(each_result['qty_ordered']),
-                                    #'product_uom' :product_id[0].product_tmpl_id.uom_id.id,
-                                    #   'name' : name,
-                                    'price_unit' : float(unit_price) ,
-                                    'product_id' : product_id[0].id,
-                                    'order_item_id':str(each_result['item_id']),
-                                    }
-                                tax_id = []
-                                print ("each_result.get('tax_percent')_+_+_+_+_+_+",each_result.get('tax_percent'))
-                                
-                                if each_result.get('tax_percent') != None:
-                                    tax_id = self.getTaxesAccountID(each_result)
-                                    print ("tax_id_)_)_)_)_)_)",tax_id)
-                                    if tax_id:
-                                        orderlinevals['tax_id'] = [(6, 0, tax_id)]
-                                        print("sfddddddddfdssfdfd")
+                                        if not product_id:
+                                            product_ids = self.env['product.product'].search([('default_code','=','deleted_product')])
+                                            if not product_ids:
+                                                vals = {
+                                                    'name':'Product Removed or Deleted',
+                                                    'default_code':'deleted_product'
+                                                    }
+                                                product_id = self.env['product.product'].create(vals)
+                                                self.env.cr.commit()
+                                            else:
+                                                product_id = product_ids
+                                #        else: #### LO SIGUIENTE ESTABA COMENTADO
+                                #            product_ids=self.env['product.product'].search([('default_code','=',str(each_result['sku']))])
+                                #            if not product_ids:
+                                #                product_id=self.env['product.product'].create_simple_products(self.magento_instance_id,headers,each_result['sku'],self,self.website_id)
+                                #            else:
+                                #                product_id = product_ids
+                                #    if product_id[0].default_code == 'RMPRD':
+                                #        name = '[' +each_result['sku'] + '] ' +each_result['name']
+                                #    else:
+                                #        name = each_result['name']
+                                    if 'parent_item'in each_result:
+                                        parent_item = each_result['parent_item']
+                                        if 'base_price' in parent_item and  parent_item['base_price'] > 0:
+                                            unit_price = parent_item['base_price']
+                                    else:
+                                        unit_price = each_result['base_price']
+                                    orderlinevals = {
+                                        'name' : name or product_id.name,
+                                        # 'customer_lead': 0,### REQUERIDO. Número de días entre la confirmación del pedido y la entrega de los productos al cliente
+                                        'order_id' : saleorder_id.id,
+                                        'price_unit' : float(unit_price) ,
+                                        'product_uom_qty' : float(each_result['qty_ordered']),
+                                        #'product_uom' :product_id[0].product_tmpl_id.uom_id.id,
+                                        'product_id' : product_id[0].id,
+                                        'order_item_id':str(each_result['item_id']),
+                                        }
+                                    tax_id = []
+                                    if each_result.get('tax_percent') != None:
+                                        tax_id = self.getTaxesAccountID(each_result)
+                                        if tax_id:
+                                            orderlinevals['tax_id'] = [(6, 0, tax_id)]
+                                        else:
+                                            orderlinevals['tax_id'] =[(6, 0, [])]
                                     else:
                                         orderlinevals['tax_id'] =[(6, 0, [])]
-                                else:
-                                    orderlinevals['tax_id'] =[(6, 0, [])]
-                                print ("orderlinevals+_+_+_+_+_+",orderlinevals)
-                                #print ("orderlinevals+++++++++++++++",orderlinevals,type(each_result['qty_ordered']),type(each_result['base_price']),type(each_result['item_id']))
-                                self.env['sale.order.line'].create(orderlinevals)
-                                disc_tax_id = tax_id
-                            print ("saleorder_list['discount_amount']+_+_+_+_+_+__+_+",saleorder_list['discount_amount'])
-                            if float(saleorder_list['discount_amount']) != 0.00 or 'discount_invoiced' in saleorder_list and float(saleorder_list['discount_invoiced']) != 0.00:
-                                if not self.discount_product:
-                                    raise UserError(_('Please Configure Discount Product'))
-                                if float(saleorder_list['discount_amount']) > 0:
-                                    discount = float(saleorder_list['discount_amount'])
-                                else:
-                                    discount = float(saleorder_list['discount_invoiced'])
-                                prod_shipping_id = self.discount_product
-                                discountorderlinevals = {
-                                    'order_id' : saleorder_id.id,
-                                    'product_uom_qty' : 1,
-                                    'product_uom' : prod_shipping_id.product_tmpl_id.uom_id.id,
-                                    'name' : prod_shipping_id.name,
-                                    'price_unit' : discount,
-                                    'product_id' : self.discount_product.id,
-                                    'tax_id': [(6, 0, disc_tax_id)],
-                                    } 
-                                print ("discountorderlinevals_)_)_+_+_+_+_",discountorderlinevals)
-                                self.env['sale.order.line'].create(discountorderlinevals)
-                            print ("saleorder_id+++++++++++",saleorder_id.carrier_id)
-                            print ("saleorder_id+++++++++++",saleorder_id.carrier_id.fixed_price)
-                            #saleorder_id.get_delivery_price()
-                            if saleorder_id.carrier_id.fixed_price > 0:
-                                delivery_wizard = Form(self.env['choose.delivery.carrier'].with_context({
-                                                            'default_order_id': saleorder_id.id,
-                                                            'default_carrier_id': saleorder_id.carrier_id.id
-                                                    }))
-                                print ("delivery_wizard|++++",delivery_wizard)
-                                choose_delivery_carrier = delivery_wizard.save()
-                                print ("choose_delivery_carrier++++++++++++",choose_delivery_carrier)
-                                choose_delivery_carrier.button_confirm()
-                            #saleorder_id.set_delivery_line()
-                self.write({'magento_order_date':date.today(),'magento_order_date_to':date.today()})
+                                    self.env['sale.order.line'].create(orderlinevals)
+                                    self.env.cr.commit()
+                                    disc_tax_id = tax_id
+                                
+                                if float(saleorder_list['discount_amount']) != 0.00 or 'discount_invoiced' in saleorder_list and float(saleorder_list['discount_invoiced']) != 0.00:
+                                    if not self.discount_product:
+                                        raise UserError(_('Please Configure Discount Product!'))
+                                    if float(saleorder_list['discount_amount']) > 0:
+                                        discount = float(saleorder_list['discount_amount'])
+                                    else:
+                                        discount = float(saleorder_list['discount_invoiced'])
+                                    prod_shipping_id = self.discount_product
+                                    discountorderlinevals = {
+                                        'order_id' : saleorder_id.id,
+                                        'product_uom_qty' : 1,
+                                        'product_uom' : prod_shipping_id.product_tmpl_id.uom_id.id,
+                                        'name' : prod_shipping_id.name,
+                                        'price_unit' : discount,
+                                        'product_id' : self.discount_product.id,
+                                        'tax_id': [(6, 0, disc_tax_id)],
+                                        }
+                                    self.env['sale.order.line'].create(discountorderlinevals)
+                                    self.env.cr.commit()
+                                #saleorder_id.get_delivery_price() ### ESTABA COMENTADO
+                                if saleorder_id.carrier_id.fixed_price > 0:
+                                    delivery_wizard = Form(self.env['choose.delivery.carrier'].with_context({
+                                                                'default_order_id': saleorder_id.id,
+                                                                'default_carrier_id': saleorder_id.carrier_id.id
+                                                        }))
+                                    choose_delivery_carrier = delivery_wizard.save()
+                                    choose_delivery_carrier.button_confirm()
+                                #saleorder_id.set_delivery_line() ### ESTABA COMENTADO
+                            else:
+                                print("==> NOT FOUND A PARTNER!")
+                                pass
+                    vals_d = {
+                        'magento_order_date':date.today(),
+                        'magento_order_date_to':date.today()
+                        }
+                    print("409==> ADD magento_order_date!")
+                    self.write(vals_d)
+                else:
+                    raise UserError(_('Sorry, no orders found in shopify!'))
             else:
-                raise UserError(_('To Date cannot be before From Date'))
+                raise UserError(_('To Date cannot be before From Date!'))
         return True
-    
+
+
+
 
     def GuestCustomer(self, saleorder_list):
         PartnerObj = self.env['res.partner']
