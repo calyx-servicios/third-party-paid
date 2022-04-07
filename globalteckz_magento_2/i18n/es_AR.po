@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-18 16:01+0000\n"
-"PO-Revision-Date: 2022-02-18 16:01+0000\n"
+"POT-Creation-Date: 2022-04-07 13:29+0000\n"
+"PO-Revision-Date: 2022-04-07 13:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento__store_form_view
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_res_partner__mag_address_id
@@ -153,7 +153,7 @@ msgstr ""
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__base_image
 msgid "Base Image"
-msgstr ""
+msgstr "Imagen básica"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__based_on
@@ -163,7 +163,7 @@ msgstr ""
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__product_product__product_type__bundle
 msgid "Bundle Product"
-msgstr ""
+msgstr "Paquete de productos"
 
 #. module: globalteckz_magento_2
 #: model:ir.ui.menu,name:globalteckz_magento_2.gt_menu_product_categories
@@ -219,7 +219,7 @@ msgstr "Producto Configurable"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__is_configurable
 msgid "Configurable?"
-msgstr ""
+msgstr "Configurable>"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_res_partner
@@ -234,7 +234,7 @@ msgstr "Configuración básica"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__count_magento_attribute_set
 msgid "Count Magento Attribute Set"
-msgstr ""
+msgstr "Contar conjunto de atributos de Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__count_magento_attributes
@@ -304,8 +304,9 @@ msgstr "Creado en Tienda"
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_sw__create_uid
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_wb__create_uid
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__create_uid
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_sku_reference_import__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_frontend_input__create_date
@@ -334,8 +335,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_sw__create_date
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_wb__create_date
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__create_date
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_sku_reference_import__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__cust_from_id
@@ -389,7 +391,7 @@ msgstr "Fecha y hora"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__gt_product_attributes__backend_type__decimal
 msgid "Decimal"
-msgstr ""
+msgstr "Decimal"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_website__default_group_id
@@ -404,7 +406,7 @@ msgstr "Valor por defecto"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_delivery_carrier__mage_delivery
 msgid "Delivery"
-msgstr ""
+msgstr "Entrega"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__description
@@ -443,8 +445,9 @@ msgstr "Producto descuento"
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_sw__display_name
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_wb__display_name
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__display_name
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_sku_reference_import__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: globalteckz_magento_2
 #: model:ir.ui.menu,name:globalteckz_magento_2.menu_sale_order_completed
@@ -510,7 +513,7 @@ msgstr "Exportar Factura"
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento__store_form_view
 msgid "Export Order Status"
-msgstr ""
+msgstr "Estado del pedido de exportación"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_export_button_magento
@@ -546,47 +549,52 @@ msgstr "Filtrable?"
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Float Attributes"
-msgstr ""
+msgstr "Atributos flotantes"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__gl_flt_att_ids
 msgid "Float Product Attributes Global"
-msgstr ""
+msgstr "Atributos de productos flotantes globales"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__sw_flt_att_ids
 msgid "Float Product Attributes Store"
-msgstr ""
+msgstr "Tienda de atributos de productos flotantes"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__wb_flt_att_ids
 msgid "Float Product Attributes Website"
-msgstr ""
+msgstr "Sitio web de atributos de productos flotantes"
+
+#. module: globalteckz_magento_2
+#: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
+msgid "Force Import SKU product"
+msgstr "Forzar importacion producto SKU"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_store__magento_order_date
 msgid "From Date"
-msgstr ""
+msgstr "Fecha Desde"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__frontend_class
 msgid "Frontend Class"
-msgstr ""
+msgstr "Clase de interfaz"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__frontend_input_id
 msgid "Frontend Input"
-msgstr ""
+msgstr "Entrada de interfaz"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_gt_frontend_input
 msgid "Frontend Input type"
-msgstr ""
+msgstr "Tipo de entrada de interfaz"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_gt_magento_instance
 msgid "GT Magento Instance"
-msgstr ""
+msgstr "Instancia GT Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_multiselect_gl__gl_mul_mag_inst_id
@@ -607,17 +615,17 @@ msgstr ""
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Global Scope"
-msgstr ""
+msgstr "Alcance global"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__group_id
 msgid "Group"
-msgstr ""
+msgstr "Grupo"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__product_product__product_type__grouped
 msgid "Grouped Product"
-msgstr ""
+msgstr "Producto agrupado"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_frontend_input__id
@@ -646,6 +654,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_sw__id
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_wb__id
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__id
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_sku_reference_import__id
 msgid "ID"
 msgstr ""
 
@@ -653,22 +662,22 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_product_image_multi__images_ids
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__image
 msgid "Image"
-msgstr ""
+msgstr "Imagen"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__image_extension
 msgid "Image Extension Type"
-msgstr ""
+msgstr "Tipo de extensión de imagen"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__image_alt
 msgid "Image Label"
-msgstr ""
+msgstr "Etiqueta de imagen"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__product_image_id
 msgid "Images"
-msgstr ""
+msgstr "Imagenes"
 
 #. module: globalteckz_magento_2
 #: model:ir.actions.server,name:globalteckz_magento_2.import_magento2_attribute_set_scheduler_ir_actions_server
@@ -723,7 +732,7 @@ msgstr "Importar datos de Magento a Odoo"
 #: model:ir.cron,cron_name:globalteckz_magento_2.import_magento2_image_scheduler
 #: model:ir.cron,name:globalteckz_magento_2.import_magento2_image_scheduler
 msgid "Import Image"
-msgstr Importar Imagen"
+msgstr "mportar Imagen"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
@@ -760,6 +769,11 @@ msgid "Import Product"
 msgstr "Importar Producto"
 
 #. module: globalteckz_magento_2
+#: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
+msgid "Import Products"
+msgstr "Importar Productos"
+
+#. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento__store_form_view
 msgid "Import Shipment"
 msgstr ""
@@ -778,6 +792,16 @@ msgid "Import Stock"
 msgstr ""
 
 #. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_sku_reference_import__import_success
+msgid "Import Success"
+msgstr ""
+
+#. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute__is_attribute_magento
+msgid "Imported by Magento"
+msgstr ""
+
+#. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_store__magento_instance_id
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_website__magento_instance_id
 msgid "Instance"
@@ -786,12 +810,12 @@ msgstr "Instancia"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__gt_product_attributes__backend_type__int
 msgid "Integer"
-msgstr ""
+msgstr "Entero"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order__invoiced
 msgid "Invoiced"
-msgstr ""
+msgstr "Facturado"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__product_photo__image_extension__jpeg
@@ -807,7 +831,7 @@ msgstr "Asientos contables"
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attribute_options__label
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__frontend_label
 msgid "Label"
-msgstr ""
+msgstr "Etiqueta"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_frontend_input____last_update
@@ -836,8 +860,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_sw____last_update
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_wb____last_update
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo____last_update
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_sku_reference_import____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_frontend_input__write_uid
@@ -866,8 +891,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_sw__write_uid
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_wb__write_uid
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__write_uid
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_sku_reference_import__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última modificación por"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_frontend_input__write_date
@@ -896,28 +922,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_sw__write_date
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_wb__write_date
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__write_date
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_sku_reference_import__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización en"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_category__level
 msgid "Level"
-msgstr ""
+msgstr "Nivel"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__limit_configurable_product_id
 msgid "Limit for Configurable Product ID Import"
-msgstr ""
+msgstr "Límite para la importación de ID de producto configurable"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__limit_simple_product_id
 msgid "Limit for Simple Product ID Import"
-msgstr ""
+msgstr "Límite para la importación de ID de producto simple"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__link
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
@@ -932,34 +959,55 @@ msgstr "Cargar Sitios Web Magento"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__location
 msgid "Location"
-msgstr ""
+msgstr "Ubicación"
 
 #. module: globalteckz_magento_2
 #: model:ir.ui.menu,name:globalteckz_magento_2.gt_menu_magerp
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.view_base_view_partner_form_magento
 msgid "Magento"
-msgstr ""
+msgstr "Magento"
 
 #. module: globalteckz_magento_2
 #: model:res.groups,name:globalteckz_magento_2.group_magento_manager
 msgid "Magento / Manager"
-msgstr ""
+msgstr "Magento / Administrador"
+
+#. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute__attribute_magento_id
+msgid "Magento Attribute ID"
+msgstr "ID de atributo de Magento"
+
+#. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute__attribute_set_magento_id
+msgid "Magento Attribute Set"
+msgstr "Conjunto de atributos de Magento"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Magento Attributes"
-msgstr ""
+msgstr "Magento Atributos"
+
+#. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_template__prod_category_id
+msgid "Magento Categories"
+msgstr "Magento Categorias"
+
+#. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__prod_attr_category_id
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_template__prod_attr_category_id
+msgid "Magento Category"
+msgstr "Magento Categoria"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_delivery_carrier__magento_code
 msgid "Magento Code"
-msgstr ""
+msgstr "Magento Codigo"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_res_partner__magento_customer
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_res_users__magento_customer
 msgid "Magento Customer"
-msgstr ""
+msgstr "Magento Cliente"
 
 #. module: globalteckz_magento_2
 #: model:ir.ui.menu,name:globalteckz_magento_2.gt_menu_magerp_customer
@@ -969,17 +1017,17 @@ msgstr "Clientes Magento"
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.view_order_magento_form
 msgid "Magento Details"
-msgstr ""
+msgstr "Magento Detalles"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_delivery_carrier__magento_export
 msgid "Magento Export"
-msgstr ""
+msgstr "Magento Exportar"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__exported_magento
 msgid "Magento Exported"
-msgstr ""
+msgstr "Magento Exportado"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__magento_id
@@ -988,12 +1036,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_template__magento_id
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_stock_picking__mage_stock_id
 msgid "Magento ID"
-msgstr ""
+msgstr "Magento ID"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_gt_magento_product_image_multi
 msgid "Magento Image Multi ID"
-msgstr ""
+msgstr "Magento multi imagen ID"
+
+#. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__prod_images
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_template__prod_images
+#: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_template_form_view_magento
+msgid "Magento Images"
+msgstr "Magento Imagenes"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attribute_options__referential_id
@@ -1034,22 +1089,22 @@ msgstr "Instancias Magento"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_account_move__mage_invoice_id
 msgid "Magento Invoice ID"
-msgstr ""
+msgstr "Id. de factura de Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order__magento_order
 msgid "Magento Order"
-msgstr ""
+msgstr "Orden Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order__order_date
 msgid "Magento Order Date"
-msgstr ""
+msgstr "Fecha de pedido de Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order__ma_order_id
 msgid "Magento Order ID"
-msgstr ""
+msgstr "ID de pedido de Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.ui.menu,name:globalteckz_magento_2.gt_menu_magerp_mag_orders
@@ -1059,26 +1114,26 @@ msgstr "Órdenes Magento"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__position
 msgid "Magento Position"
-msgstr ""
+msgstr "Posición Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__magento_product
 msgid "Magento Product"
-msgstr ""
+msgstr "Producto Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.actions.act_window,name:globalteckz_magento_2.act_gt_product_attribute_options
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_product_attribute_options_form
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_product_attribute_options_tree
 msgid "Magento Product Attribute Options"
-msgstr ""
+msgstr "Opciones de atributos de productos de Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.actions.act_window,name:globalteckz_magento_2.act_gt_product_attribute_set
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_product_attribute_set_form
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_product_attribute_set_tree
 msgid "Magento Product Attribute Sets"
-msgstr ""
+msgstr "Conjuntos de atributos de productos de Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.actions.act_window,name:globalteckz_magento_2.act_gt_product_attributes
@@ -1102,7 +1157,7 @@ msgstr "Productos Magento"
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_template__magento_sku
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_template_form_view_magento
 msgid "Magento SKU"
-msgstr ""
+msgstr "Magento SKU"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_store__magento_shop
@@ -1126,93 +1181,93 @@ msgstr "Tiendas Magento"
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_selection_sw__sw_sel_mag_str_id
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_sw__sw_txt_mag_str_id
 msgid "Magento Store"
-msgstr ""
+msgstr "Magento Tienda"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_dte_gl
 msgid "Magento Store Date Attribute Global"
-msgstr ""
+msgstr "Magento Store Fecha Atributo Global"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_dte_sw
 msgid "Magento Store Date Attribute Store"
-msgstr ""
+msgstr "Magento Tienda Fecha Atributo Tienda"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_dte_wb
 msgid "Magento Store Date Attribute Website"
-msgstr ""
+msgstr "Sitio web de atributo de fecha de la tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_flt_gl
 msgid "Magento Store Float Attribute Global"
-msgstr ""
+msgstr "Magento Store Float Atributo Global"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_flt_sw
 msgid "Magento Store Float Attribute Store"
-msgstr ""
+msgstr "Tienda de atributos flotantes de la tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_flt_wb
 msgid "Magento Store Float Attribute Website"
-msgstr ""
+msgstr "Sitio web de atributos flotantes de la tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_multiselect_gl
 msgid "Magento Store Multiselect Attribute Global"
-msgstr ""
+msgstr "Magento Store Multiselect Atributo Global"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_multiselect_sw
 msgid "Magento Store Multiselect Attribute Store"
-msgstr ""
+msgstr "Tienda Magento Tienda de atributos de selección múltiple"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_multiselect_wb
 msgid "Magento Store Multiselect Attribute Website"
-msgstr ""
+msgstr "Sitio web de atributos de selección múltiple de la tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_selection_gl
 msgid "Magento Store Selection Attribute Global"
-msgstr ""
+msgstr "Atributo de selección de tienda de Magento global"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_selection_sw
 msgid "Magento Store Selection Attribute Store"
-msgstr ""
+msgstr "Tienda de atributos de selección de tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_selection_wb
 msgid "Magento Store Selection Attribute Website"
-msgstr ""
+msgstr "Sitio web de atributo de selección de tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_txt_gl
 msgid "Magento Store Text Attribute Global"
-msgstr ""
+msgstr "Sitio web de atributo de selección de tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_txt_sw
 msgid "Magento Store Text Attribute Store"
-msgstr ""
+msgstr "Tienda de atributos de texto de la tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_attribute_txt_wb
 msgid "Magento Store Text Attribute Website"
-msgstr ""
+msgstr "Sitio web de atributos de texto de la tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento__store_form_view
 msgid "Magento Store View"
-msgstr ""
+msgstr "Vista de la tienda Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__magento_template
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_template__magento_template
 msgid "Magento Template"
-msgstr ""
+msgstr "Plantilla Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.actions.act_window,name:globalteckz_magento_2.gt_act_magento_website
@@ -1225,12 +1280,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_wb__wb_txt_mag_web_id
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_website_tree
 msgid "Magento Website"
-msgstr ""
+msgstr "Sitio web Magento"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_website_form_view
 msgid "Magento Website View"
-msgstr ""
+msgstr "Vista del sitio web de Magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.ui.menu,name:globalteckz_magento_2.gt_menu_magerp_website
@@ -1240,52 +1295,52 @@ msgstr "Sitios web Magento"
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_payment_method_magento
 msgid "Magento payment Method"
-msgstr ""
+msgstr "Método de pago Magento"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
 msgid "Manage Catalog"
-msgstr ""
+msgstr "Administrar Catalogo"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
 msgid "Manage Customers"
-msgstr ""
+msgstr "Administrar Clientes"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento__store_form_view
 msgid "Manage Orders"
-msgstr ""
+msgstr "Administrar pedidos"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
 msgid "Manage Products and Customer ID"
-msgstr ""
+msgstr "Administrar productos y clientes ID"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Multi-Select Attributes"
-msgstr ""
+msgstr "Atributos de selección múltiple"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__gl_mul_att_ids
 msgid "Multi-Select Product Attributes Global"
-msgstr ""
+msgstr "Atributos de productos de selección múltiple Global"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__sw_mul_att_ids
 msgid "Multi-Select Product Attributes Store"
-msgstr ""
+msgstr "Tienda de atributos de productos de selección múltiple"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__wb_mul_att_ids
 msgid "Multi-Select Product Attributes Website"
-msgstr ""
+msgstr "Sitio web de atributos de productos de selección múltiple"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__product_product__product_type__mygrouped
 msgid "My Grouped"
-msgstr ""
+msgstr "Mi agrupado"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_frontend_input__name_type
@@ -1295,12 +1350,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_payment_method_magento__name
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__name
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__note
 msgid "Note"
-msgstr ""
+msgstr "Nota"
+
+#. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__odoo_attr_id
+msgid "Odoo Attribute"
+msgstr "Atributo Odoo"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.actions.act_window,help:globalteckz_magento_2.action_magento_customer
@@ -1309,51 +1369,59 @@ msgid ""
 "                a customer: discussions, history of business opportunities,\n"
 "                documents, etc."
 msgstr ""
+"Odoo lo ayuda a rastrear fácilmente todas las actividades relacionadas con\n"
+" un cliente: discusiones, historial de oportunidades comerciales,\n"
+"documentos, etc."
+
+#. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attribute_options__product_attr_value
+msgid "Odoo product Attribute Value"
+msgstr "Valor del atributo del producto Odoo"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__field_name
 msgid "Open ERP Field name"
-msgstr ""
+msgstr "Nombre de campo de Open ERP"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_gt_product_attribute_options
 msgid "Options of selected attributes"
-msgstr ""
+msgstr "Opciones de atributos seleccionados"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order__mage_order_id
 msgid "Order ID"
-msgstr ""
+msgstr "Orden ID"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order_line__order_item_id
 msgid "Order Item Id"
-msgstr ""
+msgstr "ID del artículo del pedido"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order__order_status
 msgid "Order Status"
-msgstr ""
+msgstr "Estado del pedido"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento__store_form_view
 msgid "Orders"
-msgstr ""
+msgstr "Ordenes"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__product_photo__image_extension__png
 msgid "PNG"
-msgstr ""
+msgstr "PNG"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__apipassoword
 msgid "Password"
-msgstr ""
+msgstr "Clave"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order__payment_method
 msgid "Payment Method"
-msgstr ""
+msgstr "Payment Method"
 
 #. module: globalteckz_magento_2
 #: model:ir.ui.menu,name:globalteckz_magento_2.menu_sale_order_pending
@@ -1361,39 +1429,20 @@ msgid "Pending Orders"
 msgstr "Ordenes pendientes"
 
 #. module: globalteckz_magento_2
-#: code:addons/globalteckz_magento_2/models/gt_magento_shop.py:0
-#, python-format
-msgid "Please Configure Discount Product"
-msgstr ""
-
-#. module: globalteckz_magento_2
-#: code:addons/globalteckz_magento_2/models/gt_magento_instance.py:0
-#: code:addons/globalteckz_magento_2/models/gt_magento_instance.py:0
-#, python-format
-msgid "Please Create Store"
-msgstr "Por favor, cree una Tienda"
-
-#. module: globalteckz_magento_2
-#: code:addons/globalteckz_magento_2/models/gt_magento_instance.py:0
-#, python-format
-msgid "Please Import Magento Website First"
-msgstr ""
-
-#. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__position
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_category__position
 msgid "Position"
-msgstr ""
+msgstr "Posición"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_store__prefix
 msgid "Prefix"
-msgstr ""
+msgstr "Prefijo"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_store__pricelist_id
 msgid "Pricelist"
-msgstr ""
+msgstr "Lista de precios"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_product
@@ -1402,6 +1451,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__product_id
 msgid "Product"
 msgstr "Producto"
+
+#. module: globalteckz_magento_2
+#: model:ir.model,name:globalteckz_magento_2.model_product_attribute
+msgid "Product Attribute"
+msgstr "Atributo de producto"
 
 #. module: globalteckz_magento_2
 #: model:ir.ui.menu,name:globalteckz_magento_2.gt_menu_product_attributes
@@ -1419,17 +1473,22 @@ msgstr "Categoría de producto"
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__gt_magento_image_ids
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__gt_magento_product_ids
 msgid "Product ID"
-msgstr ""
+msgstr "ID del Producto"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Product Images"
-msgstr ""
+msgstr "Imágenes del producto"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__gt_product_attributes__based_on__product_product
 msgid "Product Product"
-msgstr ""
+msgstr "Producto Producto"
+
+#. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__sku_reference_ids
+msgid "Product Sku Reference Import"
+msgstr "Referencia importacion producto SKU"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_template
@@ -1455,12 +1514,12 @@ msgstr "Plantilla de producto"
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_sw__sw_txt_att_idc
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_attribute_txt_wb__wb_txt_att_idc
 msgid "Product Variant"
-msgstr ""
+msgstr "Variante del producto"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_product_photo
 msgid "Product photo"
-msgstr ""
+msgstr "foto del producto"
 
 #. module: globalteckz_magento_2
 #: model:ir.ui.menu,name:globalteckz_magento_2.gt_menu_magerp_products
@@ -1483,12 +1542,18 @@ msgstr "Productos No Exportados"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__is_required
 msgid "Required?"
-msgstr ""
+msgstr "Requerido?"
 
 #. module: globalteckz_magento_2
+#: model:ir.model.fields,field_description:globalteckz_magento_2.field_sku_reference_import__name
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_template_form_view_magento
 msgid "SKU"
-msgstr ""
+msgstr "SKU"
+
+#. module: globalteckz_magento_2
+#: model:ir.model,name:globalteckz_magento_2.model_sku_reference_import
+msgid "SKU Reference Import"
+msgstr "Importación de referencia de SKU"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_sale_order
@@ -1505,42 +1570,42 @@ msgstr "Línea de pedido de venta"
 #: model:ir.actions.act_window,name:globalteckz_magento_2.gt_action_orders_magento_completed
 #: model:ir.actions.act_window,name:globalteckz_magento_2.gt_action_orders_magento_pending
 msgid "Sales Orders"
-msgstr ""
+msgstr "Ordenes de venta"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__scope
 msgid "Scope"
-msgstr ""
+msgstr "Alcance"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__is_searchable
 msgid "Searchable ?"
-msgstr ""
+msgstr "Buscable?"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Selection Attributes"
-msgstr ""
+msgstr "Atributos de selección"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__gl_sel_att_ids
 msgid "Selection Product Attributes Global"
-msgstr ""
+msgstr "Selección Producto Atributos Global"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__sw_sel_att_ids
 msgid "Selection Product Attributes Store"
-msgstr ""
+msgstr "Selección Producto Atributos Tienda"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__wb_sel_att_ids
 msgid "Selection Product Attributes Website"
-msgstr ""
+msgstr "Selección Producto Atributos Websit"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order__shipped
 msgid "Shipped"
-msgstr ""
+msgstr "Enviado"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_delivery_carrier
@@ -1550,24 +1615,24 @@ msgstr "Métodos de envío"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_store__shipping_product
 msgid "Shipping Product"
-msgstr ""
+msgstr "Producto de envío"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_sale_order__magento_shop_id
 msgid "Shop"
-msgstr ""
+msgstr "Tienda"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_product_image_multi__gt_magento_exported
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_product_multi__gt_magento_exported
 msgid "Shopify Exported"
-msgstr ""
+msgstr "Shopify exportado"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_product_image_multi__gt_magento_instance_id
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_product_multi__gt_magento_instance_id
 msgid "Shopify Instance"
-msgstr ""
+msgstr "Instancia de Shopify"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
@@ -1577,130 +1642,110 @@ msgstr "Tiendas"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__from_id
 msgid "Simple From ID"
-msgstr ""
+msgstr "Simple de identificación"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__product_product__product_type__simple
 msgid "Simple Product"
-msgstr ""
+msgstr "Producto sencillo"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__to_id
 msgid "Simple To ID"
-msgstr ""
+msgstr "Fácil de identificar"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__small_image
 msgid "Small Image"
-msgstr ""
+msgstr "Imagen pequeña"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__gt_product_attributes__backend_type__static
 msgid "Static"
-msgstr ""
+msgstr "Estático"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__location_id
 msgid "Stock Location"
-msgstr ""
+msgstr "Ubicación de stock"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__store_ids
 msgid "Store"
-msgstr ""
+msgstr "Tienda"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_store__store_id
 msgid "Store ID"
-msgstr ""
+msgstr "Tienda ID"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__gt_product_attributes__scope__store
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Store View"
-msgstr ""
+msgstr "Vista de la tienda"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "StoreView Scope"
-msgstr ""
+msgstr "Ámbito de vista de la tienda"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__swatch_image
 msgid "Swatch Image"
-msgstr ""
+msgstr "Imagen de muestra"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_res_partner__mag_tax_vat
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_res_users__mag_tax_vat
 msgid "Tax /Vat Number"
-msgstr ""
+msgstr "Número de Impuesto / IVA"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__magento_exported
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_template__magento_exported
 msgid "Template Magento Exported"
-msgstr ""
+msgstr "Plantilla Magento Exportada"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__gt_product_attributes__backend_type__text
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Text Attributes"
-msgstr ""
+msgstr "Atributos de texto"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__gl_txt_att_ids
 msgid "Text Product Attributes Global"
-msgstr ""
+msgstr "Atributos de producto de texto Global"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__sw_txt_att_ids
 msgid "Text Product Attributes Store"
-msgstr ""
+msgstr "Tienda de atributos de producto de texto"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__wb_txt_att_ids
 msgid "Text Product Attributes Website"
-msgstr ""
-
-#. module: globalteckz_magento_2
-#: code:addons/globalteckz_magento_2/models/product_template.py:0
-#, python-format
-msgid ""
-"The number of variants to generate is too high. You should either not "
-"generate variants for each combination or generate them on demand from the "
-"sales order. To do so, open the form view of attributes and change the mode "
-"of *Create Variants*."
-msgstr ""
-"El número de variantes a generar es demasiado alto. No debe crear variantes "
-"para cada combinación o crearlas a petición del pedido de cliente. Para "
-"ello, abra la vista formulario de atributos y modifique el modo de *Crear "
-"variantes*."
+msgstr "Sitio web de atributos de producto de texto"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__thumbnail
 msgid "Thumbnail Image"
-msgstr ""
+msgstr "Imagen en miniatura"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_store__magento_order_date_to
 msgid "To Date"
-msgstr ""
-
-#. module: globalteckz_magento_2
-#: code:addons/globalteckz_magento_2/models/gt_magento_shop.py:0
-#, python-format
-msgid "To Date cannot be before From Date"
-msgstr ""
+msgstr "Fecha Hasta"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__token
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #. module: globalteckz_magento_2
 #: model:ir.model,name:globalteckz_magento_2.model_stock_picking
@@ -1710,34 +1755,34 @@ msgstr "Albarán"
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__product_type
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attribute_options__ipcast
 msgid "Type cast"
-msgstr ""
+msgstr "Tipo de elenco"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__url
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__is_unique
 msgid "Unique?"
-msgstr ""
+msgstr "Unico?"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_product_attribute_set_form
 msgid "Update Attribute Set"
-msgstr ""
+msgstr "Actualizar conjunto de atributos"
 
 #. module: globalteckz_magento_2
 #: model:ir.actions.server,name:globalteckz_magento_2.update_invoice_schedular_ir_actions_server
 #: model:ir.cron,cron_name:globalteckz_magento_2.update_invoice_schedular
 #: model:ir.cron,name:globalteckz_magento_2.update_invoice_schedular
 msgid "Update Invoice Status"
-msgstr ""
+msgstr "Actualizar estado de factura"
 
 #. module: globalteckz_magento_2
 #: model:ir.actions.server,name:globalteckz_magento_2.update_product_schedular_ir_actions_server
@@ -1745,131 +1790,136 @@ msgstr ""
 #: model:ir.cron,name:globalteckz_magento_2.update_product_schedular
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_export_button_magento
 msgid "Update Product"
-msgstr ""
+msgstr "Actualizar producto"
 
 #. module: globalteckz_magento_2
 #: model:ir.actions.server,name:globalteckz_magento_2.update_shipment_schedular_ir_actions_server
 #: model:ir.cron,cron_name:globalteckz_magento_2.update_shipment_schedular
 #: model:ir.cron,name:globalteckz_magento_2.update_shipment_schedular
 msgid "Update Shipment Status"
-msgstr ""
+msgstr "Actualizar estado de envío"
 
 #. module: globalteckz_magento_2
 #: model:ir.actions.server,name:globalteckz_magento_2.update_magento2_stock_scheduler_ir_actions_server
 #: model:ir.cron,cron_name:globalteckz_magento_2.update_magento2_stock_scheduler
 #: model:ir.cron,name:globalteckz_magento_2.update_magento2_stock_scheduler
 msgid "Update Stock"
-msgstr ""
+msgstr "Actualizar existencias"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__is_used_for_price_rules
 msgid "Used for pricing rules?"
-msgstr ""
+msgstr "¿Se utiliza para las reglas de precios?"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__is_user_defined
 msgid "User Defined?"
-msgstr ""
+msgstr "¿Usuario definido?"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_instance__apiusername
 msgid "User Name"
-msgstr ""
+msgstr "Nombre de usuario"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attribute_options__value
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__gt_product_attributes__backend_type__varchar
 msgid "Varchar"
-msgstr ""
+msgstr "Várchar"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__product_product__product_type__virtual
 msgid "Virtual Product"
-msgstr ""
+msgstr "Producto Virtual"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__is_visible_on_front
 msgid "Visible (Front)?"
-msgstr ""
+msgstr "¿Visible (frente)?"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__is_visible_in_advanced_search
 msgid "Visible in advanced search?"
-msgstr ""
+msgstr "¿Visible en la búsqueda avanzada?"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attributes__is_visible
 msgid "Visible?"
-msgstr ""
+msgstr "Visible?"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_store__warehouse_id
 msgid "Warhouse"
-msgstr ""
+msgstr "Almacen"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
 msgid "Web Service username"
-msgstr ""
+msgstr "Nombre de usuario del servicio web"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_product__website_ids
 #: model:ir.model.fields.selection,name:globalteckz_magento_2.selection__gt_product_attributes__scope__website
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Website"
-msgstr ""
+msgstr "Sitio web"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_website_form_view
 msgid "Website Details"
-msgstr ""
+msgstr "Detalles del Sitio web"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_magento_website__website_id
 msgid "Website ID"
-msgstr ""
+msgstr "Sitio web ID"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.product_product_form_view_magento1
 msgid "Website Scope"
-msgstr ""
+msgstr "Alcance Sitio web"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
 msgid "Websites"
-msgstr ""
+msgstr "Sitios web"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_payment_method_magento__code
 msgid "code"
-msgstr ""
+msgstr "codigo"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
 msgid "http://www.magento.com"
-msgstr ""
+msgstr "http://www.magento.com"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_account_move__is_magento_id
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_stock_picking__is_magento
 msgid "is magento"
-msgstr ""
+msgstr "es magento"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_product_photo__magento_url
 msgid "magento Url"
-msgstr ""
+msgstr "magento URL"
 
 #. module: globalteckz_magento_2
 #: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
 msgid "password"
-msgstr ""
+msgstr "clave"
 
 #. module: globalteckz_magento_2
 #: model:ir.model.fields,field_description:globalteckz_magento_2.field_gt_product_attribute_set__sort_order
 msgid "sort Order"
-msgstr ""
+msgstr "clasificar Pedido"
+
+#. module: globalteckz_magento_2
+#: model_terms:ir.ui.view,arch_db:globalteckz_magento_2.gt_magento_instance_form_view
+msgid "token"
+msgstr "token"
