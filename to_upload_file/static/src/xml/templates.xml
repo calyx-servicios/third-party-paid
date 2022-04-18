@@ -1,0 +1,19 @@
+<templates>
+	<t t-name="UploadFile">
+		<div t-if="widget.mode === 'readonly' and widget.value">
+			<a t-attf-href="/to_upload_file/download/#{widget.value.split('/').pop()}" class="download_file">
+				<span class="fa fa-download"/>
+			</a>
+		</div>
+		
+		<div t-if="widget.mode !== 'readonly'" class="o_field_binary_file" aria-atomic="true">
+			<form class="d-none">
+				<input type="file" name="file" />
+			</form>
+			<input type="text" class="o_input input_show_file_name" readonly="readonly" />
+			<button class="select_file_button btn btn-sm btn-primary">Select File to Upload</button>
+			<button type="button" class="btn btn-secondary fa fa-pencil select_file_button" title="Edit" aria-label="Edit"/>
+			<button type="button" class="btn btn-secondary fa fa-trash-o delete_file_button" title="Delete" aria-label="Delete"/>
+		</div>
+	</t>
+</templates>
