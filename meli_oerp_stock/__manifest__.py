@@ -9,7 +9,7 @@
 {
     'name': 'MercadoLibre Stock Management Extension / Mercado Libre Publisher Extension',
     'summary': 'MercadoLibre Stock Management Extension / Mercado Libre Publisher Extension',
-    'version': '13.0.21.26',
+    'version': '13.0.22.6',
     'author': 'Moldeo Interactive',
     'website': 'https://www.moldeointeractive.com',
     "category": "Sales",

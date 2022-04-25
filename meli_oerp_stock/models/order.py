@@ -35,7 +35,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     def _meli_order_update( self, config=None, data=None ):
-        _logger.info("_meli_order_update")
+        #_logger.info("_meli_order_update")
         for order in self:
 
             wh_id = order._meli_get_warehouse_id(config=config)
@@ -54,10 +54,10 @@ class SaleOrder(models.Model):
             order_type = self.env["mercadolibre.orders"].get_sale_order_type( config=config, sale_order=order, shipment=(order and order.meli_shipment) )
             if order_type and "type_id" in order_type:
                 order.type_id = order_type["type_id"]
-                _logger.info("order_type:"+str(order_type))
+                #_logger.info("order_type:"+str(order_type))
 
     def meli_deliver( self, meli=None, config=None, data=None):
-        _logger.info("meli_deliver")
+        #_logger.info("meli_deliver")
         res= {}
         if "mercadolibre_stock_mrp_production_process" in config._fields and config.mercadolibre_stock_mrp_production_process:
             self.meli_produce( meli=meli, config=config, data=data )
@@ -65,6 +65,17 @@ class SaleOrder(models.Model):
         if self.picking_ids:
             for spick in self.picking_ids:
                 _logger.info(spick)
+                if self.warehouse_id and spick.location_id:
+                    
+                    if self.warehouse_id.lot_stock_id.id != spick.location_id.id:
+                        _logger.info("Fixing location!")
+                        spick.location_id = self.warehouse_id.lot_stock_id
+
+                    if self.warehouse_id.lot_stock_id.id != spick.location_id.id:
+                        _logger.info("Fixing location NOT POSSIBLE! Aborting delivery.")
+                        return { "error": "Fixing location NOT POSSIBLE! Aborting delivery." }
+
+
                 if (spick.move_line_ids):
                     _logger.info(spick.move_line_ids)
                     if (len(spick.move_line_ids)>=1):
@@ -72,7 +83,7 @@ class SaleOrder(models.Model):
                             _logger.info(pop)
                             if (pop.qty_done==0.0 and pop.product_qty>=0.0):
                                 pop.qty_done = pop.product_qty
-                        _logger.info("validating")
+                        #_logger.info("validating")
                         try:
                             spick.button_validate()
                             spick.action_done()
@@ -93,7 +104,7 @@ class SaleOrder(models.Model):
                             pass;
 
     def meli_produce( self, meli=None, config=None, data=None):
-        _logger.info("meli_produce")
+        #_logger.info("meli_produce")
         order = self
         productions = self.env['mrp.production'].search( [ ('origin','=',order.name), ('state', 'not in', ['draft','done','cancel']) ])
         if productions:
@@ -131,7 +142,7 @@ class SaleOrder(models.Model):
 
     def confirm_ml_stock( self, meli=None, config=None, force=False ):
 
-        _logger.info("meli_oerp_stock confirm_ml_stock")
+        #_logger.info("meli_oerp_stock confirm_ml_stock")
         company = (config and 'company_id' in config._fields and config.company_id) or self.env.user.company_id
         config = config or company
 
@@ -140,14 +151,14 @@ class SaleOrder(models.Model):
         forcing_date = forcing_date and config.mercadolibre_stock_filter_order_datetime_to and self.meli_date_closed <= config.mercadolibre_stock_filter_order_datetime_to
 
         force = force or forcing_date
-        _logger.info("Forcing shipment validation: "+str(force))
+        #_logger.info("Forcing shipment validation: "+str(force))
 
         self._meli_order_update( config=config )
 
         delinofull = "mercadolibre_order_confirmation_delivery" in config._fields and config.mercadolibre_order_confirmation_delivery
         delifull = "mercadolibre_order_confirmation_delivery_full" in config._fields and config.mercadolibre_order_confirmation_delivery_full
         shipped_or_delivered = self.meli_shipment and ("delivered" in self.meli_shipment.status or "shipped" in self.meli_shipment.status)
-        _logger.info("shipped_or_delivered:"+str(shipped_or_delivered))
+        #_logger.info("shipped_or_delivered:"+str(shipped_or_delivered))
 
         condition = self.meli_shipment_logistic_type=="fulfillment" and delifull and "paid_confirm_deliver" in delifull
         condition = condition or (not self.meli_shipment_logistic_type and delinofull and  "paid_confirm_deliver" in delinofull)
@@ -157,16 +168,16 @@ class SaleOrder(models.Model):
         #last check:
         condition = condition and ("paid" in self.meli_status) and self.state in ['sale','done']
 
-        _logger.info("delivery condition: "+str(condition))
+        #_logger.info("delivery condition: "+str(condition))
         if (condition or force):
             self.meli_deliver( meli=meli, config=config)
 
-        _logger.info("meli_oerp_stock confirm_ml_stock ended")
+        #_logger.info("meli_oerp_stock confirm_ml_stock ended")
 
     #try to update order before confirmation (quotation)
     def confirm_ml( self, meli=None, config=None ):
 
-        _logger.info("meli_oerp_stock confirm_ml: config:"+str(config and config.name))
+        #_logger.info("meli_oerp_stock confirm_ml: config:"+str(config and config.name))
 
         company = (config and 'company_id' in config._fields and config.company_id) or self.env.user.company_id
         config = config or company
@@ -175,10 +186,87 @@ class SaleOrder(models.Model):
 
         super(SaleOrder, self).confirm_ml( meli=meli, config=config )
 
+        #if self.location_id and self.location_id.mercadolibre_active == True:
+
+        # select lot_id based on max quantity , and assign location_id based on lot_id (search quant assigned... to this lot_id (name) )
+        # _logger.info("Location es ML Active "+str(self.location_id))
+        #search for the max... check the origin (move_ids.origin)
+        # check  and search for lot_id
+        # search for stock.quant   related to this location_id, then choose the first bigger lot_id
+        # if self.product_id:
+        #     quants = self.env["stock.quant"].search([('product_id','=',self.product_id.id),('location_id','=',self.location_id.id)])
+            #search max!!!
+        #     max = 0
+        #     qs = quants and quants[0]
+        #     for q in quants:
+        #         if q.inventory_quantity>max:
+        #             qs = q
+        #             max = qs.inventory_quantity
+        #     self.lot_id = qs and qs.lot_id
+        #
+
         #seleccionar en la confirmacion del stock.picking la informacion del carrier
         #
-        _logger.info("meli_oerp_stock confirm_ml ended.")
+        #_logger.info("meli_oerp_stock confirm_ml ended.")
 
+
+    def _action_confirm(self):
+
+        _logger.info("order _action_confirm")
+
+        ret = super( SaleOrder, self )._action_confirm()
+
+        _logger.info("order _action_confirm :"+str(self.picking_ids))
+
+        if self.picking_ids:
+
+            for spick in self.picking_ids:
+
+                #_logger.info("_action_confirm Picking state:"+str(spick.state))
+
+                if spick.state in ["assigned"]:
+
+                    _logger.info("_action_confirm picking Asssigned")
+                    #for sp in spick.move_line_ids:
+                    #    spick.action_assign()
+        return ret
+
+    def action_confirm(self):
+
+        _logger.info("order action_confirm")
+
+        ret = super( SaleOrder, self ).action_confirm()
+
+        _logger.info("order action_confirm :"+str(self.picking_ids)+" ret:"+str(ret))
+
+        if self.picking_ids:
+
+            for spick in self.picking_ids:
+
+                #_logger.info("action_confirm  Picking state:"+str(spick.state))
+
+                if spick.state in ["assigned"]:
+
+                    _logger.info("action_confirm picking Asssigned")
+                    for mv in spick.move_line_ids_without_package:
+                        _logger.info("Move Line: State:"+str(mv.state)
+                                    +" Product:"+str(mv.product_id and mv.product_id.name)
+                                    +" Location:"+str(mv.location_id and mv.location_id.name)
+                                    +" Lot:"+str(mv.lot_id and mv.lot_id.name)
+                                    +" Qty Reserved:"+str(mv.product_uom_qty)
+                                    )
+                        #mv.state = 'draft'
+                    spick.do_unreserve()
+                    spick.action_assign()
+                    for mv in spick.move_line_ids_without_package:
+                        _logger.info("Move Line: State:"+str(mv.state)
+                                    +" Product:"+str(mv.product_id and mv.product_id.name)
+                                    +" Location:"+str(mv.location_id and mv.location_id.name)
+                                    +" Lot:"+str(mv.lot_id and mv.lot_id.name)
+                                    +" Qty Reserved:"+str(mv.product_uom_qty)
+                                    )
+                    #spick.action_reassign()
+        return ret
 
 class MercadolibreOrder(models.Model):
 
@@ -192,9 +280,11 @@ class MercadolibreOrder(models.Model):
         if "error" in result and not 'No product related to meli_id' in result['error']:
             return result
         #company = self.env.user.company_id
-        oid = ('id' in data and data['id']) or ('order_json' in data and 'id' in data['order_json'] and data['order_json']["id"])
-        if oid:
-            order = self.env['mercadolibre.orders'].search([( 'order_id','=',str(oid) )], limit=1)
+        oid = (data and 'order_json' in data and 'id' in data['order_json'] and data['order_json']["id"])
+        cid = (data and 'id' in data and data['id'])
+        if oid or cid:
+            order = oid and self.env['mercadolibre.orders'].search([( 'order_id','=',str(oid) )], limit=1)
+            order = order or (not order and cid and self.env['mercadolibre.orders'].browse(cid))
             if order:
                 sorder = order.sale_order or (order.shipment and order.shipment.sale_order)
                 if sorder:
@@ -202,7 +292,7 @@ class MercadolibreOrder(models.Model):
                 else:
                     _logger.info("missing sale order for:"+str(order.name))
             else:
-                _logger.info("missing meli order for:"+str(oid))
+                _logger.info("missing meli order for: oid:"+str(oid)+" or "+str(cid))
         else:
             _logger.info("missing id in data:"+str(data))
 
@@ -212,7 +302,7 @@ class MercadolibreOrder(models.Model):
     def map_meli_sku( self, meli_sku=None, meli_item=None ):
         _logger.info("map_meli_sku: "+str(meli_item))
         odoo_sku = None
-        mapped = None
+        mapped_sku = None
         filtered = None
         seller_sku = meli_sku or (meli_item and 'seller_sku' in meli_item and meli_item['seller_sku']) or (meli_item and 'seller_custom_field' in meli_item and meli_item['seller_custom_field'])
 
@@ -258,7 +348,7 @@ class MercadolibreOrder(models.Model):
             #1ST attempt "seller_sku" or "seller_custom_field"
             seller_sku = ('seller_sku' in meli_item and meli_item['seller_sku']) or ('seller_custom_field' in meli_item and meli_item['seller_custom_field'])
             if (seller_sku):
-                product_related = product_obj.search([('default_code','=',seller_sku)])
+                product_related = product_obj.search([('default_code','=ilike',seller_sku)])
 
             #2ND attempt only old "seller_custom_field"
             if (not product_related and 'seller_custom_field' in meli_item):
@@ -314,7 +404,7 @@ class MercadolibreOrder(models.Model):
                 wh_id = config.mercadolibre_stock_warehouse_full
         if wh_id:
             meli_order_fields.update({'warehouse_id': wh_id.id })
-        _logger.info("prepare_sale_order_vals > meli_order_fields:"+str(meli_order_fields))
+        #_logger.info("prepare_sale_order_vals > meli_order_fields:"+str(meli_order_fields))
 
         return meli_order_fields
 

@@ -104,9 +104,15 @@ class SaleOrder(models.Model):
                         for inv in invoices:
                             #try:
                             if inv.state in ['draft']:
-                                _logger.info("Validate invoice: "+str(inv.name))
-                                inv.action_post()
-                                _logger.info("Created invoices and validated!")
+                                draft_validation = not config.mercadolibre_order_confirmation_invoice or ( config.mercadolibre_order_confirmation_invoice and not "_draft" in config.mercadolibre_order_confirmation_invoice)
+                                draft_validation_full = not config.mercadolibre_order_confirmation_invoice_full or ( config.mercadolibre_order_confirmation_invoice_full and not "_draft" in config.mercadolibre_order_confirmation_invoice_full)
+                                draft_validate = draft_validation
+                                if (so.meli_shipment_logistic_type and "fulfillment" in so.meli_shipment_logistic_type):
+                                    draft_validate = draft_validation_full
+                                if draft_validate:
+                                    _logger.info("Validate invoice: "+str(inv.name))
+                                    inv.action_post()
+                                    _logger.info("Created invoices and validated!")
 
                             if inv.state in posted_statuses and config and config.mercadolibre_post_invoice:
                                 _logger.info("Send to MercadoLibre: "+str(inv.name))
@@ -164,13 +170,13 @@ class SaleOrder(models.Model):
                             _logger.info(e, exc_info=True)
                         try:
                             if config.mercadolibre_process_payments_supplier_fea and not payment.account_supplier_payment_id:
-                                payment.create_supplier_payment()
+                                payment.create_supplier_payment( meli=meli, config=config )
                         except Exception as e:
                             _logger.info("Error creating supplier fee payment")
                             _logger.info(e, exc_info=True)
                         try:
                             if config.mercadolibre_process_payments_supplier_shipment and not payment.account_supplier_payment_shipment_id and (payment.order_id and payment.order_id.shipping_list_cost>0.0):
-                                payment.create_supplier_payment_shipment()
+                                payment.create_supplier_payment_shipment( meli=meli, config=config )
                         except Exception as e:
                             _logger.info("Error creating supplier shipment payment")
                             _logger.info(e, exc_info=True)

@@ -26,7 +26,6 @@ _logger = logging.getLogger(__name__)
 
 import pdb
 
-#from .warning import warning
 import requests
 from odoo.addons.meli_oerp.melisdk.meli import Meli
 from odoo.addons.meli_oerp.models.versions import *
@@ -76,29 +75,48 @@ class product_product(models.Model):
         company = (config and 'company_id' in config._fields and config.company_id) or company
         meli_id = meli_id or self.meli_id
         meli_shipping_logistic_type = self._meli_update_logistic_type(meli_id=meli_id, meli=meli,config=config)
+        #_logger.info("_meli_get_location_id > meli_shipping_logistic_type:"+str(meli_shipping_logistic_type))
 
-        if (config.mercadolibre_stock_warehouse):
-            loc_id = config.mercadolibre_stock_warehouse.lot_stock_id
+        loc_id = self.env["stock.location"].search([('mercadolibre_active','=',True),('company_id', '=', company.id)])
 
-        if (config.mercadolibre_stock_location_to_post):
-            loc_id = config.mercadolibre_stock_location_to_post
-        else:
-            #loc_id = self.env["stock.location"].search([('mercadolibre_active','=',True),('company_id', '=', company.id)])
-            loc_id = self.env["stock.location"].search([('mercadolibre_active','=',True),('company_id', '=', company.id)])
-            if loc_id and len(loc_id)==0:
-                loc_id = False
-            if "mercadolibre_stock_location_to_post_many" in config._fields and config.mercadolibre_stock_location_to_post_many:
-                loc_id = []
-                for lid in config.mercadolibre_stock_location_to_post_many:
-                    loc_id.append(lid)
-                #_logger.info(loc_id)
+        #CHECK ALL COMPANY LOCATIONS
+        if loc_id:
+            loc_ids = []
+            for lid in loc_id:
+                if (meli_shipping_logistic_type != "fulfillment"):
+                    if (not lid.mercadolibre_logistic_type or (lid.mercadolibre_logistic_type and 'fulfillment' not in lid.mercadolibre_logistic_type)):
+                        loc_ids.append(lid)
+                else:
+                    if (lid.mercadolibre_logistic_type and 'fulfillment' in lid.mercadolibre_logistic_type):
+                        loc_ids.append(lid)
+            loc_id = loc_ids
+
+        #JUST OCAPI PUBLISH STOCK LOCATION
+        multi_stock_locations = ("publish_stock_locations" in config._fields and config.publish_stock_locations)
+        multi_stock_locations = multi_stock_locations or ("mercadolibre_stock_location_to_post_many" in config._fields and config.mercadolibre_stock_location_to_post_many)
+        if multi_stock_locations:
+            loc_ids = []
+            for lid in multi_stock_locations.filtered(lambda x: not x.company_id or (x.company_id and x.company_id.id == company.id ) ):
+                if (meli_shipping_logistic_type != "fulfillment"):
+                    if (not lid.mercadolibre_logistic_type or (lid.mercadolibre_logistic_type and 'fulfillment' not in lid.mercadolibre_logistic_type)):
+                        loc_ids.append(lid)
+                else:
+                    if (lid.mercadolibre_logistic_type and 'fulfillment' in lid.mercadolibre_logistic_type):
+                        loc_ids.append(lid)
+            loc_id = loc_ids
+            #_logger.info(loc_id)
 
 
         if (meli_shipping_logistic_type == "fulfillment"):
-            if (config.mercadolibre_stock_warehouse_full):
-                loc_id = config.mercadolibre_stock_warehouse_full.lot_stock_id
-            if (config.mercadolibre_stock_location_to_post_full):
+            if (config.mercadolibre_stock_location_to_post_full and not loc_id):
                 loc_id = config.mercadolibre_stock_location_to_post_full
+            if (config.mercadolibre_stock_warehouse_full and not loc_id):
+                loc_id = config.mercadolibre_stock_warehouse_full.lot_stock_id
+        else:
+            if (config.mercadolibre_stock_location_to_post and not loc_id):
+                loc_id = config.mercadolibre_stock_location_to_post
+            if (config.mercadolibre_stock_warehouse and not loc_id):
+                loc_id = config.mercadolibre_stock_warehouse.lot_stock_id
 
         return loc_id
 
@@ -119,15 +137,46 @@ class product_product(models.Model):
 
         qty_available = 0
         #_logger.info("meli_oerp_stock._meli_virtual_available quant_obj: "+str(quant_obj)+" product_id:"+str(product_id))
+
+        loc_oper = ("mercadolibre_stock_location_operation" in config._fields) and config.mercadolibre_stock_location_operation
+        qty_method = ("mercadolibre_stock_virtual_available" in config._fields) and config.mercadolibre_stock_virtual_available
+
+        #_logger.info("loc_oper: "+str(loc_oper)+" qty_method: "+str(qty_method))
+
+        last_qty_available_op = 0
+        qty_available_op = 0
+
         for loc in loc_id:
-            if ("mercadolibre_stock_virtual_available" in config._fields and (not config.mercadolibre_stock_virtual_available or config.mercadolibre_stock_virtual_available=='virtual')):
-            #_logger.info(loc.display_name)
-            #if 1==1:
-                qty_available+= quant_obj._get_available_quantity(product_id, loc)
+
+            #Cantidad disponible en esta ubicacion
+            if ( not qty_method or qty_method=='virtual' ):
+                qty_available_op = quant_obj._get_available_quantity( product_id, loc )
             else:
-                qty_available+= product_id.get_theoretical_quantity( product_id.id, loc.id )
-                #qty_available+= product_id.qty_available
-            _logger.info("qty_available:"+str(qty_available))
+                if (qty_method=='theoretical'):
+                    qty_available_op = product_id.get_theoretical_quantity( product_id.id, loc.id )
+
+                if (qty_method=='qty_reserved'):
+                    qty_available_op = product_id.get_theoretical_quantity( product_id.id, loc.id )
+
+            #Operacion entre ubicaciones
+            if (loc_oper and loc_oper=="sum" or not loc_oper):
+                last_qty_available_op = qty_available_op
+                qty_available+= last_qty_available_op
+
+            if loc_oper and loc_oper=="maximum":
+                if (qty_available_op>last_qty_available_op):
+                    qty_available+= (qty_available_op-last_qty_available_op)
+                    last_qty_available_op = qty_available_op
+
+            #if loc_oper and loc_oper=="minimum":
+            #    if (qty_available_op>0 and qty_available_op<last_qty_available_op):
+            #        qty_available+= (qty_available_op-last_qty_available_op)
+            #        last_qty_available_op = qty_available_op
+
+            #_logger.info(   "qty_available:"+str(qty_available)
+            #                +" last_qty_available_op:"+str(last_qty_available_op)
+            #                +" qty_available_op:"+str(qty_available_op) )
+
         #_logger.info("meli_oerp_stock._meli_virtual_available qty_available: "+str(qty_available))
 
         return qty_available
@@ -157,13 +206,13 @@ class product_product(models.Model):
                 new_meli_available_quantity = product._meli_virtual_available( meli_id=meli_id, meli=meli, config=config )
 
         if (1==1 and 'mrp.bom' in self.env and new_meli_available_quantity<=10000):
-            _logger.info("search bom:"+str(product.default_code))
+            #_logger.info("search bom:"+str(product.default_code))
             bom_id = self.env['mrp.bom'].search([('product_id','=',product.id)],limit=1)
             if not bom_id:
                 bom_id = self.env['mrp.bom'].search([('product_tmpl_id','=',product_tmpl.id)],limit=1)
             if bom_id and bom_id.type == 'phantom':
                 #_logger.info(bom_id.type)
-                _logger.info("bom_id:"+str(bom_id))
+                #_logger.info("bom_id:"+str(bom_id))
                 #chequear si el componente principal es fabricable
                 stock_material_max = 100000
                 stock_material = 0
@@ -174,10 +223,10 @@ class product_product(models.Model):
                         #_logger.info(product_tmpl.code_prefix)
                         _logger.info("bom product: " + str(bom_line.product_id.default_code) )
                         for route in product.route_ids:
-                            if (route.name in ['Fabricar','Manufacture']):
+                            #if (route.name in ['Fabricar','Manufacture']):
                                 #_logger.info("Fabricar")
-                                new_meli_available_quantity = 1
-                            if (route.name in ['Comprar','Buy']):
+                            #    new_meli_available_quantity = 1
+                            if (route.name in ['Comprar','Buy'] or route.name in ['Fabricar','Manufacture']):
                                 #_logger.info("Comprar")
                                 virtual_comp_av = bom_line.product_id._meli_virtual_available( meli_id=meli_id, meli=meli,config=config)
                                 _logger.info("bom component stock: " + str(virtual_comp_av) )
@@ -249,3 +298,64 @@ class product_product(models.Model):
         except Exception as e:
             _logger.info("product_update_stock Exception")
             _logger.info(e, exc_info=True)
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    #inventory_availability = fields.Selection([
+    #    ('never', 'Sell regardless of inventory'),
+    #    ('always', 'Show inventory on website and prevent sales if not enough stock'),
+    #    ('threshold', 'Show inventory below a threshold and prevent sales if not enough stock'),
+    #    ('custom', 'Show product-specific notifications'),
+    #], string='Inventory Availability', help='Adds an inventory availability status on the web product page.', default='never')
+    #available_threshold = fields.Float(string='Availability Threshold', default=5.0)
+    #custom_message = fields.Text(string='Custom Message', default='', translate=True)
+
+    def _get_combination_info(self, combination=False, product_id=False, add_qty=1, pricelist=False, parent_combination=False, only_template=False):
+
+        _logger.info("_get_combination_info meli: "+str(combination))
+
+        combination_info = super(ProductTemplate, self)._get_combination_info(
+            combination=combination, product_id=product_id, add_qty=add_qty, pricelist=pricelist,
+            parent_combination=parent_combination, only_template=only_template)
+
+        if not self.env.context.get('website_sale_stock_get_quantity'):
+            return combination_info
+
+        _logger.info("combination_info start: "+str(combination_info))
+
+        if combination_info['product_id']:
+            product = self.env['product.product'].sudo().browse(combination_info['product_id'])
+            website = self.env['website'].get_current_website()
+            virtual_available = product.with_context(warehouse=website.warehouse_id.id).virtual_available
+            meli_virtual_available = product.with_context(warehouse=website.warehouse_id.id)._meli_virtual_available()
+            combination_info.update({
+                #'virtual_available': virtual_available,
+                'virtual_available': meli_virtual_available,
+                'meli_virtual_available': meli_virtual_available,
+                'virtual_available_formatted': self.env['ir.qweb.field.float'].value_to_html(meli_virtual_available, {'decimal_precision': 'Product Unit of Measure'}),
+                'product_type': product.type,
+                'inventory_availability': product.inventory_availability,
+                'available_threshold': product.available_threshold,
+                'custom_message': product.custom_message,
+                'product_template': product.product_tmpl_id.id,
+                'cart_qty': product.cart_qty,
+                'uom_name': product.uom_id.name,
+            })
+            _logger.info("combination_info [product_id]: "+str(combination_info))
+        else:
+            product_template = self.sudo()
+            combination_info.update({
+                'virtual_available': 0,
+                'product_type': product_template.type,
+                'inventory_availability': product_template.inventory_availability,
+                'available_threshold': product_template.available_threshold,
+                'custom_message': product_template.custom_message,
+                'product_template': product_template.id,
+                'cart_qty': 0
+            })
+
+        _logger.info("combination_info final: "+str(combination_info))
+
+        return combination_info

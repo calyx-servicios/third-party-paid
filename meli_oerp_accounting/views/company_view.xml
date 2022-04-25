@@ -19,6 +19,8 @@
                       <field name="mercadolibre_process_payments_customer" invisible="0"/>
                       <field name="mercadolibre_process_payments_supplier_fea" invisible="0"/>
                       <field name="mercadolibre_process_payments_supplier_shipment" invisible="0"/>
+                      <!--field name="mercadolibre_account_payment_receiptbook_id"/>
+                      <field name="mercadolibre_account_payment_supplier_receiptbook_id"/-->
                     </group>
                     <group>
                       <field name="mercadolibre_order_confirmation_invoice" invisible="0"/>

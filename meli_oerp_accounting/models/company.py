@@ -41,10 +41,7 @@ class ResCompany(models.Model):
     mercadolibre_process_payments_journal_shp = fields.Many2one("account.journal",string="Account Journal for MercadoLibre (SHP)")
     mercadolibre_process_payments_res_partner_shp = fields.Many2one("res.partner",string="MercadoLibre Partner (SHP)")
 
-    mercadolibre_order_confirmation = fields.Selection([ ("manual", "Manual"),
-                                                ("paid_confirm", "Pagado>Confirmado"),
-                                                ("paid_delivered", "Pagado>Entregado"),
-                                                ("paid_confirm_with_invoice", "Pagado>Facturado"),
+    mercadolibre_order_confirmation = fields.Selection(selection_add=[("paid_confirm_with_invoice", "Pagado>Facturado"),
                                                 ("paid_delivered_with_invoice", "Pagado>Facturado y Entregado")],
                                                 string='Acción al recibir un pedido',
                                                 help='Acción al confirmar una orden o pedido de venta')
@@ -52,23 +49,33 @@ class ResCompany(models.Model):
     mercadolibre_order_confirmation_invoice = fields.Selection([ ("manual", "No facturar"),
                                                 ("paid_confirm_invoice", "Pagado > Facturar"),
                                                 ("paid_confirm_delivered_invoice", "Entregado > Facturar"),
+
+                                                ("paid_confirm_invoice_draft", "Pagado > Factura borrador"),
+                                                ("paid_confirm_delivered_invoice_draft", "Entregado > Factura borrador"),
                                                 #("paid_confirm_invoice_deliver", "Pagado > Facturar > Entregar")
                                                 ],
-                                                string='Acción al confirmar un pedido',
-                                                help='Acción al confirmar una orden o pedido de venta')
+                                                string='Acción sobre la factura al confirmar un pedido',
+                                                help='Acción sobre la factura al confirmar una orden o pedido de venta')
 
     mercadolibre_order_confirmation_invoice_full = fields.Selection([ ("manual", "No facturar"),
                                                 ("paid_confirm_invoice", "Pagado > Facturar"),
                                                 ("paid_confirm_delivered_invoice", "Entregado > Facturar"),
+
+                                                ("paid_confirm_invoice_draft", "Pagado > Factura borrador"),
+                                                ("paid_confirm_delivered_invoice_draft", "Entregado > Factura borrador"),
                                                 #("paid_confirm_invoice_deliver", "Pagado > Facturar > Entregar")
                                                 ],
-                                                string='(FULL) Acción al confirmar un pedido',
-                                                help='(FULL) Acción al confirmar una orden o pedido de venta')
+                                                string='(FULL) Acción sobre la factura al confirmar un pedido',
+                                                help='(FULL) Acción sobre la factura al confirmar una orden o pedido de venta')
 
     mercadolibre_post_invoice = fields.Boolean(string="Post Invoice Automatic",help="Try to post invoice, when order is revisited or refreshed.")
     mercadolibre_post_invoice_dont_send = fields.Boolean(string="Dont really send, just prepare to post invoice.")
 
     mercadolibre_set_fully_invoice = fields.Boolean( string="Set Fully Invoice", help="Marcar como completamente facturado la orden correspondiente (incluido linea de envio)" )
+
+    #mercadolibre_account_payment_receiptbook_id = fields.Many2one( "account.payment.receiptbook", string="Recibos")
+    #mercadolibre_account_payment_supplier_receiptbook_id = fields.Many2one( "account.payment.receiptbook", string="Ordenes de pago")
+
 
     def hi(self):
         return True

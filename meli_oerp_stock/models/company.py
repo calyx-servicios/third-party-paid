@@ -25,12 +25,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 import pdb
-
-#from .meli_oerp_config import *
-#from .warning import warning
-
 import requests
-#from ..melisdk.meli import Meli
 
 class ResCompany(models.Model):
 
@@ -38,7 +33,7 @@ class ResCompany(models.Model):
 
     mercadolibre_stock_warehouse = fields.Many2one("stock.warehouse", string="Stock Warehouse Default", help="Almacen predeterminado")
     mercadolibre_stock_location_to_post = fields.Many2one("stock.location", string="Stock Location To Post", help="Ubicación desde dónde publicar el stock")
-    mercadolibre_stock_location_to_post_many = fields.Many2many("stock.location", string="Stock Location To Post", help="Ubicaciones desde dónde publicar el stock")
+    mercadolibre_stock_location_to_post_many = fields.Many2many("stock.location", string="Stock Locations To Post", help="Ubicaciones desde dónde publicar el stock")
 
     mercadolibre_stock_warehouse_full = fields.Many2one("stock.warehouse", string="Stock Warehouse Default for FULL", help="Almacen predeterminado para modo fulfillment")
     mercadolibre_stock_location_to_post_full = fields.Many2one("stock.location", string="Stock Location To Post for Full", help="Ubicación desde dónde publicar el stock en modo Full")
@@ -46,21 +41,37 @@ class ResCompany(models.Model):
     mercadolibre_order_confirmation_delivery = fields.Selection([ ("manual", "No entregar"),
                                                 ("paid_confirm_deliver", "Pagado > Entregar"),
                                                 ("paid_confirm_shipped_deliver", "Pagado > Entregado > Entregar")],
-                                                string='Acción al confirmar un pedido',
-                                                help='Acción al confirmar una orden o pedido de venta')
+                                                string='Acción sobre la entrega al confirmar un pedido',
+                                                help='Acción sobre la entrega al confirmar una orden o pedido de venta')
 
     mercadolibre_order_confirmation_delivery_full = fields.Selection([ ("manual", "No entregar"),
                                                 ("paid_confirm_deliver", "Pagado > Entregar"),
                                                 ("paid_confirm_shipped_deliver", "Pagado > Entregado > Entregar")],
-                                                string='(FULL) Acción al confirmar un pedido',
-                                                help='(FULL) Acción al confirmar una orden o pedido de venta')
+                                                string='(FULL) Acción sobre la entrega al confirmar un pedido',
+                                                help='(FULL) Acción sobre la entrega al confirmar una orden o pedido de venta')
 
     #TODO: process
     mercadolibre_cron_get_shipments = fields.Boolean(string='Force shipment validation',help='Force shipment validation')
     mercadolibre_stock_filter_order_datetime = fields.Datetime("Order Closed Date (Forcing shipment validation)")
     mercadolibre_stock_filter_order_datetime_to = fields.Datetime("Order Closed Date To (Forcing shipment validation)")
 
-    mercadolibre_stock_virtual_available = fields.Selection([("virtual","Virtual (quantity-reserved)"),("theoretical","En mano (quantity)")],default='virtual')
+    mercadolibre_stock_virtual_available = fields.Selection(string="Cantidad disponible",
+                                                            selection=[
+                                                                        ("virtual","Planificado (virtual_available)"),
+                                                                        ("theoretical","En mano (quantity)"),
+                                                                        ("qty_reserved","Cantidad menos reservado (quantity - reserved)")
+                                                            ],
+                                                            default='virtual')
+
+    mercadolibre_stock_location_operation = fields.Selection( string="Operación sobre las ubicaciones",
+                                                              selection=[
+                                                                            ("sum","Suma de las ubicaciones"),
+                                                                            ("maximum","Maximo"),
+                                                                            #("minimum","Minimo")
+                                                              ],
+                                                              default='sum',
+                                                              help="Suma, maximo o minimo como operacion de las diferentes ubicaciones activas para MercadoLibre")
+
     #TODO: check if 3rd option needed to force quantity - reserved mercadolibre_stock_virtual_available = fields.Selection([("virtual","Virtual Available"),("virtual_reserved","Virtual ( on hand - reserved )"),("theoretical","En mano (quantity)")],default='virtual')
 
     #TODO: activate
@@ -81,7 +92,6 @@ class ResCompany(models.Model):
         _logger.info('company cron_meli_shipments() '+str(self))
 
         company = self.env.user.company_id
-        warningobj = self.pool.get('warning')
 
         apistate = self.env['meli.util'].get_new_instance(company)
         if apistate.needlogin_state:

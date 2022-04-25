@@ -151,12 +151,14 @@ class OrdersInvoice(models.Model):
     invoice_xml = fields.Binary(string='Invoice XML')
     invoice_xml_filename = fields.Char(string="XML Filename")
 
-    def orders_create_invoice(self, context=None, meli=None):
+    def orders_create_invoice(self, context=None, meli=None, config=None):
         _logger.info("orders_create_invoice:"+str(context))
         self.invoice_created = True
         so = self and self.sale_order
+        config = config or ("connection_account" in self._fields and self.connection_account and self.connection_account.configuration)
+        config = config or so.company_id or self.env.user.company_id
         if (so):
-            so.meli_create_invoice( meli=meli, config=so.company_id )
+            so.meli_create_invoice( meli=meli, config=config )
 
 
     def orders_post_invoice(self, context=None, meli=None, config=None):
@@ -166,14 +168,20 @@ class OrdersInvoice(models.Model):
         self.invoice_posted = False
 
         _logger.info("Create binary PDF and XML for attach files")
-        company = (config and 'company_id' in config._fields and config.company_id) or self.env.user.company_id
-        config = config or company
 
-        if not meli:
-            meli = self.env['meli.util'].get_new_instance(company)
+        config = config or ("connection_account" in self._fields and self.connection_account and self.connection_account.configuration)
+        company = (config and 'company_id' in config._fields and config.company_id)
 
         so = self.sale_order
         if so:
+            config = config or so.company_id or self.env.user.company_id
+            if not meli:
+                if ("connection_account" in self._fields and self.connection_account):
+                    account = self.connection_account
+                    meli = self.env['meli.util'].get_new_instance(config, account)
+                else:
+                    meli = self.env['meli.util'].get_new_instance(config)
+
             invoices = self.env[acc_inv_model].search([(invoice_origin,'=',so.name)])
             #'estado_validacion': record['fe_approved'],
             respost = ""

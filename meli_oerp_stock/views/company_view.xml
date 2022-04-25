@@ -10,6 +10,8 @@
                   <group string="Configuración Stock" name="meli_oerp_stock"  col="2">
                     <group>
                       <field name="mercadolibre_stock_virtual_available" invisible="0"/>
+                      <field name="mercadolibre_stock_location_operation" invisible="0"/>
+                      
                       <field name="mercadolibre_stock_warehouse" invisible="0"/>
                       <field name="mercadolibre_stock_location_to_post" invisible="0"  domain = "[('mercadolibre_active','=',True),('company_id', '=', id)]"/>
                       <!--field name="mercadolibre_stock_location_to_post_many" invisible="0" domain = "[('mercadolibre_active','=',True)]"/-->

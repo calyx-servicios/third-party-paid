@@ -26,11 +26,7 @@ _logger = logging.getLogger(__name__)
 
 import pdb
 
-#from .meli_oerp_config import *
-#from .warning import warning
-
 import requests
-#from ..melisdk.meli import Meli
 
 
 class stock_move(models.Model):
@@ -52,7 +48,128 @@ class stock_move(models.Model):
                 _logger.info("post stock for: "+p.display_name)
         
         return ret
+        
+class stock_picking( models.Model):
+    
+    _inherit = "stock.picking"
+    
+    def action_reassign( self ):
+        
+        moves = self.mapped('move_lines').filtered(lambda move: move.state not in ('draft', 'cancel', 'done'))
+        if moves:
+            #re assign
+            _logger.info("meli_oerp_stock reassign: "+str(moves))
+            for m in moves:
+                mv = m
+                qty = mv.product_uom_qty
+                _logger.info("action_reassign Move Line: State:"+str(mv.state)
+                            +" Product:"+str(mv.product_id and mv.product_id.name)
+                            +" Location:"+str(mv.location_id and mv.location_id.name)
+                            #+" Lot:"+str(mv.lot_id and mv.lot_id.name)
+                            +" Qty Reserved:"+str(mv.product_uom_qty)
+                            )
+                if m.product_id: # and m.location_id.mercadolibre_active == True:
+                    _logger.info("meli_oerp_stock reassign: move: "+str(m))
+                    #quants_by_lot = self.env["stock.quant"].search([('product_id','=',self.product_id.id),('location_id','=',self.location_id.id)])
+                    quants = self.env["stock.quant"].search([('product_id','=',m.product_id.id)])
+                    _logger.info("meli_oerp_stock reassign: quants:"+str(quants))
+                    #search max!!!
+                    max = 0
+                    qs = None
+                    for q in quants:
+                        #_logger.info("meli_oerp_stock reassign: q:"+str(q.location_id and q.location_id.name))
+                        #_logger.info("meli_oerp_stock reassign: q.quantity:"+str(q.quantity))
+                        if q.quantity>max and q.location_id.mercadolibre_active == True:
+                            qs = q
+                            max = qs.quantity
+                    if qs:
+                        _logger.info("meli_oerp_stock reassign: qs:"+str(qs and qs.location_id and qs.location_id.name)+" quantity:"+str(qs.quantity))
+                        m.lot_id = qs and qs.lot_id
+                        m.location_id = qs and qs.location_id
+                        #m.product_uom_qty = qty
+                        #m.state = 'assigned'
+    
+    # Comprobar disponibilidad
+    def action_assign( self ):
+        _logger.info("meli_oerp_stock re-assign: "+str(self))
+        #puede llegar a asignar varios stocks asociados
+        ret = super( stock_picking, self).action_assign()
+        
+        self.action_reassign()
+            
+            
+        return ret
+        
 
+class stock_move_line(models.Model):
+
+    _inherit = "stock.move.line"
+    
+    @api.onchange('location_id')
+    def onchange_location_id_ml(self):
+        """ When the user is encoding a move line for a tracked product, we apply some logic to
+        help him. This includes:
+            - automatically switch `qty_done` to 1.0
+            - warn if he has already encoded `lot_name` in another move line
+        """
+        res = {}
+        if self.location_id and self.location_id.mercadolibre_active == True:
+            #
+            _logger.info("Location es ML Active "+str(self.location_id))
+            #search for the max... check the origin (move_ids.origin)
+            # check  and search for lot_id
+            # search for stock.quant   related to this location_id, then choose the first bigger lot_id
+            if self.product_id:
+                #quants_by_lot = self.env["stock.quant"].search([('product_id','=',self.product_id.id),('location_id','=',self.location_id.id)])
+                quants = self.env["stock.quant"].search([('product_id','=',self.product_id.id),('location_id','=',self.location_id.id)])
+                #search max!!!
+                max = 0
+                qs = quants and quants[0]
+                for q in quants:
+                    if q.quantity>max:
+                        qs = q
+                        max = qs.quantity
+                self.lot_id = qs and qs.lot_id
+                        
+                    
+        else:
+            message = "Use a MercadoLibre Active Location"
+            #if message:
+            #    res['warning'] = {'title': _('Warning'), 'message': message}
+        return res
+    
+
+    @api.onchange('lot_id')
+    def onchange_lot_id_ml(self):
+        """ When the user is encoding a move line for a tracked product, we apply some logic to
+        help him. This includes:
+            - automatically switch `qty_done` to 1.0
+            - warn if he has already encoded `lot_name` in another move line
+        """
+        res = {}
+        if self.lot_id:
+            #
+            #_logger.info("Location es ML Active "+str(self.location_id))
+            #search for the max... check the origin (move_ids.origin)
+            # check  and search for lot_id
+            # search for stock.quant   related to this location_id, then choose the first bigger lot_id
+            if self.product_id:
+                quants = self.env["stock.quant"].search([('product_id','=',self.product_id.id),('lot_id','=',self.lot_id.id)])
+                #search max!!!
+                max = 0
+                qs = quants and quants[0]
+                for q in quants:
+                    if q.quantity>max:
+                        qs = q
+                        max = qs.quantity
+                self.location_id = qs and qs.location_id
+                        
+                    
+        else:
+            message = "Use a Lot"
+            #if message:
+            #    res['warning'] = {'title': _('Warning'), 'message': message}
+        return res
 
 class stock_location(models.Model):
 
