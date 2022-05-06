@@ -89,21 +89,7 @@ class GtMagentoStore(models.Model):
         return True   
     
     
-    
-    def Update_invoice_status(self, cron_mode=True):
-        store_obj = self.env['gt.magento.store']
-        store_id = store_obj.search([])
-        for stores in store_id:
-            stores.GtExportMagentoInvoice()
-        return True
-    
-     
-    def Update_shipment_status(self, cron_mode=True):
-        store_obj = self.env['gt.magento.store']
-        store_id = store_obj.search([])
-        for stores in store_id:
-            stores.GtExportMagentoInvoice()
-        return True
+
         
         
         

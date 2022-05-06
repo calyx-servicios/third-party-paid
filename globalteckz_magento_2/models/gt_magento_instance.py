@@ -69,6 +69,7 @@ class GtMagentoInstance(models.Model):
     limit_simple_product_id = fields.Integer(string='Limit for Simple Product ID Import', default=1000)
     limit_configurable_product_id = fields.Integer(string='Limit for Configurable Product ID Import', default=1000)
     sku_reference_ids = fields.Many2many('sku.reference.import', string='Product Sku Reference Import')
+    magento_instance_id_used_token = fields.Boolean('Used Token')
 
     @api.depends('from_id')
     def _compute_simple_to_id(self):
@@ -717,6 +718,7 @@ class GtMagentoInstance(models.Model):
     
     def CreateMagentoCustomer(self, customer):
         partner_obj = self.env['res.partner']
+
         partner_vals = {
             'name' : str(customer['firstname']) + str(customer['lastname']),
             'email' : customer['email'],

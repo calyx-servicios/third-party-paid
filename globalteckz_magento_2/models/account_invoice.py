@@ -20,10 +20,47 @@
 ###############################################################################
 
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 import time
 
-class AccountInvoice(models.Model):
+class AccountMove(models.Model):
     _inherit = "account.move"
 
     mage_invoice_id = fields.Char('Magento Invoice ID', size=100, readonly=True)
     is_magento_id = fields.Boolean('is magento')
+    export_magento_sucess = fields.Boolean('Export Magento Sucess')
+
+    def export_magento_invoice(self):
+        
+        sale_id = self.env['sale.order'].search([('name', '=', self.invoice_origin)], limit=1)
+        invoice_id = self
+        if sale_id:
+            store = sale_id.magento_shop_id
+        
+            if store:
+                token = False
+                if store.magento_instance_id.magento_instance_id_used_token:
+                    token = store.magento_instance_id.token
+                else:
+                    store.magento_instance_id.generate_token()
+                    token = store.magento_instance_id.token
+                    token = token.replace('"'," ")
+                
+                headers = {
+                    'authorization':"Bearer " + token,
+                    'content-type': "application/json",
+                    'cache-control': "no-cache",
+                    }
+
+                res = store.export_magento_invoice_order(headers, invoice_id, sale_id)
+
+                if res == 'sucess':
+                    self.export_magento_sucess = True
+            
+    def action_post(self):
+        res = super(AccountMove, self).action_post()
+        sale_id = self.env['sale.order'].search([('name', '=', self.invoice_origin)], limit=1)
+        store = sale_id.magento_shop_id
+        if store:
+            self.export_magento_invoice()
+        return res

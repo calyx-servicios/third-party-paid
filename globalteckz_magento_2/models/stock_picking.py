@@ -19,15 +19,43 @@
 #                                                                             #   
 ###############################################################################
 from odoo import fields,models
+from odoo.exceptions import UserError
 
-
-class Picking(models.Model):
+class StockPicking(models.Model):
     _inherit='stock.picking'
 
     mage_stock_id = fields.Char(string= 'Magento ID',readonly=True)
     is_magento=fields.Boolean('is magento')
+    export_magento_sucess = fields.Boolean('Export Magento Sucess')
     
+    def export_magento_shipment_delivery(self):
+        
+        store = self.sale_id.magento_shop_id
+        
+        if store:
+            token = False
+            if store.magento_instance_id.magento_instance_id_used_token:
+                token = store.magento_instance_id.token
+            else:
+                store.magento_instance_id.generate_token()
+                token = store.magento_instance_id.token
+                token = token.replace('"'," ")
+            
+            headers = {
+                'authorization':"Bearer " + token,
+                'content-type': "application/json",
+                'cache-control': "no-cache",
+                }
 
+            res = store.export_magento_shipment_order(headers, self, self.sale_id)
+            if res == 'sucess':
+                self.export_magento_sucess = True
+            
+    def button_validate(self):
+        res = super(StockPicking, self).button_validate()
+        if self.sale_id.magento_shop_id:
+            self.export_magento_shipment_delivery()
+        return res
 
 class DeliveryCarrier(models.Model):
     _name = "delivery.carrier"

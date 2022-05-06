@@ -32,14 +32,9 @@
                         <page string="Actions" attrs="{'invisible':[('magento_shop','=',False)]}" >
                             <group>
                                 <group string='Manage Orders'>
-                                    <!-- <group>
-                                        <button name="GtCreateMagentoOrders" string="Import Order" type="object" class="btn-primary"/>
-                                    </group> -->
-                                    <!-- <group> -->
-                                        <button name="GtCreateMagentoOrders" string="Import Order" type="object" class="btn-primary"/>
-                                        <field name="magento_order_date"/>
-                                        <field name="magento_order_date_to"/>
-                                    <!-- </group> -->
+                                    <button name="GtCreateMagentoOrders" string="Import Order" type="object" class="btn-primary"/>
+                                    <field name="magento_order_date"/>
+                                    <field name="magento_order_date_to"/>
                                 </group>
                                 <group string="Import Order Status">
                                     <newline/>
