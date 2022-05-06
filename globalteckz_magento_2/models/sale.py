@@ -26,16 +26,14 @@ class SaleOrder(models.Model):
     
     mage_order_id = fields.Char(string='Order ID', size=100)
     order_status = fields.Char(string='Order Status')
-    magento_shop_id=fields.Many2one('gt.magento.store',string='Shop')
-    shipped=fields.Boolean('Shipped')
+    magento_shop_id = fields.Many2one('gt.magento.store',string='Shop')
+    shipped = fields.Boolean('Shipped')
     magento_order = fields.Boolean('Magento Order')
-    invoiced=fields.Boolean('Invoiced')
-    order_date=fields.Boolean('Magento Order Date')
+    invoiced = fields.Boolean('Invoiced')
+    order_date = fields.Boolean('Magento Order Date')
     entity_id = fields.Char('Entity Id')
     ma_order_id = fields.Char('Magento Order ID')
     payment_method = fields.Many2one('payment.method.magento', 'Payment Method')
-
-
 
 
 class SaleOrderLine(models.Model):

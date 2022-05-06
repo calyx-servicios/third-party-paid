@@ -51,7 +51,8 @@
                         </group>
                         <group>
                             <field name="apipassoword" placeholder="password" password="True"/>
-                            <field name="token" placeholder="token"/>
+                            <field name="magento_instance_id_used_token"/>
+                            <field name="token" placeholder="token" attrs="{'invisible': [('magento_instance_id_used_token', '=', False)]}"/>
                         </group>
                     </group>
                     <group >

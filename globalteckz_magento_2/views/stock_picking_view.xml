@@ -9,6 +9,10 @@
                 <field name= "mage_stock_id"/>
                 <field name="is_magento"/>
             </xpath>
+            <xpath expr="/form/header/button[last()]" position="after">
+                <field name='export_magento_sucess' invisible="1"/>
+                <button name="export_magento_shipment_delivery" string="Export Delivery Magento" type="object" attrs="{'invisible': [('export_magento_sucess', '=', True)]}"/>
+            </xpath>
         </field>
     </record>
 
