@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="0">
+
+     <record id ="gt_shopify_user" model="res.groups">
+        <field name="name">Shopify / User</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+    
+</data>
+</odoo>
