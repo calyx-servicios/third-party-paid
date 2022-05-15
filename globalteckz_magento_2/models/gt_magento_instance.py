@@ -730,7 +730,7 @@ class GtMagentoInstance(models.Model):
         }
         partner_id=partner_obj.search([('mag_cust_id','=',customer['id']),('magento_instance_ids','=',self.id)])
         if not partner_id:
-            partner_id = partner_obj.create(partner_vals)##ACA CREA AL CLIENTE.
+            partner_id = partner_obj.create(partner_vals)
         else:
             partner_obj.write(partner_vals)
         if partner_id:
@@ -791,6 +791,10 @@ class GtMagentoInstance(models.Model):
                 self._cr.commit()
             else:
                 child_id = self.env['res.partner'].write(partner_vals)
+            
+            if 'vat_id' in cust_address:
+                partner_id.write({'vat': cust_address['vat_id']})
+
         return True
       
     def GtImportProductImage(self):
