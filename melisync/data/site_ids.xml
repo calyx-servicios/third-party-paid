@@ -1,0 +1,6 @@
+<odoo>
+	<data noupdate="1">
+		<!-- Download site IDS -->
+		<function model="melisync.site.ids" name="download" />
+	</data>
+</odoo>

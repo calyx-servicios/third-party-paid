@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <!-- MercadoLibre Sale Orders -->
+        <record id="melisync.action_meli_sale_orders" model="ir.actions.act_window">
+            <field name="name">MercadoLibre Sale Orders</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="type">ir.actions.act_window</field>
+            <field name="domain">[('meli_id', '!=', False)]</field>
+        </record>
+        <!-- Extends sale.order form view -->
+        <record model="ir.ui.view" id="melisync.sale_view_order_form_inherit">
+            <field name="name">MercadoLibre sale.order form inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='pricelist_id']" position="before">
+                    <field name="meli_instance" groups="melisync.res_groups_sales_administrator" attrs="{ 'readonly': True, 'invisible': [('meli_id', '=', False)] }" />
+                    <field name="meli_id" groups="melisync.res_groups_sales_administrator" attrs="{ 'readonly': True, 'invisible': [('meli_id', '=', False)] }" />
+                </xpath>
+            </field>
+        </record>
+        <!-- Menu items -->
+        <menuitem name="Sale orders" parent="melisync.menu_sales" id="melisync.menu_meli_sale_orders" action="melisync.action_meli_sale_orders" groups="melisync.res_groups_sales_administrator" sequence="0"/>
+    </data>
+</odoo>
