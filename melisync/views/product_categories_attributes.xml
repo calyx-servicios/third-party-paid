@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <!-- Meli Attribute view -->
+        <record model="ir.ui.view" id="melisync.product_categories_attributes_view_form">
+            <field name="name">meli category attributes view form</field>
+            <field name="model">melisync.product.categories.attributes</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Meli attributes" delete="false" create="false" edit="false" duplicate="0">
+                    <sheet>
+                        <group string="Meli attribute data">
+                            <field name="context_meli_category_id" attrs="{ 'invisible': True }" />
+                            <field name="meli_categories" widget="many2many_tags" />
+                            <field name="meli_id" />
+                            <field name="meli_name" />
+                            <field name="meli_value_type" />
+                            <field name="meli_tags" widget="many2many_tags" />
+                            <field name="meli_values">
+                                <tree>
+                                    <field name="meli_id" />
+                                    <field name="name" />
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

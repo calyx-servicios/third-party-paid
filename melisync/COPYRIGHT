@@ -1,0 +1,11 @@
+In order to use the app you should purchase a valid license in the Odoo Apps store. It is assumed that one copy should be purchased for each production database (the purchase also grants the rights to install the app for development and staging environments without restrictions).
+
+It is forbidden to put the source code of the Lucas Shoobridge apps in locations which make possible their source code public download. In particular, it is strictly forbidden to add module to public GitHub repositories (use private repos instead). 
+
+A valid license allows anybody to develop own modules based on Lucas Shoobridge modules as a library. Such modules might be distributed (sold or published), but they should include the original app in dependencies  (__manifest__.py or __openerp__.py files) and should have compatible license. Simultaneously, it is forbidden to modify the source code of the modules, and share or sell such derivative solutions.
+
+Odoo vendors should avoid reselling the apps for their clients. Instead of that, such clients should purchase the apps directly in the Odoo store.
+
+Lucas Shoobridge reserve the right to apply to any legal action (including but not limited to DMCA and other similar policies) without any further notice. Please take into account that breaking the license rules, with or without intent, might lead to serious penalties, real and potential losses indemnification, and sanctions on various of your accounts (included but not limited to sanctions on your Odoo.com and GitHub accounts).
+
+Feel free to contact us by any questions using our support email.
