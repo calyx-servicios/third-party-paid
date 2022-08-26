@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+    <!-- explicit tree view definition -->
+    <record model="ir.ui.view" id="melisync.test_users_view_tree">
+      <field name="name">MercadoLibre test.users View Tree</field>
+      <field name="model">melisync.test.users</field>
+      <field name="arch" type="xml">
+        <tree default_order="create_date desc" create="false" edit="false" duplicate="0" string="Test users">
+            <field name="email" />
+            <field name="password" />
+            <field name="nickname" />
+            <field name="create_date" />
+        </tree>
+      </field>
+    </record>
+
+    <!-- explicit form view definition -->
+    <record model="ir.ui.view" id="melisync.test_users_view_form">
+      <field name="name">MercadoLibre test.users view form</field>
+      <field name="model">melisync.test.users</field>
+      <field name="arch" type="xml">
+        <form create="false" edit="false" duplicate="0" string="Test users">
+          <sheet>
+            <group string="MercadoLibre login data">
+                <field name="email" />
+                <field name="password" />
+                <field name="user_id" />
+                <field name="nickname" />
+                <field name="site_status" />
+            </group>
+            <group string="MercadoLibre user data">
+                <field name="user_id" />
+                <field name="site_id" />
+            </group>
+            <group string="Other data">
+                <field name="create_date" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="melisync.test_users_act_window">
+      <field name="name">Test users</field>
+      <field name="res_model">melisync.test.users</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+  </data>
+</odoo>

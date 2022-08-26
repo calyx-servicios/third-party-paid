@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+        <!-- Extends product.attribute form view -->
+        <record model="ir.ui.view" id="melisync.product_attribute_view_form_inherit">
+            <field name="name">MercadoLibre product.attribute form inherit</field>
+            <field name="model">product.attribute</field>
+            <field name="inherit_id" ref="product.product_attribute_view_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='main_fields']" position="after">
+                    <group name="mercadolibre_fields" string="MercadoLibre data" class="o_label_nowrap" attrs="{ 'invisible': [('meli_id', '=', False)] }">
+                        <label for="meli_id" string="MercadoLibre ID"/>
+                        <field name="meli_id" nolabel="1" attrs="{ 'readonly': True }"/>
+                        <field name="is_required" attrs="{ 'readonly': True }" />
+                        <field name="tag_ids" widget="many2many_tags" />
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='value_ids']" position="replace">
+                    <field
+                        name="value_ids"
+                        domain="[('meli_id', '!=', False)]"
+                        attrs="{ 'invisible': [('meli_id', '=', False)] }"
+                        widget="one2many"
+                        nolabel="1">
+                        <tree string="Values" delete="false" create="false" edit="false" duplicate="0">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                    <field
+                        name="value_ids"
+                        domain="[('meli_id', '=', False)]"
+                        attrs="{ 'invisible': [('meli_id', '!=', False)] }"
+                        widget="one2many"
+                        nolabel="1">
+                        <tree string="Values" editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
