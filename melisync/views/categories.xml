@@ -35,7 +35,7 @@
             </group>
             <group string="Attributes" attrs="{ 'invisible': [('attribute_ids', '=', [])]}">
                 <field name="attribute_ids" nolabel="1">
-                  <tree decoration-warning="is_required" default_order="meli_id asc" create="false" edit="false" delete="false" duplicate="0">
+                  <tree decoration-warning="is_required" default_order="is_required desc, meli_id asc" create="false" edit="false" delete="false" duplicate="0">
                     <field name="is_required" attrs="{ 'column_invisible': True }" />
                     <field name="meli_id" string="Attribute ID" />
                     <field name="name" string="Attribute name" />
@@ -55,9 +55,9 @@
         <field name="model">melisync.categories</field>
         <field name="arch" type="xml">
             <search string="Search category">
-                <field string="Site ID" name="site_id" domain="[('site_id', 'ilike', self)]"/>
-                <field string="ID" name="categ_id" domain="[('categ_id', 'ilike', self)]"/>
                 <field string="Name" name="name" domain="[('name', 'ilike', self)]"/>
+                <field string="ID" name="categ_id" domain="[('categ_id', 'ilike', self)]"/>
+                <field string="Site ID" name="site_id" domain="[('site_id', 'ilike', self)]"/>
                 <field string="Parent ID" name="parent_id" domain="[('parent_id.name', 'ilike', self)]"/>
                 <separator />
                 <group expand="0" name="group_by" string="Group by">

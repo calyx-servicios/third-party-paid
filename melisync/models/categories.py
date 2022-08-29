@@ -3,7 +3,7 @@ from odoo import models, fields, _, api, modules, sql_db, http
 from odoo.exceptions import UserError
 import multiprocessing
 import time
-#from odoo.http import request
+from odoo.osv import expression
 
 import logging
 logger = logging.getLogger(__name__)
@@ -76,9 +76,9 @@ class Categories(models.Model):
                         })
                     categ_id.sync_childrens()
                 except Exception as e:
-                    logger.warning('Error on sync_childrens category "{}": {}'.format(category.get('name'), e))
+                    raise Exception(_('Error on sync_childrens category "{}": {}').format(category.get('name'), e))
         except Exception as e:
-            logger.error('Error on get category "{}" childrens : {}'.format(self.categ_id, e))
+            raise UserError(_('Error on get category "{}" childrens : {}').format(self.categ_id, e))
         # Reload the view.
         return {
             'type': 'ir.actions.client',
@@ -101,11 +101,14 @@ class Categories(models.Model):
             attributes = downloaded_attrs or client.get_category_attributes(self.categ_id)
             # Loop childrens
             for attr in attributes:
+                # Parse attribute data
                 try:
-                    # Save attr value ids
-                    attr_value_ids = []
                     # Check for existent attribute
-                    attr_id = product_attribute_obj.search([('meli_id', '=', attr.get('id'))])
+                    attr_id = product_attribute_obj.search([
+                        '|',
+                        ('meli_id', '=', attr.get('id')),
+                        ('name', '=', attr.get('name')),
+                    ])
                     # If not exists
                     if not attr_id:
                         # Create attribute
@@ -115,6 +118,14 @@ class Categories(models.Model):
                             'display_type': 'radio',
                             'create_variant': 'no_variant'
                         })
+                    else:
+                        # Add the meli_id/name value if the attribute doesn't have it.
+                        if attr_id.meli_id != attr.get('id'):
+                            attr_id.write({ 'meli_id': attr.get('id') })
+                except Exception as e:
+                    raise Exception(_('Error on parse attribute "{}" of category "{}": {}').format(attr.get('name'), self.categ_id, e))
+                # Parse attribute tags
+                try:
                     # Loop attribute tags
                     tags = attr.get('tags', {})
                     # List of tag ids to append to attr.
@@ -137,32 +148,39 @@ class Categories(models.Model):
                     attr_id.write({
                         'tag_ids': [(6, False, attr_tag_ids)],
                     })
-                    # Add attribute to category.
-                    self.write({
-                        'attribute_ids': [(4, attr_id.id, False)],
-                    })
-                    # Loop attribute values
-                    for index, value in enumerate(attr.get('values', [])):
-                        try:
-                            # Check for existent attribute value
-                            value_id = product_attribute_value_obj.search([('meli_id', '=', value.get('id'))])
-                            if not value_id:
-                                value_id = product_attribute_value_obj.create({
-                                    'meli_id': value.get('id'),
-                                    'name': value.get('name'),
-                                    'attribute_id': attr_id.id,
-                                    'is_custom': False,
-                                    'is_used_on_products': True,
-                                    'sequence': index,
-                                })
-                            # Save value id.
-                            attr_value_ids.append(value_id.id)
-                        except Exception as e:
-                            logger.warning('Error on create/edit attribute value "{}": {}'.format(value.get('id'), e))
                 except Exception as e:
-                    logger.warning('Error on parse attribute "{}" of category "{}": {}'.format(attributes.get('name'), self.categ_id, e))
+                    raise Exception(_('Error on parse attribute "{}" of category "{}": {}').format(attr.get('name'), self.categ_id, e))
+                # Parse attribute values
+                for index, value in enumerate(attr.get('values', [])):
+                    try:
+                        # Check for existent attribute value
+                        value_id = product_attribute_value_obj.search([
+                            ('attribute_id', '=', attr_id.id),
+                            ('name', '=', value.get('name')),
+                        ])
+                        if not value_id:
+                            value_id = product_attribute_value_obj.create({
+                                'meli_id': value.get('id'),
+                                'name': value.get('name'),
+                                'attribute_id': attr_id.id,
+                                'is_custom': False,
+                                'is_used_on_products': True,
+                                'sequence': index,
+                            })
+                        else:
+                            # If attribute exists, add Meli ID
+                            if value_id.meli_id != value.get('id'):
+                                value_id.write({
+                                    'meli_id': value.get('id'),
+                                })
+                    except Exception as e:
+                        raise Exception(_('Error on create/edit attribute value "{}": {}').format(value.get('id'), e))
+                # Add attribute to category.
+                self.write({
+                    'attribute_ids': [(4, attr_id.id, False)],
+                })
         except Exception as e:
-            logger.error('Error on get category "{}" attributes : {}'.format(self.categ_id, e))
+            raise UserError(_('Error on get category "{}" attributes : {}').format(self.categ_id, e))
         # Reload the view.
         return {
             'type': 'ir.actions.client',
@@ -358,3 +376,9 @@ class Categories(models.Model):
                             categ_id.sync_attributes(categ_attrs)
                 except Exception as e:
                     logger.warning('Error on create category [{}]: {}'.format(value.get('categ_id'), e))
+
+    @api.model
+    def _name_search(self, name, args=None, operator='ilike', limit=100, name_get_uid=None):
+        domain = expression.OR([[['name', operator, name]], [['categ_id', operator, name]]])
+        ids = self._search(domain + args, limit=limit, access_rights_uid=name_get_uid)
+        return [[x.id, x.display_name] for x in self.search([('id', 'in', ids)])]

@@ -17,7 +17,6 @@ Odoo MercadoLibre Uploader
         'product',
         'sale_management',
         'stock',
-        'purchase',
     ],
 
     'data': [
