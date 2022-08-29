@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0-20220520\n"
+"Project-Id-Version: Odoo Server 13.0-20220317\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-02 13:31+0000\n"
-"PO-Revision-Date: 2022-08-02 13:31+0000\n"
+"POT-Creation-Date: 2022-08-27 21:51+0000\n"
+"PO-Revision-Date: 2022-08-27 21:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -77,17 +77,6 @@ msgstr "<strong>Nota</strong>: Puedes sincronizar los"
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "<strong>Note</strong>: You can synchronize the"
 msgstr "<strong>Nota</strong>: Puedes sincronizar los"
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-msgid ""
-"<strong>Warning</strong>: adding or deleting attributes\n"
-"              will delete and recreate existing variants and lead\n"
-"              to the loss of their possible customizations."
-msgstr ""
-"<strong>Alerta</strong>: Agregando o eliminando atributos\n"
-"              eliminará y volverá a crear las variantes existentes y dará lugar a\n"
-"              la pérdida de sus posibles personalizaciones."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -285,6 +274,11 @@ msgstr "Categoria"
 #, python-format
 msgid "Category ID"
 msgstr "ID de categoria"
+
+#. module: melisync
+#: model:ir.model.constraint,message:melisync.constraint_melisync_categories_categ_id_unique
+msgid "Category ID must be unique."
+msgstr "El ID de categoria debe ser unico."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -588,6 +582,12 @@ msgid "Error on create shipping option \"{}\": {}"
 msgstr "Error al crear la opcion de envio \"{}\": {}"
 
 #. module: melisync
+#: code:addons/melisync/models/categories.py:0
+#, python-format
+msgid "Error on create/edit attribute value \"{}\": {}"
+msgstr "Error al crear/editar valor del atributo \"{}\": {}"
+
+#. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "Error on download category attributes: {}"
@@ -622,6 +622,18 @@ msgstr "Error al descargar categorias para instancia ID {}: {}"
 #, python-format
 msgid "Error on get categories_count for setting ID {}: {}"
 msgstr "Error al traer categories_count para setting ID {}: {}"
+
+#. module: melisync
+#: code:addons/melisync/models/categories.py:0
+#, python-format
+msgid "Error on get category \"{}\" attributes : {}"
+msgstr "Error al obtener atributos de categoria \"{}\" : {}"
+
+#. module: melisync
+#: code:addons/melisync/models/categories.py:0
+#, python-format
+msgid "Error on get category \"{}\" childrens : {}"
+msgstr "Error al obtener categorias hijas de la categoria \"{}\" : {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -684,6 +696,13 @@ msgstr ""
 #, python-format
 msgid "Error on getting warehouse stock for product_tmp_id \"{}\": {}"
 msgstr "Error al traer el stock del product_tmp_id \"{}\": {}"
+
+#. module: melisync
+#: code:addons/melisync/models/categories.py:0
+#: code:addons/melisync/models/categories.py:0
+#, python-format
+msgid "Error on parse attribute \"{}\" of category \"{}\": {}"
+msgstr "Error al configurar atributo \"{}\" de la categoria \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -779,6 +798,12 @@ msgstr ""
 #, python-format
 msgid "Error on sync products stock of setting instance ID {}: {}"
 msgstr "Error al sincronizar stock de productos para la instancia ID {}: {}"
+
+#. module: melisync
+#: code:addons/melisync/models/categories.py:0
+#, python-format
+msgid "Error on sync_childrens category \"{}\": {}"
+msgstr "Error al sincronizar categorias hijas \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -1058,6 +1083,11 @@ msgid "Listing ID"
 msgstr "ID de tipo de publicacion"
 
 #. module: melisync
+#: model:ir.model.constraint,message:melisync.constraint_melisync_listing_types_listing_unique
+msgid "Listing ID must be unique."
+msgstr "El ID de tipo de publicacion debe ser unico."
+
+#. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_listing_type
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_listing_type
@@ -1220,7 +1250,6 @@ msgstr ""
 
 #. module: melisync
 #: model:ir.model.constraint,message:melisync.constraint_product_attribute_meli_id_unique
-#: model:ir.model.constraint,message:melisync.constraint_product_attribute_value_meli_id_unique
 msgid "MercadoLibre ID must be unique."
 msgstr "MercadoLibre ID tiene que ser unico."
 
@@ -1410,6 +1439,11 @@ msgid "Method ID"
 msgstr "ID de metodo"
 
 #. module: melisync
+#: model:ir.model.constraint,message:melisync.constraint_melisync_shipping_methods_method_id_unique
+msgid "Method ID must be unique for site_id."
+msgstr "El metodo debe ser unico por Site ID"
+
+#. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_view_form
 msgid "Method description"
 msgstr "Descripcion de metodo"
@@ -1461,6 +1495,12 @@ msgstr "Multi procesos"
 #, python-format
 msgid "Name"
 msgstr "Nombre"
+
+#. module: melisync
+#: model:ir.model.constraint,message:melisync.constraint_melisync_site_ids_name_unique
+#: model:ir.model.constraint,message:melisync.constraint_product_attribute_name_unique
+msgid "Name must be unique."
+msgstr "El nombre debe ser unico."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -1815,7 +1855,7 @@ msgstr "Metodos de envio gratis"
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_shipping_mode
 #, python-format
 msgid "Shipping mode"
-msgstr ""
+msgstr "Modo de envio"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
@@ -1858,6 +1898,11 @@ msgstr "Mostrar en MercadoLibre lista de precios."
 #, python-format
 msgid "Site ID"
 msgstr "ID de sitio"
+
+#. module: melisync
+#: model:ir.model.constraint,message:melisync.constraint_melisync_site_ids_site_id_unique
+msgid "Site ID must be unique."
+msgstr "El ID del sitio debe ser unico."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
@@ -2070,11 +2115,6 @@ msgid "Values"
 msgstr "Valores"
 
 #. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-msgid "Variants"
-msgstr "Variantes"
-
-#. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "View all categories downloaded for this site."
 msgstr "Ver todas las categorias descargadas para este sitio."
@@ -2150,11 +2190,6 @@ msgid "auto predict category"
 msgstr "auto predecir categoria"
 
 #. module: melisync
-#: model:ir.model.constraint,message:melisync.constraint_melisync_categories_categ_id_unique
-msgid "categ_id must be unique."
-msgstr "categ_id tiene que ser unico."
-
-#. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "category attributes"
 msgstr "atributos de categoria"
@@ -2167,8 +2202,8 @@ msgstr "modo de envio y metodos por defecto"
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
-msgid "error downloading category or attributes: {}"
-msgstr "error descargando categoria o atributos: {}"
+msgid "error downloading category attributes: {}"
+msgstr "error descargando atributos de categoria: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/sale_order.py:0
@@ -2177,24 +2212,20 @@ msgid "invoice"
 msgstr "factura"
 
 #. module: melisync
-#: model:ir.model.constraint,message:melisync.constraint_melisync_listing_types_listing_unique
-msgid "listing_type must be unique."
-msgstr "listing_type tiene que ser unico."
+#: code:addons/melisync/models/product_template.py:0
+#, python-format
+msgid "no predictions found."
+msgstr "no hay predicciones"
 
 #. module: melisync
-#: model:ir.model.constraint,message:melisync.constraint_melisync_shipping_methods_method_id_unique
-msgid "method_id must be unique for site_id."
-msgstr "method_id tiene que ser unico por site_id."
-
-#. module: melisync
-#: model:ir.model.constraint,message:melisync.constraint_melisync_site_ids_name_unique
-msgid "name must be unique."
-msgstr "nombre tiene que ser unico."
-
-#. module: melisync
-#: model:ir.model.constraint,message:melisync.constraint_melisync_site_ids_site_id_unique
-msgid "site_id must be unique."
-msgstr "site_id tiene que ser unico."
+#: code:addons/melisync/models/product_template.py:0
+#, python-format
+msgid ""
+"the \"{}\" category does not exist, please synchronize the categories of "
+"your instance."
+msgstr ""
+"La categoria \"{}\" no existe, por favor sincronice las categorias de "
+"la instancia."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form

@@ -94,7 +94,7 @@ class ProductsModel(models.Model):
     def _get_meli_ready(self):
         for rec in self:
             # Check if product is ready for publish
-            rec.meli_ready = all([rec.meli_id == False, rec.meli_instance != False, rec.meli_category != False, rec.meli_shipping_mode != False])
+            rec.meli_ready = all([rec.meli_instance != False, rec.meli_category != False, rec.meli_shipping_mode != False, rec.image_1920 != False])
 
     # Computed fields
     meli_price = fields.Float(compute=_get_product_meli_price, string=_('Pricelist price'), help=_('Price based on pricelist of MercadoLibre instance.'))
@@ -549,30 +549,25 @@ class ProductsModel(models.Model):
         try:
             # Get category predictions for product
             predictions = client.category_predictor(self.meli_instance.site_id.site_id, self.name, limit=1)
-            # If categories
-            if predictions:
-                # Get first prediction
-                categ_prediction = predictions[0]
-                category_id = categ_prediction.get('category_id')
-                # Check if category exists
-                categ_id = melisync_categories_obj.search([('categ_id', '=', category_id)])
-                # If category not exists:
-                if not categ_id:
-                    try:
-                        # Get data from category
-                        categ_id = melisync_categories_obj.create({
-                            'site_id': self.meli_instance.site_id.id,
-                            'categ_id': category_id,
-                            'name': categ_prediction.get('category_name'),
-                            #'parent_id': self.id, # TODO: get parent ID.
-                        })
-                        # Sync attributes.
-                        categ_id.sync_attributes()
-                    except Exception as e:
-                        raise Exception(_('error downloading category or attributes: {}').format(e))
-                self.write({
-                    'meli_category': categ_id.id,
-                })
+            # If predictions
+            if not predictions:
+                raise Exception(_('no predictions found.'))
+            # Get first prediction
+            categ_prediction = predictions[0]
+            category_id = categ_prediction.get('category_id')
+            # Check if category exists
+            categ_id = melisync_categories_obj.search([('categ_id', '=', category_id)])
+            # If category not exists:
+            if not categ_id:
+                raise Exception(_('the "{}" category does not exist, please synchronize the categories of your instance.').format(category_id))
+            try:
+                # Sync attributes.
+                categ_id.sync_attributes()
+            except Exception as e:
+                raise Exception(_('error downloading category attributes: {}').format(e))
+            self.write({
+                'meli_category': categ_id.id,
+            })
         except Exception as e:
             raise UserError(_('Error: {error}').format(error=e))
 

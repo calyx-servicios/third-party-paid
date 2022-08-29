@@ -2,19 +2,6 @@
 	<data noupdate="1">
 		<!-- Custom settings -->
 		<record model="res.config.settings" id="melisync.res_config_settings_config">
-			<!-- Use your own email servers -->
-			<field name="external_email_server_default" eval="True" />
-			<!-- Let your customers log in to see their documents -->
-			<field name="auth_signup_uninvited">b2b</field>
-			<!-- Enable password reset from Login page -->
-			<field name="auth_signup_reset_password" eval="False" />
-			<!-- Add fun feedback and motivate your employees -->
-			<field name="show_effect" eval="False" />
-			<!-- Allow users to import data from CSV/XLS/XLSX/ODS files -->
-			<field name="module_base_import" eval="False" />
-			<!-- Find free high-resolution images from Unsplash -->
-			<field name="module_web_unsplash" eval="False" />
-			<!-- ===== Sales -->
 			<!-- ===== Product Catalog -->
 			<!-- Sell variants of a product using attributes (size, color, etc.) -->
 			<field name="group_product_variant" eval="True" />
@@ -25,33 +12,11 @@
 			<field name="group_sale_pricelist" eval="True" />
 			<field name="group_product_pricelist" eval="True" />
 			<field name="product_pricelist_setting">advanced</field>
-			<!-- ===== Quotations & Orders -->
-			<!-- Request an online signature to confirm orders -->
-			<field name="portal_confirmation_sign" eval="False" />
-			<!-- No longer edit orders once confirmed -->
-			<field name="group_auto_done_setting" eval="True" />
-			<!-- Request an online payment to confirm orders -->
-			<field name="portal_confirmation_pay" eval="False" />
-			<!-- Create standardized offers with default products -->
-			<field name="group_sale_order_template" eval="False" />
 			<!-- ===== Inventory -->
-			<!-- Send an automatic confirmation email when Delivery Orders are done -->
-			<field name="stock_move_email_validation" eval="False" />
-			<!-- Send an automatic confirmation SMS Text Message when Delivery Orders are done -->
-			<field name="stock_move_sms_validation" eval="False" />
 			<!-- Manage several warehouses -->
 			<field name="group_stock_multi_warehouses" eval="True" />
 			<!-- Sell and purchase products in different units of measure -->
 			<field name="group_uom" eval="True" />
-			<!-- Get a full traceability from vendors to customers -->
-			<field name="group_stock_production_lot" eval="False" />
-			<!-- ===== Invoice -->
-			<!-- <field name="currency_id" eval="ref('base.ARS')" /> -->
-			<field name="invoice_is_email" eval="False" />
-			<field name="snailmail_color" eval="False" />
-			<!-- ===== Another params -->
-			<!-- <field name="company_id" eval="ref('base.default_company')" /> -->
-			<field name="user_default_rights" eval="True" />
 			<!-- Default picking policy -->
 			<field name="default_picking_policy">direct</field>
 		</record>
