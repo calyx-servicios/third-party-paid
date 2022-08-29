@@ -24,7 +24,7 @@ class ShippingModesModel(models.Model):
     company_name = fields.Char(string=_('Company Name'))
 
     _sql_constraints = [
-        ('method_id_unique', 'unique (method_id, site_id)', 'method_id must be unique for site_id.')
+        ('method_id_unique', 'unique (method_id, site_id)', 'Method ID must be unique for site_id.'),
     ]
 
     # Computed methods

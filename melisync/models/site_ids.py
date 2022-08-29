@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, _, api
 from odoo.exceptions import UserError
+from odoo.osv import expression
 
 import logging
 logger = logging.getLogger(__name__)
@@ -16,8 +17,8 @@ class SiteIDsModel(models.Model):
     currency_id = fields.Char(required=True, string=_('Default Currency ID'))
 
     _sql_constraints = [
-        ('site_id_unique', 'unique (site_id)', 'site_id must be unique.'),
-        ('name_unique', 'unique (name)', 'name must be unique.'),
+        ('site_id_unique', 'unique (site_id)', 'Site ID must be unique.'),
+        ('name_unique', 'unique (name)', 'Name must be unique.'),
     ]
 
     @api.depends('site_id', 'name')
@@ -89,3 +90,9 @@ class SiteIDsModel(models.Model):
                     logger.warning('Error on create site_id "{}": {}'.format(site.get('site_id'), e))
         except Exception as e:
             raise UserError('Error on get site ids: {}'.format(e))
+
+    @api.model
+    def _name_search(self, name, args=None, operator='ilike', limit=100, name_get_uid=None):
+        domain = expression.OR([[['name', operator, name]], [['site_id', operator, name]]])
+        ids = self._search(domain + args, limit=limit, access_rights_uid=name_get_uid)
+        return [[x.id, x.display_name] for x in self.search([('id', 'in', ids)])]

@@ -20,6 +20,21 @@
             </div>
         </div>
         <!-- Remove variants by default -->
+        <xpath expr="//page[@name='variants']//field[@name='attribute_line_ids']" position="after">
+          <group string="MercadoLibre category attributes" attrs="{ 'invisible': [('meli_category', '=', False)]}">
+            <field name="meli_category_attribute_ids" nolabel="1" attrs="{ 'invisible': [('meli_category_attribute_ids', '=', [])]}">
+              <tree decoration-warning="is_required" default_order="is_required desc, meli_id asc" create="false" edit="false" delete="false" duplicate="0">
+                <field name="is_required" attrs="{ 'column_invisible': True }" />
+                <field name="meli_id" string="Attribute ID" />
+                <field name="name" string="Attribute name" />
+                <field name="tag_ids" string="Tags" widget="many2many_tags" />
+              </tree>
+            </field>
+            <p colspan="2" attrs="{ 'invisible': [('meli_category_attribute_ids', '!=', [])]}">
+              <strong>Note</strong>: You can synchronize the <button name="meli_button_category_sync_attributes" type="object" string="category attributes" class="oe_link"/> with this button.
+            </p>
+          </group>
+        </xpath>
         <xpath expr="//page[@name='inventory']" position="after">
           <!-- Hidden fields-->
           <field name="meli_image_id" attrs="{ 'invisible': True }" />
@@ -30,9 +45,9 @@
               <group>
                 <group string="Settings">
                   <field name="meli_instance" string="Site instance" attrs="{ 'readonly': [('meli_id', '!=', False)] }" options="{ 'no_open': True, 'no_create': True, 'no_edit': True, 'no_create_edit': True }" />
-                  <field name="meli_category" string="Category" domain="[('site_id', '=', meli_instance_site_id)]" attrs="{ 'readonly': [('meli_id', '!=', False)], 'required': [('meli_instance', '!=', False)] }" options="{ 'no_open': True, 'no_create': True, 'no_edit': True, 'no_create_edit': True }" />
-                  <label for="meli_category" string="Prediction" class="oe_edit_only"/>
-                  <div class="oe_edit_only">
+                  <field name="meli_category" string="Category" domain="[('site_id', '=', meli_instance_site_id)]" attrs="{ 'readonly': [('meli_id', '!=', False)], 'required': [('meli_instance', '!=', False)] }" options="{ 'no_create': True, 'no_edit': True, 'no_create_edit': True }" />
+                  <label for="meli_category" string="Prediction" class="oe_edit_only" attrs="{ 'invisible': [('meli_instance', '=', False)] }" />
+                  <div class="oe_edit_only" attrs="{ 'invisible': [('meli_instance', '=', False)] }">
                     <button name="meli_button_predict_category" type="object" string="auto predict category" class="oe_link"/>
                   </div>
                   <field name="meli_listing_type" string="Listing type" domain="[('site_id', '=', meli_instance_site_id)]" attrs="{ 'required': [('meli_instance', '!=', False)], 'readonly': [('meli_id', '!=', False)]  }" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
@@ -80,32 +95,6 @@
                 <field name="meli_local_pickup" string="Pick up locally" />
               </group>
             </sheet>
-          </page>
-          <page name="product_variants" string="Variants" groups="product.group_product_variant">
-            <field name="attribute_line_ids" widget="one2many" attrs="{'readonly': [('meli_id', '!=', False)]}" context="{'show_attribute': False }">
-                <tree string="Variants" editable="bottom">
-                  <field name="attribute_id" attrs="{'readonly': [('id', '!=', False)]}" options="{ 'no_create': True, 'no_edit': True, 'no_create_edit': True }" />
-                  <field name="value_ids" widget="many2many_tags" context="{ 'default_attribute_id': attribute_id, 'show_attribute': False }"/>
-                </tree>
-            </field>
-            <p class="oe_grey oe_edit_only">
-              <strong>Warning</strong>: adding or deleting attributes
-              will delete and recreate existing variants and lead
-              to the loss of their possible customizations.
-            </p>
-            <group string="MercadoLibre category attributes" attrs="{ 'invisible': [('meli_category', '=', False)]}">
-                <field name="meli_category_attribute_ids" nolabel="1" attrs="{ 'invisible': [('meli_category_attribute_ids', '=', [])]}">
-                  <tree decoration-warning="is_required" default_order="meli_id asc" create="false" edit="false" delete="false" duplicate="0">
-                    <field name="is_required" attrs="{ 'column_invisible': True }" />
-                    <field name="meli_id" string="Attribute ID" />
-                    <field name="name" string="Attribute name" />
-                    <field name="tag_ids" string="Tags" widget="many2many_tags" />
-                  </tree>
-                </field>
-                <p colspan="2" attrs="{ 'invisible': [('meli_category_attribute_ids', '!=', [])]}">
-                  <strong>Note</strong>: You can synchronize the <button name="meli_button_category_sync_attributes" type="object" string="category attributes" class="oe_link"/> with this button.
-                </p>
-            </group>
           </page>
         </xpath>
       </field>
