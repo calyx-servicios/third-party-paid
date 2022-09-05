@@ -79,7 +79,7 @@
                 <field name="picking_policy" attrs="{ 'invisible': [('company_id', '=', False)] }" />
               </group>
               <group string="Sales settings">
-                  <field name="pricelist" domain="[('meli_list', '=', True), ('company_id', '=', company_id)]" context="{ 'default_meli_list': True, 'default_name': 'MercadoLibre '+name, 'default_discount_policy': 'with_discount', 'default_company_id': company_id }"/>
+                  <field name="pricelists" domain="[('meli_list', '=', True), ('company_id', '=', company_id)]" context="{ 'default_meli_list': True, 'default_name': 'MercadoLibre '+name, 'default_discount_policy': 'with_discount', 'default_company_id': company_id }" widget="many2many_tags" />
                   <field name="last_days_orders_get" />
               </group>
             </group>
