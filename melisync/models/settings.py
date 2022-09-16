@@ -29,7 +29,7 @@ class SettingsModel(models.Model):
     testing_mode = fields.Boolean(default=True, string=_('In testing'), help=_('In testing mode, this products are no published with real name.'))
     test_users = fields.Many2many(comodel_name='melisync.test.users', relation='melisync_settings_test_users_rel', column1='setting_id', column2='user_id', string=_('Test users'))
     company_id = fields.Many2one(required=True, comodel_name='res.company', string=_('Company ID'))
-    pricelist = fields.Many2one(required=True, comodel_name='product.pricelist', string=_('Pricelist'), help=_('Get prices from pricelist.'))
+    pricelists = fields.Many2many(comodel_name='product.pricelist', string=_('Available pricelists'), help=_('Available pricelists'))
     warehouse_id = fields.Many2one(required=True, comodel_name='stock.warehouse', string=_('Warehouse ID'))
     picking_policy = fields.Selection(required=True, selection=_PICKING_POLICY_OPTIONS, default='one', string=_('Picking Policy'))
     currency_id = fields.Many2one(required=True, comodel_name='res.currency', string=_('Currency ID'))
@@ -83,10 +83,10 @@ class SettingsModel(models.Model):
 
     def _get_published_count(self):
         # Objects
-        product_template_obj = self.env['product.template']
+        melisync_publications_obj = self.env['melisync.publications']
         for rec in self:
             try:
-                rec.published_count = len(product_template_obj.search([('meli_instance', '=', rec.id), ('meli_status', 'in', ['active', 'paused'])]))
+                rec.published_count = len(melisync_publications_obj.search([('status', 'in', ['active', 'paused'])]))
             except Exception as e:
                 logger.warning(_('Error on get published_count for setting ID {}: {}').format(rec.id, e))
 
@@ -293,8 +293,7 @@ class SettingsModel(models.Model):
             # Get all categories with attributes
             melisync_categories_obj.download_categories(settings_instance=self, withAttributes=self.sync_categories_attrs)
         except Exception as e:
-            logger.error(_('Error on get categories of setting instance ID {}: {}').format(self.id, e))
-            raise UserError(_('Error on getting categories for this site. Please, review your config.'))
+            raise UserError(_('Error on get categories of setting instance "{}" (id {}): {}').format(self.name, self.id, e))
 
     def sync_sales(self):
         """
@@ -306,8 +305,7 @@ class SettingsModel(models.Model):
             # Get all categories with attributes
             sale_order_obj.meli_get_sales(settings_instance=self)
         except Exception as e:
-            logger.error(_('Error on get sales of setting instance ID {}: {}').format(self.id, e))
-            raise UserError(_('Error on getting sales for this site. Please, review your config.'))
+            raise UserError(_('Error on get sales of setting instance "{}" (id {}): {}').format(self.name, self.id, e))
     
     def sync_products_all(self):
         """
@@ -315,11 +313,10 @@ class SettingsModel(models.Model):
         """
         try:
             # Objects
-            product_template_obj = self.env['product.template']
+            product_template_obj = self.env['melisync.publications']
             # Get all products published and active
             domain = [
-                ('meli_id', '!=', False),
-                ('meli_status', '=', 'active'),
+                ('publication_ids', '!=', []),
             ]
             products = product_template_obj.search(domain)
             # If exists products published
@@ -329,7 +326,7 @@ class SettingsModel(models.Model):
                 # Loop products
                 for product in products:
                     try:
-                        product.meli_sync(client)
+                        product.sync(client)
                     except Exception as e:
                         logger.warning(_('Error on sync product all data of product "{}" ({}): {}').format(product.name, product.id, e))
         except Exception as e:
@@ -356,7 +353,7 @@ class SettingsModel(models.Model):
                 # Loop products
                 for product in products:
                     try:
-                        product.meli_sync_stock(client)
+                        product.sync_stock(client)
                     except Exception as e:
                         logger.warning(_('Error on sync product stock of product "{}" ({}): {}').format(product.name, product.id, e))
         except Exception as e:
@@ -383,7 +380,7 @@ class SettingsModel(models.Model):
                 # Loop products
                 for product in products:
                     try:
-                        product.meli_publish(client)
+                        product.publish(client)
                     except Exception as e:
                         logger.warning(_('Error on publish product "{}" ({}): {}').format(product.name, product.id, e))
         except Exception as e:

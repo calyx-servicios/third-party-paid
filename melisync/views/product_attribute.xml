@@ -15,30 +15,6 @@
                         <field name="tag_ids" widget="many2many_tags" />
                     </group>
                 </xpath>
-                <xpath expr="//field[@name='value_ids']" position="replace">
-                    <field
-                        name="value_ids"
-                        domain="[('meli_id', '!=', False)]"
-                        attrs="{ 'invisible': [('meli_id', '=', False)] }"
-                        widget="one2many"
-                        nolabel="1">
-                        <tree string="Values" delete="false" create="false" edit="false" duplicate="0">
-                            <field name="sequence" widget="handle"/>
-                            <field name="name"/>
-                        </tree>
-                    </field>
-                    <field
-                        name="value_ids"
-                        domain="[('meli_id', '=', False)]"
-                        attrs="{ 'invisible': [('meli_id', '!=', False)] }"
-                        widget="one2many"
-                        nolabel="1">
-                        <tree string="Values" editable="bottom">
-                            <field name="sequence" widget="handle"/>
-                            <field name="name"/>
-                        </tree>
-                    </field>
-                </xpath>
             </field>
         </record>
     </data>
