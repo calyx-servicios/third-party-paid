@@ -22,13 +22,11 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
         <field name="arch" type="xml">
-            <data>
-            <field name="delivery_type" position="after">
+            <field name="active" position="before">
                 <field name="magento_code"/>
                 <field name="magento_export"/>
                 <field name="mage_delivery" invisible="1"/>
             </field>
-          </data>
        </field>
     </record>
 </odoo>

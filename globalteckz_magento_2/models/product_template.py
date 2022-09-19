@@ -335,3 +335,29 @@ class ProductTemplate(models.Model):
                 if len(product_list['items']) == 0:
                     raise UserError('El SKU no existe en Magento')
                 return True
+
+    def GtUpdateProductImage(self):
+        for rec in self:
+            rec.prod_images.unlink()
+            instance = rec.magento_instance_ids
+            if rec.magento_exported and rec.magento_id and rec.magento_sku and instance: 
+                
+                if instance[0].token:
+                    token = instance[0].token
+                else:
+                    token = instance[0].generate_token()
+                
+                token = token.replace('"'," ")
+                auth_token = "Bearer "+token.strip()
+                auth_token = auth_token.replace("'",'"')
+                headers = {
+                    'authorization':auth_token,
+                    'content-type': "application/json",
+                    'cache-control': "no-cache",
+                    }
+
+                url = instance.location+"/rest/V1/products/"+str(rec.magento_sku)+"/media"
+                response = requests.request("GET",url, headers=headers)
+                if str(response.status_code) == '200':
+                    list_prods=json.loads(response.text)
+                    instance.create_image(rec,list_prods)

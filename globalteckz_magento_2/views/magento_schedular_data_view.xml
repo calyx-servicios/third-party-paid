@@ -30,8 +30,8 @@
         </record>
         
         <record forcecreate="True" id="update_product_schedular" model="ir.cron">
-            <field name="name">Update Product</field>
-            <field name="model_id" ref="model_gt_magento_store"/>
+            <field name="name">Update Product Magento -> Odoo</field>
+            <field name="model_id" ref="model_product_template"/>
             <field name="state">code</field>
             <field name="code">model.Update_product_scheduler(True)</field>
             <field eval="False" name="active"/>
@@ -156,7 +156,7 @@
             <field eval="False" name="active"/>
             <field name="user_id" ref="base.user_root"/>
             <field name="interval_number">1</field>
-            <field name="interval_type">hours</field>
+            <field name="interval_type">minutes</field>
             <field name="numbercall">-1</field>
             <field eval="False" name="doall"/>
         </record>
