@@ -102,6 +102,9 @@ class Categories(models.Model):
             # Loop childrens
             for attr in attributes:
                 # Parse attribute data
+                tags = attr.get('tags', {})
+                allow_variations = tags.get('allow_variations', False)
+                # === Create or write attribute
                 try:
                     # Check for existent attribute
                     attr_id = product_attribute_obj.search([
@@ -109,25 +112,22 @@ class Categories(models.Model):
                         ('meli_id', '=', attr.get('id')),
                         ('name', '=', attr.get('name')),
                     ])
+                    attr_data = {
+                        'meli_id': attr.get('id'),
+                        'name': attr.get('name'),
+                        'display_type': 'radio',
+                        'create_variant': 'always' if allow_variations else 'no_variant',
+                    }
                     # If not exists
                     if not attr_id:
                         # Create attribute
-                        attr_id = product_attribute_obj.create({
-                            'meli_id': attr.get('id'),
-                            'name': attr.get('name'),
-                            'display_type': 'radio',
-                            'create_variant': 'no_variant'
-                        })
+                        attr_id = product_attribute_obj.create(attr_data)
                     else:
-                        # Add the meli_id/name value if the attribute doesn't have it.
-                        if attr_id.meli_id != attr.get('id'):
-                            attr_id.write({ 'meli_id': attr.get('id') })
+                        attr_id.write(attr_data)
                 except Exception as e:
                     raise Exception(_('Error on parse attribute "{}" of category "{}": {}').format(attr.get('name'), self.categ_id, e))
-                # Parse attribute tags
+                # === Add product attribute tags
                 try:
-                    # Loop attribute tags
-                    tags = attr.get('tags', {})
                     # List of tag ids to append to attr.
                     attr_tag_ids = []
                     for tag in tags:
@@ -158,21 +158,20 @@ class Categories(models.Model):
                             ('attribute_id', '=', attr_id.id),
                             ('name', '=', value.get('name')),
                         ])
+                        # Parse value data
+                        value_data = {
+                            'meli_id': value.get('id'),
+                            'name': value.get('name'),
+                            'attribute_id': attr_id.id,
+                            'is_custom': False,
+                            'is_used_on_products': True,
+                            'sequence': index,
+                        }
+                        # Create or write attribute value.
                         if not value_id:
-                            value_id = product_attribute_value_obj.create({
-                                'meli_id': value.get('id'),
-                                'name': value.get('name'),
-                                'attribute_id': attr_id.id,
-                                'is_custom': False,
-                                'is_used_on_products': True,
-                                'sequence': index,
-                            })
+                            value_id = product_attribute_value_obj.create(value_data)
                         else:
-                            # If attribute exists, add Meli ID
-                            if value_id.meli_id != value.get('id'):
-                                value_id.write({
-                                    'meli_id': value.get('id'),
-                                })
+                            value_id.write(value_data)
                     except Exception as e:
                         raise Exception(_('Error on create/edit attribute value "{}": {}').format(value.get('id'), e))
                 # Add attribute to category.

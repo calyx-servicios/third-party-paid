@@ -4,7 +4,7 @@ from odoo import models, fields, _, api
 import logging
 logger = logging.getLogger(__name__)
 
-class ProductAttributeValueModel(models.Model):
+class ProductAttributeValue(models.Model):
     _inherit = 'product.attribute.value'
     
     meli_id = fields.Char(required=False, string=_('MercadoLibre Attribute Value ID'))

@@ -12,8 +12,11 @@
                         <label for="meli_id" string="MercadoLibre ID"/>
                         <field name="meli_id" nolabel="1" attrs="{ 'readonly': True }"/>
                         <field name="is_required" attrs="{ 'readonly': True }" />
-                        <field name="tag_ids" widget="many2many_tags" />
+                        <field name="tag_ids" widget="many2many_tags" attrs="{ 'readonly': True }" />
                     </group>
+                </xpath>
+                <xpath expr="//field[@name='value_ids']" position="replace">
+                    <field name="value_ids" />
                 </xpath>
             </field>
         </record>

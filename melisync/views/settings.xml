@@ -46,7 +46,6 @@
                 <group string="Instance settings" colspan="2">
                   <field name="name" string="Name" />
                   <field name="site_id" context="{ 'order_display': 'site_id asc' }" string="Country ID" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
-                  <field name="default_listing_type" domain="[('site_id', '=', site_id)]" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
                   <field name="currency_id" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
                 </group>
                 <group string="Shipping settings" colspan="2" attrs="{ 'invisible': [('user_id', '=', False)] }">

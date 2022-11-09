@@ -12,7 +12,6 @@
           <div class="oe_button_box" name="button_box_2" attrs="{ 'invisible': ['|', ('meli_publications', '=', []), ('meli_ready', '=', False)]}" groups="melisync.res_groups_products_moderator">
               <button type="object" name="meli_button_publish" string="ML Publish" help="Publish on MercadoLibre." class="oe_stat_button text-success" icon="fa-play" />
               <button type="object" name="meli_button_sync" string="ML Sync" help="Synchronize on MercadoLibre." class="oe_stat_button text-alpha" icon="fa-spinner" />
-              <button type="object" name="meli_button_sync_stock" string="ML Sync stock" help="Synchronize stock on MercadoLibre." class="oe_stat_button text-alpha" icon="fa-refresh" />
               <button type="object" name="meli_button_reactivate" string="ML Reactivate" help="Reactivate product on MercadoLibre." class="oe_stat_button text-primary" icon="fa-play" />
               <button type="object" name="meli_button_pause" string="ML Pause" help="Pause product on MercadoLibre." class="oe_stat_button text-warning" icon="fa-pause" />
               <button type="object" name="meli_button_close" string="ML Close" help="Delete product on MercadoLibre." class="oe_stat_button text-danger" icon="fa-power-off" />
@@ -92,7 +91,7 @@
           <page name="mercadolibre" string="MercadoLibre publications" attrs="{ 'invisible': ['|', ('type', '!=', 'product'), ('meli_ready', '=', False)] }" groups="melisync.res_groups_products_moderator">
             <group string="Publications">
               <field name="meli_publications" nolabel="1" context="{ 'default_product_id': id }">
-                <tree editable="bottom" delete="false">
+                <tree editable="bottom">
                   <field name="user_is_meli_administrator" attrs="{ 'column_invisible': True }" />
                   <field name="site_id" attrs="{ 'column_invisible': True }" />
                   <field name="product_id" attrs="{ 'column_invisible': True }" />
@@ -101,7 +100,7 @@
                   <field name="listing_type" domain="[('site_id', '=', site_id)]" options="{ 'no_open': True, 'no_create_edit': True }" />
                   <field name="pricelist" domain="[('id', 'in', available_pricelists)]" options="{ 'no_open': True, 'no_create': True, 'no_edit': True, 'no_create_edit': True }" />
                   <field name="status" string="Status" attrs="{ 'readonly': [('user_is_meli_administrator', '=', False)] }" />
-                  <field name="available_qty" string="Stock" attrs="{ 'readonly': True }" />
+                  <field name="available_qty" string="Total stock" attrs="{ 'readonly': True }" />
                   <field name="price" attrs="{ 'readonly': True }" />
                   <field name="publication_id" attrs="{ 'readonly': [('user_is_meli_administrator', '=', False)] }" />
                 </tree>
