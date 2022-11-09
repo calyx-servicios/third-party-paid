@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0-20220317\n"
+"Project-Id-Version: Odoo Server 13.0-20220520\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-05 01:01+0000\n"
-"PO-Revision-Date: 2022-09-05 01:01+0000\n"
+"POT-Creation-Date: 2022-08-29 14:30+0000\n"
+"PO-Revision-Date: 2022-08-29 14:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid ".<br/>Please, first read"
-msgstr ".<br/>Por favor, lea primero"
+msgstr ".<br/>Por favor, leia primeiro"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
@@ -27,9 +27,9 @@ msgid ""
 "price or release testing. Remember that MercadoLibre can remove your "
 "publications if you do not comply with the rules."
 msgstr ""
-"<strong>Nota</strong>: Aplique <strong>testing mode</strong> si usted esta "
-"haciendo precios o publicaciones de testing. Recuerde que MercadoLibre puede"
-" remover suspublicaciones si usted no cumple con las reglas."
+"<strong>Observação</strong>: aplique o <strong>modo de teste</strong> se estiver fazendo "
+"teste de preço ou lançamento. Lembre-se que o MercadoLivre pode remover seu "
+"publicações se você não cumprir as regras."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
@@ -37,14 +37,13 @@ msgid ""
 "<strong>Note</strong>: Apply the <strong>redirect uri</strong> in the "
 "settings of your app in MercadoLibre."
 msgstr ""
-"<strong>Nota</strong>: Aplique la <strong>URI de redireccion</strong> en las"
-" configuraciones de su app MercadoLibre."
+"<strong>Observação</strong>: aplique o <strong>redirect uri</strong> no "
+"configurações do seu aplicativo no MercadoLivre."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "<strong>Note</strong>: Auto synchronize all data with MercadoLibre."
-msgstr ""
-"<strong>Nota</strong>: Auto sincronizar todos los datos con MercadoLibre."
+msgstr "<strong>Observação</strong>: Sincronize automaticamente todos os dados com o MercadoLivre."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
@@ -52,8 +51,8 @@ msgid ""
 "<strong>Note</strong>: To create your own app and get your credentials, go "
 "to"
 msgstr ""
-"<strong>Nota</strong>: Para crear su propia app y obtener las credenciales, "
-"vaya a"
+"<strong>Observação</strong>: para criar seu próprio aplicativo e obter suas credenciais, acesse "
+"para"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
@@ -63,71 +62,63 @@ msgid ""
 "example, when downloading the categories from the specified SITE, you should"
 " not wait for them to finish downloading."
 msgstr ""
-"<strong>Nota</strong>: Puede usar <strong>multiprocesos</strong> para "
-"procesar largos volumenes de datos y mantener una buena performance. Por "
-"ejemplo, mientras se descargan las categorias de un sitio especifico, usted "
-"no tiene que esperar mientras termina de descargar."
+"<strong>Observação</strong>: podemos usar <strong>multiprocessos</strong> para processar "
+"grandes volumes de dados em segundo plano e obter um melhor desempenho. Para "
+"exemplo, ao baixar as categorias do SITE especificado, você deve"
+"não espere que eles terminem de baixar."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "<strong>Note</strong>: You can sync the"
-msgstr "<strong>Nota</strong>: Puedes sincronizar los"
+msgstr "<strong>Observação</strong>: você pode sincronizar o"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "<strong>Note</strong>: You can synchronize the"
-msgstr "<strong>Nota</strong>: Puedes sincronizar los"
+msgstr "<strong>Observação</strong>: você pode sincronizar o""
 
 #. module: melisync
-#: model:ir.model.fields,help:melisync.field_melisync_publications__description_sale
-msgid ""
-"A description of the Product that you want to communicate to your customers."
-" This description will be copied to every Sales Order, Delivery Order and "
-"Customer Invoice/Credit Note"
-msgstr ""
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields.selection,name:melisync.selection__melisync_publications__status__active
+#: code:addons/melisync/models/product_template.py:0
+#: model:ir.model.fields.selection,name:melisync.selection__product_template__meli_status__active
 #, python-format
 msgid "Active"
-msgstr "Activo"
+msgstr "Ativo"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "App ID"
-msgstr ""
+msgstr "ID do aplicativo"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields.selection,name:melisync.selection__melisync_settings__picking_policy__direct
 #, python-format
 msgid "As soon as possible"
-msgstr "Tan pronto como sea posible"
+msgstr "O mais breve possível"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Attribute ID"
-msgstr "ID de atributo"
+msgstr "ID do atributo"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__attribute_ids
 #, python-format
 msgid "Attribute IDs"
-msgstr "IDs de atributos"
+msgstr "IDs de atributo"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_product_attribute_value
 msgid "Attribute Value"
-msgstr "Valor del Atributo"
+msgstr "Valor do atributo"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Attribute name"
-msgstr "Nombre del atributo"
+msgstr "Nome do Atributo"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
@@ -139,7 +130,7 @@ msgstr "Atributos"
 #: model:ir.model.fields.selection,name:melisync.selection__product_template__meli_buying_mode__auction
 #, python-format
 msgid "Auction"
-msgstr "Subasta"
+msgstr "Leilão"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
@@ -149,40 +140,22 @@ msgstr "Autenticar"
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Authenticate with MercadoLibre user for specified app_id."
-msgstr ""
-"Autenticarse con el usuario de MercadoLibre para el app_id especificado."
+msgstr "Autentique com o usuário do MercadoLivre para o app_id especificado."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Authenticated User ID"
-msgstr "Usuario autenticado"
+msgstr "ID de usuário autenticado"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__auto_sync
 #, python-format
 msgid "Auto synchronize data"
-msgstr "Auto sincronizar datos"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: code:addons/melisync/models/settings.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__available_pricelists
-#: model:ir.model.fields,field_description:melisync.field_melisync_settings__pricelists
-#: model:ir.model.fields,help:melisync.field_melisync_publications__available_pricelists
-#: model:ir.model.fields,help:melisync.field_melisync_settings__pricelists
-#: model:ir.model.fields,help:melisync.field_product_product__meli_pricelists
-#: model:ir.model.fields,help:melisync.field_product_template__meli_pricelists
-#, python-format
-msgid "Available pricelists"
-msgstr "Listas de precios disponibles"
+msgstr "Sincronizar dados automaticamente"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,help:melisync.field_melisync_publications__available_qty
-#: model:ir.model.fields,help:melisync.field_melisync_publications__product_available_qty
 #: model:ir.model.fields,help:melisync.field_product_product__meli_available_qty
 #: model:ir.model.fields,help:melisync.field_product_template__meli_available_qty
 #, python-format
@@ -190,13 +163,15 @@ msgid ""
 "Available qty for product in warehouse selected for setting instance. Value "
 "is 1 if the listing_type = free."
 msgstr ""
-"Cantidad disponible para el producto en el deposito seleccionado de la "
-"instancia. Valores 1 si tipo de publicacion es free."
+"Quantidade disponível para produto no armazém selecionado para configuração da instância. Valor "
+"é 1 se o tipo_de_listagem = livre."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_tree
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_tree_published
 msgid "Available qty."
-msgstr "Cant. disponible"
+msgstr "Quantidade disponível."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -206,35 +181,35 @@ msgstr "Cant. disponible"
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_available_shipping_modes
 #, python-format
 msgid "Available shipping modes"
-msgstr "Modos de envio disponibles"
+msgstr "Modos de envio disponíveis"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_search_view
 msgid "Barcode"
-msgstr "Codigo de barras"
+msgstr "Código de barras"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #: model:ir.model.fields.selection,name:melisync.selection__product_template__meli_buying_mode__buy_it_now
 #, python-format
 msgid "Buy it now"
-msgstr "Comprar ahora"
+msgstr "Compre agora"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Buying data"
-msgstr "Datos de compra"
+msgstr "Dados de compra"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__buying_mode
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_buying_mode
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_buying_mode
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 #, python-format
 msgid "Buying mode"
 msgstr "Modo de compra"
+"Não é possível criar o pedido {}:\n"
+"Erro: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/sale_order.py:0
@@ -243,8 +218,8 @@ msgid ""
 "Cannot create order {}:\n"
 "Error: {}"
 msgstr ""
-"No se puede crear el pedido {}:\n"
-"Error: {}"
+"Não é possível criar o pedido {}:\n"
+"Erro: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/sale_order.py:0
@@ -253,8 +228,8 @@ msgid ""
 "Cannot get orders of MercadoLibre:\n"
 "Error: {}"
 msgstr ""
-"No se pudieron obtener las ordenes de MercadoLibre:\n"
-"Error: {}"
+"Não é possível receber pedidos do MercadoLivre:\n"
+"Erro: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/sale_order.py:0
@@ -263,8 +238,8 @@ msgid ""
 "Cannot process order {}:\n"
 "Error: {}"
 msgstr ""
-"No se pudo procesar el pedido {}:\n"
-"Error: {}"
+"Não é possível processar o pedido {}:\n"
+"Erro: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
@@ -280,16 +255,15 @@ msgstr "Categorias"
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__categories_count
 #, python-format
 msgid "Categories count"
-msgstr "Total de categorias"
+msgstr "Contagem de categorias"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__category
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_category
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_category
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_tree
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_tree_published
 #, python-format
 msgid "Category"
 msgstr "Categoria"
@@ -299,7 +273,7 @@ msgstr "Categoria"
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__categ_id
 #, python-format
 msgid "Category ID"
-msgstr "ID de categoria"
+msgstr "Categoria ID"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -307,38 +281,33 @@ msgstr "ID de categoria"
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_category_attribute_ids
 #, python-format
 msgid "Category attributes availables"
-msgstr "Atributos de categoria disponibles"
+msgstr "Atributos de categoria disponíveis"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
 msgid "Category data"
-msgstr "Datos de categorias"
+msgstr "Dados da categoria"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__client_id
 #, python-format
 msgid "Client ID"
-msgstr "ID de cliente"
+msgstr "ID do Cliente"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__client_secret
 #, python-format
 msgid "Client Secret"
-msgstr "Clave secreta"
+msgstr "Segredo do cliente"
 
 #. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-msgid "Close"
-msgstr "Cerrar"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields.selection,name:melisync.selection__melisync_publications__status__closed
+#: code:addons/melisync/models/product_template.py:0
+#: model:ir.model.fields.selection,name:melisync.selection__product_template__meli_status__closed
 #, python-format
 msgid "Closed"
-msgstr "Cerrado"
+msgstr "Fechados"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
@@ -348,24 +317,24 @@ msgstr "Cerrado"
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
 #, python-format
 msgid "Company ID"
-msgstr "ID de compañia"
+msgstr "ID da empresa"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__company_name
 #, python-format
 msgid "Company Name"
-msgstr "Nombre de compañia"
+msgstr "nome da empresa"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_view_form
 msgid "Company info"
-msgstr "Info de compañia"
+msgstr "Informação da companhia"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
 msgid "Company name"
-msgstr "Nombre de compañia"
+msgstr "Nome da empresa"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_res_partner
@@ -375,23 +344,22 @@ msgstr "Contacto"
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Country ID"
-msgstr "ID de pais"
+msgstr "Código do país"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Create test user"
-msgstr "Crear usuario de test"
+msgstr "Criar usuário de teste"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Create test user to get new testing redentials."
-msgstr "Crear un usuario de test para tener nuevas credenciales de testing."
+msgstr "Crie um usuário de teste para obter novas redentials de teste."
 
 #. module: melisync
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__create_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types__create_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_product_attribute_tags__create_uid
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__create_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__create_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__create_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods_options__create_uid
@@ -399,13 +367,12 @@ msgstr "Crear un usuario de test para tener nuevas credenciales de testing."
 #: model:ir.model.fields,field_description:melisync.field_melisync_site_ids__create_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__create_uid
 msgid "Created by"
-msgstr "Creado por"
+msgstr "Criado por"
 
 #. module: melisync
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__create_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types__create_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_product_attribute_tags__create_date
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__create_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__create_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__create_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods_options__create_date
@@ -413,12 +380,12 @@ msgstr "Creado por"
 #: model:ir.model.fields,field_description:melisync.field_melisync_site_ids__create_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__create_date
 msgid "Created on"
-msgstr "Creado el"
+msgstr "Criado em"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_res_currency
 msgid "Currency"
-msgstr "Moneda"
+msgstr "Moeda"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
@@ -428,12 +395,12 @@ msgstr "Moneda"
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
 #, python-format
 msgid "Currency ID"
-msgstr "ID de moneda"
+msgstr "Código da moeda"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
 msgid "Currency id"
-msgstr "ID de moneda"
+msgstr "Código da moeda"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
@@ -443,54 +410,59 @@ msgstr "Desautenticar"
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Deauthenticate user."
-msgstr "Desautenticar usuario"
+msgstr "Desautentique o usuário."
 
 #. module: melisync
 #: code:addons/melisync/models/site_ids.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_site_ids__currency_id
 #, python-format
 msgid "Default Currency ID"
-msgstr "ID de moneda por defecto"
+msgstr "ID da moeda padrão"
+
+#. module: melisync
+#: code:addons/melisync/models/settings.py:0
+#: model:ir.model.fields,field_description:melisync.field_melisync_settings__default_listing_type
+#, python-format
+msgid "Default products listing type"
+msgstr "Tipo de listagem de produtos padrão"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__default_shipping_methods_free
 #, python-format
 msgid "Default shipping free methods"
-msgstr "Medios de envio gratis por defecto"
+msgstr "Métodos gratuitos de envio padrão"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,help:melisync.field_melisync_settings__default_shipping_methods_free
 #, python-format
 msgid "Default shipping free methods for all products sync."
-msgstr "Metodos de envio gratis para todos los productos."
+msgstr "Métodos gratuitos de envio padrão para sincronização de todos os produtos."
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__default_shipping_mode
 #, python-format
 msgid "Default shipping mode"
-msgstr "Forma de envio por defecto."
+msgstr "Modo de envio padrão"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,help:melisync.field_melisync_settings__default_shipping_mode
 #, python-format
 msgid "Default shipping mode for all products sync."
-msgstr "Forma de envio por defecto para todos los productos"
+msgstr "Modo de envio padrão para sincronização de todos os produtos."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
 msgid "Delete force product on MercadoLibre."
-msgstr "Eliminar forzadamente de MercadoLibre."
+msgstr "Excluir produto de força no MercadoLivre."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
 msgid "Delete product on MercadoLibre."
-msgstr "Eliminar producto de MercadoLibre"
+msgstr "Excluir produto no MercadoLivre."
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
@@ -498,7 +470,7 @@ msgstr "Eliminar producto de MercadoLibre"
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
 #, python-format
 msgid "Deliver to"
-msgstr "Entrega a"
+msgstr "Entregar para"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_view_form
@@ -517,7 +489,6 @@ msgstr "Tipo de entrega"
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__display_name
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types__display_name
 #: model:ir.model.fields,field_description:melisync.field_melisync_product_attribute_tags__display_name
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__display_name
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__display_name
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__display_name
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods_options__display_name
@@ -525,360 +496,275 @@ msgstr "Tipo de entrega"
 #: model:ir.model.fields,field_description:melisync.field_melisync_site_ids__display_name
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__display_name
 msgid "Display Name"
-msgstr "Nombre para mostrar"
+msgstr "Nome em Exibição"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
 msgid "Download all children attributes."
-msgstr "Descargar todos los atributos de categoria."
+msgstr "Baixe todos os atributos filhos."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
 msgid "Download all children categories."
-msgstr "Descargar todas las subcategorias."
+msgstr "Baixe todas as categorias infantis."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Download and save all MercadoLibre categories available for this site."
-msgstr ""
-"Descargar y guardar todas las categorias de MercadoLibre para este sitio."
+msgstr "Baixe e salve todas as categorias do MercadoLivre disponíveis para este site."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Download and save all MercadoLibre sale orders for this site."
-msgstr "Descargar y guardar todas las ventas de MercadoLibre para este sitio."
+msgstr "Baixe e salve todos os pedidos de venda do MercadoLivre para este site."
 
 #. module: melisync
 #: code:addons/melisync/models/test_users.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__email
 #, python-format
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr "E-mail"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Enter field \"Last days orders get\" value between 1-100."
-msgstr ""
-"Ingresar el valor del campo \"Descargar ordenes de los ultimos dias\" entre "
-"1-100."
+msgstr "Insira o valor do campo \"Os últimos dias são obtidos\" entre 1 e 100."
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Enter field \"Quantity of process\" value between 1-100."
-msgstr "Ingresar el valor del campo \"Cantidad de procesos\" entre 1-100."
+msgstr "Insira o valor do campo \"Quantidade do processo\" entre 1-100."
+
+#. module: melisync
+#: code:addons/melisync/models/product_template.py:0
+#, python-format
+msgid "Error getting MercadoLibre price of product_tmpl id \"{}\": {}"
+msgstr "Erro ao obter o preço do MercadoLivre de product_tmpl id \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
 #, python-format
 msgid "Error getting parent_id for category \"{}\": {}"
-msgstr "Error al traer parent_id para la categoria \"{}\": {}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid "Error getting price for publication id \"{}\" (product tmpl: \"{}\"): {}"
-msgstr "Error obteniendo el precio para la publicacion id \"{}\" (producto: \"{}\"): {}"
+msgstr "Erro ao obter parent_id para a categoria \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
-msgid "Error on close product \"{}\" ({}): {}"
-msgstr "Error al cerrar producto \"{}\" ({}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid "Error on close publication \"{}\" (product \"{}\") in MercadoLibre: {}"
-msgstr "Error al cerrar publicacion \"{}\" (producto \"{}\") en MercadoLibre: {}"
-
-#. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on close publications for product \"{}\" (id: {}): {}"
-msgstr "Error al cerrar publicaciones del producto \"{}\" (id: {}): {}"
+msgid "Error on close product \"{}\" ({}) in MercadoLibre: {}"
+msgstr "Erro ao fechar produto \"{}\" ({}) no MercadoLivre: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #, python-format
 msgid "Error on create method \"{}\": {}"
-msgstr "Error al crear el metodo \"{}\": {}"
+msgstr "Erro no método de criação \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #, python-format
 msgid "Error on create shipping mode \"{}\": {}"
-msgstr "Error al crear el modo de envio \"{}\": {}"
+msgstr "Erro ao criar modo de envio \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #, python-format
 msgid "Error on create shipping option \"{}\": {}"
-msgstr "Error al crear la opcion de envio \"{}\": {}"
+msgstr "Erro ao criar opção de envio \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
 #, python-format
 msgid "Error on create/edit attribute value \"{}\": {}"
-msgstr "Error al crear/editar valor del atributo \"{}\": {}"
+msgstr "Erro ao criar/editar valor do atributo \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "Error on download category attributes: {}"
-msgstr "Error al descargar los atributos de categoria: {}"
+msgstr "Erro nos atributos da categoria de download: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on download sales for instance {}: {}"
-msgstr "Error al descargar ventas de la instancia instance {}: {}"
+msgstr "Erro nas vendas de download da instância {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
-msgid "Error on force close product \"{}\" ({}): {}"
-msgstr "Error al cerrar forzadamente el producto \"{}\" ({}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on force close publications for product \"{}\" (id: {}): {}"
-msgstr "Error al cerrar forzadamente publicaciones del producto \"{}\" (id: {}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid ""
-"Error on get MercadoLibre updatable data for publication id: \"{}\" (item "
-"\"{}\"): {}"
-msgstr ""
-"Error al obtener datos actualizables de MercadoLibre para la publicacion id: \"{}\" (item "
-"\"{}\"): {}"
+msgid "Error on get MercadoLibre updatable data for item \"{}\": {}"
+msgstr "Erro ao obter dados atualizáveis ​​do MercadoLivre para o item \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on get _get_sales_count for setting ID {}: {}"
-msgstr "Error al traer _get_sales_count para setting ID {}: {}"
+msgstr "Erro ao obter _get_sales_count para definir o ID {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
-msgid "Error on get categories of setting instance \"{}\" (id {}): {}"
-msgstr "Error al obtener categorias de la instancia \"{}\" (id {}): {}"
+msgid "Error on get categories of setting instance ID {}: {}"
+msgstr "Erro ao obter categorias de configuração de ID de instância {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on get categories_count for setting ID {}: {}"
-msgstr "Error al traer categories_count para setting ID {}: {}"
+msgstr "Erro ao obter category_count para definir o ID {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
 #, python-format
 msgid "Error on get category \"{}\" attributes : {}"
-msgstr "Error al obtener atributos de categoria \"{}\" : {}"
+msgstr "Erro ao obter atributos de categoria \"{}\" : {}"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
 #, python-format
 msgid "Error on get category \"{}\" childrens : {}"
-msgstr "Error al obtener categorias hijas de la categoria \"{}\" : {}"
+msgstr "Erro ao obter os filhos da categoria \"{}\" : {}"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
+#: code:addons/melisync/models/product_template.py:0
 #, python-format
-msgid ""
-"Error on get product data of MercadoLibre of publication \"{}\" (product: "
-"\"{}\"): {}"
-msgstr ""
-"Error al obtener datos del producto de MercadoLibre de la publicacion \"{}\" (product: "
-"\"{}\"): {}"
+msgid "Error on get product data of MercadoLibre: {}"
+msgstr "Erro ao obter dados do produto do MercadoLivre: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on get published_count for setting ID {}: {}"
-msgstr "Error al traer published_count para instancia ID {}: {}"
+msgstr "Erro ao obter publish_count para definir o ID {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
-msgid "Error on get sales of setting instance \"{}\" (id {}): {}"
-msgstr "Error al obtener ventas de la instancia \"{}\" (id {}): {}"
+msgid "Error on get sales of setting instance ID {}: {}"
+msgstr "Erro ao obter vendas ao definir o ID da instância {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on get setting instance: {}"
-msgstr "Error al traer instancia: {}"
+msgstr "Erro ao obter instância de configuração: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #, python-format
 msgid "Error on get shipping methods: {}"
-msgstr "Error al traer metodos de envio: {}"
+msgstr "Erro ao obter métodos de envio: {}"
 
 #. module: melisync
 #: code:addons/melisync/controllers/controllers.py:0
 #, python-format
 msgid "Error on get shipping modes for user: {}"
-msgstr "Error al traer modos de envio para el usuario: {}"
+msgstr "Erro ao obter modos de envio para o usuário: {}"
 
 #. module: melisync
 #: code:addons/melisync/controllers/controllers.py:0
 #, python-format
 msgid "Error on get user data: {}"
-msgstr "Error al traer datos del usuario: {}"
+msgstr "Erro ao obter dados do usuário: {}"
+
+#. module: melisync
+#: code:addons/melisync/models/settings.py:0
+#, python-format
+msgid "Error on getting categories for this site. Please, review your config."
+msgstr "Erro ao obter categorias para este site. Por favor, revise sua configuração."
+
+#. module: melisync
+#: code:addons/melisync/models/settings.py:0
+#, python-format
+msgid "Error on getting sales for this site. Please, review your config."
+msgstr "Erro ao obter vendas para este site. Por favor, revise sua configuração."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "Error on getting warehouse stock for product_tmp_id \"{}\": {}"
-msgstr "Error al traer el stock del product_tmp_id \"{}\": {}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid ""
-"Error on getting warehouse stock for publication id: \"{}\" (product_tmp_id "
-"\"{}\"): {}"
-msgstr ""
-"Error al obtener stock de la publicacion id: \"{}\" (template "
-"\"{}\"): {}"
+msgstr "Erro ao obter estoque do armazém para product_tmp_id \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
 #: code:addons/melisync/models/categories.py:0
 #, python-format
 msgid "Error on parse attribute \"{}\" of category \"{}\": {}"
-msgstr "Error al configurar atributo \"{}\" de la categoria \"{}\": {}"
+msgstr "Erro no atributo de análise \"{}\" da categoria \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on pause product \"{}\" ({}): {}"
-msgstr "Error al pausar producto \"{}\" ({}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid "Error on pause publication \"{}\" (product \"{}\") in MercadoLibre: {}"
-msgstr "Error al pausar publicacion \"{}\" (producto \"{}\") en MercadoLibre: {}"
-
-#. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on pause publications for product \"{}\" (id: {}): {}"
-msgstr "Error al pausar publicacion del producto \"{}\" (id: {}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
 #, python-format
 msgid "Error on process shipping info for product \"{}\": {}"
-msgstr "Error al procesar info de envio del producto \"{}\": {}"
+msgstr "Erro ao processar as informações de envio do produto \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on publish all ready products for instance {}: {}"
-msgstr ""
-"Error al publicar todos los productos listos para publicar de la instancia "
-"{}: {}"
+msgstr "Erro ao publicar todos os produtos prontos para instância {}: {}"
 
 #. module: melisync
-#: code:addons/melisync/models/product_template.py:0
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on publish product \"{}\" ({}): {}"
-msgstr "Error al publicar producto \"{}\" ({}): {}"
+msgstr "Erro ao publicar produto \"{}\" ({}): {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on publish products for this site. Please, review your config."
-msgstr ""
-"Error al publicar productos para este sitio. Por favor, revise su "
-"configuracion."
+msgstr "Erro ao publicar produtos para este site. Por favor, revise sua configuração."
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on publish products of setting instance ID {}: {}"
-msgstr "Error al publicar productos de la instancia ID {}: {}"
+msgstr "Erro ao publicar produtos ao definir o ID da instância {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
-msgid "Error on publish publications for product \"{}\" (id: {}): {}"
-msgstr "Error al publicar publicaciones del producto \"{}\" (id: {}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on reactivate product \"{}\" ({}): {}"
-msgstr "Error al reactivar producto \"{}\" ({}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid "Error on reactivate publication \"{}\" (product \"{}\") in MercadoLibre: {}"
-msgstr "Error on reactivate publication \"{}\" (product \"{}\") in MercadoLibre: {}"
-
-#. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on reactivate publications for product \"{}\" (id: {}): {}"
-msgstr "Error al reactivar publicaciones del producto \"{}\" (id: {}): {}"
+msgid "Error on reactivate product in MercadoLibre: {}"
+msgstr "Erro ao reativar produto no MercadoLivre: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on sync all products for instance {}: {}"
-msgstr "Error al sincronizar productos de la instancia {}: {}"
+msgstr "Erro ao sincronizar todos os produtos da instância {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on sync all products stock for instance {}: {}"
-msgstr ""
-"Error al sincronizar el stock de todos los productos de la instancia {}: {}"
-
-#. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on sync product \"{}\" ({}): {}"
-msgstr "Error al sincronizar producto \"{}\" ({}): {}"
+msgstr "Erro ao sincronizar o estoque de todos os produtos, por exemplo {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on sync product all data of product \"{}\" ({}): {}"
-msgstr ""
-"Error al sincronizar todos los datos de todos los productos \"{}\" ({}): {}"
+msgstr "Erro ao sincronizar todos os dados do produto \"{}\" ({}): {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on sync product stock of product \"{}\" ({}): {}"
-msgstr "Error al sincronizar el stock del producto \"{}\" ({}): {}"
+msgstr "Erro ao sincronizar o estoque do produto \"{}\" ({}): {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on sync products all for this site. Please, review your config."
-msgstr ""
-"Error al sincronizar todos los productos de esta instancia. Por favor, "
-"revise su configuracion."
+msgstr "Erro ao sincronizar todos os produtos para este site. Por favor, revise sua configuração."
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on sync products all of setting instance ID {}: {}"
-msgstr "Error al sincronizar todos los productos de la instancia ID {}: {}"
+msgstr "Erro em todos os produtos de sincronização ao definir o ID da instância {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
@@ -886,100 +772,63 @@ msgstr "Error al sincronizar todos los productos de la instancia ID {}: {}"
 msgid ""
 "Error on sync products stock for this site. Please, review your config."
 msgstr ""
-"Error al sincronizar el stock de los productos de esta instancia. Por favor,"
-" revise su configuracion."
+"Erro ao sincronizar estoque de produtos para este site. Por favor, revise sua configuração."
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error on sync products stock of setting instance ID {}: {}"
-msgstr "Error al sincronizar stock de productos para la instancia ID {}: {}"
-
-#. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on sync publications for product \"{}\" (id: {}): {}"
-msgstr "Error al sincronizar publicaciones del producto \"{}\" (id: {}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on sync stock product \"{}\" ({}): {}"
-msgstr "Error al sincronizar stock del producto \"{}\" ({}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#, python-format
-msgid "Error on sync stock publications for product \"{}\" (id: {}): {}"
-msgstr "Error al sincronizar stock de las publicaciones del product \"{}\" (id: {}): {}"
+msgstr "Erro no estoque de produtos de sincronização ao definir o ID da instância {}: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
 #, python-format
 msgid "Error on sync_childrens category \"{}\": {}"
-msgstr "Error al sincronizar categorias hijas \"{}\": {}"
+msgstr "Erro na categoria sync_childrens \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "Error on update fields by setting instance: {}"
-msgstr "Error al actualizar los campos de la instancia: {}"
+msgstr "Erro nos campos de atualização definindo a instância: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #, python-format
 msgid "Error on update method \"{}\": {}"
-msgstr "Error al actualizar metodo \"{}\": {}"
+msgstr "Erro no método de atualização \"{}\": {}"
+
+#. module: melisync
+#: code:addons/melisync/models/product_template.py:0
+#: code:addons/melisync/models/product_template.py:0
+#: code:addons/melisync/models/product_template.py:0
+#, python-format
+msgid "Error on update product in MercadoLibre: {}"
+msgstr "Erro na atualização do produto no MercadoLivre: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
-msgid "Error on update product publication \"{}\" ({}): {}"
-msgstr "Error al actualizar la publicacion \"{}\" ({}): {}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
 msgid "Error on update product stock for product \"{}\" in MercadoLibre: {}"
-msgstr "Error al actualizar el stock del producto \"{}\" en MercadoLibre: {}"
+msgstr "Erro ao atualizar estoque do produto \"{}\" no MercadoLivre: {}"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid "Error on update publication \"{}\" (product \"{}\") in MercadoLibre: {}"
-msgstr "Error al actualizar la publicacion \"{}\" (producto \"{}\") en MercadoLibre: {}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
+#: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "Error on upload image to MercadoLibre: {}"
-msgstr "Error al subir imagen a MercadoLibre: {}"
+msgstr "Erro ao fazer upload da imagem para o MercadoLivre: {}"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid ""
-"Error on upload product \"{}\" ({}) to MercadoLibre:\n"
-"\n"
-"{}"
-msgstr ""
-"Error al subir producto \"{}\" ({}) a MercadoLibre:\n"
-"\n"
-"{}"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
+#: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "Error processing delivery free method \"{}\" for product \"{}\": {}"
-msgstr "Error procesando metodo gratis de envio \"{}\" para el producto \"{}\": {}"
+msgstr "Erro ao processar o método gratuito de entrega \"{}\" para o produto \"{}\": {}"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
+#: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "Error processing product \"{}\" delivery free method \"{}\" options: {}"
-msgstr ""
-"Error procesando del producto \"{}\" metodos de envio gratis \"{}\" opcion: "
-"{}"
+msgstr "Erro ao processar as opções \"{}\" do método de entrega gratuita do produto \"{}\": {}"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
@@ -988,53 +837,57 @@ msgstr ""
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Error processing setting instances: {}"
-msgstr "Error procesando instancias de configuracion: {}"
+msgstr "Erro ao processar instâncias de configuração: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "Error: {error}"
-msgstr ""
+msgstr "Erro: {erro}"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Extra info"
-msgstr "Info extra"
+msgstr "Informação extra"
 
 #. module: melisync
 #: code:addons/melisync/models/listing_types.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types__field_name
 #, python-format
 msgid "Field name"
-msgstr "Nombre del campo"
+msgstr "Nome do campo"
 
 #. module: melisync
 #: code:addons/melisync/models/sale_order.py:0
 #, python-format
 msgid "Fiscal information: {} ({}: {})"
-msgstr "Informacion fiscal: {} ({}: {})"
+msgstr "Informações fiscais: {} ({}: {})"
 
 #. module: melisync
 #: model:ir.ui.menu,name:melisync.menu_products_non_processed
 msgid "For process"
-msgstr "Para procesar"
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-msgid "Force delete"
-msgstr "Eliminar forzadamente"
+msgstr "Para processo"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Free methods"
-msgstr "Metodos gratis"
+msgstr "Métodos gratuitos"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__shipping_methods_options_free
 #, python-format
 msgid "Free modes"
-msgstr "Modos gratis"
+msgstr "Modos gratuitos"
+
+#. module: melisync
+#: code:addons/melisync/models/settings.py:0
+#: model:ir.model.fields,help:melisync.field_melisync_settings__pricelist
+#: model:ir.model.fields,help:melisync.field_product_product__meli_pricelist
+#: model:ir.model.fields,help:melisync.field_product_template__meli_pricelist
+#, python-format
+msgid "Get prices from pricelist."
+msgstr "Obter preços da lista de preços."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_search_view
@@ -1048,13 +901,12 @@ msgstr "Agrupar por"
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__have_childrens
 #, python-format
 msgid "Have childrens"
-msgstr "Tiene subcategorias"
+msgstr "Ter filhos"
 
 #. module: melisync
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__id
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types__id
 #: model:ir.model.fields,field_description:melisync.field_melisync_product_attribute_tags__id
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__id
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__id
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__id
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods_options__id
@@ -1066,44 +918,42 @@ msgid "ID"
 msgstr ""
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__image_id
+#: code:addons/melisync/models/product_template.py:0
+#: model:ir.model.fields,field_description:melisync.field_product_product__meli_image_id
+#: model:ir.model.fields,field_description:melisync.field_product_template__meli_image_id
 #, python-format
 msgid "Image ID"
-msgstr "ID de imagen"
+msgstr "ID da imagem"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__testing_mode
 #, python-format
 msgid "In testing"
-msgstr "En testing"
+msgstr "Em teste"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,help:melisync.field_melisync_settings__testing_mode
 #, python-format
 msgid "In testing mode, this products are no published with real name."
-msgstr ""
-"En modo de testing, los productos no son publicados con su nombre real."
+msgstr "No modo de teste, esses produtos não são publicados com nome real."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__instance
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_instance
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_instance
 #, python-format
 msgid "Instance"
-msgstr "Instancia"
+msgstr "Instância"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: model:ir.model.fields,field_description:melisync.field_product_product__meli_pricelists
-#: model:ir.model.fields,field_description:melisync.field_product_template__meli_pricelists
+#: model:ir.model.fields,field_description:melisync.field_product_product__meli_pricelist
+#: model:ir.model.fields,field_description:melisync.field_product_template__meli_pricelist
 #, python-format
-msgid "Instance Available pricelists"
-msgstr "Listas de precio disponibles para la instancia"
+msgid "Instance Pricelist ID"
+msgstr "ID da lista de preços da instância"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -1111,7 +961,7 @@ msgstr "Listas de precio disponibles para la instancia"
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_instance_site_id
 #, python-format
 msgid "Instance Site ID"
-msgstr "Instancia de configuracion"
+msgstr "ID do site da instância"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -1119,58 +969,48 @@ msgstr "Instancia de configuracion"
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_warehouse_id
 #, python-format
 msgid "Instance Warehouse ID"
-msgstr "Instancia de deposito"
+msgstr "ID do armazém da instância"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Instance settings"
-msgstr "Instancia de configuracion"
+msgstr "Configurações da instância"
 
 #. module: melisync
 #: model:ir.ui.menu,name:melisync.settings_instances
 msgid "Instances"
-msgstr "Instancias"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__user_is_meli_administrator
-#, python-format
-msgid "Is MercadoLibre Administrator?"
-msgstr "Es administrador de MercadoLibre?"
+msgstr "Instâncias"
 
 #. module: melisync
 #: model:ir.model.fields,field_description:melisync.field_product_pricelist__meli_list
 msgid "Is MercadoLibre list?"
-msgstr "Es una lista de MercadoLibre?"
+msgstr "A lista do MercadoLivre?"
 
 #. module: melisync
 #: code:addons/melisync/models/product_attribute.py:0
 #: model:ir.model.fields,field_description:melisync.field_product_attribute__is_required
 #, python-format
 msgid "Is required"
-msgstr "Es requerido"
+msgstr "É necessário"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__condition
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_condition
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_condition
 #, python-format
 msgid "Item condition"
-msgstr "Condicion del item"
+msgstr "condição do item"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
+#: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "Item de Prueba - Por favor, NO OFERTAR #{id}"
-msgstr ""
+msgstr "Item de Prueba - Por favor, NO OFERTAR #{id}"
 
 #. module: melisync
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories____last_update
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types____last_update
 #: model:ir.model.fields,field_description:melisync.field_melisync_product_attribute_tags____last_update
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications____last_update
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings____last_update
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods____last_update
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods_options____last_update
@@ -1178,13 +1018,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:melisync.field_melisync_site_ids____last_update
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users____last_update
 msgid "Last Modified on"
-msgstr "Ultima modificacion el"
+msgstr "Última modificação em"
 
 #. module: melisync
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__write_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types__write_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_product_attribute_tags__write_uid
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__write_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__write_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__write_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods_options__write_uid
@@ -1192,13 +1031,12 @@ msgstr "Ultima modificacion el"
 #: model:ir.model.fields,field_description:melisync.field_melisync_site_ids__write_uid
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__write_uid
 msgid "Last Updated by"
-msgstr "Ultima modificacion por"
+msgstr "Última atualização por"
 
 #. module: melisync
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__write_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types__write_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_product_attribute_tags__write_date
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__write_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__write_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__write_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods_options__write_date
@@ -1206,28 +1044,30 @@ msgstr "Ultima modificacion por"
 #: model:ir.model.fields,field_description:melisync.field_melisync_site_ids__write_date
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__write_date
 msgid "Last Updated on"
-msgstr "Ultima modificacion el"
+msgstr "Última atualização em"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__last_days_orders_get
 #, python-format
 msgid "Last days orders get"
-msgstr "Traer ventas de los ultimos dias"
+msgstr "Os pedidos dos últimos dias chegam"
 
 #. module: melisync
 #: code:addons/melisync/models/listing_types.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types__listing_id
 #, python-format
 msgid "Listing ID"
-msgstr "ID de tipo de publicacion"
+msgstr "ID da listagem"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__listing_type
+#: code:addons/melisync/models/product_template.py:0
+#: model:ir.model.fields,field_description:melisync.field_product_product__meli_listing_type
+#: model:ir.model.fields,field_description:melisync.field_product_template__meli_listing_type
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 #, python-format
 msgid "Listing type"
-msgstr "Tipo de publicacion"
+msgstr "Tipo de listagem"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_search_view
@@ -1236,28 +1076,26 @@ msgstr "Categoria local"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__local_pickup
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_local_pickup
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_local_pickup
 #, python-format
 msgid "Local pickup"
-msgstr "Retira en local"
+msgstr "Retirada local"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "ML Close"
-msgstr "ML Cerrar"
+msgstr "ML Fechar"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "ML Force delete"
-msgstr "ML Eliminar forzadamente"
+msgstr "ML Forçar exclusão"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "ML Pause"
-msgstr "ML Pausar"
+msgstr "ML Pausa"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
@@ -1267,24 +1105,29 @@ msgstr "ML Publicar"
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "ML Reactivate"
-msgstr "ML Reactivar"
+msgstr "ML Reativar"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "ML Sync"
-msgstr ""
+msgstr "ML Sincronizar"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "ML Sync stock"
-msgstr ""
+msgstr "ML Sincronizar estoque"
+
+#. module: melisync
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
+msgid "ML View"
+msgstr "ML Visão"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__max_time
 #, python-format
 msgid "Max time"
-msgstr "Tiempo maximo"
+msgstr "Tempo máximo"
 
 #. module: melisync
 #: code:addons/melisync/models/res_partner.py:0
@@ -1292,266 +1135,268 @@ msgstr "Tiempo maximo"
 #: model:ir.model.fields,field_description:melisync.field_res_users__meli_id
 #, python-format
 msgid "Meli ID"
-msgstr ""
+msgstr "Meli ID"
 
 #. module: melisync
 #: model:ir.ui.menu,name:melisync.menu_root
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "MercadoLibre"
-msgstr ""
+msgstr "MercadoLivre"
 
 #. module: melisync
 #: model:ir.actions.server,name:melisync.ir_cron_publish_ready_products_ir_actions_server
 #: model:ir.cron,cron_name:melisync.ir_cron_publish_ready_products
 #: model:ir.cron,name:melisync.ir_cron_publish_ready_products
 msgid "MercadoLibre - All instances publish ready products"
-msgstr "MercadoLibre - Todas las instancias publican productos listos"
+msgstr "MercadoLivre - Todas as instâncias publicam produtos prontos"
 
 #. module: melisync
 #: model:ir.actions.server,name:melisync.ir_cron_sync_products_all_ir_actions_server
 #: model:ir.cron,cron_name:melisync.ir_cron_sync_products_all
 #: model:ir.cron,name:melisync.ir_cron_sync_products_all
 msgid "MercadoLibre - All instances sync products all"
-msgstr "MercadoLibre - Todas las instancias sincronizan todos los productos"
+msgstr "MercadoLivre - Todas as instâncias sincronizam todos os produtos"
 
 #. module: melisync
 #: model:ir.actions.server,name:melisync.ir_cron_sync_products_stock_ir_actions_server
 #: model:ir.cron,cron_name:melisync.ir_cron_sync_products_stock
 #: model:ir.cron,name:melisync.ir_cron_sync_products_stock
 msgid "MercadoLibre - All instances sync products stock"
-msgstr "MercadoLibre - Todas las instancias sincronizan stock de productos"
+msgstr "MercadoLivre - Todas as instâncias sincronizam o estoque de produtos"
 
 #. module: melisync
 #: model:ir.actions.server,name:melisync.ir_cron_sync_all_sales_ir_actions_server
 #: model:ir.cron,cron_name:melisync.ir_cron_sync_all_sales
 #: model:ir.cron,name:melisync.ir_cron_sync_all_sales
 msgid "MercadoLibre - All instances sync sales"
-msgstr "MercadoLibre - Todas las instancias sincronizan ventas"
+msgstr "MercadoLivre - Todas as instâncias sincronizam vendas"
 
 #. module: melisync
 #: model:ir.module.category,name:melisync.res_groups_administrator_module_category
 msgid "MercadoLibre Administration"
-msgstr "MercadoLibre administracion"
+msgstr "Administração do Mercado Livre"
 
 #. module: melisync
 #: model:res.groups,name:melisync.res_groups_base_user_root_permissions_administrator
 msgid "MercadoLibre Administrator"
-msgstr "MercadoLibre administrador"
+msgstr "Administrador do MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "MercadoLibre App Settings"
-msgstr "MercadoLibre configuracion de la app"
+msgstr "Configurações do aplicativo MercadoLivre"
 
 #. module: melisync
 #: code:addons/melisync/models/product_attribute.py:0
 #: model:ir.model.fields,field_description:melisync.field_product_attribute__meli_id
 #, python-format
 msgid "MercadoLibre Attribute ID"
-msgstr "MercadoLibre atributo"
+msgstr "ID de atributo do MercadoLivre"
 
 #. module: melisync
 #: code:addons/melisync/models/product_attribute_value.py:0
 #: model:ir.model.fields,field_description:melisync.field_product_attribute_value__meli_id
 #, python-format
 msgid "MercadoLibre Attribute Value ID"
-msgstr "MercadoLibre ID de atributo"
+msgstr "ID do valor do atributo do MercadoLivre"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_melisync_categories
 msgid "MercadoLibre Categories Model"
-msgstr "MercadoLibre Modelo Categorías "
+msgstr "Modelo de categorias do MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "MercadoLibre DevCenter"
-msgstr "Centro de desarrollo de MercadoLibre"
+msgstr "MercadoLivre DevCenter"
 
 #. module: melisync
+#: code:addons/melisync/models/product_template.py:0
 #: code:addons/melisync/models/sale_order.py:0
+#: model:ir.model.fields,field_description:melisync.field_product_product__meli_id
+#: model:ir.model.fields,field_description:melisync.field_product_template__meli_id
 #: model:ir.model.fields,field_description:melisync.field_sale_order__meli_id
 #: model_terms:ir.ui.view,arch_db:melisync.product_attribute_view_form_inherit
 #, python-format
 msgid "MercadoLibre ID"
-msgstr ""
+msgstr "ID do MercadoLivre"
 
 #. module: melisync
 #: code:addons/melisync/models/sale_order.py:0
 #: model:ir.model.fields,field_description:melisync.field_sale_order__meli_instance
 #, python-format
 msgid "MercadoLibre Instance"
-msgstr "MercadoLibre instancia"
+msgstr "Instância do MercadoLivre"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_melisync_listing_types
 msgid "MercadoLibre Listing Types Model"
-msgstr "Modelo de Tipos de Listado de MercadoLibre"
+msgstr "Modelo de Tipos de Listagem do MercadoLivre"
 
 #. module: melisync
 #: model:ir.actions.act_window,name:melisync.action_meli_res_partners
 msgid "MercadoLibre Partners"
-msgstr "MercadoLibre Clientes"
+msgstr "Parceiros do MercadoLivre"
 
 #. module: melisync
 #: model:ir.actions.act_window,name:melisync.menu_product_pricelist_action_tree
 msgid "MercadoLibre Pricelists"
-msgstr "MercadoLibre listas de precios"
+msgstr "Listas de preços do MercadoLivre"
 
 #. module: melisync
 #: model:res.groups,name:melisync.res_groups_products_moderator
 msgid "MercadoLibre Products Moderation"
-msgstr "MercadoLibre moderacion de productos"
+msgstr "Moderação de Produtos MercadoLivre"
 
 #. module: melisync
 #: model:res.groups,comment:melisync.res_groups_products_moderator
 msgid "MercadoLibre Products Moderation Permission Group."
-msgstr "MercadoLibre grupo de permisos de moderacion de productos."
+msgstr "Grupo de Permissão de Moderação de Produtos do MercadoLivre."
 
 #. module: melisync
 #: model:res.groups,name:melisync.res_groups_base_user_root_permissions_products_moderator
 msgid "MercadoLibre Products Moderator"
-msgstr "MercadoLibre moderador de productos."
-
-#. module: melisync
-#: model:ir.model,name:melisync.model_melisync_publications
-msgid "MercadoLibre Publications Model"
-msgstr ""
+msgstr "Moderador de Produtos MercadoLivre"
 
 #. module: melisync
 #: model:ir.actions.act_window,name:melisync.action_meli_sale_orders
 msgid "MercadoLibre Sale Orders"
-msgstr "MercadoLibre Ventas"
+msgstr "Ordens de venda do MercadoLivre"
 
 #. module: melisync
 #: model:res.groups,name:melisync.res_groups_sales_administrator
 msgid "MercadoLibre Sales Administration"
-msgstr "MercadoLibre administracion de ventas"
+msgstr "Administração de Vendas MercadoLivre"
 
 #. module: melisync
 #: model:res.groups,comment:melisync.res_groups_sales_administrator
 msgid "MercadoLibre Sales Administration Permission Group."
-msgstr "MercadoLibre grupo de permisos de administracion de ventas."
+msgstr "Grupo de Permissão de Administração de Vendas do MercadoLivre."
 
 #. module: melisync
 #: model:res.groups,name:melisync.res_groups_base_user_root_permissions_sales_administrator
 msgid "MercadoLibre Sales administrator"
-msgstr "MercadoLibre administrador de ventas."
+msgstr "Administrador de vendas do MercadoLivre"
 
 #. module: melisync
 #: model:res.groups,name:melisync.res_groups_administrator
 msgid "MercadoLibre Settings Administration"
-msgstr "MercadoLibre administrador de configuraciones."
+msgstr "Administração de configurações do MercadoLivre"
 
 #. module: melisync
 #: model:res.groups,comment:melisync.res_groups_administrator
 msgid "MercadoLibre Settings Administration Permission Group."
-msgstr "MercadoLibre grupo de permisos de administracion de configuraciones."
+msgstr "Grupo de permissões de administração de configurações do MercadoLivre."
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_melisync_test_users
 msgid "MercadoLibre Test Users Model"
-msgstr "MercadoLibre Modelo de usuarios de prueba"
+msgstr "Modelo de usuários de teste do MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_search_view
 msgid "MercadoLibre buying mode"
-msgstr "MercadoLibre modo de compra"
+msgstr "Modo de compra do MercadoLivre"
 
 #. module: melisync
 #: model:ir.actions.act_window,name:melisync.categories_act_window
 msgid "MercadoLibre categories"
-msgstr "MercadoLibre categorias"
+msgstr "Categorias do Mercado Livre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_search_view
-#: model_terms:ir.ui.view,arch_db:melisync.product_template_tree
 msgid "MercadoLibre category"
-msgstr "MercadoLibre categoria"
+msgstr "Categoria MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "MercadoLibre category attributes"
-msgstr "MercadoLibre atributos de categoria"
+msgstr "Atributos da categoria MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_search_view
 msgid "MercadoLibre condition"
-msgstr "MercadoLibre condicion"
+msgstr "Condição MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_attribute_view_form_inherit
 msgid "MercadoLibre data"
-msgstr "MercadoLibre datos"
+msgstr "Dados do MercadoLivre"
+
+#. module: melisync
+#: model_terms:ir.ui.view,arch_db:melisync.product_search_view
+msgid "MercadoLibre id"
+msgstr "Código do MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_search_view
 msgid "MercadoLibre instance"
-msgstr "MercadoLibre instancia"
+msgstr "Instância do MercadoLivre"
+
+#. module: melisync
+#: model_terms:ir.ui.view,arch_db:melisync.product_search_view
+msgid "MercadoLibre listing type"
+msgstr "Tipo de listagem do MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_search_view
 msgid "MercadoLibre local pickup"
-msgstr "MercadoLibre retira en local"
+msgstr "Retirada local do MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.test_users_view_form
 msgid "MercadoLibre login data"
-msgstr "MercadoLibre datos de inicio de sesion."
+msgstr "Dados de login do MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.menu_product_pricelist_view_tree
 msgid "MercadoLibre pricelists"
-msgstr "MercadoLibre listas de precios"
+msgstr "Listas de preços do MercadoLivre"
 
 #. module: melisync
-#: code:addons/melisync/models/product_template.py:0
-#: model:ir.actions.act_window,name:melisync.publications_act_window
-#: model:ir.model.fields,field_description:melisync.field_product_product__meli_publications
-#: model:ir.model.fields,field_description:melisync.field_product_template__meli_publications
-#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-#, python-format
-msgid "MercadoLibre publications"
-msgstr "Publicaciones de MercadoLibre"
+#: model_terms:ir.ui.view,arch_db:melisync.product_search_view
+msgid "MercadoLibre status"
+msgstr "Status do MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.test_users_view_form
 msgid "MercadoLibre user data"
-msgstr "MercadoLibre datos de usuario"
+msgstr "Dados do usuário do MercadoLivre"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_search_view
 msgid "MercadoLibre youtube video"
-msgstr "MercadoLibre video de YouTube."
+msgstr "Vídeo do mercado livre no youtube"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_melisync_product_attribute_tags
 msgid "MercadoLibreSync Products Attributes Tags Model"
-msgstr "MercadoLibreSync Productos Atributos Etiquetas Modelo"
+msgstr "Modelo de tags de atributos de produtos do MercadoLibreSync"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_melisync_settings
 msgid "MercadoLibreSync Settings Model"
-msgstr "MercadoLibreSync Modelo de configuración"
+msgstr "Modelo de configurações do MercadoLibreSync"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_melisync_shipping_methods
 msgid "MercadoLibreSync Shipping Methods Model"
-msgstr "MercadoLibreSync Modelo de métodos de envío"
+msgstr "Modelo de métodos de envio do MercadoLibreSync"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_melisync_shipping_methods_options
 msgid "MercadoLibreSync Shipping Methods Options Model"
-msgstr "MercadoLibreSync Modelo de opciones de métodos de envío"
+msgstr "Modelo de opções de métodos de envio do MercadoLibreSync"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_melisync_shipping_modes
 msgid "MercadoLibreSync Shipping Modes Model"
-msgstr "MercadoLibreSync Modelo de modos de envío"
+msgstr "Modelo de modos de envio do MercadoLibreSync"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_melisync_site_ids
 msgid "MercadoLibreSync Site IDs Model"
-msgstr "MercadoLibreSync Modelo de IDs de sitio"
+msgstr "Modelo de IDs de site do MercadoLibreSync"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
@@ -1559,29 +1404,29 @@ msgstr "MercadoLibreSync Modelo de IDs de sitio"
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
 #, python-format
 msgid "Method ID"
-msgstr "ID de metodo"
+msgstr "ID do método"
 
 #. module: melisync
 #: model:ir.model.constraint,message:melisync.constraint_melisync_shipping_methods_method_id_unique
 msgid "Method ID must be unique for site_id."
-msgstr "El metodo debe ser unico por Site ID"
+msgstr "O ID do método deve ser exclusivo para site_id."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_view_form
 msgid "Method description"
-msgstr "Descripcion de metodo"
+msgstr "Descrição do método"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_view_form
 msgid "Method options"
-msgstr "Opciones de metodo"
+msgstr "Opções de método"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__min_time
 #, python-format
 msgid "Min time"
-msgstr "Tiempo minimo"
+msgstr "Tempo mínimo"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
@@ -1591,7 +1436,7 @@ msgstr "Modo"
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Multi process"
-msgstr "Multi procesos"
+msgstr "Vários processos"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
@@ -1617,53 +1462,53 @@ msgstr "Multi procesos"
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
 #, python-format
 msgid "Name"
-msgstr "Nombre"
+msgstr "Nome"
 
 #. module: melisync
 #: model:ir.model.constraint,message:melisync.constraint_melisync_site_ids_name_unique
 msgid "Name must be unique."
-msgstr "El nombre debe ser unico."
+msgstr "O nome deve ser exclusivo."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #: model:ir.model.fields.selection,name:melisync.selection__product_template__meli_condition__new
 #, python-format
 msgid "New"
-msgstr "Nuevo"
+msgstr "Novo"
 
 #. module: melisync
 #: code:addons/melisync/models/test_users.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__nickname
 #, python-format
 msgid "Nickname"
-msgstr "Apodo"
+msgstr ""
 
 #. module: melisync
 #: model:ir.actions.act_window,name:melisync.menu_products_non_processed_action
 msgid "Non processed products"
-msgstr "Productos no procesados"
+msgstr "Produtos não processados"
 
 #. module: melisync
 #: model:ir.model.fields.selection,name:melisync.selection__product_template__meli_condition__not_specified
 msgid "Not specified"
-msgstr "No especificado"
+msgstr "Não especificado"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Number of max process"
-msgstr "Numero maximo de procesos"
+msgstr "Número máximo de processos"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,help:melisync.field_melisync_settings__sync_categories_attrs
 #, python-format
 msgid "On categories synchronization, download attributes"
-msgstr "Descargar atributos en sincronizacion de categorias."
+msgstr "Na sincronização de categorias, baixe atributos"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.test_users_view_form
 msgid "Other data"
-msgstr "Otros datos"
+msgstr "Outros dados"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
@@ -1673,233 +1518,198 @@ msgstr "Otros datos"
 #: model_terms:ir.ui.view,arch_db:melisync.categories_search_view
 #, python-format
 msgid "Parent ID"
-msgstr "ID del padre"
+msgstr "ID pai"
 
 #. module: melisync
 #: model:ir.ui.menu,name:melisync.menu_partners
 #: model:ir.ui.menu,name:melisync.menu_partners_tree
 msgid "Partners"
-msgstr "Clientes"
+msgstr "Parceiros"
 
 #. module: melisync
 #: code:addons/melisync/models/test_users.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__password
 #, python-format
 msgid "Password"
-msgstr "Clave"
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-msgid "Pause"
-msgstr "Pausar"
+msgstr "Senha"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
 msgid "Pause product on MercadoLibre."
-msgstr "Pausar producto en MercadoLibre"
+msgstr "Pausar produto no MercadoLivre."
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields.selection,name:melisync.selection__melisync_publications__status__paused
+#: code:addons/melisync/models/product_template.py:0
+#: model:ir.model.fields.selection,name:melisync.selection__product_template__meli_status__paused
+#: model:ir.ui.menu,name:melisync.menu_products_paused
 #, python-format
 msgid "Paused"
 msgstr "Pausado"
 
 #. module: melisync
+#: model:ir.actions.act_window,name:melisync.menu_products_paused_action
+msgid "Paused products"
+msgstr "Produtos pausados"
+
+#. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Pick up locally"
-msgstr "Retirar localmente"
+msgstr "Retire no local"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__picking_policy
 #, python-format
 msgid "Picking Policy"
-msgstr "Modo de piqueo"
+msgstr "Política de Seleção"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Prediction"
-msgstr "Prediccion"
+msgstr "Predição"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,help:melisync.field_melisync_publications__price
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_tree
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_tree_published
+msgid "Price"
+msgstr "Preço"
+
+#. module: melisync
+#: code:addons/melisync/models/product_template.py:0
+#: model:ir.model.fields,help:melisync.field_product_product__meli_price
+#: model:ir.model.fields,help:melisync.field_product_template__meli_price
 #, python-format
-msgid "Price based on pricelist selected."
-msgstr "Precio basado en la lista de precios seleccionada."
+msgid "Price based on pricelist of MercadoLibre instance."
+msgstr "Preço baseado na lista de preços da instância do MercadoLivre."
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
+#: code:addons/melisync/models/settings.py:0
 #: model:ir.model,name:melisync.model_product_pricelist
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__pricelist
+#: model:ir.model.fields,field_description:melisync.field_melisync_settings__pricelist
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 #, python-format
 msgid "Pricelist"
-msgstr "Lista de precios"
+msgstr "Lista de preços"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__price
+#: code:addons/melisync/models/product_template.py:0
+#: model:ir.model.fields,field_description:melisync.field_product_product__meli_price
+#: model:ir.model.fields,field_description:melisync.field_product_template__meli_price
 #, python-format
 msgid "Pricelist price"
-msgstr "Precio de lista de precios"
+msgstr "Preço da tabela de preços"
 
 #. module: melisync
 #: model:ir.ui.menu,name:melisync.menu_product_pricelists
 msgid "Pricelists"
-msgstr "Listas de precios"
-
-#. module: melisync
-#: model:ir.ui.menu,name:melisync.menu_products_processed
-msgid "Processed"
-msgstr "Procesados"
-
-#. module: melisync
-#: model:ir.actions.act_window,name:melisync.menu_products_processed_action
-msgid "Processed products"
-msgstr "Productos procesados"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__product_id
-#, python-format
-msgid "Product"
-msgstr "Producto"
+msgstr "Lista de preços"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_product_attribute
 msgid "Product Attribute"
-msgstr "Atributo de producto"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__attribute_line_ids
-#, python-format
-msgid "Product Attributes"
-msgstr "Atrbutos de producto"
+msgstr "Atributo do Artigo"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_product_template
 msgid "Product Template"
-msgstr "Plantilla de producto"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__available_qty
-#, python-format
-msgid "Product available quantity"
-msgstr "Cantidad disponible del producto"
+msgstr "Modelo de Artigo"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Product condition"
-msgstr "Condicion del producto"
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-msgid "Product settings"
-msgstr "Configuracion del producto"
+msgstr "Condição do produto"
 
 #. module: melisync
 #: model:ir.ui.menu,name:melisync.menu_products
 msgid "Products"
-msgstr "Productos"
+msgstr "Produtos"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__publication_id
-#, python-format
-msgid "Publication ID"
-msgstr ""
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-msgid "Publication data"
-msgstr "Datos de la publicacion"
-
-#. module: melisync
-#: model:ir.ui.menu,name:melisync.menu_publications_tree
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-msgid "Publications"
-msgstr "Publicaciones"
+msgid "Publication ID"
+msgstr "ID da publicação"
 
 #. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-msgid "Publish"
-msgstr "Publicar"
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
+msgid "Publication data"
+msgstr "Dados de publicação"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Publish all ready products."
-msgstr "Publicar todos los productos listos."
+msgstr "Publique todos os produtos prontos."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
 msgid "Publish on MercadoLibre."
-msgstr "Publicar en MercadoLibre."
+msgstr "Publique todos os produtos prontos."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Publish products"
-msgstr "Publicar productos"
+msgstr "Publicar produtos"
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__status
+#: code:addons/melisync/models/product_template.py:0
+#: model:ir.model.fields,field_description:melisync.field_product_product__meli_status
+#: model:ir.model.fields,field_description:melisync.field_product_template__meli_status
 #, python-format
 msgid "Publish status"
-msgstr "Estado de publicacion"
+msgstr "Status de publicação"
+
+#. module: melisync
+#: model:ir.ui.menu,name:melisync.menu_products_published
+msgid "Published"
+msgstr "Publicados"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
+#: model:ir.actions.act_window,name:melisync.menu_products_published_action
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__published_count
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 #, python-format
 msgid "Published products"
-msgstr "Productos publicados"
+msgstr "Produtos publicados"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #, python-format
 msgid "Published/paused products"
-msgstr "Productos publicados/pausados"
+msgstr "Produtos publicados/pausados"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__multiprocess_qty_process
 #, python-format
 msgid "Quantity of process"
-msgstr "Cantidad de procesos"
+msgstr "Quantidade de processo"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,help:melisync.field_melisync_settings__multiprocess_qty_process
 #, python-format
 msgid "Quantity of processes uses to download categories."
-msgstr "Cantidad de procesos que se usan para descargar categorias."
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-msgid "Reactivate"
-msgstr "Reactivar"
+msgstr "Quantidade de processos usados ​​para baixar categorias."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
 msgid "Reactivate product on MercadoLibre."
-msgstr "Reactivar producto en MercadoLire."
+msgstr "Reativar produto no MercadoLivre."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_ready
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_ready
-#: model:ir.model.fields.selection,name:melisync.selection__melisync_publications__status__ready_for_publish
+#: model:ir.ui.menu,name:melisync.menu_products_unpublished
 #, python-format
 msgid "Ready for publish"
-msgstr "Listo para publicar"
+msgstr "Pronto para publicação"
+
+#. module: melisync
+#: model:ir.actions.act_window,name:melisync.menu_products_ready_for_publish_action
+msgid "Ready for publish products"
+msgstr "Pronto para publicar produtos"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
@@ -1907,14 +1717,14 @@ msgstr "Listo para publicar"
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 #, python-format
 msgid "Redirect URI"
-msgstr "URL de redireccion"
+msgstr "URI de redirecionamento"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__refresh_token
 #, python-format
 msgid "Refresh Token"
-msgstr "Recargar Token"
+msgstr "Atualizar token"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
@@ -1922,61 +1732,49 @@ msgstr "Recargar Token"
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 #, python-format
 msgid "Sale orders"
-msgstr "Ordenes de venta"
+msgstr "Pedidos de venda"
 
 #. module: melisync
 #: model:ir.ui.menu,name:melisync.menu_sales
 msgid "Sales"
-msgstr "Ventas"
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__description_sale
-#, python-format
-msgid "Sales Description"
-msgstr "Descripcion de ventas"
+msgstr "Vendas"
 
 #. module: melisync
 #: model:ir.model,name:melisync.model_sale_order
 msgid "Sales Order"
-msgstr "Pedido de venta"
+msgstr "Ordem de Vendas"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__sales_count
 #, python-format
 msgid "Sales count"
-msgstr "Total de ventas"
+msgstr "Contagem de vendas"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Sales settings"
-msgstr "Configuracion de ventas"
+msgstr "Configurações de vendas"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_search_view
 msgid "Search category"
-msgstr "Buscar categoria"
+msgstr "Categoria de pesquisa"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_search_view
 msgid "Search product"
-msgstr "Buscar producto"
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_search_view
-msgid "Search publication"
-msgstr "Buscar publicacion"
+msgstr "Pesquisar produto"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
 msgid "Search shipping methods"
-msgstr "Buscar metodos de envio"
+msgstr "Pesquisar métodos de envio"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Secret key"
-msgstr "Clave secreta"
+msgstr "Chave secreta"
 
 #. module: melisync
 #: model:ir.actions.act_window,name:melisync.settings_act_window
@@ -1985,7 +1783,7 @@ msgstr "Clave secreta"
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_tree
 msgid "Settings"
-msgstr "Configuraciones"
+msgstr "Definições"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
@@ -1997,38 +1795,34 @@ msgstr "Modos de envio"
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Shipping info"
-msgstr "Metodos de envio"
+msgstr "Informação de Envio"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_view_form
 msgid "Shipping method"
-msgstr "Metodo de envio"
+msgstr "Método de envio"
 
 #. module: melisync
 #: model:ir.actions.act_window,name:melisync.shipping_methods_act_window
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_view_tree
 msgid "Shipping methods"
-msgstr "Metodos de envio"
+msgstr "Métodos de Envio"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__shipping_methods_free
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_shipping_methods_free
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_shipping_methods_free
 #, python-format
 msgid "Shipping methods free"
-msgstr "Metodos de envio gratis"
+msgstr "Métodos de envio gratuitos"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__shipping_mode
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_shipping_mode
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_shipping_mode
 #, python-format
 msgid "Shipping mode"
-msgstr "Modo de envio"
+msgstr "Modo de entrega"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.shipping_methods_search_view
@@ -2038,33 +1832,31 @@ msgstr "Modos de envio"
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Shipping settings"
-msgstr "Configuracion de envio"
+msgstr "Configurações de envio"
 
 #. module: melisync
 #: code:addons/melisync/models/shipping_methods.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__short_name
 #, python-format
 msgid "Short name"
-msgstr "Nombre corto"
+msgstr "Nome curto"
 
 #. module: melisync
 #: code:addons/melisync/models/product_pricelist.py:0
 #: model:ir.model.fields,help:melisync.field_product_pricelist__meli_list
 #, python-format
 msgid "Show in MercadoLibre pricelists list."
-msgstr "Mostrar en MercadoLibre lista de precios."
+msgstr "Mostrar na lista de preços do MercadoLivre."
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
 #: code:addons/melisync/models/listing_types.py:0
-#: code:addons/melisync/models/publications.py:0
 #: code:addons/melisync/models/settings.py:0
 #: code:addons/melisync/models/shipping_methods.py:0
 #: code:addons/melisync/models/site_ids.py:0
 #: code:addons/melisync/models/test_users.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_categories__site_id
 #: model:ir.model.fields,field_description:melisync.field_melisync_listing_types__site_id
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__site_id
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__site_id
 #: model:ir.model.fields,field_description:melisync.field_melisync_shipping_methods__site_id
 #: model:ir.model.fields,field_description:melisync.field_melisync_site_ids__site_id
@@ -2072,60 +1864,52 @@ msgstr "Mostrar en MercadoLibre lista de precios."
 #: model_terms:ir.ui.view,arch_db:melisync.categories_search_view
 #, python-format
 msgid "Site ID"
-msgstr "ID de sitio"
+msgstr "Identificação de site"
 
 #. module: melisync
 #: model:ir.model.constraint,message:melisync.constraint_melisync_site_ids_site_id_unique
 msgid "Site ID must be unique."
-msgstr "El ID del sitio debe ser unico."
+msgstr "O ID do site deve ser exclusivo."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Site instance"
-msgstr "Instancia de sitio"
+msgstr "Instância do site"
 
 #. module: melisync
 #: code:addons/melisync/models/test_users.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__site_status
 #, python-format
 msgid "Site status"
-msgstr "Estado de sitio"
+msgstr "Status do site"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__state_uuid
 #, python-format
 msgid "State uuid"
-msgstr "UUID"
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_tree_view
-msgid "Status"
-msgstr "Estado"
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.product_template_tree
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-#: model_terms:ir.ui.view,arch_db:melisync.publications_tree_view
-msgid "Stock"
-msgstr ""
+msgstr "uuid de estado"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
+msgid "Status"
+msgstr "Status"
+
+#. module: melisync
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
+msgid "Stock and price"
+msgstr ""
+
+#. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Stock settings"
-msgstr "Configuracion de stock"
+msgstr "Configurações de estoque"
 
 #. module: melisync
 #: code:addons/melisync/models/categories.py:0
 #, python-format
 msgid "Subcategories"
 msgstr "Subcategorias"
-
-#. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-msgid "Sync"
-msgstr "Sincronizar"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
@@ -2135,23 +1919,22 @@ msgstr "Sincronizar categorias"
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Sync products"
-msgstr "Sincronizar productos"
+msgstr "Sincronizar produtos"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Sync sales"
-msgstr "Sincronizar ventas"
+msgstr "Sincronizar vendas"
 
 #. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Sync stock"
-msgstr "Sincronizar stock"
+msgstr "Sincronizar estoque"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Synchronization"
-msgstr "Sincronizacion"
+msgstr "Sincronização"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
@@ -2163,47 +1946,45 @@ msgstr "Sincronizar atributos"
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__sync_categories_attrs
 #, python-format
 msgid "Synchronize categories attributes"
-msgstr "Sincronizar atributos de categoria"
+msgstr "Sincronizar atributos de categorias"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
 msgid "Synchronize childrens"
-msgstr "Sincronizar subcategorias."
+msgstr "Sincronizar crianças"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
 msgid "Synchronize on MercadoLibre."
-msgstr "Sincronizar en MercadoLibre."
+msgstr "Sincronize no MercadoLivre."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Synchronize products with all data."
-msgstr "Sincronizar productos con todos los datos."
+msgstr "Sincronize produtos com todos os dados."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Synchronize stock for all published products."
-msgstr "Sincronizar stock de todos los productos publicados."
+msgstr "Sincronize o estoque para todos os produtos publicados."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
 msgid "Synchronize stock on MercadoLibre."
-msgstr "Sincronizar stock en MercadoLibre"
+msgstr "Sincronize o estoque no MercadoLibre."
 
 #. module: melisync
 #: code:addons/melisync/models/product_attribute.py:0
 #: model:ir.model.fields,field_description:melisync.field_product_attribute__tag_ids
 #, python-format
 msgid "Tag IDs"
-msgstr ""
+msgstr "IDs de tags"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Tags"
-msgstr ""
+msgstr "Tag"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
@@ -2214,43 +1995,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:melisync.test_users_view_tree
 #, python-format
 msgid "Test users"
-msgstr "Usuarios de prueba"
+msgstr "Usuários de teste"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "Testing mode"
-msgstr "Modo de testing"
+msgstr "Modo de teste"
 
 #. module: melisync
 #: model:ir.module.category,description:melisync.res_groups_administrator_module_category
 msgid "The MercadoLibre Administration Application."
-msgstr "Administraciond e aplicacion de MercadoLibre."
+msgstr "O Aplicativo de Administração do MercadoLivre."
 
 #. module: melisync
-#: code:addons/melisync/models/publications.py:0
+#: code:addons/melisync/models/product_template.py:0
 #, python-format
-msgid "The product \"{}\" is not allowed for sale."
-msgstr "El producto \"{}\" no esta configurado para la venta."
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid ""
-"The publication instance \"{}\" (product: \"{}\") has been already published"
-" in MercadoLibre."
-msgstr ""
-"La instancia de publicacion \"{}\" (producto: \"{}\") ya esta publicada"
-" en MercadoLibre."
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid ""
-"The publication instance \"{}\" (product: \"{}\") has not published in "
-"MercadoLibre."
-msgstr ""
-"La instancia de publicacion \"{}\" (producto: \"{}\") NO esta publicada"
-" en MercadoLibre."
+msgid "This product doesn't have image."
+msgstr "Este produto não tem imagem."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -2258,21 +2019,28 @@ msgstr ""
 #: model:ir.model.fields,help:melisync.field_product_template__meli_ready
 #, python-format
 msgid "This product is ready for publish in MercadoLibre."
-msgstr "El producto esta listo para ser publicado en MercadoLibre."
+msgstr "Este produto está pronto para publicação no MercadoLivre."
+
+#. module: melisync
+#: code:addons/melisync/models/product_template.py:0
+#: model:ir.model.fields.selection,name:melisync.selection__product_template__meli_status__unpublished
+#, python-format
+msgid "Unpublished"
+msgstr "Não publicado"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,help:melisync.field_melisync_settings__auto_sync
 #, python-format
 msgid "Upload and download daily updates for products and sales."
-msgstr "Subir y descargar actualizaciones diarias de productos y ventas."
+msgstr "Carregue e baixe atualizações diárias de produtos e vendas."
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__multiprocess
 #, python-format
 msgid "Use multiprocess"
-msgstr "Usar multiprocesos."
+msgstr "Usar multiprocesso"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -2288,7 +2056,7 @@ msgstr "Usado"
 #: model:ir.model.fields,field_description:melisync.field_melisync_test_users__user_id
 #, python-format
 msgid "User ID"
-msgstr "ID de usuario"
+msgstr "ID do usuário"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
@@ -2298,8 +2066,8 @@ msgid ""
 "Using multiprocess, the downloaded information as downloaded in background "
 "mode."
 msgstr ""
-"Usando multiprocesos, la informacion descargada se descarga en background "
-"mode."
+"Usando multiprocesso, as informações baixadas são baixadas em segundo plano "
+"modo."
 
 #. module: melisync
 #: code:addons/melisync/models/product_attribute_tags.py:0
@@ -2309,93 +2077,84 @@ msgid "Value"
 msgstr "Valor"
 
 #. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
-msgid "View"
-msgstr "Ver"
-
-#. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "View all categories downloaded for this site."
-msgstr "Ver todas las categorias descargadas para este sitio."
+msgstr "Veja todas as categorias baixadas para este site."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "View all published products."
-msgstr "Ver todos los productos publicados."
+msgstr "Veja todos os produtos publicados."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "View all sale orders for this site."
-msgstr "Ver todas las ventas de este sitio."
+msgstr "Veja todos os pedidos de venda para este site."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
 msgid "View children categories."
-msgstr "Ver subcategorias."
+msgstr "Veja as categorias infantis."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.categories_form_view
 msgid "View childrens"
-msgstr "Ver subcategorias."
+msgstr "Ver crianças"
 
 #. module: melisync
-#: model_terms:ir.ui.view,arch_db:melisync.publications_form_view
+#: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "View on MercadoLibre."
-msgstr "Ver en MercadoLibre"
+msgstr "Veja no MercadoLivre."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Warehouse"
-msgstr "Deposito"
+msgstr "Armazém"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__warehouse_id
 #, python-format
 msgid "Warehouse ID"
-msgstr "ID de deposito"
+msgstr "ID do armazém"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__product_available_qty
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_available_qty
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_available_qty
 #, python-format
 msgid "Warehouse available quantity"
-msgstr "Cantidad disponible en deposito"
+msgstr "Quantidade disponível do armazém"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields.selection,name:melisync.selection__melisync_settings__picking_policy__one
 #, python-format
 msgid "When all products are ready"
-msgstr "Cuando todos los productos estan listos"
+msgstr "Quando todos os produtos estiverem prontos"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "Youtube URL"
-msgstr "URL de YouTube"
+msgstr "URL do Youtube"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
-#: code:addons/melisync/models/publications.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_publications__youtube_url
 #: model:ir.model.fields,field_description:melisync.field_product_product__meli_youtube_url
 #: model:ir.model.fields,field_description:melisync.field_product_template__meli_youtube_url
 #, python-format
 msgid "Youtube video URL"
-msgstr "URL de video de YouTube"
+msgstr "URL do vídeo do Youtube"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "auto predict category"
-msgstr "auto predecir categoria"
+msgstr "categoria de previsão automática"
 
 #. module: melisync
 #: model:ir.model.constraint,message:melisync.constraint_melisync_categories_categ_id_unique
 msgid "categ_id must be unique."
-msgstr ""
+msgstr "categ_id deve ser exclusivo."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
@@ -2405,50 +2164,40 @@ msgstr "atributos de categoria"
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "default shipping mode and methods"
-msgstr "modo de envio y metodos por defecto"
+msgstr "modo e métodos de envio padrão"
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "error downloading category attributes: {}"
-msgstr "error descargando atributos de categoria: {}"
+msgstr "erro ao baixar atributos de categoria: {}"
 
 #. module: melisync
 #: code:addons/melisync/models/sale_order.py:0
 #, python-format
 msgid "invoice"
-msgstr "factura"
+msgstr "fatura"
 
 #. module: melisync
 #: model:ir.model.constraint,message:melisync.constraint_melisync_listing_types_listing_unique
 msgid "listing_type must be unique."
-msgstr ""
+msgstr "list_type deve ser exclusivo."
 
 #. module: melisync
 #: model:ir.model.constraint,message:melisync.constraint_product_attribute_meli_id_unique
 msgid "meli_id must be unique."
-msgstr ""
+msgstr "meli_id deve ser único."
 
 #. module: melisync
 #: model:ir.model.constraint,message:melisync.constraint_product_attribute_name_unique
 msgid "name must be unique."
-msgstr ""
+msgstr "nome deve ser único."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
 #, python-format
 msgid "no predictions found."
-msgstr "no hay predicciones"
-
-#. module: melisync
-#: model:ir.model.constraint,message:melisync.constraint_melisync_publications_product_listing_unique
-msgid "product id, listing type must be unique."
-msgstr ""
-
-#. module: melisync
-#: model:ir.model.constraint,message:melisync.constraint_melisync_publications_publication_id_unique
-msgid "publication_id must be unique."
-msgstr ""
+msgstr "nenhuma previsão encontrada."
 
 #. module: melisync
 #: code:addons/melisync/models/product_template.py:0
@@ -2457,26 +2206,20 @@ msgid ""
 "the \"{}\" category does not exist, please synchronize the categories of "
 "your instance."
 msgstr ""
-"La categoria \"{}\" no existe, por favor sincronice las categorias de la "
-"instancia."
-
-#. module: melisync
-#: code:addons/melisync/models/publications.py:0
-#, python-format
-msgid "the product \"{}\" (id: {}) doesn't have image."
-msgstr "el producto \"{}\" (id: {}) no tiene imagen."
+"a categoria \"{}\" não existe, sincronize as categorias de "
+"sua instância."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.settings_view_form
 msgid "this guide"
-msgstr "esta guia"
+msgstr "este guia"
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "with the settings instance config."
-msgstr "con las configuraciones de la instancia."
+msgstr "com a configuração da instância de configurações."
 
 #. module: melisync
 #: model_terms:ir.ui.view,arch_db:melisync.product_template_inherit
 msgid "with this button."
-msgstr "con este boton."
+msgstr "com este botão."

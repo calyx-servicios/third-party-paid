@@ -6,7 +6,7 @@ class MercadoLibreClient(object):
     _API_URL = 'https://api.mercadolibre.com'
     # Default authorization url
     _AUTHORIZATION_URL = 'https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id={client_id}&redirect_uri={redirect_uri}&state={state}'
-    
+
     def __init__(self, client_id, client_secret, redirect_uri):
         """
             Class Start
@@ -30,6 +30,21 @@ class MercadoLibreClient(object):
         }
         # Set user ID flag
         self.user_id = None
+        # Set requests object
+        def _error_parser_fn(res):
+            """
+                Throw error if res has errors.
+            """
+            if isinstance(res, dict):
+                # If res has error
+                if res.get('error'):
+                    # Get causes
+                    causes = res.get('cause', [])
+                    # Array with causes
+                    errors = ['{}: {}'.format(x.get('code'), x.get('message')) for x in causes]
+                    # Exception lines
+                    raise Exception('\n\n[{}] {}:\n\n{}'.format(res.get('error'), res.get('message'), '\n'.join(errors)))
+        self.requests_obj = Requests(self._API_URL, self.default_headers, _error_parser_fn)
 
     def get_authorization_url(self, state):
         """
@@ -51,8 +66,7 @@ class MercadoLibreClient(object):
             'code': authorization_code,
             'redirect_uri': self.params.get('redirect_uri'),
         }
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        response = requests_obj._post('/oauth/token', data = data)
+        response = self.requests_obj._post('/oauth/token', data = data)
         # Save token
         token_data = {
             'token_type': response.get('token_type').capitalize(),
@@ -75,11 +89,7 @@ class MercadoLibreClient(object):
             'client_secret': self.params.get('client_secret'),
             'refresh_token': refresh_token,
         }
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        response = requests_obj._post('/oauth/token', data = data)
-        # If response has error
-        if response.get('error'):
-            raise Exception(response.get('message'))
+        response = self.requests_obj._post('/oauth/token', data = data)
         # Save token
         token_data = {
             'token_type': response.get('token_type').capitalize(),
@@ -96,41 +106,25 @@ class MercadoLibreClient(object):
             Parameters:
                 - site_id: site ID to register new test user.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        response = requests_obj._post('/users/test_user', json = { 'site_id': site_id })
-        # If response has error
-        if response.get('error'):
-            raise Exception(response.get('message'))
-        return response
+        return self.requests_obj._post('/users/test_user', json = { 'site_id': site_id })
 
     def me(self):
         """
             User account information.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        response = requests_obj._get('/users/me')
-        # If response has error
-        if response.get('error'):
-            raise Exception(response.get('message'))
-        return response
+        return self.requests_obj._get('/users/me')
 
     def get_user(self, user_id):
         """
             User account information.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        response = requests_obj._get(f'/users/{user_id}')
-        # If response has error
-        if response.get('error'):
-            raise Exception(response.get('message'))
-        return response
+        return self.requests_obj._get(f'/users/{user_id}')
 
     def get_sites(self):
         """
             Retrieves information about the sites where MercadoLibre runs.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        return requests_obj._get('/sites')
+        return self.requests_obj._get('/sites')
 
     def get_listing_types(self, site_id):
         """
@@ -138,8 +132,7 @@ class MercadoLibreClient(object):
             Parameters:
                 - site_id: site ID.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        return requests_obj._get(f'/sites/{site_id}/listing_types')
+        return self.requests_obj._get(f'/sites/{site_id}/listing_types')
 
     def get_category_attributes(self, category_id):
         """
@@ -147,15 +140,13 @@ class MercadoLibreClient(object):
             Parameters:
                 - category_id: id of category.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        return requests_obj._get(f'/categories/{category_id}/attributes')
+        return self.requests_obj._get(f'/categories/{category_id}/attributes')
 
     def get_currencies(self):
         """	
             Returns information about all available currencies in MercadoLibre.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        return requests_obj._get('/currencies')
+        return self.requests_obj._get('/currencies')
 
     def category_predictor(self, site_id, product_name, limit = 8):
         """
@@ -164,13 +155,12 @@ class MercadoLibreClient(object):
                 - product_name: name of products
                 - limit: the limit value default return is 1, but you can configure between 1 and 8
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
         # Define query parameters.
         params = {
             'q': product_name,
             'limit': limit,
         }
-        return requests_obj._get(f'/sites/{site_id}/domain_discovery/search', params=params)
+        return self.requests_obj._get(f'/sites/{site_id}/domain_discovery/search', params=params)
 
     def item_create(self, item_data):
         """
@@ -178,17 +168,7 @@ class MercadoLibreClient(object):
             Parameters:
                 - item_data: obj with item data.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        response = requests_obj._post('/items', json = item_data)
-        # If response has error
-        if response.get('error'):
-            # Get causes
-            causes = response.get('cause', [])
-            # Array with causes
-            errors = ['{}: {}'.format(x.get('code'), x.get('message')) for x in causes]
-            # Exception lines
-            raise Exception('{}:\r\n{}'.format(response.get('message'), '\r\n'.join(errors)))
-        return response
+        return self.requests_obj._post('/items', json = item_data)
 
     def item_update(self, item_id, item_data):
         """
@@ -197,17 +177,43 @@ class MercadoLibreClient(object):
                 - item_id: published item ID.
                 - item_data: new item data.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        response = requests_obj._put(f'/items/{item_id}', json = item_data)
-        # If response has error
-        if response.get('error'):
-            # Get causes
-            causes = response.get('cause', [])
-            # Array with causes
-            errors = ['{}: {}'.format(x.get('code'), x.get('message')) for x in causes]
-            # Exception lines
-            raise Exception('{}:\r\n{}'.format(response.get('message'), '\r\n'.join(errors)))
-        return response
+        return self.requests_obj._put(f'/items/{item_id}', json = item_data)
+
+    def item_variation_create(self, item_id, variant_data):
+        """
+            Add product variant in MercadoLibre.
+            Parameters:
+                - item_id: published item ID.
+                - variant_data: variation data.
+        """
+        return self.requests_obj._post(f'/items/{item_id}/variations', json = variant_data)
+
+    def item_variation_delete(self, item_id, variation_id):
+        """
+            Add product variant in MercadoLibre.
+            Parameters:
+                - item_id: published item ID.
+                - variation_id: variation id.
+        """
+        return self.requests_obj._delete(f'/items/{item_id}/variations/{variation_id}')
+
+    def item_post_description(self, item_id, data):
+        """
+            Post a product description in MercadoLibre.
+            Parameters:
+                - item_id: published item ID.
+                - data: { **description_data }
+        """
+        return self.requests_obj._put(f'/items/{item_id}/description', json = data)
+
+    def item_update_description(self, item_id, data):
+        """
+            Update a product description in MercadoLibre.
+            Parameters:
+                - item_id: published item ID.
+                - data: { **description_data }
+        """
+        return self.requests_obj._put(f'/items/{item_id}/description', json = data)
 
     def item_get(self, item_id):
         """
@@ -215,31 +221,24 @@ class MercadoLibreClient(object):
             Parameters:
                 - item_id: published item ID.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        response = requests_obj._get(f'/items/{item_id}')
-        # If response has error
-        if response.get('error'):
-            # Get causes
-            causes = response.get('cause', [])
-            # Array with causes
-            errors = ['{}: {}'.format(x.get('code'), x.get('message')) for x in causes]
-            # Exception lines
-            raise Exception('{}:\r\n{}'.format(response.get('message'), '\r\n'.join(errors)))
-        return response
+        return self.requests_obj._get(f'/items/{item_id}')
     
     def item_picture_upload(self, files):
         """
             Upload item image.
             Parameters:
                 - files: object with files.
-                - headers: custom headers
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        response = requests_obj._post('/pictures/items/upload', files=files)
-        # If response has error
-        if response.get('error'):
-            raise Exception(response.get('message'))
-        return response
+        return self.requests_obj._post('/pictures/items/upload', files=files)
+    
+    def item_picture_add(self, item_id, picture_id):
+        """
+            Add item image.
+            Parameters:
+                - item_id: item id
+                - picture_id: new picture_id
+        """
+        return self.requests_obj._post(f'/items/{item_id}/pictures', json = { 'id': picture_id })
 
     def get_orders(self, params={}):
         """	
@@ -248,8 +247,7 @@ class MercadoLibreClient(object):
                 - params: custom filter.
             Info: https://developers.mercadolibre.com.ar/es_ar/gestiona-ventas#Buscar-ordenes
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        return requests_obj._get('/orders/search', params=params)
+        return self.requests_obj._get('/orders/search', params=params)
 
     def get_sale_billing_info(self, order_id):
         """	
@@ -258,8 +256,7 @@ class MercadoLibreClient(object):
                 - order_id: order ID
             Info: https://developers.mercadolibre.com.ar/es_ar/gestiona-ventas#Buscar-ordenes
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        return requests_obj._get(f'/orders/{order_id}/billing_info')
+        return self.requests_obj._get(f'/orders/{order_id}/billing_info')
 
     def get_site_categories(self, site_id):
         """
@@ -267,8 +264,7 @@ class MercadoLibreClient(object):
             Parameters:
                 - site_id: site ID.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        return requests_obj._get(f'/sites/{site_id}/categories')
+        return self.requests_obj._get(f'/sites/{site_id}/categories')
 
     def get_category_data(self, categ_id):
         """
@@ -276,8 +272,7 @@ class MercadoLibreClient(object):
             Parameters:
                 - categ_id: category ID.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        return requests_obj._get(f'/categories/{categ_id}')
+        return self.requests_obj._get(f'/categories/{categ_id}')
 
     def get_all_categories(self, site_id, withAttributes=False):
         """
@@ -286,11 +281,10 @@ class MercadoLibreClient(object):
                 - site_id: site ID.
                 - withAttributes: get all categories attributes.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
         params = {}
         if withAttributes:
             params['withAttributes'] = 'true'
-        return requests_obj._get(f'/sites/{site_id}/categories/all', params=params)
+        return self.requests_obj._get(f'/sites/{site_id}/categories/all', params=params)
 
     def get_shipping_methods(self, site_id):
         """
@@ -298,5 +292,4 @@ class MercadoLibreClient(object):
             Parameters:
                 - site_id: site ID.
         """
-        requests_obj = Requests(self._API_URL, self.default_headers)
-        return requests_obj._get(f'/sites/{site_id}/shipping_methods')
+        return self.requests_obj._get(f'/sites/{site_id}/shipping_methods')
