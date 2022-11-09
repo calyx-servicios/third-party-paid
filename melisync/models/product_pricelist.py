@@ -2,7 +2,7 @@
 from odoo import models, _, fields
 from datetime import datetime
 
-class ProductsModel(models.Model):
+class ProductPricelist(models.Model):
     _inherit = 'product.pricelist'
 
     meli_list = fields.Boolean(default=False, string=('Is MercadoLibre list?'), help=_('Show in MercadoLibre pricelists list.'))

@@ -6,7 +6,7 @@ from odoo.osv import expression
 import logging
 logger = logging.getLogger(__name__)
 
-class SiteIDsModel(models.Model):
+class SiteIds(models.Model):
     _name = 'melisync.site.ids'
     _description = 'MercadoLibreSync Site IDs Model'
     _rec_name = 'name'
@@ -37,7 +37,7 @@ class SiteIDsModel(models.Model):
         ctx = self._context
         if 'order_display' in ctx:
             order = ctx['order_display']
-        return super(SiteIDsModel, self).search(args, offset=offset, limit=limit, order=order, count=count)
+        return super(SiteIds, self).search(args, offset=offset, limit=limit, order=order, count=count)
 
     def get_site_ids(self):
         """

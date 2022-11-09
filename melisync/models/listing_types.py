@@ -5,7 +5,7 @@ from odoo.exceptions import UserError
 import logging
 logger = logging.getLogger(__name__)
 
-class ListingTypesModel(models.Model):
+class ListingTypes(models.Model):
     _name = 'melisync.listing.types'
     _description = 'MercadoLibre Listing Types Model'
     _rec_name = 'field_name'
