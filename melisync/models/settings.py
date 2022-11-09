@@ -8,7 +8,7 @@ from ..utils.mercadolibreapi import MercadoLibreClient
 import logging
 logger = logging.getLogger(__name__)
 
-class SettingsModel(models.Model):
+class Settings(models.Model):
     _name = 'melisync.settings'
     _description = 'MercadoLibreSync Settings Model'
     _rec_name = 'name'
@@ -41,7 +41,6 @@ class SettingsModel(models.Model):
     default_shipping_methods_free = fields.Many2many(comodel_name='melisync.shipping.methods', string=_('Default shipping free methods'), help=_('Default shipping free methods for all products sync.'))
     auto_sync = fields.Boolean(default=True, string=_('Auto synchronize data'), help=_('Upload and download daily updates for products and sales.'))
     sync_categories_attrs = fields.Boolean(default=False, string=_('Synchronize categories attributes'), help=_('On categories synchronization, download attributes'))
-    default_listing_type = fields.Many2one(required=True, comodel_name='melisync.listing.types', string=_('Default products listing type'))
 
     # Constraints
     @api.constrains('multiprocess_qty_process')
@@ -69,7 +68,6 @@ class SettingsModel(models.Model):
         # Variables
         for rec in self:
             rec.currency_id = False
-            rec.default_listing_type = False
             rec.default_shipping_methods_free = False
 
     def _get_categories_count(self):
@@ -86,7 +84,7 @@ class SettingsModel(models.Model):
         melisync_publications_obj = self.env['melisync.publications']
         for rec in self:
             try:
-                rec.published_count = len(melisync_publications_obj.search([('status', 'in', ['active', 'paused'])]))
+                rec.published_count = len(melisync_publications_obj.search(self._get_published_domain()))
             except Exception as e:
                 logger.warning(_('Error on get published_count for setting ID {}: {}').format(rec.id, e))
 
@@ -216,18 +214,31 @@ class SettingsModel(models.Model):
             'res_model': 'melisync.categories',
             'domain': [('site_id', '=', self.site_id.id)],
         }
+
+    def _get_published_domain(self):
+        domain = [
+            ('instance', '=', self.id),
+            ('status', 'in', ['active', 'paused']),
+            ('publication_id', '!=', False)
+        ]
+        return domain
     
     def button_view_published(self):
         """
             View published products of settings instance.
         """
         self.ensure_one()
+        # Objects
+        melisync_publications_obj = self.env['melisync.publications']
+        # Products
+        publications = melisync_publications_obj.search(self._get_published_domain())
+        prod_ids = list(set([x.product_id.id for x in publications]))
         return {
             'type': 'ir.actions.act_window',
             'name': _('Published/paused products'),
             'view_mode': 'tree,form',
             'res_model': 'product.template',
-            'domain': [('meli_instance', '=', self.id), ('meli_status', 'in', ['active', 'paused'])],
+            'domain': [('id', 'in', prod_ids)],
         }
 
     def button_view_sales(self):
@@ -332,33 +343,6 @@ class SettingsModel(models.Model):
         except Exception as e:
             logger.error(_('Error on sync products all of setting instance ID {}: {}').format(self.id, e))
             raise UserError(_('Error on sync products all for this site. Please, review your config.'))
-    
-    def sync_products_stock(self):
-        """
-            Synchronize stock for all products published in MercadoLibre.
-        """
-        try:
-            # Objects
-            product_template_obj = self.env['product.template']
-            # Get all products published and active
-            domain = [
-                ('meli_id', '!=', False),
-                ('meli_status', '=', 'active'),
-            ]
-            products = product_template_obj.search(domain)
-            # If exists products published
-            if products:
-                # Get MercadoLibre client instance
-                client = self.get_client_instance()
-                # Loop products
-                for product in products:
-                    try:
-                        product.sync_stock(client)
-                    except Exception as e:
-                        logger.warning(_('Error on sync product stock of product "{}" ({}): {}').format(product.name, product.id, e))
-        except Exception as e:
-            logger.error(_('Error on sync products stock of setting instance ID {}: {}').format(self.id, e))
-            raise UserError(_('Error on sync products stock for this site. Please, review your config.'))
     
     def publish_ready_products(self):
         """

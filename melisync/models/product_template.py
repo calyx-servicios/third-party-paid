@@ -5,7 +5,7 @@ from odoo.exceptions import UserError
 import logging
 logger = logging.getLogger(__name__)
 
-class ProductsModel(models.Model):
+class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     _BUYING_MODE = [
@@ -80,8 +80,9 @@ class ProductsModel(models.Model):
         """
         melisync_publications_obj = self.env['melisync.publications']
         # If published on MercadoLibre
-        res = super(ProductsModel, self).write(values)
-        if self.meli_publications != False:
+        res = super(ProductTemplate, self).write(values)
+        # If already published products on MercadoLibre
+        if len(self.meli_publications):
             # Set fields to update automatically when change values.
             listen_fields = [
                 'meli_condition',
@@ -90,6 +91,7 @@ class ProductsModel(models.Model):
                 'meli_shipping_methods_free',
                 'meli_buying_mode',
                 'sale_ok',
+                'description_sale',
             ]
             # Fields modified
             modified_fields = [key for key, _ in values.items() if key in listen_fields]
@@ -102,11 +104,11 @@ class ProductsModel(models.Model):
                 ]
                 # Get publication IDS
                 publication_ids = melisync_publications_obj.search(domain)
+                # Objects
+                client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
                 # Loop publications
                 for publication in publication_ids:
                     try:
-                        # Objects
-                        client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
                         # Update publication in MercadoLibre
                         publication.sync(client)
                     except Exception as e:
@@ -193,14 +195,6 @@ class ProductsModel(models.Model):
             'tag': 'reload',
         }
 
-    def meli_button_sync_stock(self):
-        self.meli_sync_stock()
-        # Reload the view.
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'reload',
-        }
-
     def meli_button_reactivate(self):
         self.meli_reactivate()
         # Reload the view.
@@ -244,10 +238,10 @@ class ProductsModel(models.Model):
                 ('status', '=', 'ready_for_publish'),
             ]
             publications = melisync_publications_obj.search(domain)
+            client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
             # Loop publications
             for publication in publications:
                 try:
-                    client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
                     publication.publish(client)
                 except Exception as e:
                     raise Exception(_('Error on publish product "{}" ({}): {}').format(self.name, publication.listing_type.name, e))
@@ -265,36 +259,15 @@ class ProductsModel(models.Model):
                 ('status', '=', 'active'),
             ]
             publications = melisync_publications_obj.search(domain)
+            client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
             # Loop publications
             for publication in publications:
                 try:
-                    client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
                     publication.sync(client)
                 except Exception as e:
                     raise Exception(_('Error on sync product "{}" ({}): {}').format(self.name, publication.listing_type.name, e))
         except Exception as e:
             raise UserError(_('Error on sync publications for product "{}" (id: {}): {}').format(self.name, self.id, e))
-
-    def meli_sync_stock(self):
-        # Object
-        melisync_publications_obj = self.env['melisync.publications']
-        try:
-            # Parse domain
-            domain = [
-                ('id', 'in', self.meli_publications.ids),
-                ('publication_id', '!=', False),
-                ('status', '=', 'active'),
-            ]
-            publications = melisync_publications_obj.search(domain)
-            # Loop publications
-            for publication in publications:
-                try:
-                    client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
-                    publication.sync_stock(client)
-                except Exception as e:
-                    raise Exception(_('Error on sync stock product "{}" ({}): {}').format(self.name, publication.listing_type.name, e))
-        except Exception as e:
-            raise UserError(_('Error on sync stock publications for product "{}" (id: {}): {}').format(self.name, self.id, e))
 
     def meli_reactivate(self):
         # Object
@@ -307,10 +280,10 @@ class ProductsModel(models.Model):
                 ('status', '=', 'paused'),
             ]
             publications = melisync_publications_obj.search(domain)
+            client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
             # Loop publications
             for publication in publications:
                 try:
-                    client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
                     publication.reactivate(client)
                 except Exception as e:
                     raise Exception(_('Error on reactivate product "{}" ({}): {}').format(self.name, publication.listing_type.name, e))
@@ -328,10 +301,10 @@ class ProductsModel(models.Model):
                 ('status', '=', 'active'),
             ]
             publications = melisync_publications_obj.search(domain)
+            client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
             # Loop publications
             for publication in publications:
                 try:
-                    client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
                     publication.pause(client)
                 except Exception as e:
                     raise Exception(_('Error on pause product "{}" ({}): {}').format(self.name, publication.listing_type.name, e))
@@ -349,10 +322,10 @@ class ProductsModel(models.Model):
                 ('status', 'in', ['active', 'paused']),
             ]
             publications = melisync_publications_obj.search(domain)
+            client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
             # Loop publications
             for publication in publications:
                 try:
-                    client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
                     publication.close(client)
                 except Exception as e:
                     raise Exception(_('Error on close product "{}" ({}): {}').format(self.name, publication.listing_type.name, e))
@@ -370,14 +343,12 @@ class ProductsModel(models.Model):
                 ('status', '=', ['active', 'paused']),
             ]
             publications = melisync_publications_obj.search(domain)
+            client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
             # Loop publications
             for publication in publications:
                 try:
-                    client = self.meli_instance.get_client_instance() # Get MercadoLibre instance
                     publication.close_force(client)
                 except Exception as e:
                     logger.warning(_('Error on force close product "{}" ({}): {}').format(self.name, publication.listing_type.name, e))
         except Exception as e:
             raise UserError(_('Error on force close publications for product "{}" (id: {}): {}').format(self.name, self.id, e))
-
-
