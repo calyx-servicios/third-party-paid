@@ -18,7 +18,7 @@
     <template id="assets" inherit_id="point_of_sale.assets">
         <xpath expr="." position="inside">
 
-            <t t-call="web._assets_utils"/>
+            <!-- <t t-call="web._assets_utils"/>
             <t t-call="web._assets_primary_variables"/>
             <t t-call="web._assets_secondary_variables"/>
             <link rel="stylesheet" type="text/scss"
@@ -39,7 +39,7 @@
             <link rel="stylesheet" type="text/scss" href="/mail/static/src/scss/thread_window.scss"/>
             <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/import_bootstrap.scss"/>
             <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/dropdown.scss"/>
-            <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/dropdown_extra.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/dropdown_extra.scss"/> -->
 
             <link href="/point_of_sale_chat/static/src/scss/message.scss"
                   rel="stylesheet" type="text/scss"/>
