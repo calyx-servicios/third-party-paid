@@ -40,11 +40,15 @@ odoo.define('point_of_sale_chat.chrome', function (require) {
             'click .o_new_message': '_onClickNewMessage',
             'click .o_mail_preview_mark_as_read': '_onClickPreviewMarkAsRead',
             'click .o_thread_window_expand': '_onClickExpand',
+            'click .close_chat': 'close'
         },
         isMobile: function () {
             return config.device.isMobile;
         },
         close: function(){
+			if(!$('.o_mail_systray_item').hasClass('oe_hidden')){
+		    	$('.o_mail_systray_item').addClass('oe_hidden');
+		    }
         },
         /**
          * @override
