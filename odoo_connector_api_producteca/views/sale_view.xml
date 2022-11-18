@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+      <!-- ORDERS VIEW FORMS -->
+
+      <record model="ir.ui.view" id="view_producteca_sale_order_form">
+          <field name="name">producteca.sale_order.form</field>
+          <field name="model">producteca.sale_order</field>
+          <field name="type">form</field>
+          <field name="arch" type="xml">
+            <form string="Orden de Producteca">
+              <header>
+                <field name="status" widget="statusbar"/>
+              </header>
+              <sheet>
+                <div class="oe_title">
+                  <h1><field name="name"  readonly="1"/></h1>                  
+                </div>
+                <div class="oe_button_box" name="button_box_mel" style="width: auto;">
+                  <button name='update' type="object"
+                    string="Actualizar"
+                    attrs="{'invisible':[('integrations_integrationId','=',False)]}"
+                    class="oe_stat_button"
+                    icon="fa-refresh"/>
+                </div>
+                <group>
+                  <group>
+                    <field name="isOpen" readonly="1"/>
+                    <field name="isCanceled" readonly="1"/>
+                    <field name="paymentStatus" readonly="1"/>
+                    <field name="deliveryStatus" readonly="1"/>
+                    <field name="paymentFulfillmentStatus" readonly="1"/>
+                    <field name="deliveryFulfillmentStatus" readonly="1"/>
+                  </group>
+                  <group>
+                    <field name="connection_account"  readonly="1"/>
+                    <field name="channel" invisible="1"  readonly="1"/>
+                    <field name="channel_id"  readonly="1"/>
+                    <field name="integrations_integrationId"  readonly="1"/>
+                    <field name="integrations_alternateId"  readonly="1"/>
+                  </group>
+                </group>
+                <group>
+                  <group>
+                      <field name="cartId"/>
+                      <field name="client"/>
+                      <field name="sale_order"/>
+                      <field name="date_created" invisible="1" readonly="1"/>
+                      <field name="date_closed" invisible="1" readonly="1"/>
+                      <field name="date"/>
+                      <field name="tags"/>                                            
+                      <!--field name="seller"/>
+                      <field name="pack_order"/>
+                      <field name="catalog_order"/-->
+                  </group>
+                  <group>
+                      <field name="amount" widget="monetary"/>
+                      <field name="amount_no_shipping" widget="monetary"/>
+                      <field name="shippingCost"  widget="monetary"/>
+                      <field name="financialCost"  widget="monetary"/>
+                      <field name="paidApproved"  widget="monetary"/>
+                      <field name="currency"/>
+                      <field name="customId"/>
+                      <field name="paymentTerm"/>
+                      <field name="logisticType"/>
+                      <field name="shippingLink" widget="url"/>
+                  </group>
+                </group>
+                <notebook>
+                  <page string="Order Items">
+                    <field name="lines">
+                      <tree delete="0" edit="0" create="0">
+                        <field name="name"/>
+                        <field name="quantity"/>
+                        <field name="price"/>
+                      </tree>
+                    </field>
+                  </page>
+                  <page string="Payments">
+                    <field name="payments">
+                      <tree delete="0" edit="0" create="0">
+                        <field name="name"/>
+                        <field name="method"/>
+                        <field name="date"/>
+                        <field name="account_payment_id"/>
+                        <field name="amount"/>
+                        <field name="couponAmount"/>
+                        <field name="status"/>
+                      </tree>
+                    </field>
+                  </page>
+                  <page string="Shipments">
+                    <group>
+                      <group>
+                          <field name="hasAnyShipments"/>
+                          <field name="deliveryMethod"/>
+                          <field name="logisticType"/>
+                        </group>
+                        <group>
+                          <field name="shipments"/>
+                        </group>
+                    </group>
+                  </page>
+                  <page string="Notifications">
+                    <field name="sale_notifications">
+                      <tree delete="0" edit="1" create="0">
+                        <field name="sent" />
+              					<field name="topic" />
+              					<field name="resource" />
+                        <field name="state" />
+                      </tree>
+                    </field>
+                  </page>
+                </notebook>
+              </sheet>
+
+            </form>
+          </field>
+      </record>
+
+      <!--TREE AND MENU VIEWS -->
+
+        <record id="sale_order_view_search_inherit_producteca" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit.producteca</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
+                  <field name="producteca_bindings" string="Producteca Bindings"/>
+                  <separator/>
+                  <filter string="Producteca Orders" name="sale_orders_producteca" domain="[('producteca_bindings','!=',False)]" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_view_search_inherit_quotation_producteca" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit.quotation.producteca</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='my_quotation']" position="after">
+                  <field name="producteca_bindings" string="Producteca Bindings"/>
+                  <separator/>
+                  <filter string="Producteca Quotations" name="sale_quotations_producteca" domain="[('producteca_bindings','!=',False)]" />
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_producteca_orders_tree">
+            <field name="name">producteca.sale_order.tree</field>
+            <field name="model">producteca.sale_order</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Orders" default_order="conn_id desc">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="sale_order"/>
+                    <field name="conn_id"/>
+                    <field name="date"/>
+                    <field name="client"/>
+                    <field name="logisticType"/>
+                    <field name="paidApproved"/>
+                    <field name="paymentStatus" optional="hide"/>
+                    <field name="deliveryStatus" optional="hide"/>
+                    <field name="amount" widget="monetary"/>
+                    <field name="amount_no_shipping" widget="monetary"/>
+                    <field name="shippingLink" widget="url"/>
+                    <!--field name="order_id"/>
+                    <field name="shipping_id" invisible="0"/>
+                    <field name="status"/>
+                    <field name="buyer"/>
+                    <field name="total_amount"/>
+                    <field name="paid_amount"/>
+                    <field name="date_created"/>
+                    <field name="date_closed"/>
+                    <field name="tags" invisible="1"/>
+                    <field name="pack_order" string="Es Carrito"/>
+                    <field name="catalog_order" string="Es de Catalogo"/-->
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sale_order_form_producteca">
+            <field name="name">sale.order.form.producteca</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <notebook>
+                        <page string="Producteca" attrs="{'invisible':[('producteca_bindings', '=', False)]}">
+                          <button name='producteca_update' type="object"
+                            string="Actualizar"
+                            attrs="{'invisible':[('producteca_bindings','=',False)]}"
+                            class="oe_stat_button"
+                            icon="fa-refresh"/>
+                            <field name="producteca_bindings" invisible="0"/>
+                            <!--group>
+                              <field name="producteca_order_id" invisible="0"/>
+                              <field name="producteca_status" invisible="0"/>
+                              <field name="producteca_shipment" invisible="0"/>
+                              <field name="producteca_shipment_logistic_type" invisible="0"/>
+                              <field name="producteca_status_detail" invisible="0"/>
+                              <field name="producteca_total_amount" invisible="0"/>
+                              <field name="producteca_shipping_cost" invisible="0"/>
+                              <field name="producteca_shipping_list_cost" invisible="0"/>
+                              <field name="producteca_fee_amount" invisible="0"/>
+                              <field name="producteca_paid_amount" invisible="0"/>
+                              <field name="producteca_currency_id" invisible="0"/>
+                              <field name="producteca_date_created" invisible="0"/>
+                              <field name="producteca_date_closed" invisible="0"/>
+                            </group-->
+                        </page>
+                    </notebook>
+                </data>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_res_partner_form_producteca">
+            <field name="name">res.partner.form.producteca</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <notebook>
+                        <page string="Producteca" attrs="{'invisible':[('producteca_bindings', '=', False)]}">
+                          <group>
+                            <field name="producteca_bindings" invisible="0"/>
+                            <!--field name="producteca_buyer" invisible="0"/-->
+                          </group>
+                        </page>
+                    </notebook>
+                </data>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_producteca_product_pricelist_items_tree">
+            <field name="name">producteca.product.pricelist.item.tree</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_tree_view"/>
+            <field name="arch" type="xml">
+              <!--xpath expr="//field[@name='name']" position="before">
+                  <field name="pricelist_id"/>
+              </xpath-->
+              <xpath expr="//field[@name='name']" position="after">
+                  <field name="price"/>
+                  <!--field name="product_brand"/-->
+                  <field name="product_main_cat"/>
+                  <field name="product_main_cat_child"/>
+                  <!--field name="product_size" context="{ 'show_attribute': False }"/>
+                  <field name="product_color" context="{ 'show_attribute': False }"/-->
+              </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_producteca_clients_tree">
+            <field name="name">producteca.client.tree</field>
+            <field name="model">producteca.client</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Clientes" >
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <!--field name="buyer_id"/>
+                    <field name="nickname"/>
+                    <field name="email"/-->
+                </tree>
+            </field>
+        </record>
+
+        <!--record model="ir.ui.view" id="view_producteca_orders_form">
+            <field name="name">producteca.orders.form</field>
+            <field name="model">producteca.orders</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Orden de ML">
+                <header>
+                  <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                  <div class="oe_title">
+                    <h1><field name="name"/></h1>
+                    <field name="status_detail"/>
+                    <field name="tags"/>
+                    <field name="order_id"/>
+                  </div>
+                  <div class="oe_button_box" name="button_box_mel" style="width: auto;">
+                    <button name='orders_update_order' type="object"
+                      string="Actualizar"
+                      attrs="{'invisible':[('order_id','=',False)]}"
+                      class="oe_stat_button"
+                      icon="fa-refresh"/>
+                  </div>
+                  <group>
+                    <group>
+                        <field name="sale_order"/>
+                        <field name="date_created"/>
+                        <field name="date_closed"/>
+                        <field name="buyer"/>
+                        <field name="seller"/>
+                        <field name="pack_order"/>
+                        <field name="catalog_order"/>
+                    </group>
+                    <group>
+                        <field name="total_amount" widget="monetary"/>
+                        <field name="shipping_cost"  widget="monetary"/>
+                        <field name="shipping_list_cost"  widget="monetary"/>
+                        <field name="fee_amount"  widget="monetary"/>
+                        <field name="paid_amount"  widget="monetary"/>
+                        <field name="currency_id"/>
+                    </group>
+                  </group>
+                  <notebook>
+                    <page string="Order Items">
+                      <field name="order_items" />
+                    </page>
+                    <page string="Payments">
+                      <field name="payments"/>
+                    </page>
+                    <page string="Shipments">
+                      <group>
+                        <group>
+                            <field name="shipping"/>
+                            <field name="shipping_id"/>
+                          </group>
+                          <group>
+                            <field name="shipment"/>
+                          </group>
+                      </group>
+                    </page>
+                  </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+              </form>
+            </field>
+        </record-->
+
+        <!--record model="ir.ui.view" id="view_producteca_order_items_tree">
+            <field name="name">producteca.order_items.tree</field>
+            <field name="model">producteca.order_items</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Lineas de la Orden" >
+                    <field name="posting_id"/>
+                    <field name="product_id"/>
+                    <field name="order_id"/>
+                    <field name="order_item_id"/>
+                    <field name="unit_price"/>
+                    <field name="quantity"/>
+                </tree>
+            </field>
+        </record-->
+
+        <!--record model="ir.ui.view" id="view_producteca_payments_tree">
+            <field name="name">producteca.payments.tree</field>
+            <field name="model">producteca.payments</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Pagos" >
+                    <field name="payment_id"/>
+                    <field name="transaction_amount"/>
+                    <field name="total_paid_amount"/>
+                    <field name="shipping_amount"/>
+                    <field name="fee_amount"/>
+                    <field name="taxes_amount"/>
+                    <field name="currency_id"/>
+                    <field name="status"/>
+                    <field name="date_created"/>
+                    <field name="date_last_modified"/>
+                </tree>
+            </field>
+        </record-->
+
+        <record id="producteca_orders_bindings_search_view" model="ir.ui.view">
+            <field name="name">producteca.sale_order.search</field>
+            <field name="model">producteca.sale_order</field>
+            <field name="arch" type="xml">
+    	         <search string="Search Producteca Orders Information">
+                 <field name="name" string="Name"/>
+                 <field name="conn_id" string="Connector Id"/>
+                 <!--field name="status" string="Status"/-->
+                 <!--field name="buyer" string="Comprador"/-->
+                 <!--field name="seller" string="Vendedor"/-->
+    	         </search>
+            </field>
+        </record>
+
+        <record id="producteca_sale_order_search_view" model="ir.ui.view">
+        	<field name="name">Sale - Search</field>
+        	<field name="model">sale.order</field>
+        	<field name="arch" type="xml">
+        		<search  string="Search Producteca Sale Quotations/Orders">
+        			<field name="name" />
+              <!--field name="date_create" /-->
+              <filter string="Producteca"
+    						domain="[('producteca_bindings', '!=', False)]"
+    						name="producteca_filter" />
+        		</search>
+        	</field>
+        </record>
+        
+        <record id="producteca_product_pricelist_items_search_view" model="ir.ui.view">
+        	<field name="name">Precios - Search</field>
+        	<field name="model">product.pricelist.item</field>
+        	<field name="arch" type="xml">
+        		<search  string="Search Producteca PriceList Items">
+        			<field name="product_id"/>
+              <!--field name="name" /-->
+              <!--field name="date_create" /-->
+              <field name="pricelist_id"/>              
+              <!--field name="product_brand"/-->
+              <field name="product_main_cat"/>
+              <filter string="Producteca"
+    						domain="['|',('producteca_tmpl_bindings', '!=', False),('producteca_var_bindings', '!=', False)]"
+    						name="producteca_filter" />
+              <!--filter string="Compania TownConnection"
+    						domain="[('company_id','=',1)]"
+    						name="producteca_compania_town" /-->
+              <filter string="Agrupar por Lista"
+    						domain="[]"
+                context="{'group_by': 'pricelist_id'}"
+    						name="producteca_agrupar_lista" />
+              <filter string="Agrupar por Cia"
+      						domain="[]"
+                  context="{'group_by': 'company_id'}"
+      						name="producteca_agrupar_cia" />
+        		</search>
+        	</field>
+        </record>
+
+        <!--record id="producteca_clients_search_view" model="ir.ui.view">
+            <field name="name">mercadolibre.clients.search</field>
+            <field name="model">mercadolibre.clients</field>
+            <field name="arch" type="xml">
+        	    <search string="Search MercadoLibre Buyers Information">
+                  <field name="nickname" string="Usuario ML"/>
+                  <field name="first_name" string="Nombre ML"/>
+                  <field name="last_name" string="Apellido ML"/>
+                  <field name="email" string="Email ML"/>
+                  <field name="phone" string="Phone ML"/>
+                  <field name="alternative_phone" string="Alternative Phone ML"/>
+                  <field name="billing_info" string="Documento Id ML"/>
+        	    </search>
+            </field>
+        </record-->
+
+        <!--record id="view_orders_update" model="ir.ui.view">
+              <field name="name">Actualizar Orden de ML</field>
+              <field name="model">mercadolibre.orders.update</field>
+              <field name="type">form</field>
+              <field name="arch" type="xml">
+                <form string="Update Order" version="7.0">
+                    <footer>
+                        <button name="order_update" string="Update Order"  type="object" class="oe_highlight"  />
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+              </field>
+        </record-->
+
+        <record model="ir.actions.act_window" id="action_producteca_orders_tree">
+            <field name="name">Ventas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <!--field name="view_type">form</field-->
+            <field name="view_mode">tree,form</field>
+            <!--field name="view_id" ref="view_producteca_binding_product_template_tree"/-->
+            <field name="context">{"search_default_producteca_filter":1}</field>
+          	<field name="search_view_id" ref="producteca_sale_order_search_view" />
+            <!--<field name="search_view_id" ref="producteca_orders_search_view"/>-->
+        </record>
+
+        <record model="ir.actions.act_window" id="action_producteca_pricelist_items_tree">
+            <field name="name">Precios</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.pricelist.item</field>
+            <!--field name="view_type">form</field-->
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_producteca_product_pricelist_items_tree"/>
+            <field name="search_view_id" ref="producteca_product_pricelist_items_search_view" />
+            <!--field name="context">{"search_default_producteca_filter":1}</field-->
+            <!--field name="search_view_id" ref="producteca_sale_order_search_view" /-->
+        </record>
+
+        <record model="ir.actions.act_window" id="action_producteca_orders_bindings_tree">
+            <field name="name">Ventas Producteca</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">producteca.sale_order</field>
+            <!--field name="view_type">form</field-->
+            <field name="view_mode">tree,form</field>
+            <!--<field name="search_view_id" ref="producteca_orders_search_view"/>-->
+        </record>
+
+        <record model="ir.actions.act_window" id="action_producteca_clients_tree">
+            <field name="name">Clientes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">producteca.client</field>
+            <!--field name="view_type">form</field-->
+            <field name="view_mode">tree,form</field>
+            <!--<field name="search_view_id" ref="producteca_clients_search_view"/>-->
+        </record>
+
+        <!--record id="action_update_producteca_orders" model="ir.actions.act_window">
+            <field name="name">Actualizar Ordenes de ML</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="src_model">mercadolibre.orders</field>
+            <field name="res_model">mercadolibre.orders.update</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record-->
+
+        <!--
+        <record model="ir.values" id="update_producteca_orders">
+            <field name="name">Actualizar Ordenes</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' +str(ref('action_update_producteca_orders'))" />
+            <field name="key">action</field>
+            <field name="model">mercadolibre.orders</field>
+        </record>
+        -->
+
+        <menuitem id="menu_producteca_connectors" name="Producteca" parent="sale.sale_menu_root" sequence="5"
+            groups="odoo_connector_api_producteca.group_producteca_connectors_manager" />
+
+          <menuitem id="menu_producteca_orders"
+              action="action_producteca_orders_tree"
+              parent="menu_producteca_connectors"
+              name="Ventas" sequence="6"/>
+
+
+              <menuitem id="menu_producteca_orders_bindings"
+                  action="action_producteca_orders_bindings_tree"
+                  parent="menu_producteca_connectors"
+                  name="Ventas Producteca" sequence="7"/>
+
+          <menuitem id="menu_producteca_clients"
+              action="action_producteca_clients_tree"
+              parent="menu_producteca_connectors"
+              name="Clientes" sequence="8"/>
+
+
+              <menuitem id="menu_producteca_pricelist_items"
+                  action="action_producteca_pricelist_items_tree"
+                  parent="menu_producteca_connectors"
+                  name="Precios" sequence="9"/>
+
+        <!--act_window id="action_update_producteca_orders"
+            name="Update ML Orders"
+            src_model="mercadolibre.orders"
+            res_model="mercadolibre.orders.update"
+            view_type="form" view_mode="form"
+            key2="client_action_multi" target="new"/-->
+
+
+
+
+    </data>
+</odoo>

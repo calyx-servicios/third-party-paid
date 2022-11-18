@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+
+  		<record id="view_producteca_account_form" model="ir.ui.view" >
+  			<field name="name">producteca.account.form</field>
+  			<field name="model">producteca.account</field>
+  			<field name="arch" type="xml">
+  				<form>
+  					<header>
+  						<!--field name="status" widget="statusbar" /-->
+  					</header>
+  					<sheet>
+  						<div class="oe_title">
+  							<h1><field name="name"/></h1>
+                <field name="state" readonly="1"/>
+  						</div>
+  						<div class="oe_button_box" name="button_box_mel" style="width: auto;">
+  							<button name='create_credentials' type="object"
+  								string="Crear credenciales"
+  								title="Crear credenciales"
+  								confirm="¿Está seguro que necesita crear nuevas credenciales?"
+  								class="oe_stat_button"
+  								icon="fa-refresh"/>
+  						</div>
+              <notebook>
+                <page string="Credentials">
+                  <group>
+                  	<group>
+                      <field name="configuration" />
+                      <field name="type" />
+                  		<field name="company_id" />
+                  		<field name="country_id" />
+                  	</group>
+                  	<group>
+                  		<field name='client_id'/>
+                  		<field name="secret_key" />
+                  		<field name="access_token" />
+                  		<field name="seller_id" />
+                  	</group>
+                  </group>
+                </page>
+                <page string="Product Bindings">
+                  <field name="producteca_product_template_bindings">
+                     <tree>
+                       <field name="name"/>
+                       <field name="conn_id"/>
+                       <field name="sku"/>
+                       <field name="barcode"/>
+                     </tree>
+                  </field>
+                </page>
+                <page string="Variant Bindings">
+                   <field name="producteca_product_bindings">
+                       <tree>
+                         <field name="name"/>
+                         <field name="conn_id"/>
+                         <field name="conn_variation_id"/>
+                         <field name="sku"/>
+                         <field name="barcode"/>
+                       </tree>
+                   </field>
+                </page>
+                <page string="Orders">
+                   <field name="producteca_orders">
+                       <tree>
+                         <field name="name"/>
+                         <field name="sale_order"/>
+                         <field name="status"/>
+                         <!--field name="shipment_status"/-->
+                       </tree>
+                   </field>
+                </page>
+              </notebook>
+  					</sheet>
+  				</form>
+  			</field>
+  		</record>
+
+
+      <record id="view_connection_configuration_producteca" model="ir.ui.view" >
+					<field name="name">producteca.configuration.form</field>
+					<field name="model">producteca.configuration</field>
+					<field name="arch" type="xml">
+            <form string="Producteca Configuration">
+							<header>
+								<field name="mode" widget="statusbar"/>
+							</header>
+							<sheet>
+								<div class="oe_title">
+									<h1><field name="name"/></h1>
+								</div>
+                <group>
+                  <div class="oe_button_box" name="button_box_mel" style="width: auto;">
+                    <!--button name='copy_from_company' type="object"
+  											string="Copiar de Cia"
+  											title="Copiar de Cia"
+  											class="oe_stat_button"
+  											icon="fa-user-circle"/-->
+                  </div>
+                </group>
+                <group name="accounts" string="Accounts">
+                  <field name="accounts"/>
+                </group>
+                <group string="Configuración básica">
+                  <group>
+                    <field name="producteca_channels"/>
+                    <field name="producteca_channels_bindings"/>
+                    <field name="doc_undefined"/>
+                    <field name="import_payments_shipment"/>
+                  </group>
+                  <group>
+                    <field name="seller_user"/>
+                    <field name="seller_team"/>
+                    <field name="mode"/>
+                  </group>
+                </group>
+                <group string="Import Producteca a Odoo" name="ocapi_import">
+                  <group>
+                    <field name="import_sales"/>
+                    <field name="including_shipping_cost"/>
+                    <field name="import_sales_action"/>
+                    <field name="import_sales_action_full"/>
+                    <field name="import_sales_action_full_logistic" />
+
+                    <field name="import_products"/>
+                    <field name="import_stock"/>
+                    <field name="import_price_list"/>
+                    <field name="import_payments"/>
+                    <field name="import_payments_fee"/>
+                    <field name="import_payments_shipment"/>
+                  </group>
+                  <group>
+                    <field name="import_price_lists">
+                      <tree>
+                        <field name="name"/>
+                        <field name="currency_id"/>
+                      </tree>
+                    </field>
+                    <field name="import_stock_locations">
+                      <tree>
+                        <field name="name"/>
+                        <field name="lot_stock_id"/>
+                      </tree>
+                    </field>
+                  </group>
+                </group>
+                <group string="Export Odoo a Producteca" name="ocapi_export">
+                  <group>
+                    <field name="publish_products"/>
+                    <field name="publish_stock"/>
+                    <field name="publish_price_list"/>
+                  </group>
+                  <group>
+                    <field name="publish_price_lists">
+                      <tree>
+                        <field name="name"/>
+                        <field name="currency_id"/>
+                      </tree>
+                    </field>
+                    <field name="publish_stock_locations">
+                      <tree>
+                        <field name="display_name"/>
+                        <field name="usage"/>
+                      </tree>
+                    </field>
+                  </group>
+                </group>
+              </sheet>
+            </form>
+          </field>
+      </record>
+
+      <record id="view_connection_configuration_producteca_channel_binding" model="ir.ui.view" >
+					<field name="name">producteca.channel.binding.form</field>
+					<field name="model">producteca.channel.binding</field>
+					<field name="arch" type="xml">
+            <form string="Producteca Channel Binding">
+							<header>
+								<field name="channel_id"/>
+							</header>
+							<sheet>
+								<div class="oe_title">
+									<h1><field name="name"/></h1>
+								</div>
+                <group>
+                  <div class="oe_button_box" name="button_box_mel" style="width: auto;">
+                    <button name='FixJournalMethod' type="object"
+  											string="Ajustar Diario de pago"
+  											title="Ajustar Diario de pago"
+  											class="oe_stat_button"
+  											icon="fa-user-circle"/>
+                  </div>
+                </group>
+                <group string="Base" name="basic">
+                  <group>
+                    <field name="channel_id"/>
+                    <field name="configuration_id"/>
+                    <field name="code"/>
+                    <field name="app_id"/>
+                  </group>
+                  <group>
+                    <field name="country_id"/>
+                    <field name="seller_user"/>
+                    <field name="seller_team"/>
+                  </group>
+                </group>
+                <group string="Ventas" name="automate">
+                  <group>
+                    <field name="import_sale_start_date"/>
+                    <field name="including_shipping_cost"/>
+                    <field name="import_sales_action"/>
+                    <field name="import_sales_action_full"/>
+                    <field name="import_sales_action_full_logistic"/>
+                  </group>
+                  <group>
+                    <field name="warehouse_id"/>
+                  </group>
+                </group>
+                <group string="Cuentas" name="accounting">
+                  <group>
+                    <field name="journal_id"/>
+                    <field name="partner_id"/>
+                  </group>
+                  <group>
+                    <field name="payment_journal_id"/>
+                    <field name="partner_account_receive_id"/>
+                    <field name="account_payment_receipt_validation"/>
+                  </group>
+                </group>
+              </sheet>
+            </form>
+          </field>
+      </record>
+
+
+      <record id="producteca_account_search_view" model="ir.ui.view">
+  			<field name="name">Producteca Accounts - Search</field>
+  			<field name="model">producteca.account</field>
+  			<field name="arch" type="xml">
+  				<search  string="Search Producteca Account">
+  					<field name="name" />
+            <field name="client_id" />
+            <field name="company_id" />
+  				</search>
+  			</field>
+  		</record>
+
+      <record model="ir.ui.view" id="view_producteca_account_tree">
+        <field name="name">producteca.account.tree</field>
+        <field name="model">producteca.account</field>
+        <field name="arch" type="xml">
+          <tree create="0" edit="1" delete="1" default_order='id desc'>
+            <field name="company_id" />
+            <field name="name" />
+            <field name="client_id" />
+            <!--field name="state"/-->
+            <field name="type"/>
+          </tree>
+        </field>
+      </record>
+
+      <record model="ir.ui.view" id="view_producteca_configuration_tree">
+        <field name="name">producteca.configuration.tree</field>
+        <field name="model">producteca.configuration</field>
+        <field name="arch" type="xml">
+          <tree create="1" edit="1" delete="1" default_order='id desc'>
+            <field name="name" />
+            <field name="mode" />
+          </tree>
+        </field>
+      </record>
+
+      <record model="ir.actions.act_window" id="action_producteca_connections_tree">
+  			<field name="name">Connection Accounts</field>
+  			<field name="type">ir.actions.act_window</field>
+  			<field name="res_model">producteca.account</field>
+  			<field name="view_mode">tree,form</field>
+  			<field name="search_view_id" ref="producteca_account_search_view" />
+  		</record>
+
+      <record model="ir.actions.act_window" id="action_producteca_configurations_tree">
+  			<field name="name">Connection Account Configurations</field>
+  			<field name="type">ir.actions.act_window</field>
+  			<field name="res_model">producteca.configuration</field>
+  			<field name="view_mode">tree,form</field>
+  			<!--field name="search_view_id" ref="producteca_configuration_search_view" /-->
+  		</record>
+
+
+      <menuitem id="menu_producteca_connectors" name="Producteca" parent="sale.sale_menu_root" sequence="5"
+          groups="odoo_connector_api_producteca.group_producteca_connectors_manager" />
+
+
+          <menuitem id="menu_producteca_connections"
+            action="action_producteca_connections_tree"
+            parent="menu_producteca_connectors"
+            name="Accounts" sequence="1"/>
+
+            <menuitem id="menu_producteca_configurations"
+              action="action_producteca_configurations_tree"
+              parent="menu_producteca_connectors"
+              name="Configurations" sequence="2"/>
+
+		</data>
+</odoo>

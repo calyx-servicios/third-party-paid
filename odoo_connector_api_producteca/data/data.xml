@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+      <record id="producteca_invoice_email_template" model="mail.template">
+          <field name="name">Envío Factura Producteca</field>
+          <field name="use_default_to" eval="False"/>
+          <field name="email_to">${object.producteca_mail}</field>
+          <field name="subject">${object.company_id.name};</field>
+          <field name="model_id" ref="account.model_account_move"/>
+          <field name="partner_to" >${object.partner_id.id}</field>
+          <field name="report_name">${object.display_name}</field>
+          <field name="auto_delete" eval="False"/>
+          <field name="body_html"><![CDATA[
+              <style>
+                  <link rel='stylesheet' href='${object.get_base_url()}/web/static/lib/bootstrap/css/bootstrap.css'/>
+              </style>
+              <div style="background:#F0F0F0;color:#515166;padding:10px 0px;font-family:Arial,Helvetica,sans-serif;font-size:14px;">
+                  % set access_token = object.access_token
+                  % set document_name = object.type
+                  % set debit = object.es_nota_debito
+                  <table style="width:600px;margin:5px auto;">
+                      <tbody>
+                          <tr>
+                              <td>
+                                Odoo Connector Api Producteca
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <table style="width:600px;margin:0px auto;background:white;border:1px solid #e1e1e1;">
+                      <tbody>
+                          <tr>
+                              <td style="padding:15px 20px 10px 20px;">
+                              </td>
+                          </tr>
+                          <tr>
+                              <td style="padding:10px 20px">
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <table style="width:600px;margin:auto;text-align:center;font-size:12px;">
+                      <tbody>
+                          <tr>
+                              <td style="padding-top:10px;color:#afafaf;">
+                                  <p>Email automatically sent by <a target="_blank" href="https://www.odoo.com/page/project-management" style="color:#875A7B;text-decoration:none;">Odoo Project</a> for <a href="${object.company_id.website}" style="color:#875A7B;text-decoration:none;">${object.company_id.name}</a></p>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          ]]>
+          </field>
+      </record>
+      <!--
+        "2": "Mercadolibre",
+        "16": "Dropshipping",
+        "33": "VTEX",
+        "51": "Magento2",
+        "59": "ICBC Club",
+        "60": "Shopify",
+      -->
+
+      <record id="producteca_channel_mercadolibre" model="producteca.channel">
+          <field name="name">MercadoLibre</field>
+          <field name="code">ML</field>
+          <field name="app_id">2</field>
+      </record>
+
+      <record id="producteca_channel_dropshipping" model="producteca.channel">
+          <field name="name">Dropshipping</field>
+          <field name="code">DRO</field>
+          <field name="app_id">16</field>
+      </record>
+
+      <record id="producteca_channel_vtex" model="producteca.channel">
+          <field name="name">VTEX</field>
+          <field name="code">VTEX</field>
+          <field name="app_id">33</field>
+      </record>
+
+      <record id="producteca_channel_magento2" model="producteca.channel">
+          <field name="name">Magento2</field>
+          <field name="code">MTO2</field>
+          <field name="app_id">51</field>
+      </record>
+
+      <record id="producteca_channel_icbcclub" model="producteca.channel">
+          <field name="name">ICBCClub</field>
+          <field name="code">ICBC</field>
+          <field name="app_id">59</field>
+      </record>
+
+      <record id="producteca_channel_shopify" model="producteca.channel">
+          <field name="name">Shopify</field>
+          <field name="code">SHO</field>
+          <field name="app_id">60</field>
+      </record>
+
+    <!--
+      "63": "Garbarino",
+      "69": "TiendaClic",
+      "70": "TiendaColumbia",
+      "73": "Linio",
+      "75": "Dafiti",
+    -->
+
+      <record id="producteca_channel_garbarino" model="producteca.channel">
+          <field name="name">Garbarino</field>
+          <field name="code">GAR</field>
+          <field name="app_id">63</field>
+      </record>
+
+      <record id="producteca_channel_tiendaclic" model="producteca.channel">
+          <field name="name">TiendaClic</field>
+          <field name="code">TIC</field>
+          <field name="app_id">69</field>
+      </record>
+
+      <record id="producteca_channel_tiendacolumbia" model="producteca.channel">
+          <field name="name">TiendaColumbia</field>
+          <field name="code">TCO</field>
+          <field name="app_id">70</field>
+      </record>
+
+      <record id="producteca_channel_linio" model="producteca.channel">
+          <field name="name">Linio</field>
+          <field name="code">LIN</field>
+          <field name="app_id">73</field>
+      </record>
+
+      <record id="producteca_channel_dafiti" model="producteca.channel">
+          <field name="name">Dafiti</field>
+          <field name="code">DAF</field>
+          <field name="app_id">75</field>
+      </record>
+
+
+      <!--
+        "77": "Linio MX", //Mexico
+        "103": "Elektra", //Mexico
+        "113": "Naranja",
+        "140": "BBVA",
+        "141": "Supervielle",
+      -->
+
+      <record id="producteca_channel_linio" model="producteca.channel">
+          <field name="name">Linio MX</field>
+          <field name="code">LIMX</field>
+          <field name="app_id">77</field>
+      </record>
+
+      <record id="producteca_channel_elektra" model="producteca.channel">
+          <field name="name">Elektra</field>
+          <field name="code">ELK</field>
+          <field name="app_id">103</field>
+      </record>
+
+      <record id="producteca_channel_naranja" model="producteca.channel">
+          <field name="name">Naranja</field>
+          <field name="code">NJA</field>
+          <field name="app_id">113</field>
+      </record>
+
+      <record id="producteca_channel_bbva" model="producteca.channel">
+          <field name="name">BBVA</field>
+          <field name="code">BBVA</field>
+          <field name="app_id">140</field>
+      </record>
+
+      <record id="producteca_channel_supervielle" model="producteca.channel">
+          <field name="name">Supervielle</field>
+          <field name="code">SUP</field>
+          <field name="app_id">141</field>
+      </record>
+
+
+      <!--
+        "208": "Claroshop", //Mexico
+        "209": "Walmart",   //Mexico
+        "220": "Fravega",
+        "233": "Walmart DSV" //Mexico
+      -->
+
+      <record id="producteca_channel_claroshop" model="producteca.channel">
+          <field name="name">Claroshop</field>
+          <field name="code">CLA</field>
+          <field name="app_id">208</field>
+      </record>
+
+      <record id="producteca_channel_walmart" model="producteca.channel">
+          <field name="name">Walmart</field>
+          <field name="code">WAL</field>
+          <field name="app_id">209</field>
+      </record>
+
+      <record id="producteca_channel_fravega" model="producteca.channel">
+          <field name="name">Fravega</field>
+          <field name="code">FRA</field>
+          <field name="app_id">220</field>
+      </record>
+
+      <record id="producteca_channel_walmartdsv" model="producteca.channel">
+          <field name="name">Walmart DSV</field>
+          <field name="code">WALD</field>
+          <field name="app_id">233</field>
+      </record>
+
+      <!--Habilita en esos campos de ese modelo para ser publicados en los website forms -->
+      <!--
+        <function model="ir.model.fields" name="formbuilder_whitelist">
+            <value>res.partner</value>
+            <value eval="[
+                'name', 'phone', 'email',
+                'city', 'zip', 'street', 'state_id', 'country_id',
+                'vat', 'company_name', 'main_id_number', 'main_id_category_id'
+            ]"/>
+        </function>
+      -->
+    </data>
+</odoo>

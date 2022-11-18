@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_producteca_connectors_manager" model="res.groups">
+        <field name="name">Producteca Manager</field>
+        <field name="category_id" ref="base.module_category_sales_sales"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <record id="group_producteca_connectors_reader" model="res.groups">
+        <field name="name">Producteca Reader</field>
+        <field name="category_id" ref="base.module_category_sales_sales"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <record id="product_binding_comp_rule" model="ir.rule">
+        <field name="name" >Product Variant Binding multi-company</field>
+        <field name="model_id" ref="model_producteca_binding_product"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force"> ['|','|',('product_company','=',user.company_id.id),('product_company','in',user.company_ids.ids),('product_company','=',False)]</field>
+        <!--field name="active" eval="False"/-->
+    </record>
+
+    <record id="product_template_binding_comp_rule" model="ir.rule">
+        <field name="name" >Product Template Binding multi-company</field>
+        <field name="model_id" ref="model_producteca_binding_product_template"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force"> ['|','|',('product_tmpl_company','=',user.company_id.id),('product_tmpl_company','in',user.company_ids.ids),('product_tmpl_company','=',False)]</field>
+        <!--field name="active" eval="False"/-->
+    </record>
+
+</odoo>

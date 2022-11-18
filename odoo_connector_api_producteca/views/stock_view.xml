@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_location_form_producteca">
+            <field name="name">stock.location.producteca</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//group[1]" position="inside">
+                  <group string="Inventario Producteca" name="producteca_stock_location"  col="2">
+                      <field name="producteca_logistic_type" invisible="0"/>
+                  </group>
+               </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_warehouse_form_producteca">
+            <field name="name">stock.warehouse.producteca</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+              <xpath expr="//group[1]" position="inside">
+                  <group string="Inventario Producteca" name="producteca_stock_warehouse"  col="2">
+                      <field name="producteca_logistic_type" invisible="0"/>
+                  </group>
+               </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

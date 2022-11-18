@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+			<record model="ir.ui.view" id="view_company_page_producteca">
+					<field name="name">res.company.form.producteca</field>
+					<field name="model">res.company</field>
+					<field name="inherit_id" ref="base.view_company_form"/>
+					<field name="arch" type="xml">
+						<data>
+								<notebook>
+										<page string="Producteca">
+											<field name="producteca_connections" invisible="0" groups="odoo_connector_api_producteca.group_producteca_connectors_manager"
+                              domain="['|',('company_id','=',False),('company_id','=',id)]">
+                          <tree>
+                            <field name="company_id"/>
+                            <field name="name"/>
+                            <field name="client_id"/>
+                            <!--field name="state"/-->
+                            <field name="type"/>
+                          </tree>
+                      </field>
+										</page>
+								</notebook>
+              </data>
+					</field>
+			</record>
+
+		</data>
+</odoo>

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+<!-- #domain="[('id', 'in', (bom_product_ids and bom_product_ids[0][2] or False ))]" -->      
+<!-- PRODUCT TEMPLATE -->
+
+      <!-- View wizard - Remove from Connector: Producteca-->
+      <record id="view_product_template_remove_from_producteca" model="ir.ui.view">
+            <field name="name">Remove Product From Producteca / Unbind</field>
+            <field name="model">producteca.binder.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Remove Product" version="7.0">
+                  <h2>Choose Producteca Account to unbind</h2>
+                  <field name="connectors" widget="many2many_tags"/>
+                  <footer>
+                      <button name="product_template_remove_from_connector" string="Remove From Connector / Unbind"  type="object" class="oe_highlight"  />
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+              </form>
+            </field>
+      </record>
+      <!-- Action wizard - Remove from Connector: Producteca-->
+      <record id="action_product_template_remove_from_producteca" model="ir.actions.act_window">
+          <field name="name">Remove Product From Producteca / Unbind</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="binding_model_id" ref="model_product_template" />
+          <field name="view_id" ref="view_product_template_remove_from_producteca"/>
+          <field name="binding_type">action</field>
+          <field name="binding_view_types">list,form</field>
+          <field name="res_model">producteca.binder.wiz</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+      </record>
+      <!--act_window id="action_product_template_remove_from_producteca"
+    			name="Remove Product From Producteca / Unbind"
+    			binding_model="product.template"
+    			res_model="producteca.binder.wiz"
+          view_id="view_product_template_remove_from_producteca"
+    			binding_views="list,form"
+          target="new"/-->
+          
+          
+      <!-- View wizard  - Add to Connector: Producteca-->      
+      <record id="view_product_template_add_to_producteca" model="ir.ui.view">
+            <field name="name">Add Product To Producteca / Bind</field>
+            <field name="model">producteca.binder.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Add Product" version="7.0">
+                  <h2>Choose Producteca Account to bind</h2>
+                  <field name="connectors" widget="many2many_tags"/>
+                  <footer>
+                      <button name="product_template_add_to_connector" string="Add To Connector / Bind"  type="object" class="oe_highlight"  />
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+              </form>
+            </field>
+      </record>
+      <!-- Action wizard - Add to Connector: Producteca-->      
+      <record id="action_product_template_add_to_producteca" model="ir.actions.act_window">
+          <field name="name">Add Product To Producteca / Bind</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="binding_model_id" ref="model_product_template" />
+          <field name="view_id" ref="view_product_template_add_to_producteca"/>
+          <field name="binding_type">action</field>
+          <field name="binding_view_types">list,form</field>
+          <field name="res_model">producteca.binder.wiz</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+      </record>
+      <!--act_window id="action_product_template_add_to_producteca"
+    			name="Add Product To Producteca / Bind"
+    			binding_model="product.template"
+    			res_model="producteca.binder.wiz"
+          view_id="view_product_template_add_to_producteca"
+    			binding_views="list,form"
+          target="new"
+          /-->
+
+      
+<!-- PRODUCT PRODUCT -->
+      
+      <!-- View wizard - Remove Variant from Connector: Producteca-->
+      <record id="view_product_product_remove_from_producteca" model="ir.ui.view">
+            <field name="name">Remove Product Variant From Producteca / Unbind</field>
+            <field name="model">producteca.variant.binder.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Remove Product" version="7.0">
+                  <h2>Choose Producteca Account to unbind</h2>
+                  <field name="connectors" widget="many2many_tags"/>
+                  <footer>
+                      <button name="product_product_remove_from_connector" string="Remove From Connector / Unbind"  type="object" class="oe_highlight"  />
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+              </form>
+            </field>
+      </record>
+      <!-- Action wizard - Remove from Connector: Producteca-->
+      <record id="action_product_product_remove_from_producteca" model="ir.actions.act_window">
+          <field name="name">Remove Product Variant From Producteca / Unbind</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="binding_model_id" ref="model_product_product" />
+          <field name="view_id" ref="view_product_product_remove_from_producteca"/>
+          <field name="binding_type">action</field>
+          <field name="binding_view_types">list,form</field>
+          <field name="res_model">producteca.variant.binder.wiz</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+      </record>
+      <!--act_window id="action_product_product_remove_from_producteca"
+    			name="Remove Product Variant From Producteca / Unbind"
+    			binding_model="product.product"
+    			res_model="producteca.variant.binder.wiz"
+          view_id="view_product_product_remove_from_producteca"
+    			binding_views="list,form"
+          target="new"
+          /-->
+
+          
+      <!-- View wizard  - Add to Connector: Producteca-->      
+      <record id="view_product_product_add_to_producteca" model="ir.ui.view">
+            <field name="name">Add Product Variant To Producteca / Bind</field>
+            <field name="model">producteca.variant.binder.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Add Product" version="7.0">
+                  <h2>Choose Producteca Account to bind</h2>
+                  <field name="connectors" widget="many2many_tags"/>
+                  <footer>
+                      <button name="product_product_add_to_connector" string="Add To Connector / Bind"  type="object" class="oe_highlight"  />
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+              </form>
+            </field>
+      </record>
+      <!-- Action wizard - Add to Connector: Producteca-->      
+      <record id="action_product_product_add_to_producteca" model="ir.actions.act_window">
+          <field name="name">Add Product Variant To Producteca / Bind</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="binding_model_id" ref="model_product_product" />
+          <field name="view_id" ref="view_product_product_add_to_producteca"/>
+          <field name="binding_type">action</field>
+          <field name="binding_view_types">list,form</field>
+          <field name="res_model">producteca.variant.binder.wiz</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+      </record>
+      <!--act_window id="action_product_product_add_to_producteca"
+    			name="Add Product Variant To Producteca / Bind"
+    			binding_model="product.product"
+    			res_model="producteca.variant.binder.wiz"
+          view_id="view_product_product_add_to_producteca"
+    			binding_views="list,form"
+          target="new"
+          /-->
+
+  
+<!-- STOCK QUANT -->
+      
+      <!-- View wizard - Remove Variant from Connector: Producteca-->
+      <record id="view_stock_quant_remove_from_producteca" model="ir.ui.view">
+            <field name="name">Remove Product Variant From Producteca / Unbind</field>
+            <field name="model">producteca.stock.quant.binder.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Remove Product" version="7.0">
+                  <h2>Choose Producteca Account to unbind</h2>
+                  <field name="connectors" widget="many2many_tags"/>
+                  <footer>
+                      <button name="stock_quant_remove_from_connector" string="Remove From Connector / Unbind"  type="object" class="oe_highlight"  />
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+              </form>
+            </field>
+      </record>
+      <!-- Action wizard - Remove from Connector: Producteca-->
+      <record id="action_stock_quant_remove_from_producteca" model="ir.actions.act_window">
+          <field name="name">Remove Product Variant From Producteca / Unbind</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="binding_model_id" ref="stock.model_stock_quant" />
+          <field name="view_id" ref="view_stock_quant_remove_from_producteca"/>
+          <field name="binding_type">action</field>
+          <field name="binding_view_types">list,form</field>
+          <field name="res_model">producteca.stock.quant.binder.wiz</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+      </record>
+      <!--act_window id="action_stock_quant_remove_from_producteca"
+    			name="Remove Product Variant From Producteca / Unbind"
+    			binding_model="stock.quant"
+    			res_model="producteca.stock.quant.binder.wiz"
+          view_id="view_stock_quant_remove_from_producteca"
+    			binding_views="list,form"
+          target="new"
+          /-->
+
+          
+      <!-- View wizard  - Add to Connector: Producteca-->      
+      <record id="view_stock_quant_add_to_producteca" model="ir.ui.view">
+            <field name="name">Add Product Variant To Producteca / Bind</field>
+            <field name="model">producteca.stock.quant.binder.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+              <form string="Add Product" version="7.0">
+                  <h2>Choose Producteca Account to bind</h2>
+                  <field name="connectors" widget="many2many_tags"/>
+                  <footer>
+                      <button name="stock_quant_add_to_connector" string="Add To Connector / Bind"  type="object" class="oe_highlight"  />
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+              </form>
+            </field>
+      </record>
+      <!-- Action wizard - Add to Connector: Producteca-->      
+      <record id="action_stock_quant_add_to_producteca" model="ir.actions.act_window">
+          <field name="name">Add Product Variant To Producteca / Bind</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="binding_model_id" ref="stock.model_stock_quant" />
+          <field name="view_id" ref="view_stock_quant_add_to_producteca"/>
+          <field name="binding_type">action</field>
+          <field name="binding_view_types">list,form</field>
+          <field name="res_model">producteca.stock.quant.binder.wiz</field>
+          <field name="view_mode">form</field>
+          <field name="target">new</field>
+      </record>
+      <!--act_window id="action_stock_quant_add_to_producteca"
+    			name="Add Product Variant To Producteca / Bind"
+    			binding_model="stock.quant"
+    			res_model="producteca.stock.quant.binder.wiz"
+          view_id="view_stock_quant_add_to_producteca"
+    			binding_views="list,form"
+          target="new"
+          /-->
+          
+          
+          
+          <!-- NOTIFICATIONS -->
+          <!-- View wizard FORM  - Notifications Process-->
+          <record id="view_producteca_notification_wiz" model="ir.ui.view">
+                <field name="name">Process Producteca Notification Wiz Form</field>
+                <field name="model">producteca.notification.wiz</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                  <form string="Notification Process" version="7.0">
+                      <h2>Choose account to filter notification</h2>
+                      <group>
+                        <group>
+                          <field name="connection_account"/>
+                        </group>
+                      </group>
+                      <footer>
+                          <button name="process_notifications" string="Procesar"  type="object" class="oe_highlight"  />
+                            <button string="Cancel" class="oe_link" special="cancel" />
+                      </footer>
+                  </form>
+                </field>
+          </record>
+          <!-- Action wizard - Add to Connector: MercadoLibre-->
+          <record id="action_producteca_notification_wiz" model="ir.actions.act_window">
+              <field name="name">Procesar Notificaciones</field>
+              <field name="type">ir.actions.act_window</field>
+              <field name="binding_model_id" ref="model_producteca_notification" />
+              <field name="view_id" ref="view_producteca_notification_wiz"/>
+              <field name="binding_type">action</field>
+              <field name="binding_view_types">list,form</field>
+              <field name="res_model">producteca.notification.wiz</field>
+              <field name="view_mode">form</field>
+              <field name="target">new</field>
+          </record>
+          <!--act_window id="action_producteca_notification_wiz"
+              name="Producteca Notifications Process"
+              binding_model="producteca.notification"
+              res_model="producteca.notification.wiz"
+              view_id="view_producteca_notification_wiz"
+              view_mode="form"
+              binding_views="list,form"
+              target="new"/-->
+              
+              
+              <!-- PRODUCTECA SALE ORDER WIZARD -->
+              <!-- View wizard FORM  - Producteca Sale Order Process-->
+              <record id="view_producteca_sale_order_wiz" model="ir.ui.view">
+                    <field name="name">Process Producteca Sale Wiz Form</field>
+                    <field name="model">producteca.sale_order.wiz</field>
+                    <field name="type">form</field>
+                    <field name="arch" type="xml">
+                      <form string="Sale Order Process" version="7.0">
+                          <h2>Choose account to filter sales (optional)</h2>
+                          <group>
+                            <group>
+                              <field name="connection_account"/>
+                            </group>
+                          </group>
+                          <footer>
+                              <button name="producteca_sale_process" string="Actualizar"  type="object" class="oe_highlight"  />
+                                <button string="Cancel" class="oe_link" special="cancel" />
+                          </footer>
+                      </form>
+                    </field>
+              </record>
+              <!-- Action wizard - Add to Connector: MercadoLibre-->
+              <record id="action_producteca_sale_order_wiz" model="ir.actions.act_window">
+                  <field name="name">Actualizar Ventas de Producteca</field>
+                  <field name="type">ir.actions.act_window</field>
+                  <field name="binding_model_id" ref="model_producteca_sale_order" />
+                  <field name="view_id" ref="view_producteca_sale_order_wiz"/>
+                  <field name="binding_type">action</field>
+                  <field name="binding_view_types">list,form</field>
+                  <field name="res_model">producteca.sale_order.wiz</field>
+                  <field name="view_mode">form</field>
+                  <field name="target">new</field>
+              </record>
+              <!--act_window id="action_producteca_sale_order_wiz"
+                  name="Actualizar Ventas de Producteca"
+                  binding_model="producteca.sale_order"
+                  res_model="producteca.sale_order.wiz"
+                  view_id="view_producteca_sale_order_wiz"
+                  view_mode="form"
+                  binding_views="list,form"
+                  target="new"/-->
+  
+    </data>
+</odoo>

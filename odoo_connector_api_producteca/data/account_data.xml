@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+      <record id="account_payment_method_online_out" model="account.payment.method">
+					<field name="name">Online Producteca Out</field>
+					<field name="code">outbound_online_producteca</field>
+					<field name="payment_type">outbound</field>
+			</record>
+
+      <record id="account_payment_method_electronic_in" model="account.payment.method">
+					<field name="name">Online Producteca In</field>
+					<field name="code">inbound_online_producteca</field>
+					<field name="payment_type">inbound</field>
+			</record>
+		</data>
+</odoo>
