@@ -20,6 +20,7 @@
                     <t t-if="widget.isMobile()">
                         <div class="o_mail_systray_mobile_header title">
                             <button type="button" class="btn btn-secondary o_new_message"> New message </button>
+                            <button type="button" class="btn btn-secondary close_chat"> X </button>
                         </div>
                     </t>
                     <div t-if="!widget.isMobile()"
@@ -30,6 +31,7 @@
                             <button type="button" class="btn btn-link o_filter_button" data-filter='channels' role="tab"> Channels </button>
                         </div>
                         <button type="button" class="btn btn-link o_new_message"> New message </button>
+                        <button type="button" class="btn btn-secondary close_chat"> X </button>
                     </div>
                     <div class="o_mail_systray_dropdown_items"/>
                     <t t-if="widget.isMobile()">

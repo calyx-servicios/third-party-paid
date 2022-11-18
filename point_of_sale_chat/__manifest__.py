@@ -18,6 +18,7 @@
         "point_of_sale",
         "mail",
         "mail_bot",
+        "pos_seller"
     ],
     'data': [
         'views/pos_config.xml',
