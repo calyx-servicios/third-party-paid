@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data>
-        <record id="prestashop_connector_gt.group_prestashop_connector_users" model="res.groups">
-            <field name="name">Prestashop Connector Users</field>
-        </record>
-    </data>
-</odoo>
