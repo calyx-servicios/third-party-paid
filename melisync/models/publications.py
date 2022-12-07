@@ -356,7 +356,8 @@ class Publications(models.Model):
         attrs_domain = [
             ('id', 'in', self.attribute_line_ids.ids), # Attri
             ('attribute_id.create_variant', '=', 'no_variant'), # If attribute has not create variant
-            ('attribute_id.meli_id', '!=', False), # Loop only attributes with meli_id
+            # TODO: check if it works with attribute without meli_id.
+            #('attribute_id.meli_id', '!=', False), # Loop only attributes with meli_id
         ]
         # Get product attributes
         for line in self.attribute_line_ids.search(attrs_domain):
@@ -374,7 +375,8 @@ class Publications(models.Model):
                         attr_data['value_id'] = value.meli_id
                     # Save attribute
                     data['attributes'].append(attr_data)
-                    break
+                    # TODO: check if works with multiple attributes.
+                    #break
             except Exception as e:
                 raise UserError('Error processing attribute "{}" (product "{}"): {}'.format(attr_id.meli_id, self.product_id.name, e))
         # Loop product variants

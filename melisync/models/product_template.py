@@ -42,7 +42,7 @@ class ProductTemplate(models.Model):
                     warehouse_qty = self.browse(rec.id).with_context(warehouse=rec.meli_instance.warehouse_id.id).virtual_available
                     value = warehouse_qty
                 except Exception as e:
-                    logger.warning(_('Error on getting warehouse stock for product_tmp_id "{}": {}').format(self.id, e))
+                    logger.warning(_('Error on getting warehouse stock for product_tmp_id "{}": {}').format(rec.id, e))
             rec.meli_available_qty = value
 
     @api.onchange('meli_shipping_mode')
