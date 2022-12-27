@@ -37,11 +37,8 @@ class GtMagentoStore(models.Model):
         
      
     def Update_product_scheduler(self, cron_mode=True):
-        instance_obj = self.env['gt.magento.instance']
-        instance_id = instance_obj.search([])
-        for instance in  instance_id:
-            instance.GtExportMagentoProducts()
-        return True
+        products = self.env['product.template'].search([])
+        products.GtUpdateMagentoProductTemplate()
    
     
     def Import_product_scheduler(self, cron_mode=True):

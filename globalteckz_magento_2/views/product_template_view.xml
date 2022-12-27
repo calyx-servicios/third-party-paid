@@ -42,6 +42,12 @@
                     </div>
                 </div>
             </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="GtUpdateMagentoProductTemplate" string="Actualiza Producto M-O" type="object"
+                    attrs="{'invisible':[('magento_exported','=', False)]}" />
+                <button name="GtUpdateProductImage" string="Actualiza Imagenes M-O" type="object"
+                    attrs="{'invisible':[('magento_exported','=', False)]}" />    
+            </xpath>
         </field>
     </record>
 </odoo>
