@@ -406,12 +406,10 @@ class GtMagentoInstance(models.Model):
                             if str(response.status_code)=='200':
                                 jsonload= json.loads(response.text)
                                 if 'default_frontend_label' in jsonload:
+                                        prod_att_obj_count = prod_att_obj.search([('name','=',jsonloads['default_frontend_label'])])
                                     
-                                    prod_att_obj_count = prod_att_obj.search([('name','=',jsonloads['default_frontend_label'])])
-                                    if not prod_att_obj_count:
-
                                         odoo_att_vals = {
-                                            'name': jsonload['default_frontend_label'],
+                                            'name': jsonload['default_frontend_label'] if not prod_att_obj_count else jsonload['default_frontend_label'] + ' 2' ,
                                             'is_attribute_magento':True,
                                             'attribute_magento_id': jsonload['attribute_id'],
                                         }
@@ -966,4 +964,7 @@ class GtMagentoInstance(models.Model):
         except Exception as exc:
             logger.error('Exception===================:  %s', exc)
             pass
+        return True
+
+    def update_configurable_magento_product(self, sku, store_id, website_id):
         return True

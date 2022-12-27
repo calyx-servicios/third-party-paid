@@ -486,6 +486,7 @@ class ProductProduct(models.Model):
                 prods_id.append(prod_id.id)
             if instance_id.id not in prods_id:
                 prods_id.append(instance_id.id)
+
             vals = {'default_code':sku,'magento_id':each_list['id'],
                     'attribute_set':att_id,
                     'magento_instance_ids':[(6,0,instance_ids)],
@@ -498,7 +499,9 @@ class ProductProduct(models.Model):
                     'store_ids':[(6,0,store_ids)],
                     'exported_magento': True,
                     'gt_magento_product_ids':[(6,0,prods_id)]}
-            print ("*==> WRITING THE FINAL VARIANT PRODUCT::",product_ids.write(vals))
+            
+            product_ids.write(vals)
+
         return True
      
     def create_update_attributes(self,each_list,instance,product_ids,store_id,website_id):
