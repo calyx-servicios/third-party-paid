@@ -36,6 +36,8 @@ Odoo MercadoLibre Uploader
         'views/categories.xml',
         'views/product_attribute.xml',
         'views/shipping_methods.xml',
+        'views/publications.xml',
+        'views/publications_variants.xml',
     ],
 
     'application': True,

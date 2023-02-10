@@ -5,7 +5,7 @@ from odoo.exceptions import UserError
 import logging
 logger = logging.getLogger(__name__)
 
-class ResCurrencyModel(models.Model):
+class ResCurrency(models.Model):
     _inherit = 'res.currency'
     
     @api.model

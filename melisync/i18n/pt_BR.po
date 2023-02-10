@@ -373,12 +373,6 @@ msgstr "ID da moeda padrão"
 
 #. module: melisync
 #: code:addons/melisync/models/settings.py:0
-#: model:ir.model.fields,field_description:melisync.field_melisync_settings__default_listing_type
-msgid "Default products listing type"
-msgstr "Tipo de listagem de produtos padrão"
-
-#. module: melisync
-#: code:addons/melisync/models/settings.py:0
 #: model:ir.model.fields,field_description:melisync.field_melisync_settings__default_shipping_methods_free
 msgid "Default shipping free methods"
 msgstr "Métodos gratuitos de envio padrão"

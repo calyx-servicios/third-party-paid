@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import logging
 logger = logging.getLogger(__name__)
 
-class SaleOrderModel(models.Model):
+class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     meli_id = fields.Char(unique=True, string=_('MercadoLibre ID'))
@@ -17,32 +17,31 @@ class SaleOrderModel(models.Model):
             Get sales of MercadoLibre.
         """
         try:
-            #product_product_obj = self.env['product.product'] # Product product object
+            # Get meli instance client
+            client = settings_instance.get_client_instance() # Get MELI and settings instance
+            # Objects
+            publications_obj = self.env['melisync.publications']
+            publications_variants_relations_obj = self.env['melisync.publications.variants.relations']
             product_template_obj = self.env['product.template'] # Product template object
             res_partner_obj = self.env['res.partner'] # Res.partner object
             res_country_obj = self.env['res.country'] # Res.country object
             res_country_state_obj = self.env['res.country.state'] # Res.country.state object
             #l10n_latam_identification_type_obj = self.env['l10n_latam.identification.type'] # AFIP identification type
             #l10n_ar_afip_responsibility_type = self.env['l10n_ar.afip.responsibility.type'] # AFIP responsibility type
-            product_pricelist_obj = self.env['product.pricelist'] # Pricelist object
             # Complete data
             add_orders = []
-            # Get meli instance
-            client = settings_instance.get_client_instance() # Get MELI and settings instance
             # Get date of search from.
             try:
                 date_from = (datetime.now()-timedelta(days=settings_instance.last_days_orders_get))
             except:
                 date_from = datetime.now()
-            # Get Meli Pricelist
-            meli_pricelist = product_pricelist_obj.search([('name', '=', 'MercadoLibre')])
             # Define get parameters
             params = {
-                'seller': settings_instance.user_id,
                 'order.date_created.from': date_from.strftime('%Y-%m-%dT00:00:00.000-00:00'),
                 'order.status': 'paid',
+                'seller': settings_instance.user_id,
                 #'buyer': '175261657', # TODO: delete (test)
-                #'q': 4140210417, # TODO: delete (test)
+                #'q': 2000004367850158, # TODO: delete (test)
             }
             # Get orders
             meli_orders = client.get_orders(params)
@@ -61,25 +60,26 @@ class SaleOrderModel(models.Model):
                     for line in meli_order.get('order_items'):
                         # Get item data (product data)
                         item_data = line.get('item')
-                        # Get odoo product instance by Meli ID
-                        product = product_template_obj.search([('meli_id', '=', item_data.get('id'))])
-                        # If product has not exists
+                        # Get item variant ID
+                        variant_id = item_data.get('variant_id')
+                        # Get variant ID
+                        if variant_id:
+                            product = publications_variants_relations_obj.search([('meli_id', '=', variant_id)]).variant_id
+                        else:
+                            # Get publication product main variant ID
+                            item_id = item_data.get('id')
+                            # Search by publication template ID
+                            publication = publications_obj.search([('publication_id', '=', item_id)])
+                            product = publication.product_id.product_variant_id
+                        
+                        # Validate product
                         if not product:
-                            """
-                            product_data = {
-                                'meli_id': item_data.get('id'), # Meli ID
-                                'name': item_data.get('title'), # Product name
-                                'base_price': line.get('unit_price'), # Product name
-                            }
-                            product_product_obj.create(product_data)
-                            """
                             raise Exception('Cannot search product by Meli ID: {}'.format(item_data.get('id')))
-                        # Parse line data
+                        
+                        # Add order line
                         order_line = (0, 0, {
                             'product_id': product.id,
                             'product_uom_qty': line.get('quantity'),
-                            #'qty_delivered': line.get('quantity'), # TODO: view stock
-                            #'qty_to_invoice': line.get('quantity'), # TODO: view stock
                             'name': item_data.get('title'),
                             'price_unit': line.get('unit_price'),
                         })
@@ -102,20 +102,22 @@ class SaleOrderModel(models.Model):
                         #buyer_identification_type = l10n_latam_identification_type_obj.search([('name', '=', buyer_identification.get('type'))])
                         # Parse buyer data
                         buyer_data = {
-                            'company_type': 'company',
+                            'company_type': 'person',
                             'meli_id': buyer_info.get('id'),
                             'name': buyer_company.get('corporate_name'),
                             'country_id': buyer_country_id.id,
                             'city': buyer_address.get('city'),
                             'zip': buyer_address.get('zip_code'),
                             'street': buyer_address.get('address'),
-                            'vat': buyer_identification.get('number'),
+                            #'vat': buyer_identification.get('number'),
                             #'l10n_latam_identification_type_id': buyer_identification_type.id,
                             'email': buyer_info.get('email'),
                             'phone': '{area_code} {number}'.format(area_code=buyer_phone.get('area_code', ''), number=buyer_phone.get('number', '')),
                         }
                         # Create the main partner
                         main_partner_id = res_partner_obj.create(buyer_data)
+                    """
+                    TODO: loop and repair
                     # Get order billing info to create INVOICE.
                     billing_data = client.get_sale_billing_info(meli_order.get('id'))
                     # Get billing info object
@@ -177,14 +179,15 @@ class SaleOrderModel(models.Model):
                             update_data['name'] = '{} ({})'.format(invoice_partner_data['name'], billing_additional_info.get('BUSINESS_NAME'))
                         # Update partner invoice data.
                         invoice_partner_id.write(update_data)
+                    """
                     # Loop order lines
                     order_data = {
                         'meli_id': meli_order_id,
                         'order_line': order_lines,
                         'partner_id': main_partner_id.id,
-                        'pricelist_id': meli_pricelist.id,
-                        'partner_invoice_id': invoice_partner_id.id,
-                        'partner_shipping_id': invoice_partner_id.id,
+                        #'pricelist_id': meli_pricelist.id,
+                        'partner_invoice_id': main_partner_id.id,
+                        'partner_shipping_id': main_partner_id.id,
                         'meli_instance': settings_instance.id,
                         'company_id': settings_instance.company_id.id,
                         'warehouse_id': settings_instance.warehouse_id.id,
@@ -206,10 +209,3 @@ class SaleOrderModel(models.Model):
         except Exception as e:
             logger.error('Error: {}'.format(e))
             raise UserError(_('Cannot get orders of MercadoLibre:\nError: {}'.format(e)))
-"""
-TODO:
-
-Add company_id -> res.company.
-Add warehouse_id -> stock.warehouse (by company_id)
-Add picking_policy (direct, one)
-"""

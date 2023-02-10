@@ -16,3 +16,6 @@ from . import res_currency
 from . import shipping_modes
 from . import shipping_methods
 from . import shipping_methods_options
+from . import publications
+from . import product_product
+from . import publications_variants

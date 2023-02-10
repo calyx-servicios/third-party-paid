@@ -46,7 +46,6 @@
                 <group string="Instance settings" colspan="2">
                   <field name="name" string="Name" />
                   <field name="site_id" context="{ 'order_display': 'site_id asc' }" string="Country ID" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
-                  <field name="default_listing_type" domain="[('site_id', '=', site_id)]" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
                   <field name="currency_id" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
                 </group>
                 <group string="Shipping settings" colspan="2" attrs="{ 'invisible': [('user_id', '=', False)] }">
@@ -79,7 +78,7 @@
                 <field name="picking_policy" attrs="{ 'invisible': [('company_id', '=', False)] }" />
               </group>
               <group string="Sales settings">
-                  <field name="pricelist" domain="[('meli_list', '=', True), ('company_id', '=', company_id)]" context="{ 'default_meli_list': True, 'default_name': 'MercadoLibre '+name, 'default_discount_policy': 'with_discount', 'default_company_id': company_id }"/>
+                  <field name="pricelists" domain="[('meli_list', '=', True), ('company_id', '=', company_id)]" context="{ 'default_meli_list': True, 'default_name': 'MercadoLibre '+name, 'default_discount_policy': 'with_discount', 'default_company_id': company_id }" widget="many2many_tags" />
                   <field name="last_days_orders_get" />
               </group>
             </group>
