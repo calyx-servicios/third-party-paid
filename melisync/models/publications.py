@@ -369,10 +369,13 @@ class Publications(models.Model):
                     attr_data = {
                         'id': attr_id.meli_id,
                         'value_name': value.name,
+                        'value_id': value.meli_id or None,
+                        'values': [{
+                            'id': value.meli_id or None,
+                            'name': value.name,
+                            'struct': None,
+                        }]
                     }
-                    # If value has self id.
-                    if value.meli_id:
-                        attr_data['value_id'] = value.meli_id
                     # Save attribute
                     data['attributes'].append(attr_data)
                     # TODO: check if works with multiple attributes.
