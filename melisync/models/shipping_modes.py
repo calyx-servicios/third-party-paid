@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, _
 
-class ShippingModesModel(models.Model):
+class ShippingModes(models.Model):
     _name = 'melisync.shipping.modes'
     _description = 'MercadoLibreSync Shipping Modes Model'
     _rec_name = 'name'

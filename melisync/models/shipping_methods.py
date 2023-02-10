@@ -4,7 +4,7 @@ from odoo import models, fields, _, api
 import logging
 logger = logging.getLogger(__name__)
 
-class ShippingModesModel(models.Model):
+class ShippingMethods(models.Model):
     _name = 'melisync.shipping.methods'
     _description = 'MercadoLibreSync Shipping Methods Model'
     _rec_name = 'short_name'
@@ -54,7 +54,7 @@ class ShippingModesModel(models.Model):
         ctx = self._context
         if 'order_display' in ctx:
             order = ctx['order_display']
-        return super(ShippingModesModel, self).search(args, offset=offset, limit=limit, order=order, count=count)
+        return super(ShippingMethods, self).search(args, offset=offset, limit=limit, order=order, count=count)
     
     @api.model
     def download(self, site_id):
