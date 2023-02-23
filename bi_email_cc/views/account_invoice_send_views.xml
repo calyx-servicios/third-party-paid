@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<record model="ir.ui.view" id="view_account_invoice_send_form_ext">
+	    <field name="name">Account Invoice Send Form Ext</field>
+	    <field name="model">account.invoice.send</field>
+	    <field name="inherit_id" ref="account.account_invoice_send_wizard_form"/>
+	    <field name="arch" type="xml">
+			<data>
+			    <field name="subject" position="after">
+			        <field name="is_cc" invisible="1"/>
+			        <field name="is_bcc" invisible="1"/>
+			        <field name="is_reply" invisible="1"/>
+			        <field name="cc_partner_ids" widget="many2many_tags" placeholder="Add CC contacts to notify"  domain="[('is_company', '=', True)]" attrs="{'invisible': [('is_cc', '=', False)]}"  />
+			        <field name="bcc_partner_ids"  widget="many2many_tags" placeholder="Add BCC contacts to notify" domain="[('is_company', '=', False)]" attrs="{'invisible': [('is_bcc', '=', False)]}" />
+			        <field name="rply_partner_id" context="{'force_email':True, 'show_email':True}" attrs="{'invisible': [('is_reply', '=', False)]}"/> 
+			    </field>
+			</data>
+	    </field>
+	</record>
+</odoo>  

@@ -1,0 +1,198 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_email_cc
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-23 16:29+0000\n"
+"PO-Revision-Date: 2023-02-23 16:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_mail__cc_partner_ids
+msgid " CC(Partners)"
+msgstr " CC(Contactos)"
+
+#. module: bi_email_cc
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.res_config_settings_view_form
+msgid "<span class=\"o_form_label\"><strong>Default BCC</strong></span>"
+msgstr "<span class=\"o_form_label\"><strong>BCC Predeterminado</strong></span>"
+
+#. module: bi_email_cc
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.res_config_settings_view_form
+msgid "<span class=\"o_form_label\"><strong>Default CC</strong></span>"
+msgstr "<span class=\"o_form_label\"><strong>CC Predeterminado</strong></span>"
+
+#. module: bi_email_cc
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.res_config_settings_view_form
+msgid "<span class=\"o_form_label\"><strong>Default Reply-To</strong></span>"
+msgstr "<span class=\"o_form_label\"><strong>Responder a Predeterminado</strong></span>"
+
+#. module: bi_email_cc
+#: model:ir.model,name:bi_email_cc.model_account_invoice_send
+msgid "Account Invoice Send"
+msgstr "Enviar Factura"
+
+#. module: bi_email_cc
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.view_account_invoice_send_form_ext
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.view_mail_compose_mesaaged_form_ext
+msgid "Add BCC contacts to notify"
+msgstr "Agregar contactos BCC para notificar"
+
+#. module: bi_email_cc
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.view_account_invoice_send_form_ext
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.view_mail_compose_mesaaged_form_ext
+msgid "Add CC contacts to notify"
+msgstr "Agregar contactos CC para notificar"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_account_invoice_send__bcc_partner_ids
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_compose_message__bcc_partner_ids
+msgid "BCC"
+msgstr "BCC"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_mail__bcc_partner_ids
+msgid "BCC(Partners)"
+msgstr "BCC(Contactos)"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_account_invoice_send__cc_partner_ids
+msgid "CC"
+msgstr "CC"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,help:bi_email_cc.field_mail_mail__email_bcc
+msgid "Carbon copy message recipients"
+msgstr "Destinatarios del mensaje de copia de carbón"
+
+#. module: bi_email_cc
+#: model:ir.model,name:bi_email_cc.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de configuración"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_res_config_settings__bcc_partner_ids
+msgid "Default BCC"
+msgstr "BCC predeterminado"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_res_config_settings__cc_partner_ids
+msgid "Default CC"
+msgstr "CC predeterminado"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_account_invoice_send__rply_partner_id
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_compose_message__rply_partner_id
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_mail__rply_partner_id
+#: model:ir.model.fields,field_description:bi_email_cc.field_res_config_settings__rply_partner_id
+msgid "Default Reply-To"
+msgstr "Responder a predeterminado"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_res_config_settings__email
+msgid "Email"
+msgstr "Correo electrónico"
+
+#. module: bi_email_cc
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.res_config_settings_view_form
+msgid "Email CC &amp; BCC"
+msgstr "Correo electrónico CC &amp; BCC"
+
+#. module: bi_email_cc
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.res_config_settings_view_form
+msgid "Email Reply-To"
+msgstr "Correo Responder a"
+
+#. module: bi_email_cc
+#: model:ir.model,name:bi_email_cc.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Asistente de redacción de correo electrónico"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_account_invoice_send__is_bcc
+msgid "Enable BCC"
+msgstr "Habilitar BCC"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_account_invoice_send__is_cc
+msgid "Enable CC"
+msgstr "Habilitar CC"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_compose_message__is_bcc
+#: model:ir.model.fields,field_description:bi_email_cc.field_res_config_settings__email_bcc
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.res_config_settings_view_form
+msgid "Enable Email BCC"
+msgstr "Habilitar Correo BCC"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_compose_message__is_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_res_config_settings__email_cc
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.res_config_settings_view_form
+msgid "Enable Email CC"
+msgstr "Habilitar Correo CC"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_account_invoice_send__is_reply
+msgid "Enable Reply"
+msgstr "Habilitar Responder"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_res_config_settings__email_reply
+#: model_terms:ir.ui.view,arch_db:bi_email_cc.res_config_settings_view_form
+msgid "Enable Reply-To"
+msgstr "Habilitar Responder a"
+
+#. module: bi_email_cc
+#: code:addons/bi_email_cc/models/mail.py:0
+#, python-format
+msgid ""
+"Error without exception. Probably due do concurrent access update of "
+"notification records. Please see with an administrator."
+msgstr ""
+"Error sin excepción. Probablemente debido a la actualización de acceso concurrente de los "
+"registros de notificación. Consulte con un administrador."
+
+#. module: bi_email_cc
+#: code:addons/bi_email_cc/models/mail.py:0
+#, python-format
+msgid ""
+"Error without exception. Probably due do sending an email without computed "
+"recipients."
+msgstr ""
+"Error sin excepción. Probablemente debido al envío de un correo electrónico sin destinatarios "
+"calculados."
+
+#. module: bi_email_cc
+#: code:addons/bi_email_cc/models/mail.py:0
+#, python-format
+msgid "Mail Delivery Failed"
+msgstr "Entrega de correo fallida"
+
+#. module: bi_email_cc
+#: model:ir.model,name:bi_email_cc.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Correos salientes"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_compose_message__is_reply
+msgid "Reply"
+msgstr "Responder"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_mail__email_bcc
+msgid "bCc"
+msgstr "bCc"
+
+#. module: bi_email_cc
+#: model:ir.model.fields,field_description:bi_email_cc.field_mail_compose_message__cc_partner_ids
+msgid "cc"
+msgstr "cc"
