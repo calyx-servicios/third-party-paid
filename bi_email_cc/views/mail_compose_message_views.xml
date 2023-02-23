@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<record model="ir.ui.view" id="view_mail_compose_mesaaged_form_ext">
+	    <field name="name">Mail Compose Message Form Ext</field>
+	    <field name="model">mail.compose.message</field>
+	    <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+	    <field name="arch" type="xml">
+	        <data>
+	            <field name="subject" position="after">
+	            	<field name="is_cc" invisible="1"/>
+	                <field name="is_bcc" invisible="1"/>
+	                <field name="is_reply" invisible="1"/>
+	                <field name="cc_partner_ids" widget="many2many_tags_email" placeholder="Add CC contacts to notify"  domain="[('is_company', '=', True)]" attrs="{'invisible': [('is_cc', '=', False)]}"/>
+	                <field name="bcc_partner_ids" widget="many2many_tags_email" placeholder="Add BCC contacts to notify" domain="[('is_company', '=', False)]" attrs="{'invisible': [('is_bcc', '=', False)]}"/>
+	                <field name="rply_partner_id" context="{'force_email':True, 'show_email':True}" attrs="{'invisible': [('is_reply', '=', False)]}"/> 
+	            </field>
+	        </data>
+	    </field>
+	</record>
+</odoo>

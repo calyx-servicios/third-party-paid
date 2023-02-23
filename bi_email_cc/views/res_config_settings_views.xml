@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div id="contacts_settings" position="before">
+                <h2>Email CC &amp; BCC</h2>
+                <group>
+                    <div class="row mt4 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label"><strong>Default CC</strong></span>
+                                <div class="content-group">
+                                    <div class="mt8 ">
+                                        <field name="cc_partner_ids" widget="many2many_tags_email" domain="[('is_company', '=', True)]" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label"><strong>Default BCC</strong></span>
+                                <div class="content-group">
+                                    <div class="mt8">
+                                       <field name="bcc_partner_ids" widget="many2many_tags_email" domain="[('is_company', '=', False)]"/>
+                                    </div>
+                                </div>
+                            </div>            
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="email_cc"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                               <label string="Enable Email CC" for="email_cc"/>
+                            </div>
+                        </div> 
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="email_bcc"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                               <label string="Enable Email BCC" for="email_bcc"/>
+                            </div>
+                        </div>         
+                    </div>                
+                </group>
+                <h2>Email Reply-To</h2>
+                <div class="row mt4 o_settings_container">
+                    <group>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label"><strong>Default Reply-To</strong></span>
+                                <div class="content-group">
+                                    <div class="mt8 ">
+                                        <field name="rply_partner_id"  context="{'force_email':True, 'show_email':True}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </group>
+                    <group>                      
+                        <div class="col-12 col-lg-6  o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="email_reply"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Enable Reply-To " for="email_reply"/>
+                            </div>
+                        </div>  
+                    </group> 
+                </div>          
+            </div>                          
+        </field>
+    </record>                 
+</odoo>
+

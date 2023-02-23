@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<record model="ir.ui.view" id="view_mail_mail_mesaaged_form_ext">
+	    <field name="name">Mail Mail Form Ext</field>
+	    <field name="model">mail.mail</field>
+	    <field name="inherit_id" ref="mail.view_mail_form"/>
+	    <field name="arch" type="xml">
+	        <data>
+	            <field name="email_cc" position="after">
+	                <field name="cc_partner_ids" widget="many2many_tags"/>
+	                <field name="email_bcc"/>
+	                <field name="bcc_partner_ids" widget="many2many_tags"/>
+	                <field name="rply_partner_id"/>
+	            </field>
+	            <field name="reply_to" position="attributes">
+	            	<attribute name="invisible">1</attribute>
+	            </field>
+	        </data>
+	    </field>
+	</record>
+</odoo>
