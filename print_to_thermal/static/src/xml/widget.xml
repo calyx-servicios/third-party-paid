@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+  <div t-name="thermal_printer.client_action">
+      <iframe class="o_report_iframe"/>
+  </div>
+
+  <t t-name="print_to_thermal.PrintersStatus">
+    <div>
+      <button type="button" class="btn btn-primary o_report_print" title="Printer Status">Printer Status</button>
+    </div>
+  </t>
+
+  <t t-name="print_to_thermal.PrintToThermalMenu" owl="1">
+    <div class="btn-group o_dropdown" t-att-class="{ show: state.open }">
+        <button type="button"
+            class="o_dropdown_toggler_btn btn btn-secondary"
+            t-att-aria-expanded="state.open ? 'true' : 'false'"
+            tabindex="-1"
+            t-on-click="state.open = !state.open"
+            t-on-keydown="_onButtonKeydown"
+            >
+            <i t-if="icon" t-att-class="icon"/>
+            <span class="o_dropdown_title" t-esc="title"/>
+            <i t-if="displayCaret" t-attf-class="o_dropdown_caret fa fa-caret-{{ state.open ? 'down' : 'right' }}"/>
+            <i t-elif="displayChevron" t-attf-class="fa fa-chevron-{{ state.open ? 'down' : 'right' }} float-right mt4"/>
+        </button>
+        <ul t-if="state.open" class="o_dropdown_menu dropdown-menu show" role="menu"
+            t-on-item-selected="_onItemSelected"
+            >
+            <t t-set="currentGroup" t-value="null"/>
+            <t t-foreach="items" t-as="item" t-key="item.key || item.id || ('item-' + item_index)">
+                <li t-if="currentGroup !== null and currentGroup !== item.groupNumber" class="dropdown-divider" role="separator"/>
+                <t t-if="item.Component" t-component="item.Component" t-props="item.props"/>
+                <a class="dropdown-item"
+                    t-att-aria-checked="item.isActive ? 'true' : 'false'"
+                    role="menuitemcheckbox"
+                    t-att-href="item.url or '#'"
+                    t-on-click.prevent="trigger('item-selected', { item: item })"
+                    >
+                    <t t-esc="item.description"/>
+                    <!--<i t-if="props.removable"
+                        class="o_icon_right fa fa-trash-o"
+                        title="Delete item"
+                        t-on-click.stop.prevent="trigger('remove-item', { item: props })"
+                    />
+                    -->
+                </a>
+                <t t-set="currentGroup" t-value="item.groupNumber"/>
+            </t>
+        </ul>
+    </div>
+</t>
+
+  <t t-name="print_to_thermal.ActionMenus" t-inherit="web.ActionMenus"  t-inherit-mode="extension" owl="1">
+      <xpath expr="//div[hasclass('o_cp_action_menus')]" position="inside">
+          <PrintToThermalMenu t-if="showThermal"
+              title="env._t('Printers Status')"
+              icon="'fa fa-print'"
+              closeOnSelected="true"
+              items="printerItems"
+          />
+      </xpath>
+  </t>
+
+  
+</templates>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="head_thermal">
+    <t t-if='doc.company_id'>
+        <img t-att-src='doc.company_id.logo' />
+    </t>
+    <t t-else=''>
+      <h3><t t-esc='doc.company_id' /></h3>
+    </t>
+    <div>
+      <h3><t t-esc="doc.company_id.name"/></h3>
+    </div>
+    <line><left font='b'>Number: </left><right><t t-esc="number"/></right></line>
+    <t t-if="'user_id'in doc">
+      <line><left font='b'>Seller: </left><right><t t-esc="doc.user_id.name"/></right></line>
+    </t>
+    <line><left font='b'>Date: </left><right><t t-esc="date_order"/></right></line>
+    <line><left font='b'>Phone: </left><right><t t-esc="doc.company_id.phone"/></right></line>
+    <line><left font='b'>Company Address: </left><right><t t-esc="doc.company_id.street"/></right></line>
+    <t t-if="doc.partner_id">
+      <line><right>--------</right></line>
+      <line><left font='b'>Client: </left><right><span t-esc="doc.partner_id.name"/></right></line>
+      <line><left font='b'>Address: </left><right><span t-esc="doc.partner_id.street"/></right></line>
+      <line><left font='b'>Phone: </left><right><span t-esc="doc.partner_id.phone"/></right></line>
+    </t>
+  </template>
+
+  <template id="invoice_thermal">
+      <t t-foreach="docs" t-as="doc">
+        <receipt align='center' width='40' value-thousands-separator='.' >
+            <t t-set="date_order" t-value="doc.invoice_date" />
+            <t t-set="number" t-value="doc.name" />
+            <t t-call="thermal_layouts.head_thermal" />
+            <line><right>--------</right></line>
+            <div class='orderlines' line-ratio='0.6'>
+              <t t-foreach="doc.invoice_line_ids.filtered(lambda line: line.sudo().account_id and line.product_id).sorted(key=lambda l: (l.sequence))" t-as="line">
+                <t t-set='simple' t-value="line.discount == 0 and line.product_uom_id.name == 'Unit(s)' and line.quantity == 1" />
+                <t t-if='simple'>
+                    <line>
+                        <left><t t-esc='line.name' /></left>
+                        <right>$ <value ><t t-esc='line.price_unit' /></value></right>
+                    </line>
+                </t>
+                <t t-else=''>
+                  <line><left><t t-esc='line.name' /></left></line>
+                  <t t-if='line.discount != 0'>
+                    <line indent='1'><left>Discount: <t t-esc='line.discount' />%</left></line>
+                  </t>
+                  <line indent='1'>
+                    <left>
+                      <value value-decimals='3' value-autoint='on'>
+                        <t t-esc='line.quantity' />
+                      </value>
+                      <t t-if='line.product_uom_id.name != "Unit(s)"'>
+                        <t t-esc='line.product_uom_id.name' />
+                      </t>
+                      x
+                      $ <value >
+                        <t t-esc='line.price_unit' />
+                      </value>
+                    </left>
+                    <right>
+                      $ <value ><t t-esc='line.price_total' /></value>
+                    </right>
+                  </line>
+                </t>
+              </t>
+            </div>
+            <line><right>--------</right></line>
+            <line t-if="doc.amount_untaxed" class='total'>
+                <left><pre>        SubTotal</pre></left>
+                <right>$ <value ><t t-esc='doc.amount_untaxed' /></value></right>
+            </line>
+            <line t-if="doc.amount_tax" class='total'>
+              <left><pre>        Taxes</pre></left>
+              <t t-foreach="doc.line_ids.filtered(lambda line: line.tax_line_id)" t-as="tl">
+                <t t-if="not doc.es_boleta() or (doc.es_boleta() and tl.tax_line_id.sii_code in [14, 15, 17]) ">
+                  <right><t t-esc="tl.tax_line_id.description" />: $ <value ><t t-esc='tl.debit or tl.credit' /></value></right>
+                </t>
+              </t>
+            </line>
+            <line t-if='doc.amount_total' class='total'>
+              <left><pre>        TOTAL</pre></left>
+              <right>$ <value ><t t-esc='doc.amount_total' /></value></right>
+            </line>
+          </receipt>
+        </t>
+  </template>
+
+  <template id="picking_thermal">
+    <t t-foreach="docs" t-as="doc">
+      <receipt align='center' width='40' value-thousands-separator='.' >
+        <t t-set="number" t-value="doc.name" />
+        <t t-set="date_order" t-value="doc.scheduled_date" />
+          <t t-call="thermal_layouts.head_thermal" />
+          <line><right>--------</right></line>
+          <div class='orderlines' line-ratio='0.6'>
+            <t t-foreach="doc.move_lines" t-as="line">
+              <line><left><t t-esc='line.product_id.name' /></left></line>
+              <line indent='1'>
+                <left>
+                  <value value-decimals='3' value-autoint='on'>
+                    <t t-esc='line.quantity_done' />
+                  </value>
+                  <t t-if='line.product_uom.name != "Unit(s)"'>
+                    <t t-esc='line.product_uom.name' />
+                  </t>
+                </left>
+                <right>
+                  <left><t t-esc='line.product_id.name' /></left>
+                </right>
+              </line>
+            </t>
+          </div>
+          <line><right>--------</right></line>
+        </receipt>
+      </t>
+  </template>
+
+  <report
+        id="account_invoice_thermal"
+        model="account.move"
+        string="Invoice Ticket"
+        report_type="qweb-thermal"
+        name="thermal_layouts.invoice_thermal"
+        file="print_to_thermal.invoice_thermal"
+        attachment_use="True"
+        attachment="(object.state not in ('draft')) and ((object.name or '').replace('/','')+'.xml')"
+    />
+
+  <report
+          id="stock_picking_thermal"
+          model="stock.picking"
+          string="Picking Ticket"
+          report_type="qweb-thermal"
+          name="thermal_layouts.picking_thermal"
+          file="print_to_thermal.picking_thermal"
+          attachment_use="True"
+          attachment="(object.state not in ('draft')) and ((object.name or '').replace('/','')+'.xml')"
+      />
+</odoo>

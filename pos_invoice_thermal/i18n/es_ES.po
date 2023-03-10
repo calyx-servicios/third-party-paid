@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_invoice_thermal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20190116\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-16 14:39+0000\n"
+"PO-Revision-Date: 2019-01-16 11:42-0300\n"
+"Last-Translator: Daniel Santibáñez Polanco <dansanti@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_ES\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: pos_invoice_thermal
+#: model:ir.model.fields,field_description:pos_invoice_thermal.field_report_pos_invoice_thermal_invoice_xml_display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: pos_invoice_thermal
+#: model:ir.model.fields,field_description:pos_invoice_thermal.field_report_pos_invoice_thermal_invoice_xml_id
+msgid "ID"
+msgstr "ID"
+
+#. module: pos_invoice_thermal
+#: model:ir.actions.report,name:pos_invoice_thermal.pos_invoice_thermal
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: pos_invoice_thermal
+#: model:ir.model.fields,field_description:pos_invoice_thermal.field_report_pos_invoice_thermal_invoice_xml___last_update
+msgid "Last Modified on"
+msgstr "Última modificación"
+
+#. module: pos_invoice_thermal
+#: code:addons/pos_invoice_thermal/report/pos_invoice_thermal.py:24
+#, python-format
+msgid "No link to an invoice for %s."
+msgstr "No hay link a factura para %s."
+
+#. module: pos_invoice_thermal
+#: model:ir.ui.view,arch_db:pos_invoice_thermal.pos_config_view_form_inherit_pos_invoice_thermal
+msgid "Print All Invoice on Thermal"
+msgstr "Imprimir todas las Facturas en Térmica"
+
+#. module: pos_invoice_thermal
+#: model:ir.model.fields,field_description:pos_invoice_thermal.field_pos_config_thermal_invoice
+msgid "Print all Invoices on thermal format"
+msgstr "Imprimir todas las Facturas en formato térmico"
+
+#. module: pos_invoice_thermal
+#: model:ir.model,name:pos_invoice_thermal.model_pos_config
+msgid "pos.config"
+msgstr ""
+
+#. module: pos_invoice_thermal
+#: model:ir.model,name:pos_invoice_thermal.model_report_pos_invoice_thermal_invoice_xml
+msgid "report.pos_invoice_thermal.invoice_xml"
+msgstr ""

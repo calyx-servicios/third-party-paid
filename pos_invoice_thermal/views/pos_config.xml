@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="pos_config_view_form_inherit_pos_invoice_thermal" model="ir.ui.view">
+      <field name="name">pos.config.form.view</field>
+      <field name="model">pos.config</field>
+      <field name="inherit_id" ref="point_of_sale.pos_config_view_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//div[@id='posbox_reference']/div/div[hasclass('o_setting_right_pane')]/div" position="inside">
+          <div class="row"  attrs="{'invisible' : [('iface_print_via_proxy', '=', False)]}">
+              <label string="Print All Invoice on Thermal" for="thermal_invoice" class="col-md-3 o_light_label"/>
+              <field name="thermal_invoice"/>
+          </div>
+        </xpath>
+      </field>
+  </record>
+</odoo>

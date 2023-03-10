@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="assets_backend" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+          <script type="text/javascript" src="/pos_invoice_thermal/static/src/js/models.js"/>
+          <script type="text/javascript" src="/pos_invoice_thermal/static/src/js/printers.js"/>
+      </xpath>
+    </template>
+
+    <record id="pos_invoice_thermal" model="ir.actions.report">
+        <field name="name">Invoice</field>
+        <field name="model">pos.order</field>
+        <field name="report_type">qweb-thermal</field>
+        <field name="report_name">pos_invoice_thermal.invoice_xml</field>
+        <field name="print_report_name">'Invoice - %s' % (object.name)</field>
+    </record>
+
+    <template id="invoice_xml" inherit_id="thermal_layouts.invoice_thermal" primary="True"/>
+</odoo>
