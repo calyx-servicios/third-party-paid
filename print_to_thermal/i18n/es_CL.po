@@ -1,0 +1,106 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* print_to_thermal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e-20181028\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-14 03:57+0000\n"
+"PO-Revision-Date: 2019-01-14 01:05-0300\n"
+"Last-Translator: Daniel Santibáñez Polanco <dansanti@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_ES\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: print_to_thermal
+#: model:ir.model.fields,field_description:print_to_thermal.field_res_config_settings_printer_urls
+msgid "All available printers(separe with coma)"
+msgstr "Todas las impresoras disponibles ( separe con Coma)"
+
+#. module: print_to_thermal
+#: model:ir.ui.view,arch_db:print_to_thermal.res_config_settings_view_form
+msgid "Default Active Printer"
+msgstr "Impresora Activa por defecto"
+
+#. module: print_to_thermal
+#: model:ir.model.fields,field_description:print_to_thermal.field_res_config_settings_default_printer
+#: model:ir.ui.view,arch_db:print_to_thermal.res_config_settings_view_form
+msgid "Default Printer"
+msgstr "Impresora por Defecto"
+
+#. module: print_to_thermal
+#: model:ir.ui.view,arch_db:print_to_thermal.res_config_settings_view_form
+msgid "Printers"
+msgstr "Impresoras"
+
+#. module: print_to_thermal
+#: model:ir.ui.view,arch_db:print_to_thermal.res_config_settings_view_form
+msgid "Printers Urls"
+msgstr "Urls de Impresoras"
+
+#. module: print_to_thermal
+#: model:ir.ui.view,arch_db:print_to_thermal.res_config_settings_view_form
+msgid "Printers Urls separate with coma, ie.: 192.168.0.22,printer.domain.tl, 127.0.0.1"
+msgstr "Urls de impresoras separadas por coma, ejemplo: 192.168.0.22,impresora.dominio.tld,127.0.0.1"
+
+#. module: print_to_thermal
+#. openerp-web
+#: code:addons/print_to_thermal/static/src/js/device.js:334
+#, python-format
+msgid "Printing Error: "
+msgstr "Error de impresión: "
+
+#. module: print_to_thermal
+#. openerp-web
+#: code:addons/print_to_thermal/static/src/js/widget.js:178
+#, python-format
+msgid "Set as active: "
+msgstr "Poner como activa: "
+
+#. module: print_to_thermal
+#. openerp-web
+#: code:addons/print_to_thermal/static/src/js/widget.js:140
+#: model:ir.ui.view,arch_db:print_to_thermal.res_config_settings_view_form
+#, python-format
+msgid "Thermal Printers"
+msgstr "Impresoras Térmicas"
+
+#. module: print_to_thermal
+#: model:ir.ui.view,arch_db:print_to_thermal.res_config_settings_view_form
+msgid "Time Printer alive [s]"
+msgstr "Tiempo mantener viva [s]"
+
+#. module: print_to_thermal
+#: model:ir.model.fields,field_description:print_to_thermal.field_res_config_settings_time_alive_printer
+msgid "Time interval call to keep alive printer"
+msgstr "Intervalo de tiempo para mantener conexión con la impresora"
+
+#. module: print_to_thermal
+#: model:ir.ui.view,arch_db:print_to_thermal.res_config_settings_view_form
+msgid "Time interval to keep printer alive"
+msgstr "Intervalo de tiempo para mantener conexión con la impresora"
+
+#. module: print_to_thermal
+#: model:ir.model,name:print_to_thermal.model_ir_actions_report
+msgid "ir.actions.report"
+msgstr ""
+
+#. module: print_to_thermal
+#: model:ir.model,name:print_to_thermal.model_report_report_thermal_abstract
+msgid "report.report_thermal.abstract"
+msgstr ""
+
+#. module: print_to_thermal
+#: model:ir.model,name:print_to_thermal.model_report_report_thermal_partner_thermal
+msgid "report.report_thermal.partner_thermal"
+msgstr ""
+
+#. module: print_to_thermal
+#: model:ir.model,name:print_to_thermal.model_res_config_settings
+msgid "res.config.settings"
+msgstr ""
