@@ -941,7 +941,7 @@ class ProductProduct(models.Model):
                 else:
                     store_code = "default2"
                 url=instance_id.location+"rest/"+store_code+"/V1/inventory/source-items"
-                response = requests.request("PUT",url, data=payload, headers=headers)
+                response = requests.request("POST",url, data=payload, headers=headers)
                 if str(response.status_code)=="200":
                     each_response=json.loads(response.text)
                 _logger.info(response.text)
