@@ -50,6 +50,7 @@ class GtMagentoStore(models.Model):
     count_magento_orders = fields.Integer(compute='GetOrdersCount')
     magento_order_date = fields.Date(string="From Date")
     magento_order_date_to = fields.Date(string="To Date")
+    source_code = fields.Char(string='Source Code', size=64)
     
     
     def ActionGetOrders(self):

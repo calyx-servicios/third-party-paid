@@ -23,7 +23,9 @@ from odoo import fields,models,api
 import requests
 import json
 import base64
+import logging
 
+_logger = logging.getLogger(__name__)
 
 class ProductProduct(models.Model):
     _inherit='product.product'
@@ -486,7 +488,6 @@ class ProductProduct(models.Model):
                 prods_id.append(prod_id.id)
             if instance_id.id not in prods_id:
                 prods_id.append(instance_id.id)
-
             vals = {'default_code':sku,'magento_id':each_list['id'],
                     'attribute_set':att_id,
                     'magento_instance_ids':[(6,0,instance_ids)],
@@ -499,9 +500,7 @@ class ProductProduct(models.Model):
                     'store_ids':[(6,0,store_ids)],
                     'exported_magento': True,
                     'gt_magento_product_ids':[(6,0,prods_id)]}
-            
-            product_ids.write(vals)
-
+            print ("*==> WRITING THE FINAL VARIANT PRODUCT::",product_ids.write(vals))
         return True
      
     def create_update_attributes(self,each_list,instance,product_ids,store_id,website_id):
@@ -913,7 +912,6 @@ class ProductProduct(models.Model):
         return True
     
     def GtExportSingleProductStock(self):
-        multi_instance = self.env['gt.magento.product.multi']
         for instance_id in self.magento_instance_ids:
             instance_id.generate_token()
             token=instance_id.token
@@ -925,31 +923,36 @@ class ProductProduct(models.Model):
                 'content-type': "application/json",
                 'cache-control': "no-cache",
             }
-            if self.qty_available > 0.00:
-                multi_id = multi_instance.search([
-                    ('gt_magento_instance_id','=',instance_id.id),
-                    ('gt_magento_exported','=',True),
-                    ('product_id','=',self.id)
-                ])
-                vals = { "stockItem": {
-                    "itemId": 0,
-                    "productId": multi_id.magento_id,
-                    "stockId": 1,
-                    "qty": self.qty_available,
-                    "isInStock": "true",
-                    "extensionAttributes": {}
-                  }
-                }
+            if self.qty_available >= 0.00:
+                vals = { "sourceItems": []}
+                for store in self.store_ids:
+                    data = {
+                    "sku": self.default_code,
+                    "source_code": store.source_code,
+                    "quantity": self.env['stock.quant']._get_available_quantity(self,store.warehouse_id.lot_stock_id),
+                    "status": 1
+                    }
+                    vals['sourceItems'].append(data)
                 payload = str(vals) 
                 payload=payload.replace("'",'"')     
                 payload=str(payload)
-                url=instance_id.location+"/rest/V1/products/"+str(self.default_code)+"/stockItems/"+"0"
+                if self.store_ids and self.store_ids[0].code:
+                    store_code = self.store_ids[0].code
+                else:
+                    store_code = "default2"
+                url=instance_id.location+"rest/"+store_code+"/V1/inventory/source-items"
                 response = requests.request("PUT",url, data=payload, headers=headers)
                 if str(response.status_code)=="200":
                     each_response=json.loads(response.text)
+                _logger.info(response.text)
         return True
     
-    
+    def magento_export_stock(self):
+        _logger.info('cron export stock start')
+        products = self.env['product.product'].search([('state','not in',('low','draft'))])
+        for product in products:
+            product.GtExportSingleProductStock()
+        _logger.info('cron export stock end')
 #######################OLD IMAGE EXPORT CODE####################    
     # def GtExportMagentoProductImage(self):
     #     multi_instance = self.env['gt.magento.product.image.multi']
