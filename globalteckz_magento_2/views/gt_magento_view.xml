@@ -74,8 +74,8 @@
                                 <group string="Manage Catalog">
                                     <newline/>
                                     <button name="GtImportMagentoConfigurableProduct" string="Import Configurable Products" type="object" class="btn-primary"/>
-                                    <button name="GtImportMagentoSimpleProduct" string="Import Simple Products" type="object" class="btn-primary"/>
-                                    <button name="GtImportMagentoStock" string="Import Stock" type="object" class="btn-primary"/>
+                                    <!-- <button name="GtImportMagentoSimpleProduct" string="Import Simple Products" type="object" class="btn-primary"/> -->
+                                    <!-- <button name="GtImportMagentoStock" string="Import Stock" type="object" class="btn-primary"/> -->
                                     <br/>
                                     <newline/>
                                     <button name="GtImportProductImage" string="Import Images" type="object" class="btn-primary"/>
@@ -88,7 +88,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Export Data From Odoo To Magento">
+                        <!-- <page string="Export Data From Odoo To Magento">
                             <group>
                                 <group string="Export Category"> 
                                     <newline/>
@@ -104,7 +104,7 @@
                                     <newline/>
                                 </group>
                             </group>
-                        </page>
+                        </page> -->
                         <page string='Manage Products and Customer ID'>
                             <group>
                                 <group>
