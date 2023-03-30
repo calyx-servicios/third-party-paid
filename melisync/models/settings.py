@@ -26,7 +26,7 @@ class Settings(models.Model):
     user_id = fields.Char(string=_('User ID'))
     state_uuid = fields.Char(string=_('State uuid'))
     site_id = fields.Many2one(required=True, comodel_name='melisync.site.ids', string=_('Site ID'))
-    testing_mode = fields.Boolean(default=True, string=_('In testing'), help=_('In testing mode, this products are no published with real name.'))
+    #testing_mode = fields.Boolean(default=True, string=_('In testing'), help=_('In testing mode, this products are no published with real name.'))
     test_users = fields.Many2many(comodel_name='melisync.test.users', relation='melisync_settings_test_users_rel', column1='setting_id', column2='user_id', string=_('Test users'))
     company_id = fields.Many2one(required=True, comodel_name='res.company', string=_('Company ID'))
     pricelists = fields.Many2many(comodel_name='product.pricelist', string=_('Available pricelists'), help=_('Available pricelists'))

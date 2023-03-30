@@ -43,20 +43,37 @@ class ProductProduct(models.Model):
         variation_data = {
             'product_id': self.id,
             'attribute_combinations': [],
+            'attributes': [],
         }
         value_ids = self.product_template_attribute_value_ids
         # Loop variant attribute value ids
         for value in value_ids:
+            attr_id = value.attribute_id
+            # Get attr and value data
+            attr_meli_id = value.attribute_id.meli_id
+            value_id = value.product_attribute_value_id.meli_id
+            value_name = value.name
             # Parse attribute data
             attr_data = {
-                'id': value.attribute_id.meli_id,
-                'value_name': value.name,
+                'id': attr_meli_id,
             }
-            # If value has self id.
-            if value.product_attribute_value_id.meli_id:
-                attr_data['value_id'] = value.product_attribute_value_id.meli_id
-            # Save attribute
-            variation_data['attribute_combinations'].append(attr_data)
+            # If has attr value id
+            if value_id:
+                attr_data['value_id'] = value_id
+            else:
+                attr_data['value_name'] = value_name
+            # If attribute is variant_attribute
+            tag_ids = attr_id.tag_ids
+            is_variation_attribute = tag_ids.search([
+                ('id', 'in', tag_ids.ids),
+                ('name', '=', 'variation_attribute')
+            ], limit=1)
+            # Save as variation attribute
+            if is_variation_attribute:
+                variation_data['attributes'].append(attr_data)
+            else:
+                # Save as attribute combination
+                variation_data['attribute_combinations'].append(attr_data)
         return variation_data
     
     def write(self, values, **kwargs):

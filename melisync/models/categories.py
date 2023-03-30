@@ -103,7 +103,8 @@ class Categories(models.Model):
             for attr in attributes:
                 # Parse attribute data
                 tags = attr.get('tags', {})
-                allow_variations = tags.get('allow_variations', False)
+                # Product variations only is allow_variations or variation_attribute
+                allow_variations = tags.get('allow_variations', False) or tags.get('variation_attribute', False)
                 # === Create or write attribute
                 try:
                     # Check for existent attribute
