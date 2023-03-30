@@ -1,5 +1,6 @@
 from .utils import Requests
-import json
+import logging
+logger = logging.getLogger(__name__)
 
 class MercadoLibreClient(object):
     # Default API URL
@@ -36,12 +37,14 @@ class MercadoLibreClient(object):
                 Throw error if res has errors.
             """
             if isinstance(res, dict):
+                #logger.info('='*100)
+                #logger.info('res = {}'.format(res))
                 # If res has error
                 if res.get('error'):
                     # Get causes
-                    causes = res.get('cause', [])
+                    causes = sorted(res.get('cause', []), key=lambda d: d['type'])
                     # Array with causes
-                    errors = ['{}: {}'.format(x.get('code'), x.get('message')) for x in causes]
+                    errors = ['- [{}] {}: {}'.format(x.get('type'), x.get('code'), x.get('message')) for x in causes]
                     # Exception lines
                     raise Exception('\n\n[{}] {}:\n\n{}'.format(res.get('error'), res.get('message'), '\n'.join(errors)))
         self.requests_obj = Requests(self._API_URL, self.default_headers, _error_parser_fn)

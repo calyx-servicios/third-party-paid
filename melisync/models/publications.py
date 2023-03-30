@@ -227,7 +227,7 @@ class Publications(models.Model):
             data = {
                 'site_id': self.instance.site_id.site_id,
                 'category_id': self.category.categ_id,
-                'title': _('Item de Prueba - Por favor, NO OFERTAR #{id}').format(id=self.product_id.id) if self.instance.testing_mode else self.product_id.name,
+                'title': self.product_id.name,
                 'currency_id': self.instance.currency_id.name,
                 'condition': self.condition,
                 'listing_type_id': self.listing_type.listing_id,
@@ -336,6 +336,8 @@ class Publications(models.Model):
 
     def get_attributes_and_variants(self):
         """
+            publication = env['melisync.publications'].search([], order='id desc', limit=1)
+            publication.get_attributes_and_variants()
             Get product attributes
             Return:
 
@@ -366,16 +368,26 @@ class Publications(models.Model):
                 attr_id = line.attribute_id
                 # Parse attribute data
                 for value in line.value_ids:
+                    value_id = value.meli_id
+                    value_name = value.name
+
                     attr_data = {
                         'id': attr_id.meli_id,
-                        'value_name': value.name,
-                        'value_id': value.meli_id or None,
+                        #'value_name': value.name,
+                        #'value_id': value.meli_id or None,
                         'values': [{
-                            'id': value.meli_id or None,
-                            'name': value.name,
+                            #'id': value.meli_id or None,
+                            #'name': value.name,
                             'struct': None,
                         }]
                     }
+                    # Add value_id or value_name
+                    if value_id:
+                        attr_data['value_id'] = value_id
+                        attr_data['values'][0]['id'] = value_id
+                    else:
+                        attr_data['value_name'] = value_name
+                        attr_data['values'][0]['name'] = value_name
                     # Save attribute
                     data['attributes'].append(attr_data)
                     # TODO: check if works with multiple attributes.
