@@ -40,8 +40,6 @@ class SaleOrder(models.Model):
                 'order.date_created.from': date_from.strftime('%Y-%m-%dT00:00:00.000-00:00'),
                 'order.status': 'paid',
                 'seller': settings_instance.user_id,
-                #'buyer': '175261657', # TODO: delete (test)
-                #'q': 2000004367850158, # TODO: delete (test)
             }
             # Get orders
             meli_orders = client.get_orders(params)
@@ -72,9 +70,12 @@ class SaleOrder(models.Model):
                             publication = publications_obj.search([('publication_id', '=', item_id)])
                             product = publication.product_id.product_variant_id
                         
-                        # Validate product
+                        # If product not exists
                         if not product:
-                            raise Exception('Cannot search product by Meli ID: {}'.format(item_data.get('id')))
+                            product = publication.product_id.create({
+                                'name': item_data.get('title'),
+                                'type': 'product',
+                            }).product_variant_id
                         
                         # Add order line
                         order_line = (0, 0, {
