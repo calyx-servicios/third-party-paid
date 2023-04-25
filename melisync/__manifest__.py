@@ -2,7 +2,7 @@
 {
     'name': "MercadoLibre Uploader",
     'summary': "MercadoLibre Uploader for Odoo.",
-    'version': '1.0.0',
+    'version': '1.0.1',
     'author': "Lucas Shoobridge",
     'website': "https://www.linkedin.com/in/lshoobridge/",
     'description': """
@@ -41,7 +41,7 @@ Odoo MercadoLibre Uploader
     ],
 
     'application': True,
-    'price': 1000,
+    'price': 1800,
     'currency': 'USD',
     'images': [
         'static/description/images/settings_instance_authenticated_screenshot.png',

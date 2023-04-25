@@ -1,5 +1,6 @@
 import requests
-import gzip
+import logging
+logger = logging.getLogger(__name__)
 
 class Requests(object):
     def __init__(self, base_url, default_headers, error_fn = None):
@@ -35,6 +36,12 @@ class Requests(object):
             **custom_headers,
         }
         request = requests.request(method, self.base_url + endpoint, headers = headers, **kwargs)
+        logger.info(method)
+        if method == "POST":
+            logger.info('endpoint = {}'.format(self.base_url + endpoint))
+            logger.info('headers = {}'.format(headers))
+            logger.info('json = {}'.format(kwargs.get('json')))
+
         data = self._parse(request)
         if self.error_fn:
             self.error_fn(data)
