@@ -1,6 +1,9 @@
 from .utils import Requests
 import json
 
+import logging
+logger = logging.getLogger(__name__)
+
 class MercadoLibreClient(object):
     # Default API URL
     _API_URL = 'https://api.mercadolibre.com'
@@ -35,15 +38,29 @@ class MercadoLibreClient(object):
             """
                 Throw error if res has errors.
             """
-            if isinstance(res, dict):
-                # If res has error
-                if res.get('error'):
+            # If res has error
+            logger.debug('API Response: {}'.format(res))
+            if isinstance(res, dict) and res.get('error'):
+                # Send default error.
+                msg = 'Error: {}'.format(json.dumps(res.get('cause', '')))
+                try:
+                    errors = []
                     # Get causes
-                    causes = res.get('cause', [])
+                    causes = sorted(res.get('cause', []), key=lambda d: d.get('type'))
                     # Array with causes
-                    errors = ['{}: {}'.format(x.get('code'), x.get('message')) for x in causes]
+                    for x in causes:
+                        err = x
+                        try:
+                            err = '- [{}] {}: {}'.format(x.get('type'), x.get('code'), x.get('message'))
+                        except:
+                            pass
+                        errors.append(err)
+                    # Map msg
+                    msg = '\n\n[{}] {}:\n\n- {}'.format(res.get('error'), res.get('message'), '\n'.join(errors))
                     # Exception lines
-                    raise Exception('\n\n[{}] {}:\n\n{}'.format(res.get('error'), res.get('message'), '\n'.join(errors)))
+                except Exception as e:
+                    logger.error('Error mapping dict: {}'.format(e))
+                raise Exception(msg)
         self.requests_obj = Requests(self._API_URL, self.default_headers, _error_parser_fn)
 
     def get_authorization_url(self, state):

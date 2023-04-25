@@ -65,7 +65,7 @@
                   <strong>Note</strong>: Apply the <strong>redirect uri</strong> in the settings of your app in MercadoLibre.
                 </p>
                 <field name="user_id" string="Authenticated User ID" attrs="{ 'readonly': True, 'invisible': [('user_id', '=', False)] }" />
-                <field name="testing_mode" string="Testing mode" />
+                <!-- <field name="testing_mode" string="Testing mode" /> -->
                 <p class="oe_grey oe_edit_only" colspan="2">
                   <strong>Note</strong>: Apply <strong>testing mode</strong> if you are doing price or release testing. Remember that MercadoLibre can remove your publications if you do not comply with the rules.
                 </p>
