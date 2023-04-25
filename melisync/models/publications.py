@@ -288,18 +288,27 @@ class Publications(models.Model):
             except Exception as e:
                 raise Exception(_('Error on upload variant image to MercadoLibre: {}').format(e))
             # ==========
-            # Publish product in MercadoLibre
-            item = client.item_create(data)
-            # ==========
-            # Save product data
-            self.write({
-                'status': 'active',
-                'publication_id': item.get('id'),
-                'image_id': meli_image_id,
-            })
-            # Post description
-            if self.description_sale:
-                self.update_description(client)
+            try:
+                # Publish product in MercadoLibre
+                item = client.item_create(data)
+            except Exception as e:
+                raise Exception(_('item creation: {}').format(e))
+                # ==========
+            try:
+                # Save product data
+                self.write({
+                    'status': 'active',
+                    'publication_id': item.get('id'),
+                    'image_id': meli_image_id,
+                })
+            except Exception as e:
+                raise Exception(_('odoo item updating: {}').format(e))
+            try:
+                # Post description
+                if self.description_sale:
+                    self.update_description(client)
+            except Exception as e:
+                raise Exception(_('updating description: {}').format(e))
             # Save variations IDS
             for index, variation in enumerate(item.get('variations', [])):
                 try:
@@ -319,7 +328,7 @@ class Publications(models.Model):
                         'variant_id': variation_data.get('product_id'),
                     })
                 except Exception as e:
-                    raise UserError(_('Error on save product variants ids "{}" ({}) to MercadoLibre:\n\n{}\n\nPlease, add product description updating product in MercadoLibre.').format(self.product_id.name, self.listing_type.name, e))
+                    raise Exception(_('Error on save product variants ids "{}" ({}) to MercadoLibre:\n\n{}\n\nPlease, add product description updating product in MercadoLibre.').format(self.product_id.name, self.listing_type.name, e))
         except Exception as e:
             raise UserError(_('Error on upload product "{}" ({}) to MercadoLibre:\n\n{}').format(self.product_id.name, self.listing_type.name, e))
 
@@ -332,7 +341,7 @@ class Publications(models.Model):
                 'plain_text': self.description_sale or '',
             })
         except Exception as e:
-            raise UserError(_('Error on update product description "{}" ({}) to MercadoLibre:\n\n{}\n\nPlease, add product description updating product in MercadoLibre.').format(self.product_id.name, self.listing_type.name, e))
+            raise Exception(_('Error on update product description "{}" ({}) to MercadoLibre:\n\n{}\n\nPlease, add product description updating product in MercadoLibre.').format(self.product_id.name, self.listing_type.name, e))
 
     def get_attributes_and_variants(self):
         """
