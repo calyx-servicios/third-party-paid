@@ -51,7 +51,7 @@ class GtMagentoStore(models.Model):
     magento_order_date = fields.Date(string="From Date")
     magento_order_date_to = fields.Date(string="To Date")
     source_code = fields.Char(string='Source Code', size=64)
-    
+    stock_location_ids = fields.Many2many('stock.location',string='Location')
     
     def ActionGetOrders(self):
         #print "<================Calling===============>",

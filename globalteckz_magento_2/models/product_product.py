@@ -926,10 +926,13 @@ class ProductProduct(models.Model):
             if self.qty_available >= 0.00:
                 vals = { "sourceItems": []}
                 for store in self.store_ids:
+                    quantity = 0
+                    for location in store.stock_location_ids:
+                        quantity += self.env['stock.quant']._get_available_quantity(self,location)
                     data = {
                     "sku": self.default_code,
                     "source_code": store.source_code,
-                    "quantity": self.env['stock.quant']._get_available_quantity(self,store.warehouse_id.lot_stock_id),
+                    "quantity": quantity,
                     "status": 1
                     }
                     vals['sourceItems'].append(data)

@@ -22,7 +22,7 @@
 
 {
     'name': 'Odoo Magento 2 Connector',
-    'version': '1.0.0.1',
+    'version': '1.1.0.1',
     'category': 'Connector',
     'sequence': 1,
     'author': 'Globalteckz',
