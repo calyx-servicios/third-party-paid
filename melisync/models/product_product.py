@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, _, fields, api
-from odoo.exceptions import UserError
-from datetime import datetime
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -45,14 +44,30 @@ class ProductProduct(models.Model):
             'attribute_combinations': [],
             'attributes': [],
         }
-        value_ids = self.product_template_attribute_value_ids
+        # Get template attributes
+        tmpl_attrs_values_ids = sum([x.value_ids.ids for x in self.product_tmpl_id.attribute_line_ids], [])
+        
+        # Get variant attributes
+        variant_attrs_value_ids = self.product_template_attribute_value_ids
+        # Get variant values child ids
+        child_ids = [x for x in [x.child_ids for x in [value.product_attribute_value_id for value in variant_attrs_value_ids] if x.child_ids] if x.id in tmpl_attrs_values_ids]
+        
+        # Merge variant attribute values and child values
+        value_ids = [x for x in variant_attrs_value_ids] + [x for x in child_ids]
+        
         # Loop variant attribute value ids
         for value in value_ids:
+            # Get attribute data
             attr_id = value.attribute_id
-            # Get attr and value data
             attr_meli_id = value.attribute_id.meli_id
-            value_id = value.product_attribute_value_id.meli_id
+            
+            # Get value data
             value_name = value.name
+            try:
+                value_id = value.product_attribute_value_id.meli_id
+            except Exception as e:
+                value_id = value.meli_id
+
             # Parse attribute data
             attr_data = {
                 'id': attr_meli_id,
@@ -62,6 +77,7 @@ class ProductProduct(models.Model):
                 attr_data['value_id'] = value_id
             else:
                 attr_data['value_name'] = value_name
+
             # If attribute is variant_attribute
             tag_ids = attr_id.tag_ids
             is_variation_attribute = tag_ids.search([
