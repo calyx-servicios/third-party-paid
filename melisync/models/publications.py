@@ -344,12 +344,11 @@ class Publications(models.Model):
             raise Exception(_('Error on update product description "{}" ({}) to MercadoLibre:\n\n{}\n\nPlease, add product description updating product in MercadoLibre.').format(self.product_id.name, self.listing_type.name, e))
 
     def get_attributes_and_variants(self):
+        # Objects
+        product_attribute_value_obj = self.env['product.attribute.value']
         """
-            publication = env['melisync.publications'].search([], order='id desc', limit=1)
-            publication.get_attributes_and_variants()
             Get product attributes
             Return:
-
             {
                 'attributes': [],
                 'variations': [  
@@ -367,26 +366,25 @@ class Publications(models.Model):
         attrs_domain = [
             ('id', 'in', self.attribute_line_ids.ids), # Attri
             ('attribute_id.create_variant', '=', 'no_variant'), # If attribute has not create variant
-            # TODO: check if it works with attribute without meli_id.
-            #('attribute_id.meli_id', '!=', False), # Loop only attributes with meli_id
         ]
         # Get product attributes
         for line in self.attribute_line_ids.search(attrs_domain):
             try:
                 # Parse variables
                 attr_id = line.attribute_id
+                # Get values without Parent ID
+                values_wo_parent = product_attribute_value_obj.search([
+                    ('id', 'in', line.value_ids.ids),
+                    ('parent_id', '=', False),
+                ])
                 # Parse attribute data
-                for value in line.value_ids:
+                for value in values_wo_parent:
                     value_id = value.meli_id
                     value_name = value.name
 
                     attr_data = {
                         'id': attr_id.meli_id,
-                        #'value_name': value.name,
-                        #'value_id': value.meli_id or None,
                         'values': [{
-                            #'id': value.meli_id or None,
-                            #'name': value.name,
                             'struct': None,
                         }]
                     }
@@ -399,15 +397,15 @@ class Publications(models.Model):
                         attr_data['values'][0]['name'] = value_name
                     # Save attribute
                     data['attributes'].append(attr_data)
-                    # TODO: check if works with multiple attributes.
-                    #break
             except Exception as e:
                 raise UserError('Error processing attribute "{}" (product "{}"): {}'.format(attr_id.meli_id, self.product_id.name, e))
+
         # Loop product variants
         for variant in self.product_id.product_variant_ids:
             variation_data = variant.meli_get_variant_data()
+            logger.info('variation_data = {}'.format(variation_data))
             # Get other product data
-            variation_data['available_quantity'] = variant.with_context(warehouse=self.instance.warehouse_id.id).meli_available_qty
+            variation_data['available_quantity'] = variant.with_context(warehouse=self.instance.warehouse_id.id).meli_available_qty # TODO: check publish with Stock 0
             variation_data['price'] = self.price # self.with_context(pricelist=self.pricelist.id).meli_price
             # Save product variation data
             data['variations'].append(variation_data)
