@@ -2,7 +2,7 @@
 {
     'name': "MercadoLibre Uploader",
     'summary': "MercadoLibre Uploader for Odoo.",
-    'version': '1.0.1',
+    'version': '1.0.2',
     'author': "Lucas Shoobridge",
     'website': "https://www.linkedin.com/in/lshoobridge/",
     'description': """
@@ -38,6 +38,7 @@ Odoo MercadoLibre Uploader
         'views/shipping_methods.xml',
         'views/publications.xml',
         'views/publications_variants.xml',
+        'views/product_attribute_value.xml',
     ],
 
     'application': True,
