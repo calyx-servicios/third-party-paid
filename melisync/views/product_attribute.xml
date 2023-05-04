@@ -15,8 +15,9 @@
                         <field name="tag_ids" widget="many2many_tags" attrs="{ 'readonly': True }" />
                     </group>
                 </xpath>
-                <xpath expr="//field[@name='value_ids']" position="replace">
-                    <field name="value_ids" />
+                <xpath expr="//field[@name='value_ids']//tree" position="attributes">
+                    <attribute name="editable" />
+                    <attribute name="context">{ 'default_attribute_id': id }</attribute>
                 </xpath>
             </field>
         </record>

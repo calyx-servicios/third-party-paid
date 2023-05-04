@@ -157,7 +157,9 @@ class MercadoLibreClient(object):
             Parameters:
                 - category_id: id of category.
         """
-        return self.requests_obj._get(f'/categories/{category_id}/attributes')
+        data = self.requests_obj._get(f'/categories/{category_id}/attributes')
+        logger.info('{} = {}'.format(category_id, data))
+        return data
 
     def get_currencies(self):
         """	
