@@ -39,6 +39,9 @@ class ProductProduct(models.Model):
             rec.meli_price = price
 
     def meli_get_variant_data(self):
+        # Objects
+        product_attribute_value_obj = self.env['product.attribute.value']
+        # Other data
         variation_data = {
             'product_id': self.id,
             'attribute_combinations': [],
@@ -46,12 +49,15 @@ class ProductProduct(models.Model):
         }
         # Get template attributes
         tmpl_attrs_values_ids = sum([x.value_ids.ids for x in self.product_tmpl_id.attribute_line_ids], [])
-        
+
         # Get variant attributes
         variant_attrs_value_ids = self.product_template_attribute_value_ids
+
         # Get variant values child ids
-        child_ids = [x for x in [x.child_ids for x in [value.product_attribute_value_id for value in variant_attrs_value_ids] if x.child_ids] if x.id in tmpl_attrs_values_ids]
-        
+        attr_childs_ids = sum([x.child_ids.ids for x in [value.product_attribute_value_id for value in variant_attrs_value_ids] if x.child_ids], [])
+        attr_childs = [product_attribute_value_obj.browse(x) for x in attr_childs_ids]
+        child_ids = [x for x in attr_childs if x.id in tmpl_attrs_values_ids]
+
         # Merge variant attribute values and child values
         value_ids = [x for x in variant_attrs_value_ids] + [x for x in child_ids]
         

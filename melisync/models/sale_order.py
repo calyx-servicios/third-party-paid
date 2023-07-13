@@ -56,24 +56,31 @@ class SaleOrder(models.Model):
                 try:
                     # Loop order items
                     for line in meli_order.get('order_items'):
+                        # Parse product line
+                        product = None
                         # Get item data (product data)
                         item_data = line.get('item')
+                        item_id = item_data.get('id')
                         # Get item variant ID
-                        variant_id = item_data.get('variant_id')
+                        variant_id = item_data.get('variation_id', False)
+                        
+                        # Parse product title
+                        product_title = '{} ({})'.format(item_data.get('title'), item_id)
+
                         # Get variant ID
                         if variant_id:
                             product = publications_variants_relations_obj.search([('meli_id', '=', variant_id)]).variant_id
                         else:
                             # Get publication product main variant ID
-                            item_id = item_data.get('id')
                             # Search by publication template ID
                             publication = publications_obj.search([('publication_id', '=', item_id)])
                             product = publication.product_id.product_variant_id
                         
                         # If product not exists
                         if not product:
-                            product = publication.product_id.create({
-                                'name': item_data.get('title'),
+                            # Todo: check
+                            product = product_template_obj.create({
+                                'name': product_title,
                                 'type': 'product',
                             }).product_variant_id
                         
@@ -81,7 +88,7 @@ class SaleOrder(models.Model):
                         order_line = (0, 0, {
                             'product_id': product.id,
                             'product_uom_qty': line.get('quantity'),
-                            'name': item_data.get('title'),
+                            'name': product_title,
                             'price_unit': line.get('unit_price'),
                         })
                         order_lines.append(order_line)
