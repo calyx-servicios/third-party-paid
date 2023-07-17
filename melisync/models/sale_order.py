@@ -112,14 +112,14 @@ class SaleOrder(models.Model):
                         buyer_data = {
                             'company_type': 'person',
                             'meli_id': buyer_info.get('id'),
-                            'name': buyer_company.get('corporate_name'),
+                            'name': buyer_company.get('corporate_name', 'MELI #%s'.format(buyer_info.get('id'))),
                             'country_id': buyer_country_id.id,
-                            'city': buyer_address.get('city'),
-                            'zip': buyer_address.get('zip_code'),
-                            'street': buyer_address.get('address'),
+                            'city': buyer_address.get('city', ''),
+                            'zip': buyer_address.get('zip_code', ''),
+                            'street': buyer_address.get('address', ''),
                             #'vat': buyer_identification.get('number'),
                             #'l10n_latam_identification_type_id': buyer_identification_type.id,
-                            'email': buyer_info.get('email'),
+                            'email': buyer_info.get('email', ''),
                             'phone': '{area_code} {number}'.format(area_code=buyer_phone.get('area_code', ''), number=buyer_phone.get('number', '')),
                         }
                         # Create the main partner
