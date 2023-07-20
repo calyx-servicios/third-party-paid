@@ -25,6 +25,7 @@
                             <field name="prefix"/>      
                             <field name="pricelist_id"/>
                             <field name="warehouse_id"/>
+                            <field name="stock_location_ids" widget="many2many_tags"/>
                             <field name="discount_product"/>
                             <field name="shipping_product"/>      
                         </group>
