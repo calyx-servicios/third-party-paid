@@ -100,12 +100,12 @@ class SaleOrder(models.Model):
                     if not main_partner_id:
                         # Get buyer info
                         buyer_info = client.get_user(buyer_id)
-                        buyer_country_id = res_country_obj.search([('code', '=', buyer_info.get('country_id'))])
+                        buyer_country_id = res_country_obj.search([('code', '=', buyer_info.get('country_id', 'AR'))])
                         # Buyer data.
-                        buyer_identification = buyer_info.get('identification')
-                        buyer_company = buyer_info.get('company')
-                        buyer_phone = buyer_info.get('phone')
-                        buyer_address = buyer_info.get('address')
+                        buyer_identification = buyer_info.get('identification', {})
+                        buyer_company = buyer_info.get('company', {})
+                        buyer_phone = buyer_info.get('phone', {})
+                        buyer_address = buyer_info.get('address', {})
                         # Identification number and type
                         #buyer_identification_type = l10n_latam_identification_type_obj.search([('name', '=', buyer_identification.get('type'))])
                         # Parse buyer data
