@@ -8,7 +8,7 @@
     "description": """
         This module will manage live chat option in POS.
     """,
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.1.0",
     "category": "POS",
     "author": "Kinfinity Tech Pvt. Ltd.",
     "website": "https://www.kinfinitytech.com/",
@@ -18,6 +18,7 @@
         "point_of_sale",
         "mail",
         "mail_bot",
+        "pos_seller"
     ],
     'data': [
         'views/pos_config.xml',
