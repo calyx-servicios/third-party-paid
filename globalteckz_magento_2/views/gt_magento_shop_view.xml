@@ -18,8 +18,7 @@
                             <field name="store_id"/>
                             <field name="magento_shop" invisible="1"/>
                             <field name="website_id"/>
-                            <field name="code"/>
-                            <field name="source_code"/>         
+                            <field name="code"/>         
                         </group>
                         <group attrs="{'invisible':[('magento_shop','=',False)]}">
                             <field name="prefix"/>      
