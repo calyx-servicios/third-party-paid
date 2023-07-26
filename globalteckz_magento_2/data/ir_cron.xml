@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record forcecreate="True" id="magento_export_stock" model="ir.cron">
+        <field name="name">Magento: Export Stock</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 01:00:00')"/>
+        <field name="numbercall">-1</field>
+        <field name="doall">False</field>
+        <field name="active">False</field>
+        <field name="priority">1</field>
+        <field name="model_id" ref="model_product_product"/>
+        <field name="state">code</field>
+        <field name="code">model.magento_export_stock()</field>
+    </record>
+
+</odoo>
