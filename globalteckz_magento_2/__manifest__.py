@@ -129,6 +129,7 @@ import invoice from magento
                 'product',
             ],
     'data': [
+            'data/ir_cron.xml',
             'security/gt_magento_security.xml',
             'security/ir.model.access.csv',
             'views/gt_magento_view.xml',
