@@ -500,7 +500,7 @@ class ProductProduct(models.Model):
                     'store_ids':[(6,0,store_ids)],
                     'exported_magento': True,
                     'gt_magento_product_ids':[(6,0,prods_id)]}
-            print ("*==> WRITING THE FINAL VARIANT PRODUCT::",product_ids.write(vals))
+            product_ids.write(vals)
         return True
      
     def create_update_attributes(self,each_list,instance,product_ids,store_id,website_id):
