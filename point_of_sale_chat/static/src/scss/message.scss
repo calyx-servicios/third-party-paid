@@ -161,10 +161,6 @@ div.back_to_pos{
 .o_mail_systray_dropdown_top .o_filter_button:hover,  .o_mail_systray_dropdown_top .o_filter_button.active {
     color: #7C7BAD !important;
 }
-
-.pos h1{
-    font-size:20px !important;
-}
 .o_composer_button_add_attachment, .o_composer_button_emoji {
     color: #000 !important;
     background: transparent !important;
@@ -173,4 +169,30 @@ div.back_to_pos{
     padding:0 !important;
     margin-bottom: 0 !important;
     border-radius:0 !important;
+}
+
+//Confilcts-----------------
+.pos .modal-dialog {
+	margin: 0;
+	max-width: 100%;
+	pointer-events: all;
+}
+.pos .popup input.seller_name{
+	width: inherit;
+}
+.screen-content{
+	max-width: 80%;
+}
+.pos .clientlist-screen .searchbox input{
+	width: 180px;
+}
+.pos .clientlist-screen .client-list th, .pos .clientlist-screen .client-list td{
+	line-height: inherit;
+}
+.pos .payment-numpad .numpad{
+	width: revert;
+}
+.pos h1{
+	margin-top: revert;
+	font-size:20px !important;
 }
