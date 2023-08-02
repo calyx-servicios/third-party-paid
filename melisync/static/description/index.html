@@ -1,476 +1,885 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf-8">
-  <title>Untitled Document</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-  <style>
-    * {
-      font-family: "Proxima Nova", -apple-system, Roboto, Arial, sans-serif !important;
-    }
-
-    .oe_footer {
-      font-weight: 700;
-      opacity: 1;
-      font-size: 24px;
-    }
-
-    .oe_row {
-      width: 928px;
-      margin-top: 16px;
-      margin-bottom: 16px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 30px;
-      border-radius: 25px;
-      background-color: #ffdb15;
-      color: #333;
-    }
-
-    .oe_body {
-      width: 95%;
-      margin-top: 16px;
-      margin-bottom: 16px;
-      margin-left: auto;
-      margin-right: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 25px;
-    }
-
-    .list-group-item {
-      border-radius: 25px !important;
-      text-align: center;
-      margin: 5px;
-      color: #333;
-    }
-
-    .list-group-item:hover {
-      background-color: #ffdb15;
-      color: #333;
-      cursor: pointer;
-    }
-
-    .youtube {
-      color: #875A7B !important;
-    }
-
-    h3 {
-      color: #333;
-      font-weight: 700;
-      text-align: left;
-      opacity: 1;
-      font-size: 24px;
-      margin-bottom: 18px;
-      margin-top: 18px
-    }
-
-    .oe_header {
-      width: 95%;
-      text-align: center;
-      margin-top: 16px;
-      margin-bottom: 12px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 30px;
-      padding-bottom: 0;
-      border-radius: 25px;
-      background-color: #ffdb15;
-      color: #333;
-    }
-
-    .badge {
-      background-color: #333;
-      color: #ffdb15;
-    }
-
-    .badge:hover {
-      background-color: #ffdb15;
-      color: #333;
-      cursor: pointer;
-    }
-
-    .mt0::before,
-    .mt0::after {
-      display: inline-block;
-      content: "";
-      border-top: .1rem solid black;
-      width: 4rem;
-      margin: 0 .5rem;
-      transform: translateY(-.5rem);
-    }
-
-    .btn {
-      background-color: #e91b1b;
-      padding: 9px;
-      color: #333;
-      font-size: 20px;
-    }
-
-    img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .container {
-      padding: 16px;
-      display: flow-root"
-
-    }
-
-    b {
-      color: #875A7B;
-    }
-
-    .card-text {
-      margin-top: 15px;
-    }
-
-    .sub_info:hover {
-      background-color: #ffdb15;
-      color: #333;
-    }
-
-    .nav-item>a {
-      color: #875A7B !important;
-    }
-
-    .nav-item>a:hover {
-      background-color: #ffdb15 !important;
-      color: #333 !important;
-    }
-
-    .nav-item>.active {
-      background-color: #ffdb15 !important;
-      color: #333 !important;
-    }
-
-    .list-group>.active {
-      background-color: #ffdb15 !important;
-      color: #333 !important;
-      border: solid #333 1px !important;
-    }
-
-    .list-group>.active:hover {
-      background-color: #fff !important;
-      color: #333 !important;
-      border: solid #ffdb15 !important;
-    }
-
-    .col-3,
-    .col-1 {
-      background-color: #ffdb15 !important;
-      color: #333 !important;
-    }
-
-    .col-3:hover,
-    .col-1:hover {
-      background-color: #fff !important;
-      color: #333 !important;
-      border-radius: 5px !important;
-      border: solid #ffdb15 !important;
-    }
-  </style>
-</head>
-<section class="oe_container">
-  <div class="oe_header oe_spaced">
-      <h1 class="oe_slogan"><strong>MercadoLibre Uploader</strong><small class="text-muted"> - melisync</h1>
-      <h3 class="oe_slogan text-center">MercadoLibre Uploader / Publisher for Odoo.</h3>
-      <div class="oe_badge text-right">
-        <strong class="text-dark">Compatible with the following versions:</strong>
-        <span class="badge badge-pill badge-primary">Odoo 12.0</span>
-        <span class="badge badge-pill badge-primary">Odoo 13.0</span>
-        <span class="badge badge-pill badge-primary">Odoo 14.0</span>
-        <span class="badge badge-pill badge-primary">Odoo 15.0</span>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title></title>
+    <style>
+      .oe_slogan {
+        font-size: 18px;
+        font-weight: bold;
+      }
+    
+      .oe_slogan.mb8 {
+        margin-bottom: 8px;
+      }
+    
+      .oe_slogan.mt0 {
+        margin-top: 0;
+      }
+    
+      .carousel-caption {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+      }
+    
+      .carousel-caption h4 {
+        color: #fff;
+      }
+    
+      .carousel-indicators {
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="oe_styling_v8">
+      <div class="container">
+        <h3 class="text-center mt-5" style="color: #875A7B; font-family: Montserrat; font-weight: 600; text-transform: uppercase; font-size: 25px; opacity: 1;">
+          MercadoLibre Uploader / Publisher for Odoo <small class="text-muted">- melisync</small>
+        </h3>
+        <p class="text-center mb-3" style="font-size: 16px; color: #333;">Powered by Calyx Servicios S.A</p>
+        <p class="text-center" style="font-size: 18px; margin-bottom: 30px; max-width: 800px; margin: 0 auto;">
+          This is a module that allows you to publish (and keep synchronized) your Odoo products in the MercadoLibre Marketplace. Also, it will allow you to have several instances, in the event that your company has several branches in different countries, and thus be able to have your products published in all the corresponding countries.
+        </p>
+        <p class="text-center mt-4" style="color: #0f1e40; font-size: 16px; max-width: 75%; margin: 0 auto;">
+          Here is a video showing the workflows this Odoo integration module works for.
+        </p>
+        <h3 class="text-center mt-4 mb-2">
+          <a href="#" target="_blank" style="color: #875A7B; font-size: 20px; text-decoration: none; font-weight: 600;">
+            WATCH THE VIDEO
+          </a>
+        </h3>
+        <p class="text-center" style="font-size: 12px; max-width: 75%; margin: 0 auto;">
+          Melisync for each version should be purchased separately according to
+          <a href="https://apps.odoo.com/apps/sales-conditions" target="_blank" style="color: #875A7B; text-decoration: none;">Odoo store rules</a>.
+        </p>
       </div>
-  </div>
-</section>
-<section class="oe_container">
-  <div class="oe_body shadow p-3 mb-5 rounded-fill">
-    <h1 class="oe_slogan mb-18 mt-18 text-center font-size-24 font-weight-700 text-uppercase">
-      <b>What does this module do?</b>
-    </h1>
-    <div class="container text-center">
-      <div class="text-center mt-4 mb-4">
-        <strong>Melisync</strong> is a module that allows you to publish (and keep synchronized) your Odoo products in
-        the MercadoLibre Marketplace.
-        Also, it will allow you to have several instances, in the event that your company has several branches in
-        different countries, and thus be able to have your products published in all the corresponding countries.
-      </div>
-    </div>
-    <!-- FEATURES -->
-    <div class="oe_feature mb-5 pb-5">
-      <h2 class="oe_slogan mb8 text-center"><b>Features</b></h2>
-      <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="meli_intance-tab" data-toggle="tab" href="#meli_intance" role="tab"
-            aria-controls="meli_intance" aria-selected="true">MercadoLibre instances</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="price_settings-tab" data-toggle="tab" href="#price_settings" role="tab"
-            aria-controls="price_settings" aria-selected="false">Price settings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="meli_insta_actions-tab" data-toggle="tab" href="#meli_insta_actions" role="tab"
-            aria-controls="meli_insta_actions" aria-selected="false">MercadoLibre instance actions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="prod_settings-tab" data-toggle="tab" href="#prod_settings" role="tab"
-            aria-controls="prod_settings" aria-selected="false">Products settings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="meli_categ-tab" data-toggle="tab" href="#meli_categ" role="tab"
-            aria-controls="meli_categ" aria-selected="false">MercadoLibre category settings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="user_permissions-tab" data-toggle="tab" href="#user_permissions" role="tab"
-            aria-controls="user_permissions" aria-selected="false">User permissions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="sales_download-tab" data-toggle="tab" href="#sales_download" role="tab"
-            aria-controls="sales_download" aria-selected="false">Sales download</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="cron_actions-tab" data-toggle="tab" href="#cron_actions" role="tab"
-            aria-controls="cron_actions" aria-selected="false">Schedule actions</a>
-        </li>
-      </ul>
-      <div class="tab-content text-center">
-        <div class="tab-pane active" id="meli_intance" role="tabpanel" aria-labelledby="meli_intance-tab">
-          <ul class="list-group">
-            <li class="list-group-item">Multiple instances.</li>
-            <li class="list-group-item">Automatic token/refresh token obtaining just by authenticating.</li>
-            <li class="list-group-item">Automatic obtaining of publication types depending on the country selected in
-              the instance.</li>
-            <li class="list-group-item">Currency specification.</li>
-            <li class="list-group-item">Test mode: posts with name allowed for tests.</li>
-            <li class="list-group-item active">Stock settings:</li>
-            <div class="row justify-content-center">
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Choose warehouse to obtain the stock of the
-                product.</div>
+      
+      <div class="container mt-3 mb-5">
+        <div class="shadow p-4 mt-5 mb-5"style="border: 1px solid #875A7B; border-radius: 0.4rem">
+          <h2 class="text-center">
+            Acquiring our module, you will receive:
+          </h2>
+          <ol class="lead">
+            <li>Full installation and configuration support.</li>
+            <li>Specialized and dedicated technical support.</li>
+            <li>Receive the latest module updates automatically without manual downloads.</li>
+            <li>Direct email contact.</li>
+          </ol>
+          <p class="text-center font-weight-bold mb-0">
+            About us:
+          </p>
+          <div class="input-group mt-3">
+            <input type="text" class="form-control" value="https://odoo.calyx-cloud.com.ar/" readonly>
+            <div class="input-group-append">
+              <button class="btn btn-primary" onclick="copyToClipboard()">Copy Link</button>
             </div>
-          </ul>
+          </div>
         </div>
-        <div class="tab-pane" id="price_settings" role="tabpanel" aria-labelledby="price_settings-tab">
-          <ul class="list-group">
-            <li class="list-group-item">Choose:</li>
-            <div class="row justify-content-center">
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Warehouse to obtain the stock of the product.</div>
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Price list (or create a new one from the
-                configuration, with a default name).</div>
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">The number of days back from which MercadoLibre
-                sales will be synchronized.</div>
+      </div>
+      
+      <section class="s_picture bg-100 pt48 pb24" data-name="Picture">
+        <div class="container">
+          <h3 style="color: #875A7B; font-family: Montserrat; font-weight: 600; text-align: center; font-size: 20px; opacity: 1; margin: 8px 0 16px;" class="oe_slogan">
+            CONTACT US
+          </h3>
+          <div class="text-center mb-3">
+            <a href="mailto:contact_us@calyxservicios.com.ar?subject=About melysinc" target="_blank">
+              <span class="mx-1 mb-1 deep-1 deep_hover" style="color: #875A7B; font-size: 20px; vertical-align: middle; display: inline-block; padding: 13px 30px; border: 2px solid #875A7B; border-radius: 10px;">
+                contact_us@calyxservicios.com.ar
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+      
+      <section class="oe_container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h4
+              style="
+                font-size: 24px;
+                font-family: 'Lato', 'Open Sans', 'Helvetica', Sans;
+                text-align: center;
+              "
+            >
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+              <b style="color: #875A7B;">Features</b>
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+            </h4>
+          </div>
+        </div>
+      </section>
+      <div class="row">
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-layer-group" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">Multiple instances of MercadoLibre</h3>
+                  <p class="mt8">
+                    Automatic token/refresh token obtaining through authentication. Automatic obtaining of publication types based on the selected country. Currency specification. Test mode for trial posts. Stock settings - Choose warehouse to obtain product stock.
+                  </p>
+                </div>
+              </div>
             </div>
-            <li class="list-group-item">Auto synchronization: enable auto sync to update products prices, stocks,
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-file-invoice" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">Synchronize sales orders and invoices.</h3>
+                  <p class="mt8">
+                    Automatic download of the sales made in MercadoLibre, with the customer's data to be able to issue an invoice from Odoo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-upload" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">Publishing products from Odoo to Mercado Libre</h3>
+                  <p class="mt8">
+                    You can publish all your products with complete settings, keep your stock and prices updated, and ensure that customers always find accurate information about your products.                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-retweet" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">Button to update all imported products according to their status.</h3>
+                  <p class="mt8">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-th-list" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">Single or multiple publication of Odoo products.</h3>
+                  <p class="mt8">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-handshake" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">Odoo Community and Enterprise</h3>
+                  <p class="mt8">
+                    Works with both Community and Enterprise editions (self-hosted or <a href="https://www.odoo.sh/" target="_blank">odoo.sh</a>).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-sync-alt" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">The system updates the publication status, stock, price and attributes.</h3>
+                  <p class="mt8">
+                    The following actions are automatically scheduled to run: publish ready products, sync product stock, sync all product data, and sync sales data.                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-ban" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                <h3 class="mt16 mb0">Products closed in MercadoLibre are no longer published in the Odoo store.</h3>
+                  <p class="mt8">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-link" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">Possibility to link Product to several Publications</h3>
+                  <p class="mt8">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-cubes" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">Possibility of linking Products type Kits to Publications</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="col-md-6 col-sm-12" style="padding-bottom: 15px">
+          <div class="container" style="border-radius: 10px; padding: 10px 0px">
+            <div class="row">
+              <div class="col-md-3 col-sm-12 text-center">
+                <i class="fas fa-tshirt" style="font-size: 60px; color: #875A7B;"></i>
+              </div>
+              <div class="col-md-9 col-sm-12">
+                <div class="pl-md-0 pr-md-0 pl-3 pr-3">
+                  <h3 class="mt16 mb0">Size guide for Retail incorporated</h3>
+                  <p class="mt8">
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+      <p></p>
+      <br />
+      <section class="oe_container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h4
+              style="
+                font-size: 24px;
+                font-family: 'Lato', 'Open Sans', 'Helvetica', Sans;
+                text-align: center;
+              "
+            >
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+              <b style="color: #875A7B;">Module Screenshots</b>
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+            </h4>
+          </div>
+        </div>
+      </section>
+      <section class="oe_container">
+        <div class="col-md-12 col-sm-12 mb0 mt32" style="padding: 8px; font-size: 18px; line-height: initial; text-align: center;">
+          <div id="screenshotCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#screenshotCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="1"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="2"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="3"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="4"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="5"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="6"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="7"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="8"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="9"></li>
+              <li data-target="#screenshotCarousel" data-slide-to="10"></li>
+              <!-- Add more indicators as needed -->
+            </ol>
+      
+            <!-- Slides -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b> Here you can see how to configure an instance of MercadoLibre.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/settings_instance_authenticated_screenshot.png" alt="Authenticated setting instance">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b> Here you can see the file of a product ready to publish in MercadoLibre.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/product_ready_for_publish.png" alt="Product ready for publish">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b> Here you can see the attributes of a category (which will be available in the product attributes tab).</h4>
+                </div>
+                <img class="d-block w-100" src="./images/product_category_attributes.png" alt="Category attributes">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Depending on the selected category, its attributes will be
+                    available to configure them.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/product_attributes.png" alt="Category attributes">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Configure the deposit from where the stock will be obtained.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/settings_instance_stock_settings.png" alt="Category attributes">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Configure the price list and the sales that you want to
+                    synchronize.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/settings_instance_sale_settings.png" alt="Category attributes">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Use multiprocessing for synchronization.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/settings_instance_multiprocess.png" alt="Category attributes">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Actions that will be available to perform manually in each
+                    instance.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/settings_instance_buttons.png" alt="Category attributes">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Manage auto synchronization.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/settings_instance_autosync.png" alt="Category attributes">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Filtered views.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/product_tree_filtered_status.png" alt="Category attributes">
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-caption">
+                  <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Manage the product shipping info.</h4>
+                </div>
+                <img class="d-block w-100" src="./images/product_shipping_info.png" alt="Category attributes">
+              </div>
+              <!-- Add more slides as needed -->
+            </div>
+      
+            <!-- Controls -->
+            <a class="carousel-control-prev" href="#screenshotCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#screenshotCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="s_picture bg-100 pt48 pb24" data-name="Picture">
+        <div class="container">
+          <h3 style="color: #875A7B; font-family: Montserrat; font-weight: 600; text-align: center; font-size: 20px; opacity: 1; margin: 8px 0 16px;" class="oe_slogan">
+            CONTACT US
+          </h3>
+          <div class="text-center mb-3">
+            <a href="mailto:contact_us@calyxservicios.com.ar?subject=About melysinc" target="_blank">
+              <span class="mx-1 mb-1 deep-1 deep_hover" style="color: #875A7B; font-size: 20px; vertical-align: middle; display: inline-block; padding: 13px 30px; border: 2px solid #875A7B; border-radius: 10px;">
+                contact_us@calyxservicios.com.ar
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="oe_container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h4
+              style="
+                font-size: 24px;
+                font-family: 'Lato', 'Open Sans', 'Helvetica', Sans;
+                text-align: center;
+              "
+            >
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+              <b style="color: #875A7B;">Detailed features</b>
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+            </h4>
+          </div>
+        </div>
+      </section>
+      <div class="text-center">
+        <h4>
+          <span style="background-color: transparent; color: #666666">
+            MercadoLibre instances
+          </span>
+        </h4>
+          <ul style="list-style-type: none;">
+          <li class="">Multiple instances.</li>
+          <li class="">Automatic token/refresh token obtaining just by authenticating.</li>
+          <li class="">Automatic obtaining of publication types depending on the country selected in
+            the instance.</li>
+          <li class="">Currency specification.</li>
+          <li class="">Test mode: posts with name allowed for tests.</li>
+          <li class="">Stock settings: Choose warehouse to obtain the stock of the
+            product</li>
+        </ul>
+        <h4>
+          <span style="background-color: transparent; color: #666666">
+            Price Settings
+          </span>
+        </h4>
+        <ul style="list-style-type: none;">
+            <li class="">Warehouse to obtain the stock of the product.</li>
+            <li class="">Price list (or create a new one from the
+              configuration, with a default name).</li>
+            <li class="">The number of days back from which MercadoLibre
+              sales will be synchronized.</li>
+            <li class="">Auto synchronization: enable auto sync to update products prices, stocks,
               publications, unpublications of products or disable and toggle manually.</li>
-            <li class="list-group-item">Create test users with one click.</li>
-            <li class="list-group-item">Categories synchronization:</li>
-            <div class="row justify-content-center">
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Synchronize all categories synchronously.</div>
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Synchronize all categories asynchronously, using
-                configurable multiprocess.</div>
-            </div>
-            <li class="list-group-item">Shipping methods and modes:</li>
-            <div class="row justify-content-center">
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Select shipping modes, methods and auto free
-                methods.</div>
-            </div>
+            <li class="">Create test users with one click.</li>
+            <li class="">Categories synchronization:
+                <ul style="list-style-type: none;">
+                <li>Synchronize all categories synchronously.</li>
+                <li>Synchronize all categories asynchronously, using
+                  configurable multiprocess</li>
+              </ul>
+            </li>
+            <li class="">Shipping methods and modes: Select shipping modes, methods and auto free
+              methods</li>
           </ul>
-        </div>
-        <div class="tab-pane" id="meli_insta_actions" role="tabpanel" aria-labelledby="meli_insta_actions-tab">
-          <ul class="list-group">
-            <li class="list-group-item">Publish all products (with mercadolibre settings complete).</li>
-            <li class="list-group-item">Update published products (stock / price).</li>
-            <li class="list-group-item">Update published products stock.</li>
-            <li class="list-group-item">Update published products price.</li>
-            <li class="list-group-item">Download categories</li>
-            <li class="list-group-item">Download sales.</li>
-            <li class="list-group-item">Create test users.</li>
-            <li class="list-group-item active">View tree of:</li>
-            <div class="row justify-content-center">
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Sale orders.</div>
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Categories.</div>
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Published products.</div>
-            </div>
-          </ul>
-        </div>
-        <div class="tab-pane" id="prod_settings" role="tabpanel" aria-labelledby="prod_settings-tab">
-          <p class="pt-3 pb-0">
-            You can publish products with their image, price, description, attributes, etc.<br />
-            In each product tab, you can configure (among other things) the following:
-          </p>
-          <ul class="list-group pb-0">
-            <li class="list-group-item">MercadoLibre instance.</li>
-            <li class="list-group-item">Category.</li>
-            <li class="list-group-item">Listing type.</li>
-            <li class="list-group-item">Buying info.</li>
-            <li class="list-group-item">Category.</li>
-            <li class="list-group-item active">Extras:</li>
-            <div class="row justify-content-center">
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">YouTube URL</div>
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Description</div>
-              <div class="col-3 bg-primary rounded m-2 p-2 sub_info">Product attributes by MercadoLibre category.</div>
-            </div>
-            <li class="list-group-item">Shipping methods (and synchronize with MercadoLibre instance).</li>
-            <li class="list-group-item active">Actions:</li>
-            <div class="row justify-content-center">
-              <div class="col-1 bg-primary rounded m-2 p-2 sub_info">Publish.</div>
-              <div class="col-1 bg-primary rounded m-2 p-2 sub_info">Pause.</div>
-              <div class="col-1 bg-primary rounded m-2 p-2 sub_info">Resume.</div>
-              <div class="col-1 bg-primary rounded m-2 p-2 sub_info">Synchronize.</div>
-              <div class="col-1 bg-primary rounded m-2 p-2 sub_info">Delete.</div>
-              <div class="col-1 bg-primary rounded m-2 p-2 sub_info">Force delete.</div>
-            </div>
-          </ul>
-        </div>
-        <div class="tab-pane" id="meli_categ" role="tabpanel" aria-labelledby="meli_categ-tab">
-          <p class="pt-3 pb-0">
-            There is a specific model for MercadoLibre categories (since they depend on the site id to which each
-            instance belongs), and they have their own attributes, which can be configured in the product file.
-          </p>
-        </div>
-        <div class="tab-pane" id="sales_download" role="tabpanel" aria-labelledby="sales_download-tab">
-          <p class="pt-3 pb-0">
-            Automatic download of the sales made in MercadoLibre, with the customer's data to be able to issue an
-            invoice from Odoo.
-          </p>
-        </div>
-        <div class="tab-pane" id="cron_actions" role="tabpanel" aria-labelledby="cron_actions-tab">
-          <p class="pt-3 pb-0">
-            The following actions are automatically scheduled to run:
-          </p>
-          <ul class="list-group pb-0">
-            <li class="list-group-item">All instances publish ready products, it will run at 00:00 hours.</li>
-            <li class="list-group-item">All instances sync products stock, it will run at 01:00 hours.</li>
-            <li class="list-group-item">All instances sync products all, it will run at 02:00 hours.</li>
-            <li class="list-group-item">All instances sync sales, it will run at 03:00 hours.</li>
-          </ul>
-        </div>
-        <div class="tab-pane" id="user_permissions" role="tabpanel" aria-labelledby="user_permissions-tab">
-          <p class="pt-3 pb-0">
-            Permission groups were created with the necessary permissions to be able to moderate, manage products and/or manage the configurations of MercadoLibre instances.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12 col-sm-12 mb0 mt32"
-      style="padding:8px; font-size:18px; line-height:initial; text-align: center;">
-      <h2 class="oe_slogan mb8"><b>Module screenshots</b></h2>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b> Here you can see how to configure an instance of MercadoLibre.
+  
+          <h4>
+            <span style="background-color: transparent; color: #666666">
+              MercadoLibre instance actions
+            </span>
+          </h4>
+            <ul style="list-style-type: none;">
+            <li class="">Publish all products (with mercadolibre settings complete).</li>
+            <li class="">Update published products (stock / price).</li>
+            <li class="">Update published products stock.</li>
+            <li class="">Update published products price.</li>
+            <li class="">Download categories.</li>
+            <li class="">Download sales.</li>
+            <li class="">Create test users.</li>
+            <li class="">View tree of:
+                <ul style="list-style-type: none;">
+                <li class="">Sale orders.</li>
+                <li class="">Categories.</li>
+                <li class="">Published products.</li>
+              </ul>
+            </li>
+        </ul>
+        <h4>
+          <span style="background-color: transparent; color: #666666">
+            Products settings
+          </span>
+        </h4>
+        <p class="pt-3 pb-0">
+          You can publish products with their image, price, description, attributes, etc.<br />
+          In each product tab, you can configure (among other things) the following: MercadoLibre instance, category, listing type, buying info, youtube url, description, product attr by MercadoLibre category.
+        </p>
+      <h4>
+        <span style="background-color: transparent; color: #666666">
+          MercadoLibre category settings
+        </span>
       </h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/settings_instance_authenticated_screenshot.png"
-            alt="Authenticated setting instance">
+      <p class="pt-3 pb-0">
+        There is a specific model for MercadoLibre categories (since they depend on the site id to which each
+        instance belongs), and they have their own attributes, which can be configured in the product file.
+      </p>
+      <h4>
+        <span style="background-color: transparent; color: #666666">
+          User permissions
+        </span>
+      </h4>
+      <p class="pt-3 pb-0">
+        Permission groups were created with the necessary permissions to be able to moderate, manage products and/or manage the configurations of MercadoLibre instances.
+      </p>
+      <h4>
+        <span style="background-color: transparent; color: #666666">
+          Sales download
+        </span>
+      </h4>
+      <p class="pt-3 pb-0">
+        Automatic download of the sales made in MercadoLibre, with the customer's data to be able to issue an
+        invoice from Odoo.
+      </p>
+      <h4>
+        <span style="background-color: transparent; color: #666666">
+          Schedule actions
+        </span>
+      </h4>
+      <p class="pt-3 pb-0">
+        The following actions are automatically scheduled to run:
+      </p>
+        <ul style="list-style-type: none;">
+        <li class="">All instances publish ready products, it will run at 00:00 hours.</li>
+        <li class="">All instances sync products stock, it will run at 01:00 hours.</li>
+        <li class="">All instances sync products all, it will run at 02:00 hours.</li>
+        <li class="">All instances sync sales, it will run at 03:00 hours.</li>
+      </ul>
+      </div>
+      <section class="oe_container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h4
+              style="
+                font-size: 24px;
+                font-family: 'Lato', 'Open Sans', 'Helvetica', Sans;
+                text-align: center;
+              "
+            >
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+              <b style="color: #875A7B;">Compatibility</b>
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+            </h4>
+          </div>
+        </div>
+      </section>
+      <div style="padding: 0.2em 0.5em; font-size: 120%" class="text-center">
+        <ul style="list-style-type: none;">
+          <li class="mb8">Odoo Community and Enterprise</li>
+          <li class="mb8">
+            All Calyx custom modules products, 
+            <a
+              href="https://apps.odoo.com/apps/modules/browse?author=Calyx Servicios S.A."
+              target="_blank"
+              >and more</a
+            >
+          </li>
+          <li class="mb8">
+            3rd party Odoo apps developed according to Odoo standards
+          </li>
+        </ul>
+      </div>
+
+      <section class="oe_container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h4
+              style="
+                font-size: 24px;
+                font-family: 'Lato', 'Open Sans', 'Helvetica', Sans;
+                text-align: center;
+              "
+            >
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+              <b style="color: #875A7B;">Installation</b>
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+            </h4>
+          </div>
+        </div>
+      </section>
+      <div class="text-center">
+        <p class="mb16">
+          The installation of the this Odoo app requires the following knowledge:
+        </p>
+          <p class="mb8">
+            How to install a module on your Odoo instance (self-hosted or
+            <a href="https://www.odoo.com/documentation/16.0/applications/general/apps_modules.html" target="_blank">odoo.sh</a>)
+          </p>
+        <p class="mb16">
+          If you need help, you can request support via soporte_odoo@calyxservicios.com.ar.
+        </p>
+      </div>
+      <section class="oe_container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h4
+              style="
+                font-size: 24px;
+                font-family: 'Lato', 'Open Sans', 'Helvetica', Sans;
+                text-align: center;
+              "
+            >
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+              <b style="color: #875A7B;">Requesting features and reporting bugs</b>
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+            </h4>
+          </div>
+        </div>
+      </section>
+      <p class="mb16 text-center">
+        If you have questions, need any help, or have a customizations request,
+        please contact us at
+        <a href="mailto:osoporte_odoo@calyxservicios.com.ar">soporte_odoo@calyxservicios.com.ar</a>.
+      </p>
+
+      <section class="oe_container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h4
+              style="
+                font-size: 24px;
+                font-family: 'Lato', 'Open Sans', 'Helvetica', Sans;
+                text-align: center;
+              "
+            >
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+              <b style="color: #875A7B;">About Us</b>
+              <span
+                class="d-none d-sm-inline-block"
+                style="
+                  width: 10%;
+                  margin: 32px 20px;
+                  border-top: solid 1px;
+                  vertical-align: middle;
+                  opacity: 0.3;
+                "
+              ></span>
+            </h4>
+          </div>
+        </div>
+      </section>
+      <section class="oe_container text-center">
+        <h4><span style="background-color:transparent; color: #875A7B;">Our company</span></h4>
+        <p style="text-align:center"><a href="https://odoo.calyx-cloud.com.ar/"><span
+              style="background-color:transparent; color:#1155cc"><u>Calyx Servicios S.A.</u></span></a></p>
+        <p style="text-align:center"><span
+            style="background-color:transparent; color:#000000">soporte_odoo@calyxservicios.com.ar</span></p>
+        <p style="text-align:center"><strong>Argentina</strong></p>
+        <p style="text-align:center"><span
+            style="background-color:transparent; color:#000000"> +54 (11) 3986-0443</span></p>
+      </section>
+      <section class="oe_container text-center">
+        <h4>
+          <span style="background-color: transparent; color: #875A7B;">
+            Our team
+          </span>
+        </h4>
+      </section>
+      <section class="oe_container">
+        <div class="container mt12">
+          <div class="row">
+            <div class="col-md-12 mb16 mt16">
+              <p>Nuestro equipo esta compuesto por expertos en todos los campos, capaces para satisfacer sus necesidades especificas.</p>
+              <p>Podemos proporcionar todos los roles necesarios para hacer realidad su proyecto. Tenemos el conocimiento técnico para identificar rapidamene una hoja de ruta ganadora para su propósito, gestionando el mejor talento para agregar valor en cada paso del camino.</p>
+              <p>Contamos con gerentes de proyecto dedicados que hacen un seguimiento minucioso de cada propuesta con especial atención a los KPI y procesos internos integrales implementados que garantizan que nuestros equipos siempre permanezcan comprometidos y productivos.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="row mt16 mb16">
+        <div class="col-md-4 text-center">
+          <span class="fa fa-cogs fa-5x"></span>
+          <div>
+            <h3 class="mt8 mb0">DevOps</h3>
+            <p class="text-muted">Revisión, diagnostico, actualización, ajustes e intervención de servicios IT vinculados a la plataforma<br></p>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <span class="fa fa-code fa-5x" data-original-title="" title=""></span>
+          <div>
+            <h3 class="mb0 mt8">Equipo desarrollo</h3>
+            <p class="text-muted">Equipo full stack con experiencia de 5+ años en desarrollos custom en Odoo CE y CE.<br></p>
+          </div>
+        </div>
+        <div class="col-md-4 text-center">
+          <span class="fa fa-briefcase fa-5x" data-original-title="" title=""></span>
+          <div>
+            <h3 class="mt8 mb0">Business Analyst</h3>
+            <p class="text-muted">Análisis de procesos y operaciones de negocio, análisis funcional, diagnostico, comunicación y documentación de procesos relacionados al producto.<br></p>
+          </div>
         </div>
       </div>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b> </b>Here you can see the file of a product ready to publish in
-        MercadoLibre.</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/product_ready_for_publish.png"
-            alt="Product ready for publish">
+      <section class="oe_container">
+        <div class="row">
+          <div class="oe_picture">
+            <span
+              href="https://apps.odoo.com/apps/modules/browse?author=Calyx Servicios S.A."
+            >
+              <img
+                class="img img-responsive"
+                style="display: block; width: 50%; margin: auto"
+                src="https://odoo.calyx-cloud.com.ar/web/image/res.company/1/logo?unique=d2a1227"
+              />
+            </span>
+          </div>
         </div>
-      </div>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b></b>Here you can see the attributes of a category (which will be
-        available in the product attributes tab).</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/product_category_attributes.png"
-            alt="Category attributes">
-        </div>
-      </div>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Depending on the selected category, its attributes will be
-        available to configure them.</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/product_attributes.png" alt="Product attributes">
-        </div>
-      </div>
-      <!-- other images -->
-      <h3 class="oe_slogan mb8 text-center"><b>Other images</b></h3>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Configure the deposit from where the stock will be obtained.</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/settings_instance_stock_settings.png"
-            alt="Stock settings">
-        </div>
-      </div>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Configure the price list and the sales that you want to
-        synchronize.</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/settings_instance_sale_settings.png" alt="Sale settings">
-        </div>
-      </div>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Use multiprocessing for synchronization.</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/settings_instance_multiprocess.png"
-            alt="Multiprocess settings">
-        </div>
-      </div>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Actions that will be available to perform manually in each
-        instance.</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/settings_instance_buttons.png" alt="Buttons settings">
-        </div>
-      </div>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Manage auto synchronization.</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/settings_instance_autosync.png" alt="Autosync settings">
-        </div>
-      </div>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Filtered views.</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="50%" src="./images/product_tree_filtered_status.png" alt="Product tree view">
-        </div>
-      </div>
-      <h4 class="oe_slogan mb8 mt0">Meli<b>Sync: </b>Manage the product shipping info.</h4>
-      <div class="container alert mb0">
-        <div class="text-center">
-          <img class="card-img-top" width="95%" src="./images/product_shipping_info.png" alt="Shipping info">
-        </div>
-      </div>
-      <h5 class="youtube"><b>You can see more details on:</b>
-        <p><a class="btn m-2" href="https://youtube.com/playlist?list=PLH5fPtF0-W-YOR7Ua-oqlEthI_MqzYhdr"><i class="fa fa-youtube" style="padding-right:9px"></i>YouTube</a></p>
-      </h5>
+      </section>
     </div>
-  </div>
-</section>
-<section class="oe_footer col-md-12 col-sm-12 mb18 mt32">
-  <div class="oe_row oe_spaced">
-    <h2 class="oe_slogan mb8 text-center text-white"><b>Support</b></h2>
-    <h3>Acquiring our module, you will receive:</h3>
-    <ul class="list-group">
-      <li class="list-group-item">
-        Full installation and configuration support.
-      </li>
-      <li class="list-group-item">
-        Specialized and dedicated technical support.
-      </li>
-      <li class="list-group-item">
-        Module updates.
-      </li>
-      <li class="list-group-item list-primary">
-        Direct email contact.
-      </li>
-        <div class="col-12 mt-4">
-          <h5 class="text-center text-dark text-bold">To contact with me:
-            <p>
-              <a class="btn m-2" href="mailto:pergadev@gmail.com"><i class="fa fa-envelope" style="padding-right:9px"></i>pergadev@gmail.com</a>
-              <a class="btn m-2" href="https://www.linkedin.com/in/lshoobridge/"><i class="fa fa-linkedin" style="padding-right:9px"></i>LinkedIn</a></p>
-          </h5>
-        </div>
-  </div>
-</section>
+    
+
+    <script>
+      function copyToClipboard() {
+        const inputElement = document.querySelector('input');
+        inputElement.select();
+        document.execCommand('copy');
+        alert('Link copied to clipboard!');
+      }
+    </script>
+</body>
 </html>
+
