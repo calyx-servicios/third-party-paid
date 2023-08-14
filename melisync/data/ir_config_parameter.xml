@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data noupdate="1">
-		<record model="ir.config_parameter" id="melisync.redirect_uri">
-			<field name="key">melisync.redirect_uri</field>
-			<field name="value">/melisync/get_refresh_token</field>
-		</record>
-    </data>
-</odoo>
