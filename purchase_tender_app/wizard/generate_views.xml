@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_generate_purchase_id" model="ir.ui.view">
+			<field name="name">Create Purchase</field>
+			<field name="model">generate.purchase</field>
+			<field name="arch" type="xml">
+			<form string="Create Purchase">
+                    <p class="oe_grey">
+                        
+                    </p>
+                    <h><strong>Do you want to create Purchase Order?</strong></h>
+                    <footer>
+						<button name="action_generate_po" string="Create Order" type="object" 
+							 class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel"/>
+					</footer>		
+				</form>
+			</field>
+		</record>
+
+
+		<record id="action_view_generate_purchase_id" model="ir.actions.act_window">
+			<field name="name">Create Purchase</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">generate.purchase</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+	</data>
+
+</odoo>
