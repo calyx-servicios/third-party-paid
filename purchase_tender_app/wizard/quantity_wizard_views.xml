@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_change_quantity_id" model="ir.ui.view">
+			<field name="name">Change Quantity</field>
+			<field name="model">purchase.wizard</field>
+			<field name="arch" type="xml">
+			<form string="Transfer Remark">
+                    <p class="oe_grey">
+                        
+                    </p>
+                    <group>
+                        <field name="qty"/>
+                        
+                    </group>
+                    <footer>
+						<button name="action_add_qty" string="Change Quantity" type="object" 
+							 class="btn-primary"/>
+						<button string="Cancel" class="btn-default" special="cancel"/>
+					</footer>		
+				</form>
+			</field>
+		</record>
+
+
+		<record id="action_view_change_quantity_id" model="ir.actions.act_window">
+			<field name="name">Change Quantity</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">purchase.wizard</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+	</data>
+
+</odoo>
