@@ -417,7 +417,7 @@ class Settings(models.Model):
             logger.error(_('Error processing setting instances: {}'.format(e)))
 
     @api.model
-    def _sync_products_stock(self):
+    def sync_products_stock(self):
         """
             Synchronize all instances stock for all products published in MercadoLibre.
         """
