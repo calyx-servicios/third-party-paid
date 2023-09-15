@@ -2,9 +2,9 @@
 {
     'name': "MercadoLibre Uploader",
     'summary': "MercadoLibre Uploader for Odoo.",
-    'version': '1.0.5',
-    'author': "Lucas Shoobridge",
-    'website': "https://www.linkedin.com/in/lshoobridge/",
+    'version': '1.0.6',
+    'author': "Calyx Servicios S.A",
+    'website': "https://www.calyxservicios.com.ar/",
     'description': """
 Odoo MercadoLibre Uploader
 ==================================================
@@ -42,7 +42,7 @@ Odoo MercadoLibre Uploader
     ],
 
     'application': True,
-    'price': 1800,
+    'price': 2569,
     'currency': 'USD',
     'images': [
         'static/description/images/settings_instance_authenticated_screenshot.png',
