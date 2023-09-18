@@ -244,6 +244,7 @@ class Publications(models.Model):
             # ==========
             # Get MELI attributes
             attrs = self.get_attributes_and_variants()
+            logger.info('attrs = {}'.format(attrs))
             # Add attributes to data object
             data = {
                 **data,
@@ -400,15 +401,15 @@ class Publications(models.Model):
             except Exception as e:
                 raise UserError('Error processing attribute "{}" (product "{}"): {}'.format(attr_id.meli_id, self.product_id.name, e))
 
-        # Loop product variants
-        for variant in self.product_id.product_variant_ids:
-            variation_data = variant.meli_get_variant_data()
-            logger.info('variation_data = {}'.format(variation_data))
-            # Get other product data
-            variation_data['available_quantity'] = variant.with_context(warehouse=self.instance.warehouse_id.id).meli_available_qty # TODO: check publish with Stock 0
-            variation_data['price'] = self.price # self.with_context(pricelist=self.pricelist.id).meli_price
-            # Save product variation data
-            data['variations'].append(variation_data)
+        if len(self.product_id.product_variant_ids) > 1:
+            # Loop product variants
+            for variant in self.product_id.product_variant_ids:
+                variation_data = variant.meli_get_variant_data()
+                # Get other product data
+                variation_data['available_quantity'] = variant.with_context(warehouse=self.instance.warehouse_id.id).meli_available_qty # TODO: check publish with Stock 0
+                variation_data['price'] = self.price # self.with_context(pricelist=self.pricelist.id).meli_price
+                # Save product variation data
+                data['variations'].append(variation_data)
         return data
 
     def pause(self, client):
