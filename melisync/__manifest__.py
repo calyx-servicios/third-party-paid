@@ -2,7 +2,7 @@
 {
     'name': "MercadoLibre Uploader",
     'summary': "MercadoLibre Uploader for Odoo.",
-    'version': '1.0.6',
+    'version': '1.0.7',
     'author': "Calyx Servicios S.A",
     'website': "https://www.calyxservicios.com.ar/",
     'description': """
