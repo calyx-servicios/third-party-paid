@@ -118,7 +118,7 @@ class Settings(models.Model):
             Go to authorization URL
         """
         return {
-            'url': '/melisync/authorization_url?site_id={}'.format(self.site_id.site_id),
+            'url': '/melisync/authorization_url?instance_id={}'.format(self.id),
             'type': 'ir.actions.act_url',
             'target': 'self',
         }
