@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="debug_rule" model="ir.ui.view">
+        <field name="name">debug_rule</field>
+        <field name="model">debug.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+	               <field name="res_model"/>
+	               <field name="res_id"/>
+                </group>
+                <footer>
+                    <button name="execute_debug_rule" string="Run" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

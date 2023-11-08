@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record model="ir.actions.act_window" id="azk_rules_actions">
+            <field name="name">Rules</field>
+            <field name="res_model">rules</field>
+            <field name="view_mode">tree,form</field>
+        </record>       
+        
+        <menuitem id="azk_compression_rules" name="Attachments Compression Rules" parent="base.next_id_9" action="azk_rules_actions"/>
+        
+        <act_window name="Debug this rule" id="comp_rule_act"
+                    res_model="debug.rule" binding_model="rules" 
+                    view_mode="form" target="new" binding_views="form"/>
+        
+        <record model="ir.ui.view" id="azk_rules_form_view">
+            <field name="name">rules.form</field>
+            <field name="model">rules</field>
+            <field name="arch" type="xml">
+                <form string="Rules Form">
+                	<header>
+                 	<button name="execute_rule" type="object" string="Run"/>
+                 	</header>
+                    <sheet>
+                   		<field name="name"/>
+                   		
+                    	<group>
+	                        <group>
+	                        	<field name="models" widget="many2many_tags"/>
+	                            <field name="source_format"/>
+	                            <field name="destination_format"/>
+	                            <field name="quality"/>
+	                            <field name="active" widget="toggle_button"/>
+	                            
+	                        </group>
+	                        <group>
+	                            <field name="min_size"/>
+	                            <field name="newer_than"/>
+                				<field name="older_than"/>
+                				<field name="replace_all"/>
+	                        </group>
+	                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="azk_rules_tree_view">
+            <field name="name">rules.tree</field>
+            <field name="model">rules</field>
+            <field name="arch" type="xml">
+                <tree string="Rules Tree">
+                	<field name="name"/>
+                	<field name="models"/>
+                	<field name="active" widget="toggle_button"/>
+                	<field name="source_format"/>
+                	<field name="destination_format"/>
+                	<field name="min_size"/>
+                	<field name="newer_than"/>
+                	<field name="older_than"/>
+                    <field name="replace_all" />
+                </tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="rules_search_view">
+            <field name="name">rules.search</field>
+            <field name="model">rules</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="models"/>
+                    
+                    <filter string="Archived" name="not active" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+</odoo>
