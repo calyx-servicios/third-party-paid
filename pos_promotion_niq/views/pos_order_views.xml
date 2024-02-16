@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_pos_order_form_inherit" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lines']/tree/field[@name='discount']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='lines']/tree/field[@name='price_unit']" position="before">
+                <field name="origin_price" widget="monetary"/>
+                <field name="discount" widget="monetary"/>
+                <field name="promo_disc_amount" widget="monetary"/>
+                <field name="promo_fixed_price" widget="monetary"/>
+                <field name="promo_get_free"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

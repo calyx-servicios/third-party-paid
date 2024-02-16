@@ -1,0 +1,93 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="melisync.product_categories_view_tree">
+      <field name="name">meli categories view tree</field>
+      <field name="model">melisync.product.categories</field>
+      <field name="arch" type="xml">
+        <tree string="Meli categories" default_order="meli_domain_name asc" delete="false" create="false" edit="false" duplicate="0">
+          <field name="meli_category_id" />
+          <field name="meli_domain_name" />
+          <field name="meli_category_name" />
+          <field name="meli_domain_id" />
+        </tree>
+      </field>
+    </record>
+    <record model="ir.ui.view" id="melisync.product_categories_view_form">
+      <field name="name">meli categories view form</field>
+      <field name="model">melisync.product.categories</field>
+      <field name="arch" type="xml">
+        <form string="Meli categories" delete="false" create="false" edit="false" duplicate="0">
+          <header>
+            <button name="get_attributes" string="Sync attributes" class="oe_highlight" type="object"/>
+          </header>
+          <sheet>
+            <group string="Meli category data">
+              <field name="meli_category_id" />
+              <field name="meli_category_name" />
+            </group>
+            <group string="Meli domain data">
+              <field name="meli_domain_id" />
+              <field name="meli_domain_name" />
+            </group>
+            <group string="Meli attributes data">
+              <field name="meli_attributes" context="{ 'context_meli_category_id': id }">
+                <tree decoration-success="is_required" default_order="meli_id asc">
+                  <field name="is_required" attrs="{ 'column_invisible': True }" />
+                  <field name="meli_id" />
+                  <field name="meli_name" />
+                  <field name="meli_value_type" />
+                  <field name="meli_tags" widget="many2many_tags" options="{ 'no_create_edit': True, 'no_create': True, 'no_edit': True }" /> <!-- context="{ 'meli_category_id': id }" -->
+                  <field name="meli_values" widget="many2many_tags" options="{ 'no_create_edit': True, 'no_create': True, 'no_edit': True }" /> <!-- context="{ 'meli_category_id': id }" -->
+                </tree>
+              </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <!-- Odoo categories -->
+    <record model="ir.ui.view" id="melisync.odoo_product_category_view_tree">
+      <field name="name">MercadoLibre Odoo Categories view tree</field>
+      <field name="model">product.category</field>
+      <field name="arch" type="xml">
+        <tree string="Categories" default_order="name asc">
+          <field name="name" />
+          <field name="complete_name" />
+        </tree>
+      </field>
+    </record>
+    
+    <!-- search view definition -->
+    <record model="ir.ui.view" id="melisync.product_categories_search_view">
+        <field name="name">MercadoLibre product.categories Search View</field>
+        <field name="model">melisync.product.categories</field>
+        <field name="arch" type="xml">
+            <search string="Search category">
+                <field string="MercadoLibre domain ID" name="meli_domain_id" domain="[('meli_domain_id', 'ilike', self)]" />
+                <field string="MercadoLibre domain name" name="meli_domain_name" domain="[('meli_domain_name', 'ilike', self)]" />
+                <field string="MercadoLibre category ID" name="meli_category_id" domain="[('meli_category_id', 'ilike', self)]" />
+                <field string="MercadoLibre category name" name="meli_category_name" domain="[('meli_category_name', 'ilike', self)]" />
+            </search>
+        </field>
+    </record>
+    <!-- Odoo categories -->
+    <record id="melisync.menu_odoo_product_category_action" model="ir.actions.act_window">
+      <field name="name">Categories</field>
+      <field name="res_model">product.category</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_id" ref="melisync.odoo_product_category_view_tree"/>
+      <field name="type">ir.actions.act_window</field>
+    </record>
+    <!-- Actions-->
+     <record id="melisync.menu_product_categories_action" model="ir.actions.act_window">
+      <field name="name">MercadoLibre categories</field>
+      <field name="res_model">melisync.product.categories</field>
+      <field name="view_mode">tree,form</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="search_view_id" ref="melisync.product_categories_search_view" />
+    </record>
+    <!--Menu items-->
+     <menuitem name="Categories" parent="melisync.menu_categories" id="melisync.menu_odoo_product_category" action="melisync.menu_odoo_product_category_action" sequence="998"/>
+     <menuitem name="Meli categories" parent="melisync.menu_categories" id="melisync.menu_product_categories" action="melisync.menu_product_categories_action" sequence="999"/>
+  </data>
+</odoo>

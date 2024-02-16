@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="upload_categories_form_view" model="ir.ui.view">
+            <field name="name">Upload Categories</field>
+            <field name="model">upload.category</field>
+            <field name="arch" type="xml">
+              <form string="Upload Categories">
+	              <p>
+	              	<b>Please select prestashop instance</b>
+	              	<group>
+	              	<field name='prestashop_id' required='True'/>
+	              	</group>
+	              </p>
+	              <p>
+	              	<b> Upload Categories Confirm ?</b> 
+	              </p>
+                  <footer>
+                      <button name="upload_category" string="Confirm" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+            </form>
+            </field>
+        </record>
+           
+
+
+	  
+	<act_window id="action_upload_categ_view"
+            name="Upload Categories"
+            src_model="prestashop.category"
+            res_model="upload.category"
+            view_mode="form"
+            key2="client_action_multi" 
+            target="new"/>  
+            
+		  
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+	<data noupdate="1">
+		<!-- Custom settings -->
+		<record model="res.config.settings" id="melisync.res_config_settings_config">
+			<!-- ===== Product Catalog -->
+			<!-- Sell variants of a product using attributes (size, color, etc.) -->
+			<field name="group_product_variant" eval="True" />
+			<!-- ===== Pricing -->
+			<!-- Grant discounts on sales order lines -->
+			<field name="group_discount_per_so_line" eval="True" />
+			<!-- Set multiple prices per product, automated discounts, etc. -->
+			<field name="group_sale_pricelist" eval="True" />
+			<field name="group_product_pricelist" eval="True" />
+			<field name="product_pricelist_setting">advanced</field>
+			<!-- ===== Inventory -->
+			<!-- Manage several warehouses -->
+			<field name="group_stock_multi_warehouses" eval="True" />
+			<!-- Sell and purchase products in different units of measure -->
+			<field name="group_uom" eval="True" />
+			<!-- Default picking policy -->
+			<field name="default_picking_policy">direct</field>
+		</record>
+		<!-- Enable this settings. -->
+		<function model="res.config.settings" name="execute">
+			<value model="res.config.settings" search="[('id', '=', ref('melisync.res_config_settings_config'))]" />
+		</function>
+	</data>
+</odoo>

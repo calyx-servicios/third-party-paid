@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="upload_catlog_price_rule_view" model="ir.ui.view">
+            <field name="name">Upload Catalog price Rule</field>
+            <field name="model">upload.catalog.price</field>
+            <field name="arch" type="xml">
+              <form string="Upload Catalog price Rule">
+	              <p>
+	              	<b>Please select prestashop instance</b>
+	              	<group>
+	              	<field name='prestashop_id' required='True'/>
+	              	</group>
+	              </p>
+	              <p>
+	              	<b> Upload Catalog price Rule Confirm ?</b> 
+	              </p>
+                  <footer>
+                      <button name="upload_catalog_price" string="Confirm" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Cancel" class="oe_link" special="cancel" />
+                  </footer>
+            </form>
+            </field>
+        </record>
+           
+
+
+	  
+	<act_window id="action_upload_catlog_price_rule_view"
+            name="Upload Catalog Rule"
+            src_model="catalog.price.rules"
+            res_model="upload.catalog.price"
+            view_type="form" 
+            view_mode="form"
+            key2="client_action_multi" 
+            target="new"/>  
+            
+		  
+    </data>
+</odoo>

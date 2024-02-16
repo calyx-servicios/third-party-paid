@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gt_shopify_store_form_view" model="ir.ui.view">
+        <field name="name">gt.shopify.store.form.view</field>
+        <field name="model">gt.shopify.store</field>
+        <field name="arch" type="xml">
+            <form string="Shopify Store">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="gt_store_name" class="oe_edit_only"/>
+                        <h1><field name="gt_store_name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="gt_store_address1"/>
+                            <field name="gt_store_address2"/>
+                            <field name="gt_store_city"/>
+                            <field name="gt_store_province"/>
+                            <field name="gt_store_province_code"/>
+                            <field name="gt_store_zipcode"/>
+                            <field name="gt_store_country_name"/>
+                            <field name="gt_shopify_instance_id"/>
+                        </group>
+                        <group>
+                            <field name="gt_store_plan_display_name"/>
+                            <field name="gt_store_domain"/>
+                            <field name="gt_store_id"/>
+                            <field name="gt_store_email"/>
+                            <field name="gt_store_currency"/>
+                            <field name="gt_store_weight_unit"/>
+                            <field name="gt_store_shop_owner"/>
+                            <field name="gt_store_phone"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    
+    <record id="gt_shopify_store_tree_view" model="ir.ui.view">
+        <field name="name">gt.shopify.store.tree.view</field>
+        <field name="model">gt.shopify.store</field>
+        <field name="arch" type="xml">
+            <tree string="Shopify Instance">
+                <field name="gt_store_name"/>
+                <field name="gt_store_id"/>
+                <field name="gt_store_domain"/>
+                <field name="gt_store_shop_owner"/>
+            </tree>
+        </field>
+    </record>
+    
+    
+    <record id="action_gt_shopify_store" model="ir.actions.act_window">
+        <field name="name">Shopify Store</field>
+        <field name="res_model">gt.shopify.store</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to add a new tag.
+          </p>
+        </field>
+    </record>
+    
+
+</odoo>

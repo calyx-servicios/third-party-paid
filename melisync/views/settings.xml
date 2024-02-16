@@ -1,0 +1,121 @@
+<odoo>
+  <data>
+    <!-- explicit tree view definition -->
+    <record model="ir.ui.view" id="melisync.settings_view_tree">
+      <field name="name">MercadoLibre settings view tree</field>
+      <field name="model">melisync.settings</field>
+      <field name="arch" type="xml">
+        <tree duplicate="0" string="Settings">
+          <field name="name" string="Name" />
+          <field name="site_id" />
+          <field name="currency_id"/>
+          <field name="published_count" />
+        </tree>
+      </field>
+    </record>
+    <!-- explicit form view definition -->
+    <record model="ir.ui.view" id="melisync.settings_view_form">
+      <field name="name">MercadoLibre settings view form</field>
+      <field name="model">melisync.settings</field>
+      <field name="arch" type="xml">
+        <form duplicate="0" string="Settings">
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <button type="object" name="authenticate" string="Authenticate" help="Authenticate with MercadoLibre user for specified app_id." attrs="{'invisible': [('user_id', '!=', False)]}" class="oe_stat_button" icon="fa-user text-success" />
+              <button type="object" name="deauthenticate" string="Deauthenticate" help="Deauthenticate user." attrs="{'invisible': [('user_id', '=', False)]}" class="oe_stat_button" icon="fa-times text-danger" />
+              <button type="object" name="create_test_user" string="Create test user" help="Create test user to get new testing redentials." attrs="{'invisible': [('user_id', '=', False)]}" class="oe_stat_button" icon="fa-users" />
+              <button class="oe_stat_button" type="object" name="button_view_published" icon="fa-list-ul" help="View all published products." attrs="{'invisible': [('user_id', '=', False)]}">
+                  <field string="Published products" name="published_count" widget="statinfo"/>
+              </button>
+              <button class="oe_stat_button" type="object" name="button_view_sales" icon="fa-money" help="View all sale orders for this site." attrs="{'invisible': [('user_id', '=', False)]}">
+                  <field string="Sale orders" name="sales_count" widget="statinfo"/>
+              </button>
+              <button class="oe_stat_button" type="object" name="button_view_categories" icon="fa-bars" help="View all categories downloaded for this site." attrs="{'invisible': [('user_id', '=', False)]}">
+                  <field string="Categories" name="categories_count" widget="statinfo"/>
+              </button>
+            </div>
+            <div class="oe_button_box" name="button_box_2" attrs="{'invisible': [('user_id', '=', False)]}">
+              <button type="object" name="button_publish_ready_products" string="Publish products" help="Publish all ready products." class="oe_stat_button" icon="fa-play" />
+              <button type="object" name="button_sync_products_all" string="Sync products" help="Synchronize products with all data." class="oe_stat_button" icon="fa-spinner" />
+              <button type="object" name="button_sync_products_stock" string="Sync stock" help="Synchronize stock for all published products." class="oe_stat_button" icon="fa-refresh" />
+              <button type="object" name="button_sync_categories" string="Sync categories" help="Download and save all MercadoLibre categories available for this site." attrs="{'invisible': [('user_id', '=', False)]}" class="oe_stat_button" icon="fa-cloud-download" />
+              <button type="object" name="button_sync_sales" string="Sync sales" help="Download and save all MercadoLibre sale orders for this site." attrs="{'invisible': [('user_id', '=', False)]}" class="oe_stat_button" icon="fa-download" />
+            </div>
+            <group name="container_row1">
+              <group>
+                <group string="Instance settings" colspan="2">
+                  <field name="name" string="Name" />
+                  <field name="site_id" context="{ 'order_display': 'site_id asc' }" string="Country ID" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
+                  <field name="currency_id" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
+                </group>
+                <group string="Shipping settings" colspan="2" attrs="{ 'invisible': [('user_id', '=', False)] }">
+                  <field name="shipping_modes" widget="many2many_tags" />
+                  <field name="default_shipping_mode" domain="[('id', 'in', shipping_modes)]" attrs="{ 'required': [('shipping_modes', '!=', [])] }" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
+                  <field name="default_shipping_methods_free" context="{ 'order_display': 'deliver_to asc, company_name asc' }" domain="[('shipping_modes', 'in', [default_shipping_mode]), ('site_id', '=', site_id)]" options="{ 'no_create_edit': True, 'no_create': True, 'no_edit': True }" widget="many2many_tags" />
+                </group>
+              </group>
+              <group string="MercadoLibre App Settings">
+                <field name="client_id" string="App ID" attrs="{ 'readonly': [('user_id', '!=', False)] }" />
+                <p class="oe_edit_only" colspan="2" attrs="{ 'invisible': [('user_id', '!=', False)] }">
+                  <strong>Note</strong>: To create your own app and get your credentials, go to <a href="https://developers.mercadolibre.com.ar/devcenter/" target="_blank">MercadoLibre DevCenter</a>.<br />Please, first read <a href="https://developers.mercadolibre.com.ar/es_AR/registra-tu-aplicacion" target="_blank">this guide</a>
+                </p>
+                <field name="client_secret" string="Secret key" password="True" attrs="{ 'invisible': [('user_id', '!=', False)] }" />
+                <field name="redirect_uri" string="Redirect URI" attrs="{ 'readonly': True }" />
+                <p class="oe_grey oe_edit_only" colspan="2">
+                  <strong>Note</strong>: Apply the <strong>redirect uri</strong> in the settings of your app in MercadoLibre.
+                </p>
+                <field name="user_id" string="Authenticated User ID" attrs="{ 'readonly': True, 'invisible': [('user_id', '=', False)] }" />
+                <!-- <field name="testing_mode" string="Testing mode" /> -->
+                <p class="oe_grey oe_edit_only" colspan="2">
+                  <strong>Note</strong>: Apply <strong>testing mode</strong> if you are doing price or release testing. Remember that MercadoLibre can remove your publications if you do not comply with the rules.
+                </p>
+              </group>
+            </group>
+            <group>
+              <group string="Stock settings">
+                <field name="company_id" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" />
+                <field name="warehouse_id" options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }" domain="[('company_id', '=', company_id)]" attrs="{ 'invisible': [('company_id', '=', False)] }" />
+                <field name="picking_policy" attrs="{ 'invisible': [('company_id', '=', False)] }" />
+              </group>
+              <group string="Sales settings">
+                  <field name="pricelists" domain="[('meli_list', '=', True), ('company_id', '=', company_id)]" context="{ 'default_meli_list': True, 'default_name': 'MercadoLibre '+name, 'default_discount_policy': 'with_discount', 'default_company_id': company_id }" widget="many2many_tags" />
+                  <field name="last_days_orders_get" />
+              </group>
+            </group>
+            <group>
+              <group string="Synchronization">
+                  <field name="auto_sync" />
+                  <p class="oe_grey" colspan="2">
+                    <strong>Note</strong>: Auto synchronize all data with MercadoLibre.
+                  </p>
+              </group>
+              <group string="Multi process">
+                  <field name="multiprocess" />
+                  <field name="multiprocess_qty_process" string="Number of max process" attrs="{ 'required': [('multiprocess', '!=', False)], 'invisible': [('multiprocess', '=', False)] }" />
+                  <p class="oe_grey oe_edit_only" colspan="2">
+                    <strong>Note</strong>: We can use <strong>multiprocess</strong> to process large volumes of data in the background and achieve better performance. For example, when downloading the categories from the specified SITE, you should not wait for them to finish downloading.
+                  </p>
+              </group>
+            </group>
+            <group string="Test users">
+              <field name="test_users" nolabel="1" />
+            </group>
+            <!-- Hidden fields -->
+            <field name="refresh_token" password="True" attrs="{ 'invisible': True }" />
+            <field name="state_uuid" attrs="{ 'invisible': True }" />
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="melisync.settings_act_window">
+      <field name="name">Settings</field>
+      <field name="res_model">melisync.settings</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu items -->
+    <menuitem name="Instances" parent="melisync.menu_settings" id="melisync.settings_instances" action="melisync.settings_act_window" groups="melisync.res_groups_administrator" sequence="999"/>
+  </data>
+</odoo>

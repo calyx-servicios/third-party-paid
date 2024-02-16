@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      <data>
+           <act_window id="mass_order_generate_act_window"
+               name="Generate Purchase Order"
+               res_model="generate.purchase"
+               binding_model="purchase.order.line"
+               binding_type="report"
+               view_mode="form" target="new" />
+
+      </data>
+</odoo>

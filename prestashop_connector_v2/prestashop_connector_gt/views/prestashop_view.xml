@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="prestashop_instance_form_view" model="ir.ui.view">
+			<field name="name">prestashop.instance.form</field>
+			<field name="type">form</field>
+			<field name="model">prestashop.instance</field>
+			<field name="arch" type="xml">
+				<form string="Prestashop Instance">
+					<header>
+						<button name="create_prestashop_shop_action" string="Create PrestaShop" type="object"  class="btn-primary"/>
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="action_get_sale_shop"
+									type="object"
+									class="oe_stat_button"
+									icon="fa-pencil-square-o"
+									attrs="{'invisible': [('sale_shop_count', '&lt;', 1)]}"
+							>
+								<field name="sale_shop_count" widget="statinfo" string="Shops List" />
+							</button>
+						</div>
+						<group colspan="3">
+							<h1><field name="name" colspan="4" select="1" required="True"/></h1>
+						</group>
+						<group>
+							<field name="company_id" />
+						</group>
+						<group>
+							<field name="version" invisible="1"/>
+						</group>
+						<notebook colspan="4">
+							<page string="Authentication">
+								<separator string="Account Credentials" />
+								<group>
+									<field name="location" />
+									<field name="webservice_key"  password='True'/>
+								</group>
+								<group name="main_configuration" string="Main Configuration">
+									<field name="warehouse_id" required="True"/>
+									<!-- <field name="taxes_included"/>
+                                   <field name="discount_product_id" /> -->
+									<field name="shipping_product_id" required='True'/>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="view_prestashop_instance_info_tree">
+			<field name="name">prestashop.instance.tree</field>
+			<field name="model">prestashop.instance</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Prestashop Instance">
+					<field name="name"/>
+					<field name="location" colspan="4"/>
+					<field name="webservice_key" colspan="4" password='True'/>
+				</tree>
+			</field>
+		</record>
+
+		<!--<record id="view_prestashop_config_info_form" model="ir.ui.view">-->
+			<!--<field name="name">view.prestashop.config.info.form</field>-->
+			<!--<field name="type">form</field>-->
+			<!--<field name="model">prestashop.instance</field>-->
+			<!--<field name="arch" type="xml">-->
+				<!--<form string="Configuration settings">-->
+					<!--<sheet>-->
+						<!--<group name ="shop_configuration" string="Configuration">-->
+							<!--<group string="Product Configuration">-->
+								<!--<field name ="product_import_condition"/>-->
+								<!--<field name ="route_ids"/>-->
+								<!--<field name ="shipment_fee_product_id"/>-->
+								<!--<field name ="gift_wrapper_fee_product_id"/>-->
+							<!--</group>-->
+							<!--<group string="Stock Configuration">-->
+								<!--&lt;!&ndash;<field name ="on_fly_update_stock"/>&ndash;&gt;-->
+								<!--<field name ="warehouse_id"/>-->
+							<!--</group>-->
+							<!--<group string="Order Configuration">-->
+								<!--<field name ="prefix"/>-->
+								<!--&lt;!&ndash;<field name ="suffix"/>&ndash;&gt;-->
+								<!--<field name ="company_id"/>-->
+								<!--&lt;!&ndash;<field name ="workflow_id"/>&ndash;&gt;-->
+							<!--</group>-->
+						<!--</group>-->
+					<!--</sheet>-->
+				<!--</form>-->
+			<!--</field>-->
+		<!--</record>-->
+
+		<!-- Prestashop Instance Form,Tree Menu Action  -->
+		<record model="ir.actions.act_window" id="action_prestashop_instance">
+			<field name="name">Prestashop Instances</field>
+			<field name="res_model">prestashop.instance</field>
+			<field name="type">ir.actions.act_window</field>
+<!-- 			<field name="view_type">form</field>
+ -->			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="view_prestashop_instance_info_tree"/>
+		</record>
+
+
+		<!--<record model="ir.actions.act_window" id="act_prestashop_shop_form">-->
+			<!--<field name="name">Prestashop Instances</field>-->
+			<!--<field name="res_model">prestashop.instance</field>-->
+			<!--<field name="type">ir.actions.act_window</field>-->
+			<!--<field name="view_type">form</field>-->
+			<!--<field name="view_mode">tree,form</field>-->
+			<!--<field name="view_id" ref="view_prestashop_config_info_form"/>-->
+		<!--</record>-->
+
+	</data>
+</odoo>

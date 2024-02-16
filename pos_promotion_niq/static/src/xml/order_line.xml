@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="Orderline">
+        <t t-jquery=".info-list" t-operation="append">
+            <t t-if="line.get_promo_disc_amount() > 0 and !line.get_promo_get_free()">
+                <li class="info orderline-promotion promo_disc_amount">
+                    <em>
+                        original price: <t t-esc="widget.format_currency(line.get_origin_price(),'Product Price')" /> - discounted:
+                        <t t-esc="widget.format_currency(line.get_promo_disc_amount(),'Product Price')" />/
+                        <t t-esc="line.get_unit().name" />
+                    </em>
+                </li>
+            </t>
+            <t t-if="line.get_promo_disc_percentage() > 0">
+                <li class="info orderline-promotion promo_disc_percent">
+                    <em>
+                        with promotion disc.
+                        <t t-esc="line.get_promo_disc_percentage()" />
+                        %
+                    </em>
+                </li>
+            </t>
+            <t t-if="line.get_promo_fixed_price() > 0">
+                <li class="info orderline-promotion promo_fixed_price">
+                    <em>
+                        with promotion fixed price
+                        <t t-esc="widget.format_currency(line.get_promo_fixed_price(),'Product Price')" />/
+                        <t t-esc="line.get_unit().name" />
+                    </em>
+                </li>
+            </t>
+            <t t-if="line.get_promo_get_free() > 0">
+                <li class="info orderline-promotion promo_get_free">
+                    <em>
+                        with promotion get
+                        <t t-esc="line.get_quantity()" />  <t t-esc="line.get_unit().name" />
+                        free
+                    </em>
+                </li>
+            </t>
+
+        </t>
+    </t>
+
+</templates>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="gt_menu_magerp" name="Magento" icon="terp-sale" sequence="30"  parent="" groups="group_magento_manager"/>
+    <menuitem id="gt_menu_magerp_mag_orders"  name="Magento Orders" parent="gt_menu_magerp"  sequence="10"/>
+    <menuitem id="menu_sale_order" name="All orders" parent="gt_menu_magerp_mag_orders" action="gt_action_orders_magento"/>
+    <menuitem id="menu_sale_order_pending" name="Pending Orders" parent="gt_menu_magerp_mag_orders" action="gt_action_orders_magento_pending"/>
+    <menuitem id="menu_sale_order_completed" name="Done Orders" parent="gt_menu_magerp_mag_orders" action="gt_action_orders_magento_completed"/>        
+    
+    <menuitem id="gt_menu_magerp_customer"  name="Magento Customers" parent="gt_menu_magerp"  sequence="11"/>
+    <menuitem id="gt_menu_magerp_mag_customer"  name="Customers" parent="gt_menu_magerp_customer" action="action_magento_customer"/>
+        
+    <menuitem id="gt_menu_magerp_products" name="Products" parent="gt_menu_magerp"  sequence="12"/>
+    <menuitem id="gt_menu_product" name="All Products" parent="gt_menu_magerp_products" action="act_magento_products"/>
+    <menuitem id="gt_menu_product_exported" name="Products Exported" parent="gt_menu_magerp_products" action="magento_products_exported"/>
+    <menuitem id="gt_menu_product_not_exported" name="Products Not Exported" parent="gt_menu_magerp_products" action="magento_products_not_exported"/>
+    
+    <menuitem id="gt_menu_product_attributes" name="Product Attributes" parent="gt_menu_magerp"  sequence="13"/>
+    <menuitem id="gt_menu_product_attribute_set" name="Attribute Sets" parent="gt_menu_product_attributes" action="act_gt_product_attribute_set"/>
+    <menuitem id="gt_menu_product_attribute" name="Attribute" parent="gt_menu_product_attributes" action="act_gt_product_attributes"/>
+    <menuitem id="gt_menu_product_attribute_options" name="Attribute Options" parent="gt_menu_product_attributes" action="act_gt_product_attribute_options"/>
+    <menuitem id="gt_menu_product_categories" name="Categories" parent="gt_menu_product_attributes" action="product.product_category_action_form"/>
+    
+    <menuitem id="gt_menu_magerp_core" name="Core Settings" parent="gt_menu_magerp"  sequence="14"/>
+    <menuitem id="gt_menu_magerp_instances" name="Magento Instances" parent="gt_menu_magerp_core" action="gt_action_magento_instance" sequence="12"/>
+    <menuitem id="gt_menu_magerp_website" name="Magento Websites" parent="gt_menu_magerp_core" action="gt_act_magento_website" sequence="13"/>
+    <menuitem id="gt_menu_magerp_shops" name="Magento Shops" parent="gt_menu_magerp_core" action="gt_act_magento_shop" sequence="14"/>
+    
+    
+</odoo>

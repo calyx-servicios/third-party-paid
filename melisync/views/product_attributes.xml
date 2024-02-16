@@ -1,0 +1,59 @@
+<odoo>
+    <data>
+        <!-- Meli Attribute view form -->
+        <record model="ir.ui.view" id="melisync.product_attributes_view_form">
+            <field name="name">meli category attributes view form</field>
+            <field name="model">melisync.product_attributes</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Meli custom attribute">
+                    <sheet>
+                        <group string="Attribute data">
+                            <field name="meli_category_id" attrs="{ 'readonly': True }" />
+                            <field name="context_meli_category_id" attrs="{ 'invisible': True }" />
+                            <field name="meli_attributes_available_ids" attrs="{ 'invisible': True }" />
+                            <field
+                                name="meli_attributes"
+                                attrs="{ 'required': True }"
+                                options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }"
+                                context="{ 'full_name': True }"
+                                domain="[('id', 'in', meli_attributes_available_ids)]"
+                            />
+                            <field name="meli_attributes_type" attrs="{ 'readonly': True }" />
+                            <field
+                                name="meli_attributes_value"
+                                options="{ 'no_open': True, 'no_create_edit': True, 'no_create': True, 'no_edit': True }"
+                                attrs="{
+                                    'readonly': ['|', ('meli_attributes', '=', False), ('custom_value', 'not in', [False, ''])],
+                                    'required': [('custom_value', 'in', [False, ''])],
+                                }"
+                                domain="[('meli_attributes', 'in', [meli_attributes]), ('meli_categories', 'in', context.get('default_meli_category_id'))]"
+                            />
+                            <field
+                                name="custom_value"
+                                attrs="{
+                                    'readonly': [('meli_attributes_value', '!=', False)],
+                                    'required': [('meli_attributes_value', '=', False)],
+                                }"
+                            />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Meli Attribute view tree -->
+        <record model="ir.ui.view" id="melisync.product_attributes_view_tree">
+            <field name="name">meli category attributes view tree</field>
+            <field name="model">melisync.product_attributes</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="meli_attributes" />
+                    <field name="meli_attributes_type" />
+                    <field name="meli_attributes_value" />
+                    <field name="custom_value" />
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
