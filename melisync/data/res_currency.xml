@@ -1,6 +1,0 @@
-<odoo>
-    <data noupdate="1">
-        <!-- Download currencies -->
-		<function model="res.currency" name="meli_download" />
-    </data>
-</odoo>
