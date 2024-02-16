@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    
+    <record model="ir.ui.view" id="view_order_inherit_shopify_form">
+        <field name="name">sale.view.order.inherit.shopify.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//header" position="inside">
+<!--                    <button name="gt_close_shopify_order" string="Close Shopify Order" type="object" class="btn-primary" attrs="{'invisible': [('gt_shopify_order','=',False)]}"/>
+                    <button name="gt_reopen_shopify_order" string="Re-Open Shopify Order" type="object" class="btn-primary" attrs="{'invisible': [('gt_shopify_order','=',False),('gt_shopify_order','=',False)]}"/>
+                    <button name="gt_cancel_shopify_order" string="Re-Open Shopify Order" type="object" class="btn-primary" attrs="{'invisible': [('gt_shopify_order','=',False),('gt_shopify_order','=',False)]}"/>-->
+                <button name="gt_shopify_export_order" string="Export Shopify Order" type="object" class="btn-primary" attrs="{'invisible': [('gt_shopify_order_to_be_exported','=',False)]}"/>
+                </xpath>
+                <xpath expr="//sheet/div[2]" position="inside">
+                    <field name="gt_shopify_order_exported" attrs="{'invisible': [('gt_shopify_order_to_be_exported','=',False)]}"/>
+                    <label for="gt_shopify_order_exported" string="Shopify Order Exported" attrs="{'invisible': [('gt_shopify_order_to_be_exported','=',False)]}"/>
+                    <field name="gt_shopify_order_to_be_exported" attrs="{'invisible': [('gt_shopify_order_exported','=',True)]}"/>
+                    <label for="gt_shopify_order_to_be_exported" string="Shopify To be Exported" attrs="{'invisible': [('gt_shopify_order_exported','=',True)]}"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Shopify Details">
+                        <group>
+                            <group>
+                                <field name="gt_shopify_instance_id"/>
+                                <field name="gt_shopify_order_id"/>
+                                <field name="gt_shopify_order_status_url"/>
+                                <field name="gt_shopify_order_currency"/>
+                                <field name="gt_financial_status"/>
+                                <field name="gt_fulfillment_status"/>
+                            </group>
+                            <group>
+                                <field name="gt_shopify_order"/>
+                                <field name="gt_shopify_order_confirmed"/>
+                                <field name="gt_shopify_shipped"/>
+                                <field name="gt_shopify_tax_included"/>
+                                <field name="gt_shopify_close_order"/>
+                                <field name="gt_shopify_deliverd"/>
+                                <field name="gt_shopify_invoiced"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="gt_shopify_order_cancel_reason"/>
+                        </group>
+                    </page>
+                </xpath>
+<!--           <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="gt_shopify_order"/>
+                <field name="gt_shopify_instance_id"/>
+            </xpath>-->
+          </data>
+       </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_order_inherit_shopify_tree">
+        <field name="name">sale.view.order.inherit.shopify.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="gt_shopify_instance_id" invisible="True"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+    
+    <record id="action_orders_shopify_all" model="ir.actions.act_window">
+        <field name="name">Sales Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
+        <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        <field name="domain">[('gt_shopify_order', '=', 'True')]</field>
+        <field name="context">{
+                'search_default_my_sale_orders_filter': 1
+            }
+        </field>
+    </record>
+    
+    
+    <record id="action_orders_shopify_pending" model="ir.actions.act_window">
+        <field name="name">Sales Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
+        <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        <field name="domain">[('state', '!=', 'done')]</field>
+        <field name="context">{
+                'search_default_my_sale_orders_filter': 1
+            }
+        </field>
+    </record>
+    
+    <record id="action_orders_shopify_done" model="ir.actions.act_window">
+        <field name="name">Sales Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar,graph</field>
+        <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        <field name="domain">[('state', '=', 'done')]</field>
+        <field name="context">{
+                'search_default_my_sale_orders_filter': 1
+            }
+        </field>
+    </record>
+    
+</odoo>

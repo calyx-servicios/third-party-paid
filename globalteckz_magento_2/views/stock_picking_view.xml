@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="stock_shipment_form_view" model="ir.ui.view">
+        <field name="name">stock.shipment.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='group_id']" position="after">
+                <field name= "mage_stock_id"/>
+                <field name="is_magento"/>
+            </xpath>
+            <xpath expr="/form/header/button[last()]" position="after">
+                <field name='export_magento_sucess' invisible="1"/>
+                <button name="export_magento_shipment_delivery" string="Export Delivery Magento" type="object" attrs="{'invisible': [('export_magento_sucess', '=', True)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_delivery_view_delivery_carrier_form">
+        <field name="name">delivery.view.delivery.carrier.form</field>
+        <field name="model">delivery.carrier</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <field name="active" position="before">
+                <field name="magento_code"/>
+                <field name="magento_export"/>
+                <field name="mage_delivery" invisible="1"/>
+            </field>
+       </field>
+    </record>
+</odoo>

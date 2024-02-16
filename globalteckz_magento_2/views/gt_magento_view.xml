@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="gt_magento_instance_form_view" model="ir.ui.view">
+        <field name="name">gt.magento.instance.form.view</field>
+        <field name="model">gt.magento.instance</field>
+        <field name="arch" type="xml">
+            <form string="Magento Instance">
+                <header>
+                    <button name="gt_create_magento_website" string="Load Magento Website" type="object" class="btn-primary"/>
+                    <button name="gt_create_magento_stores" string="Load Magento Store" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="ActionGetWebsites" type="object" icon="fa-usd">
+                            <field string="Websites" name="count_magento_websites" widget="statinfo" />
+                        </button>
+                        <button class="oe_stat_button" name="ActionGetShop" type="object" icon="fa-bars">
+                            <field string="Shops" name="count_magento_shop" widget="statinfo" />
+                        </button>
+                        <button class="oe_stat_button" name="ActionGetAttributeSets" type="object" icon="fa-book">
+                            <field string="Attribute Set" name="count_magento_attribute_set" widget="statinfo" />
+                        </button>
+                        <newmline/>
+                        <button class="oe_stat_button" name="ActionGetAttributes" type="object" icon="fa-envelope">
+                            <field string="Attributes" name="count_magento_attributes" widget="statinfo" />
+                        </button>
+                        <button class="oe_stat_button" name="ActionGetCategories" type="object" icon="fa-pencil">
+                            <field string="Categories" name="count_magento_categories" widget="statinfo" />
+                        </button>
+                        <button class="oe_stat_button" name="ActionGetProduct" type="object" icon="fa-pencil">
+                            <field string="Products" name="count_magento_products" widget="statinfo" />
+                        </button>
+                        <button class="oe_stat_button" name="ActionGetCustomer" type="object" icon="fa-book">
+                            <field string="Customers" name="count_magento_customers" widget="statinfo" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group string="Authentication">
+                        <group>
+                            <field name="location" placeholder="http://www.magento.com"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="apiusername" placeholder="Web Service username"/>
+                        </group>
+                        <group>
+                            <field name="apipassoword" placeholder="password" password="True"/>
+                            <field name="magento_instance_id_used_token"/>
+                            <field name="token" placeholder="token" attrs="{'invisible': [('magento_instance_id_used_token', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <group >
+                        <group>
+                            <field name="location_id"/>
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Import Data from Magento To Odoo">
+                            <group>
+                                <group string="Import Catalog Attributes">
+                                    <button name="GtCreateMagentoAttributeSet" string="Import Attributes Set" type="object" class="btn-primary"/>
+                                    <button name="GtCreateMagentoAttributes" string="Import Attributes" type="object" class="btn-primary" />
+                                    <br/>
+                                    <newline/>
+                                    <button name="GtImportMagentoCategories" string=" Import Categories" type="object" class="btn-primary" />
+                                    <newline/>
+                                </group>
+                                <group string="Manage Catalog">
+                                    <newline/>
+                                    <button name="GtImportMagentoConfigurableProduct" string="Import Configurable Products" type="object" class="btn-primary"/>
+                                    <!-- <button name="GtImportMagentoSimpleProduct" string="Import Simple Products" type="object" class="btn-primary"/> -->
+                                    <!-- <button name="GtImportMagentoStock" string="Import Stock" type="object" class="btn-primary"/> -->
+                                    <br/>
+                                    <newline/>
+                                    <button name="GtImportProductImage" string="Import Images" type="object" class="btn-primary"/>
+                                    <newline/>
+                                </group>
+                                <group string="Manage Customers">
+                                    <newline/>
+                                    <button name="GtImportMagentoCustomer" string="Import Customers" type="object" class="btn-primary"/>
+                                    <newline/>
+                                </group>
+                            </group>
+                        </page>
+                        <!-- <page string="Export Data From Odoo To Magento">
+                            <group>
+                                <group string="Export Category"> 
+                                    <newline/>
+                                    <button name="ExportMultipleMagentoCategories" string=" Export Categories" type="object" class="btn-primary"/>
+                                </group>
+                                <group string="Manage Catalog">
+                                    <newline/>
+                                    <button name="GtExportMagentoProducts" string="Export Products" type="object" class="btn-primary"/>
+                                    <button name="GtExportProductImage" string="Export Image" type="object" class="btn-primary"/>
+                                    <br/>
+                                    <newline/>
+                                    <button name="GtExportProductStock" string="Export Stock" type="object" class="btn-primary"/>
+                                    <newline/>
+                                </group>
+                            </group>
+                        </page> -->
+                        <page string='Manage Products and Customer ID'>
+                            <group>
+                                <group>
+                                    <field name="from_id"/>
+                                    <field name="to_id"/>
+                                    <field name="limit_simple_product_id"/>
+                                </group>
+                                <group>
+                                    <field name="config_prod_from_id"/>
+                                    <field name="config_prod_to_id"/>
+                                    <field name="limit_configurable_product_id"/>
+                                </group>
+                                <group>
+                                <field name="cust_from_id"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string='Force Import SKU product'>
+                            <group>
+                                <group>
+                                    <field name="sku_reference_ids" widget="many2many_tags"/>
+                                </group>
+                                <group>
+                                    <button name="GtImportMagentoProductSkuForce" string="Import Products" type="object" class="btn-primary"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record> 
+        
+    <record model="ir.ui.view" id="gt_magento_instance_tree">
+        <field name="name">gt.magento.instance.tree</field>
+        <field name="model">gt.magento.instance</field>
+        <field name="arch" type="xml">
+            <tree string="Magento Instance">
+                <field name="name"/>
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="gt_action_magento_instance">
+        <field name="name">Magento Instances</field>
+        <field name="res_model">gt.magento.instance</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+        
+</odoo>

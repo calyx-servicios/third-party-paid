@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <record id="search_assistant_sale_order_form_inherit" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="name">sale.order.assistant</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="before">
+            <button string="Search" type="object"  name="call_sale_search_assistant"  
+                    attrs="{'invisible': [('state','not in',('draft'))]}" 
+                    groups="search_assistant.group_search_assistant_user"/>
+            </xpath>
+   
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gt_view_product_template_shopify" model="ir.ui.view">
+        <field name="name">product template</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="gt_export_shopify_product" string="Export Complete Product" type="object" class="btn-primary" attrs="{'invisible': ['|','|',('gt_shopify_product','=',False),('gt_shopify_exported','=',True)]}"/>
+                <button name="gt_update_shopify_product" string="Update Complete Product" type="object" class="btn-primary" attrs="{'invisible': ['|','|',('gt_shopify_product','=',False),('gt_shopify_exported','=',False)]}"/>
+                <button name="gt_export_shopify_stock_single" string="Export Stock" type="object" class="btn-primary" attrs="{'invisible': [('gt_shopify_exported','=',False)]}"/>
+            </xpath>
+            <xpath expr="/form/sheet/notebook" position="inside">  
+                <page string="Shopify">
+                    <group>
+                        <group>
+                            <field name="gt_published_scope"/>
+                            <field name="gt_vendor"/>
+                            <field name="gt_shopify_instance_id"/>
+                        </group>
+                        <group>
+                            <field name="gt_product_id" readonly="True"/>
+                            <field name="gt_product_tags" widget="many2many_tags"/>
+                            <field name="gt_shopify_product_type"/>
+                        </group>
+                        <field name="gt_shopify_description"/>
+                    </group>
+                </page>
+                <page string='Shopify Product Image'>
+                    <field name="gt_product_image_id">
+                       <form>
+                            <group>
+                                <group>
+                                    <field name="gt_image_name" placeholder="Example test.jpeg"/>
+                                    <field name="gt_image_src"/>
+                                    <field name="gt_image" widget="image" class="oe_avatar oe_left"/>
+                                </group>
+                                <group>
+                                    <field name="gt_image_position"/>
+                                    <field name="gt_image_id" readonly="True"/>
+                                    <field name="gt_is_exported" readonly="True"/>
+                                    <field name="gt_shopify_instance_id" required="True"/>
+                                </group>
+                            </group>
+                        </form>
+                        <tree>
+                            <field name="gt_image_src"/>
+                            <field name="gt_image"/>
+                        </tree>
+                     </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='sale_ok']" position="after">
+                <div class="oe_left" name="options">
+                    <div>
+                        <field name="gt_shopify_product"/>
+                        <label for="gt_shopify_product"/>
+                        <field name="gt_shopify_exported" readonly="True"/>
+                        <label for="gt_shopify_exported"/>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="shopify_product_template_exported" model="ir.actions.act_window">
+        <field name="name">Products Template Exported</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_type">form</field>
+        <field name="context">{"search_default_consumable": 1, 'default_type': 'product'}</field>
+        <field name="domain">[('gt_shopify_product','=',True),('gt_shopify_exported','=',True)]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to define a new product.
+            </p>
+        </field>
+    </record>
+    
+    
+    <record id="shopify_product_template_not_exported" model="ir.actions.act_window">
+        <field name="name">Products Template Not Exported</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_type">form</field>
+        <field name="context">{"search_default_consumable": 1, 'default_type': 'product'}</field>
+        <field name="domain">[('gt_shopify_product','=',True),('gt_shopify_exported','=',False)]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to define a new product.
+            </p>
+        </field>
+    </record>
+    
+</odoo>

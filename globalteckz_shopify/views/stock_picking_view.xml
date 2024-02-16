@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_picking_tree_pending" model="ir.actions.act_window">
+        <field name="name">Stock Operations</field>
+        <field name="res_model">stock.picking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form,calendar</field>
+        <field name="domain">[('state', '!=', 'done')]</field>
+        <field name="context">{
+                'contact_display': 'partner_address',
+        }
+        </field>
+        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click here to create a new transfer.
+          </p><p>
+            You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+          </p>
+        </field>
+    </record>
+    
+    <record id="action_picking_tree_completed" model="ir.actions.act_window">
+        <field name="name">Stock Operations</field>
+        <field name="res_model">stock.picking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form,calendar</field>
+        <field name="domain">[('state', '=', 'done')]</field>
+        <field name="context">{
+                'contact_display': 'partner_address',
+        }
+        </field>
+        <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click here to create a new transfer.
+          </p><p>
+            You can either do it immediately or mark it as Todo for future processing. Use your scanner to validate the transferred quantity quicker.
+          </p>
+        </field>
+    </record>
+</odoo>

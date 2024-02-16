@@ -1,0 +1,318 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* search_assistant
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-23 21:24+0000\n"
+"PO-Revision-Date: 2020-05-23 21:24+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.view_sale_assistant_wizard
+msgid "Add Items"
+msgstr "Agregar Items"
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.view_purchase_assistant_wizard
+msgid "Add items"
+msgstr "Agregar Items"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__attribute_value_ids
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__attribute_value_ids
+msgid "Attribute Values"
+msgstr "Valor Atributos"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__brand_id
+msgid "Brand"
+msgstr "Marca"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__brand_ids
+msgid "Brands"
+msgstr "Marcas"
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.view_search_assistant_wizard
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__product_uom_category_id
+msgid "Category"
+msgstr "Categoria"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__code
+msgid "Code"
+msgstr "Codigo"
+
+#. module: search_assistant
+#: model:ir.model,name:search_assistant.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: search_assistant
+#: model:ir.model.fields,help:search_assistant.field_search_assistant_line__product_uom_category_id
+msgid ""
+"Conversion between Units of Measure can only occur if they belong to the "
+"same category. The conversion will be made based on the ratios."
+msgstr ""
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.view_purchase_assistant_wizard
+msgid "Create and View Purchase Order"
+msgstr "Crear y ver Orden de compra"
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.view_sale_assistant_wizard
+msgid "Create and View Sale Order"
+msgstr "Crear y ver Pedido de venta"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__create_uid
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__create_uid
+msgid "Created by"
+msgstr "Creada por"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__create_date
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__create_date
+msgid "Created on"
+msgstr "Creada el"
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.res_config_settings_view_form
+msgid "Defines the default partner for purchase order creation"
+msgstr "Define el contacto predeterminado para la generacion de ordenes de compra"
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.res_config_settings_view_form
+msgid "Defines the default partner for sale order creation"
+msgstr "Define el contacto predeterminado para la generacion de Pedido de venta"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__description
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__description
+msgid "Description"
+msgstr "Descripción"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__display_name
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__display_name
+msgid "Display Name"
+msgstr "Nombre"
+
+#. module: search_assistant
+#: model:ir.model.fields,help:search_assistant.field_search_assistant__description
+msgid ""
+"Enter the description spaces split your query in"
+"                                     case you forgot how was your product "
+"description."
+msgstr ""
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__free_qty_today
+msgid "Free Qty Today"
+msgstr "Cantidad Disponible"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__id
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__id
+msgid "ID"
+msgstr ""
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant____last_update
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__write_uid
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__write_date
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.view_search_assistant_wizard
+msgid "Lines"
+msgstr "Lineas"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__partner_id
+msgid "Partner"
+msgstr "Contacto"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__partner_readonly
+msgid "Partner Readonly"
+msgstr "Solo lectura"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__attribute_ids
+msgid "Product Attribute"
+msgstr "Atributo"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__category_ids
+msgid "Product Category"
+msgstr "Categoria"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_res_config_settings__purchase_default_partner_id
+msgid "Purchase Default Partner"
+msgstr "Contacto Predeterminado"
+
+#. module: search_assistant
+#: model:ir.model,name:search_assistant.model_purchase_order
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__purchase_order_id
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__qty_to_deliver
+msgid "Qty To Deliver"
+msgstr "Cantidad a entregar"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__product_uom_qty
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_res_config_settings__sale_default_partner_id
+msgid "Sale Default Partner"
+msgstr "Contacto Predeterminado"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__sale_order_id
+msgid "Sale Order"
+msgstr "Pedido de venta"
+
+#. module: search_assistant
+#: model:ir.model,name:search_assistant.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__scheduled_date
+msgid "Scheduled Date"
+msgstr "Agendado"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__search_id
+#: model_terms:ir.ui.view,arch_db:search_assistant.search_assistant_purchase_order_form_inherit
+#: model_terms:ir.ui.view,arch_db:search_assistant.search_assistant_sale_order_form_inherit
+msgid "Search"
+msgstr "Buscar"
+
+#. module: search_assistant
+#: model:ir.actions.act_window,name:search_assistant.action_purchase_search_assistant_wizard_form
+#: model:ir.actions.act_window,name:search_assistant.action_sale_search_assistant_wizard_form
+#: model:ir.model,name:search_assistant.model_search_assistant
+#: model:ir.module.category,name:search_assistant.search_assistant
+#: model:ir.ui.menu,name:search_assistant.res_purchase_search_menu
+#: model:ir.ui.menu,name:search_assistant.res_sale_search_menu
+#: model_terms:ir.ui.view,arch_db:search_assistant.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:search_assistant.view_search_assistant_wizard
+msgid "Search Assistant"
+msgstr "Asistente de Busqueda"
+
+#. module: search_assistant
+#: model:res.groups,name:search_assistant.group_search_assistant_manager
+msgid "Search Assistant "
+msgstr "Asistente de Busqueda "
+
+#. module: search_assistant
+#: model:ir.module.category,description:search_assistant.search_assistant
+msgid "Search Assistant Category"
+msgstr "Categoria Asistente de Busqueda"
+
+#. module: search_assistant
+#: model:ir.model,name:search_assistant.model_search_assistant_line
+msgid "Search Assistant Line"
+msgstr "Asistente de Busqueda Linea"
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.res_config_settings_view_form
+msgid "Search Assistant Settings"
+msgstr "Asistente de Busqueda Configuracion"
+
+#. module: search_assistant
+#: model:res.groups,name:search_assistant.group_search_assistant_user
+msgid "Search Assistant User"
+msgstr "Asistente de Busqueda Usuario"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__line_ids
+msgid "Search Results"
+msgstr "Asistente de Busqueda Resultados"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__selected
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__selected
+msgid "Selected"
+msgstr "Seleccionado"
+
+#. module: search_assistant
+#: model:ir.actions.act_window,name:search_assistant.action_search_assistant_config_settings
+msgid "Settings"
+msgstr "Configuraciones"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__qty_available_today
+msgid "Stock"
+msgstr "Stock"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__stock_date
+msgid "Stock Date"
+msgstr "Fecha de Stock"
+
+#. module: search_assistant
+#: model_terms:ir.ui.view,arch_db:search_assistant.view_purchase_assistant_wizard
+#: model_terms:ir.ui.view,arch_db:search_assistant.view_sale_assistant_wizard
+msgid "Trim Items"
+msgstr "Eliminar items"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__price_unit
+msgid "Unit Price"
+msgstr "Precio Unitario"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__product_uom
+msgid "Unit of Measure"
+msgstr "Unidad de medida"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__virtual_available_at_date
+msgid "Virtual Available At Date"
+msgstr "Fecha virtual de disponibilidad"
+
+#. module: search_assistant
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant__warehouse_id
+#: model:ir.model.fields,field_description:search_assistant.field_search_assistant_line__warehouse_id
+msgid "Warehouse"
+msgstr "Deposito"
