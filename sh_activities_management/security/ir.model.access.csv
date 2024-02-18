@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_activity_dashboard,access_activity_dashboard,model_activity_dashboard,base.group_user,1,1,1,1
+access_sh_activity_dynamic_action,access_sh_activity_dynamic_action,model_sh_activity_dynamic_action,base.group_user,1,1,1,1
+access_sh_activity_tags,access_sh_activity_tags,model_sh_activity_tags,base.group_user,1,1,1,1
+access_sh_activity_alarm,access_sh_activity_alarm,model_sh_activity_alarm,base.group_user,1,1,1,1
+access_sh_recurring_activities,access_sh_recurring_activities,model_sh_recurring_activities,base.group_user,1,1,1,1
