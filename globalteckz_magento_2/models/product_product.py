@@ -165,6 +165,7 @@ class ProductProduct(models.Model):
             product_tmp_vals = {  
                 'default_code':str(sku),
                 'name':str(each_product.get('name')),
+                'description':str(each_product['custom_attributes'][2]['value']),
                 'lst_price':each_product.get('price'),
                 'magento_id':str(each_product.get('id')),
                 'attribute_line_ids':variant_list or False,
