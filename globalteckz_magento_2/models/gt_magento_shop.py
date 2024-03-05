@@ -205,11 +205,40 @@ class GtMagentoStore(models.Model):
                                             partner_invoice_id = self.GuestCustomerInvoice(saleorder_list['billing_address'],partner_id)
 
                                     shipping_address = saleorder_list['extension_attributes']['shipping_assignments'][0]
+
+                                    odoo_partner_addresses = partner_id.child_ids
+                                    magento_partner_address = shipping_address['shipping']
+                                    addresses_zip = []
+                                    addresses_street = []
+
+
+                                    for address in odoo_partner_addresses:
+                                        addresses_zip.append(address.zip)
+                                        addresses_street.append(address.street)
+
+                                    if magento_partner_address['address']['postcode'] not in addresses_zip:
+                                        exist_zip = True
+                                    else:
+                                        exist_zip = False
+
+                                    if magento_partner_address['address']['street'][0] not in addresses_street:
+                                        exist_street = True
+                                    else:
+                                        exist_street = False
+
+                                    if exist_zip and exist_street:
+                                        mag_address = magento_partner_address['address']
+                                        shipping_id = self.temporary_address(mag_address,partner_id)
                                     
+                                    else: 
+                                        for ship in odoo_partner_addresses:
+                                            if magento_partner_address['address']['postcode'] == ship.zip:
+                                                shipping_id = ship
+
                                     if 'shipping' in shipping_address:
                                         
                                         shipp_addre = shipping_address['shipping']
-                                        
+
                                         if 'address' in shipp_addre:
                                             shipp_address = shipp_addre['address']
                                             
@@ -283,11 +312,17 @@ class GtMagentoStore(models.Model):
                                         self.env.cr.commit()
 
                                 if partner_id:
+                                    
+                                    if shipping_id: 
+                                        id_ship = shipping_id.id
+                                    else:
+                                        id_ship = partner_ship_id.id if partner_ship_id else partner_id[0].id
+
 
                                     value_saleordervals = {
                                         'partner_id': partner_id[0].id,
                                         'partner_invoice_id': partner_invoice_id.id if partner_invoice_id else partner_id[0].id, 
-                                        'partner_shipping_id': partner_ship_id.id if partner_ship_id else partner_id[0].id,
+                                        'partner_shipping_id': id_ship,
                                         'name': str(saleorder_list['increment_id']),
                                         'mage_order_id': str(saleorder_list['increment_id']),
                                         'magento_shop_id': self.id,
