@@ -208,32 +208,19 @@ class GtMagentoStore(models.Model):
 
                                     odoo_partner_addresses = partner_id.child_ids
                                     magento_partner_address = shipping_address['shipping']
-                                    addresses_zip = []
-                                    addresses_street = []
-
+                                    exist_address = None
 
                                     for address in odoo_partner_addresses:
-                                        addresses_zip.append(address.zip)
-                                        addresses_street.append(address.street)
+                                        if address.zip == magento_partner_address['address']['postcode'] and \
+                                        address.street == magento_partner_address['address']['street'][0]:
+                                            exist_address = address
+                                            break
 
-                                    if magento_partner_address['address']['postcode'] not in addresses_zip:
-                                        exist_zip = True
-                                    else:
-                                        exist_zip = False
-
-                                    if magento_partner_address['address']['street'][0] not in addresses_street:
-                                        exist_street = True
-                                    else:
-                                        exist_street = False
-
-                                    if exist_zip and exist_street:
+                                    if not exist_address:
                                         mag_address = magento_partner_address['address']
-                                        shipping_id = self.temporary_address(mag_address,partner_id)
-                                    
-                                    else: 
-                                        for ship in odoo_partner_addresses:
-                                            if magento_partner_address['address']['postcode'] == ship.zip:
-                                                shipping_id = ship
+                                        shipping_id = self.temporary_address(mag_address, partner_id)
+                                    else:
+                                        shipping_id = exist_address
 
                                     if 'shipping' in shipping_address:
                                         
