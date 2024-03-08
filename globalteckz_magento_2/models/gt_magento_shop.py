@@ -443,6 +443,17 @@ class GtMagentoStore(models.Model):
                                         }
                                         self.env['sale.order.line'].create(shipping_line_vals)
                                         self.env.cr.commit()
+                                    
+                                if saleorder_list['status'] == 'processing':
+                                    id_location = saleorder_id.check_location()
+                                    wh_id = id_location
+                                    data = self.env['sale.order'].search([('id','=',saleorder_id.id)])
+                                    if wh_id != 0:
+                                        data.write({'warehouse_id':wh_id})
+                                        logger.debug("======== Pedido check_location: : %s" % saleorder_id)
+                                        saleorder_id.action_confirm()
+                                        logger.debug("======== Pedido confirmado: : %s" % saleorder_id)
+
 
                         except Exception as exc:
                             logger.error("======== Error : %s" % exc)
