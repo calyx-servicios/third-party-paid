@@ -451,9 +451,12 @@ class GtMagentoStore(models.Model):
                                     if wh_id != 0:
                                         data.write({'warehouse_id':wh_id})
                                         logger.debug("======== Pedido check_location: : %s" % saleorder_id)
-                                        saleorder_id.action_confirm()
+                                        sale_id = saleorder_id.action_confirm()
+                                        pickings = sale_id.picking_ids
+                                        for picking in pickings:
+                                            id_pick = sale_id.env['stock.picking'].search([('id', '=', picking.id)])
+                                            id_pick.write({'state':'confirmed'})
                                         logger.debug("======== Pedido confirmado: : %s" % saleorder_id)
-
 
                         except Exception as exc:
                             logger.error("======== Error : %s" % exc)
