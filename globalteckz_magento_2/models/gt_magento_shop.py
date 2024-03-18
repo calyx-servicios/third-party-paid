@@ -444,18 +444,18 @@ class GtMagentoStore(models.Model):
                                         self.env['sale.order.line'].create(shipping_line_vals)
                                         self.env.cr.commit()
                                     
-                                if saleorder_list['status'] == 'processing':
+                                if saleorder_list['status'] == 'processing' or saleorder_list['status'] == 'complete':
                                     id_location = saleorder_id.check_location()
                                     wh_id = id_location
                                     data = self.env['sale.order'].search([('id','=',saleorder_id.id)])
                                     if wh_id != 0:
                                         data.write({'warehouse_id':wh_id})
                                         logger.debug("======== Pedido check_location: : %s" % saleorder_id)
-                                        sale_id = saleorder_id.action_confirm()
+                                        saleorder_id.custom_action_confirm()
+                                        sale_id = saleorder_id
                                         pickings = sale_id.picking_ids
                                         for picking in pickings:
                                             id_pick = sale_id.env['stock.picking'].search([('id', '=', picking.id)])
-                                            id_pick.write({'state':'confirmed'})
                                         logger.debug("======== Pedido confirmado: : %s" % saleorder_id)
 
                         except Exception as exc:
