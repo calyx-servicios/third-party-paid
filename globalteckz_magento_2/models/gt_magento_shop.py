@@ -145,12 +145,10 @@ class GtMagentoStore(models.Model):
         headers = {
             'authorization':auth_token
             }
-        value_date_from = str(self.magento_order_date)
-        value_date_to = str(self.magento_order_date_to)
-        
-        if (value_date_from and value_date_to) == 'False':
-            value_date_from = '0000-00-00'
-            value_date_to = str(date.today())
+
+        value_date_from = str(self.magento_order_date) if self.magento_order_date else '0000-00-00'
+
+        value_date_to = str(self.magento_order_date_to) if self.magento_order_date_to else str(date.today())
         
         if value_date_to and value_date_from:
 
@@ -198,8 +196,9 @@ class GtMagentoStore(models.Model):
                                                 if customer_list:
                                                     partner_id = self.magento_instance_id.CreateMagentoCustomer(customer_list)
                                                     self._cr.commit()
-                                        else:
+        
                                             partner_id = self.GuestCustomer(saleorder_list)
+                                            
                                     else:
                                         continue
 
@@ -498,8 +497,8 @@ class GtMagentoStore(models.Model):
                             logger.error("======== Error : %s" % exc)
                             
                     vals_d = {
-                        'magento_order_date':date.today(),
-                        'magento_order_date_to':date.today()
+                        'magento_order_date': False,
+                        'magento_order_date_to': False
                         }
                     self.write(vals_d)
 
