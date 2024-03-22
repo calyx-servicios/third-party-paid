@@ -79,7 +79,47 @@ class GtMagentoStore(models.Model):
             shop.count_magento_orders = len(multishop_ids.ids)
         return res
     
-    
+    def GtUpdateMagentoOrders(self, orders):
+        ma_order_ids = orders.mapped("ma_order_id")
+
+        magento_instance_id = self.env["gt.magento.instance"].search([('name','=','Magento')], limit=1)
+
+        if not magento_instance_id:
+            return
+
+        if magento_instance_id.magento_instance_id_used_token:
+            token = magento_instance_id.token
+        else:
+            magento_instance_id.generate_token()
+            token = magento_instance_id.token
+            token = token.replace('"'," ")
+
+        auth_token="Bearer "+token.strip()
+        auth_token=auth_token.replace("'",'"')
+        headers = {
+            'authorization':auth_token
+            }
+        # busco en magento con order.ma_order_id y compara order.order_status
+        if orders:
+            ma_response = []
+            #/rest/V1/orders?searchCriteria[filter_groups][0][filters][0][field]=entity_id&searchCriteria[filter_groups][0][filters][0][value]=1,2,3&searchCriteria[filter_groups][0][filters][0][condition_type]=in
+            for ma_order_id in ma_order_ids:
+                url = str(magento_instance_id.location) + f"/rest/V1/orders?searchCriteria[filter_groups][0][filters][0][field]=entity_id&searchCriteria[filter_groups][0][filters][0][value]={ma_order_id}&searchCriteria[filter_groups][0][filters][0][condition_type]=in"
+                response = requests.request("GET",url, headers=headers)
+                ma_response.append((ma_order_id, json.loads(response.text)['items'][0]['status']))
+
+            for ma_order_id, status in ma_response:
+                saleorder = self.env['sale.order'].search([('ma_order_id', '=', ma_order_id)])
+                if saleorder and saleorder.order_status != status:
+                    saleorder.order_status = status
+                    if status == 'processing' and saleorder.state == 'draft':
+                        id_warehouse = saleorder.check_location()
+                        if id_warehouse != 0:
+                            saleorder.write({'warehouse_id':id_warehouse})
+                            logger.debug("======== Pedido check_location: : %s" % saleorder.id)
+                            saleorder.custom_action_confirm()      
+                            
+
     def GtCreateMagentoOrders(self):
 
         if not self.shipping_product:
@@ -450,13 +490,9 @@ class GtMagentoStore(models.Model):
                                     data = self.env['sale.order'].search([('id','=',saleorder_id.id)])
                                     if wh_id != 0:
                                         data.write({'warehouse_id':wh_id})
-                                        logger.debug("======== Pedido check_location: : %s" % saleorder_id)
+                                        logger.info("======== Pedido check_location: : %s" % saleorder_id)
                                         saleorder_id.custom_action_confirm()
-                                        sale_id = saleorder_id
-                                        pickings = sale_id.picking_ids
-                                        for picking in pickings:
-                                            id_pick = sale_id.env['stock.picking'].search([('id', '=', picking.id)])
-                                        logger.debug("======== Pedido confirmado: : %s" % saleorder_id)
+                                        logger.info("======== Pedido confirmado: : %s" % saleorder_id)
 
                         except Exception as exc:
                             logger.error("======== Error : %s" % exc)
