@@ -489,9 +489,9 @@ class GtMagentoStore(models.Model):
                                     data = self.env['sale.order'].search([('id','=',saleorder_id.id)])
                                     if wh_id != 0:
                                         data.write({'warehouse_id':wh_id})
-                                        logger.info("======== Pedido check_location: : %s" % saleorder_id)
-                                        saleorder_id.custom_action_confirm()
-                                        logger.info("======== Pedido confirmado: : %s" % saleorder_id)
+                                        logger.info("======== Pedido check_location: : %s" % saleorder_id.name)
+                                        saleorder_id.action_confirm()
+                                        logger.info("======== Pedido confirmado: : %s" % saleorder_id.name)
 
                                 if saleorder_list['status'].lower() == 'complete':
                                     id_location = saleorder_id.check_location()
@@ -499,9 +499,9 @@ class GtMagentoStore(models.Model):
                                     data = self.env['sale.order'].search([('id','=',saleorder_id.id)])
                                     if wh_id != 0:
                                         data.write({'warehouse_id':wh_id})
-                                        logger.info("======== Pedido check_location: : %s" % saleorder_id)
-                                        saleorder_id.custom_action_confirm()
-                                        logger.info("======== Pedido confirmado: : %s" % saleorder_id)
+                                        logger.info("======== Pedido check_location: : %s" % saleorder_id.name)
+                                        saleorder_id.action_confirm()
+                                        logger.info("======== Pedido confirmado: : %s" % saleorder_id.name)
 
                         except Exception as exc:
                             logger.error("======== Error : %s" % exc)
