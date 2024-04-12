@@ -79,7 +79,47 @@ class GtMagentoStore(models.Model):
             shop.count_magento_orders = len(multishop_ids.ids)
         return res
     
-    
+    def GtUpdateMagentoOrders(self, orders):
+        ma_order_ids = orders.mapped("ma_order_id")
+
+        magento_instance_id = self.env["gt.magento.instance"].search([('name','=','Magento')], limit=1)
+
+        if not magento_instance_id:
+            return
+
+        if magento_instance_id.magento_instance_id_used_token:
+            token = magento_instance_id.token
+        else:
+            magento_instance_id.generate_token()
+            token = magento_instance_id.token
+            token = token.replace('"'," ")
+
+        auth_token="Bearer "+token.strip()
+        auth_token=auth_token.replace("'",'"')
+        headers = {
+            'authorization':auth_token
+            }
+        # busco en magento con order.ma_order_id y compara order.order_status
+        if orders:
+            ma_response = []
+            #/rest/V1/orders?searchCriteria[filter_groups][0][filters][0][field]=entity_id&searchCriteria[filter_groups][0][filters][0][value]=1,2,3&searchCriteria[filter_groups][0][filters][0][condition_type]=in
+            for ma_order_id in ma_order_ids:
+                url = str(magento_instance_id.location) + f"/rest/V1/orders?searchCriteria[filter_groups][0][filters][0][field]=entity_id&searchCriteria[filter_groups][0][filters][0][value]={ma_order_id}&searchCriteria[filter_groups][0][filters][0][condition_type]=in"
+                response = requests.request("GET",url, headers=headers)
+                ma_response.append((ma_order_id, json.loads(response.text)['items'][0]['status']))
+
+            for ma_order_id, status in ma_response:
+                saleorder = self.env['sale.order'].search([('ma_order_id', '=', ma_order_id)])
+                if saleorder and saleorder.order_status != status:
+                    saleorder.order_status = status
+                    if status == 'processing' and saleorder.state == 'draft':
+                        id_warehouse = saleorder.check_location()
+                        if id_warehouse != 0:
+                            saleorder.write({'warehouse_id':id_warehouse})
+                            logger.debug("======== Pedido check_location: : %s" % saleorder.id)
+                            saleorder.custom_action_confirm()      
+                            
+
     def GtCreateMagentoOrders(self):
 
         if not self.shipping_product:
@@ -105,12 +145,10 @@ class GtMagentoStore(models.Model):
         headers = {
             'authorization':auth_token
             }
-        value_date_from = str(self.magento_order_date)
-        value_date_to = str(self.magento_order_date_to)
-        
-        if (value_date_from and value_date_to) == 'False':
-            value_date_from = '0000-00-00'
-            value_date_to = str(date.today())
+
+        value_date_from = str(self.magento_order_date) if self.magento_order_date else '0000-00-00'
+
+        value_date_to = str(self.magento_order_date_to) if self.magento_order_date_to else str(date.today())
         
         if value_date_to and value_date_from:
 
@@ -158,8 +196,9 @@ class GtMagentoStore(models.Model):
                                                 if customer_list:
                                                     partner_id = self.magento_instance_id.CreateMagentoCustomer(customer_list)
                                                     self._cr.commit()
-                                        else:
+        
                                             partner_id = self.GuestCustomer(saleorder_list)
+                                            
                                     else:
                                         continue
 
@@ -205,11 +244,27 @@ class GtMagentoStore(models.Model):
                                             partner_invoice_id = self.GuestCustomerInvoice(saleorder_list['billing_address'],partner_id)
 
                                     shipping_address = saleorder_list['extension_attributes']['shipping_assignments'][0]
-                                    
+
+                                    odoo_partner_addresses = partner_id.child_ids
+                                    magento_partner_address = shipping_address['shipping']
+                                    exist_address = None
+
+                                    for address in odoo_partner_addresses:
+                                        if address.zip == magento_partner_address['address']['postcode'] and \
+                                        address.street == magento_partner_address['address']['street'][0]:
+                                            exist_address = address
+                                            break
+
+                                    if not exist_address:
+                                        mag_address = magento_partner_address['address']
+                                        shipping_id = self.temporary_address(mag_address, partner_id)
+                                    else:
+                                        shipping_id = exist_address
+
                                     if 'shipping' in shipping_address:
                                         
                                         shipp_addre = shipping_address['shipping']
-                                        
+
                                         if 'address' in shipp_addre:
                                             shipp_address = shipp_addre['address']
                                             
@@ -283,11 +338,17 @@ class GtMagentoStore(models.Model):
                                         self.env.cr.commit()
 
                                 if partner_id:
+                                    
+                                    if shipping_id: 
+                                        id_ship = shipping_id.id
+                                    else:
+                                        id_ship = partner_ship_id.id if partner_ship_id else partner_id[0].id
+
 
                                     value_saleordervals = {
                                         'partner_id': partner_id[0].id,
                                         'partner_invoice_id': partner_invoice_id.id if partner_invoice_id else partner_id[0].id, 
-                                        'partner_shipping_id': partner_ship_id.id if partner_ship_id else partner_id[0].id,
+                                        'partner_shipping_id': id_ship,
                                         'name': str(saleorder_list['increment_id']),
                                         'mage_order_id': str(saleorder_list['increment_id']),
                                         'magento_shop_id': self.id,
@@ -421,13 +482,33 @@ class GtMagentoStore(models.Model):
                                         }
                                         self.env['sale.order.line'].create(shipping_line_vals)
                                         self.env.cr.commit()
+                                    
+                                if saleorder_list['status'].lower() == 'processing':
+                                    id_location = saleorder_id.check_location()
+                                    wh_id = id_location
+                                    data = self.env['sale.order'].search([('id','=',saleorder_id.id)])
+                                    if wh_id != 0:
+                                        data.write({'warehouse_id':wh_id})
+                                        logger.info("======== Pedido check_location: : %s" % saleorder_id.name)
+                                        saleorder_id.action_confirm()
+                                        logger.info("======== Pedido confirmado: : %s" % saleorder_id.name)
+
+                                if saleorder_list['status'].lower() == 'complete':
+                                    id_location = saleorder_id.check_location()
+                                    wh_id = id_location
+                                    data = self.env['sale.order'].search([('id','=',saleorder_id.id)])
+                                    if wh_id != 0:
+                                        data.write({'warehouse_id':wh_id})
+                                        logger.info("======== Pedido check_location: : %s" % saleorder_id.name)
+                                        saleorder_id.action_confirm()
+                                        logger.info("======== Pedido confirmado: : %s" % saleorder_id.name)
 
                         except Exception as exc:
                             logger.error("======== Error : %s" % exc)
                             
                     vals_d = {
-                        'magento_order_date':date.today(),
-                        'magento_order_date_to':date.today()
+                        'magento_order_date': False,
+                        'magento_order_date_to': False
                         }
                     self.write(vals_d)
 
