@@ -312,3 +312,11 @@ class MercadoLibreClient(object):
                 - site_id: site ID.
         """
         return self.requests_obj._get(f'/sites/{site_id}/shipping_methods')
+
+    def get_shipping(self, shipping_id):
+        """
+            Retirn shipping info
+            Parameters:
+                - shipping_id: shipping ID.
+        """
+        return self.requests_obj._get(f'/shipments/{shipping_id}')
