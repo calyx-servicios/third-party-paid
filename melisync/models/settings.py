@@ -60,7 +60,7 @@ class Settings(models.Model):
     def _onchange_company_id(self):
         for rec in self:
             rec.warehouse_id = False
-            rec.pricelists = False
+            rec.pricelist = False
 
     @api.onchange('site_id')
     def _onchange_site_id(self):

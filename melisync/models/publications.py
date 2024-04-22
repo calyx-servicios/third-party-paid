@@ -244,13 +244,14 @@ class Publications(models.Model):
             # ==========
             # Get MELI attributes
             attrs = self.get_attributes_and_variants()
+            logger.info('attrs = {}'.format(attrs))
             # Add attributes to data object
             data = {
                 **data,
                 **attrs,
             }
             # If product has not variants, add price and available qty.
-            if not data.get('variations', []):
+            if not data.get('variants', []):
                 data['price'] = self.price
                 data['available_quantity'] = self.available_qty
             # ==========
@@ -406,10 +407,6 @@ class Publications(models.Model):
                 variation_data = variant.meli_get_variant_data()
                 # Get other product data
                 variation_data['available_quantity'] = variant.with_context(warehouse=self.instance.warehouse_id.id).meli_available_qty # TODO: check publish with Stock 0
-                # If listing_type is free
-                if self.listing_type.listing_id == 'free':
-                    # Max is 1 (get minimoum of qty, 1)
-                    variation_data['available_quantity'] = min(1, variation_data['available_quantity'])
                 variation_data['price'] = self.price # self.with_context(pricelist=self.pricelist.id).meli_price
                 # Save product variation data
                 data['variations'].append(variation_data)

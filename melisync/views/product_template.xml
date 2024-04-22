@@ -39,7 +39,7 @@
           <field name="meli_ready" attrs="{ 'invisible': True }" />
           <field name="meli_instance_site_id" attrs="{ 'invisible': True }" />
           <field name="meli_available_shipping_modes" attrs="{ 'invisible': True }" />
-          <page name="mercadolibre" string="MercadoLibre" attrs="{ 'invisible': [('type', '!=', 'product')] }" groups="melisync.res_groups_products_moderator">
+          <page name="mercadolibre" string="MercadoLibre" attrs="{ 'invisible': ['|', ('type', '!=', 'product')] }" groups="melisync.res_groups_products_moderator">
             <sheet>
               <group>
                 <group string="Settings">

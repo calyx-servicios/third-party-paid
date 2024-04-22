@@ -92,6 +92,10 @@ class SaleOrder(models.Model):
                             'price_unit': line.get('unit_price'),
                         })
                         order_lines.append(order_line)
+
+                    billing_data = client.get_sale_billing_info(meli_order.get('id'))
+                    # Get billing info object
+                    billing_info = billing_data.get('billing_info')
                     # Get buyer data and check if exists in Odoo
                     buyer_id = meli_order.get('buyer').get('id')
                     # Get buyer partner ID
@@ -106,88 +110,109 @@ class SaleOrder(models.Model):
                         buyer_company = buyer_info.get('company', {})
                         buyer_phone = buyer_info.get('phone', {})
                         buyer_address = buyer_info.get('address', {})
+                        shipping_info = client.get_shipping(meli_order['shipping']['id'])
                         # Identification number and type
                         #buyer_identification_type = l10n_latam_identification_type_obj.search([('name', '=', buyer_identification.get('type'))])
                         # Parse buyer data
-                        buyer_data = {
-                            'company_type': 'person',
-                            'meli_id': buyer_info.get('id'),
-                            'name': buyer_company.get('corporate_name', 'MELI #%s'.format(buyer_info.get('id'))),
-                            'country_id': buyer_country_id.id,
-                            'city': buyer_address.get('city', ''),
-                            'zip': buyer_address.get('zip_code', ''),
-                            'street': buyer_address.get('address', ''),
-                            #'vat': buyer_identification.get('number'),
-                            #'l10n_latam_identification_type_id': buyer_identification_type.id,
-                            'email': buyer_info.get('email', ''),
-                            'phone': '{area_code} {number}'.format(area_code=buyer_phone.get('area_code', ''), number=buyer_phone.get('number', '')),
+                        billing = billing_info['additional_info']
+
+                        billing_user_data = {
+                            'last_name': billing[0]['value'],
+                            'doc_number': billing[1]['value'],
+                            'doc_type': billing[2]['value'],
+                            'zip_code': billing[3]['value'],
+                            'street_name': billing[4]['value'],
+                            'city_name': billing[5]['value'],
+                            'state_name': billing[6]['value'],
+                            'street_number': billing[7]['value'],
+                            'site_id': billing[8]['value'],
+                            'invoice_type': billing[9]['value'],
+                            'state_code': billing[10]['value'],
+                            'first_name': billing[11]['value'],
+                            'taxpayer_type_id': billing[12]['value'],
+                            'country_id': billing[13]['value'],
                         }
+
+                        if 'Consumidor' in billing_user_data['taxpayer_type_id']:
+                            name = f"{billing_user_data['first_name']} {billing_user_data['last_name']}"
+                            
+                            buyer_data = {
+                                'company_type': 'person',
+                                'meli_id': buyer_info.get('id'),
+                                'name': name,
+                                'country_id': buyer_country_id.id,
+                                'city': billing_user_data['city_name'],
+                                'zip':  billing_user_data['zip_code'],
+                                'street': billing_user_data['street_name'],
+                                'vat': billing_user_data['doc_number'],
+                                'l10n_ar_afip_responsibility_type_id': 5,
+                                'email': buyer_info.get('email', ''),
+                                'phone': '{area_code} {number}'.format(area_code=buyer_phone.get('area_code', ''), number=buyer_phone.get('number', '')),
+                            }
                         # Create the main partner
                         main_partner_id = res_partner_obj.create(buyer_data)
-                    """
-                    TODO: loop and repair
+                    
+                    #TODO: loop and repair
                     # Get order billing info to create INVOICE.
-                    billing_data = client.get_sale_billing_info(meli_order.get('id'))
-                    # Get billing info object
-                    billing_info = billing_data.get('billing_info')
+                    
                     # Get the invoice partner ID
-                    invoice_partner_id = res_partner_obj.search([('type', '=', 'invoice'), ('vat', '=', billing_info.get('doc_number'))])
-                    # If invoice partner not exists.
-                    if not invoice_partner_id:
-                        billing_additional_info = {}
-                        # Loop additional info keys/values.
-                        for i in billing_info.get('additional_info'):
-                            key, value = i.values()
-                            # And save in dict
-                            billing_additional_info[key] = value
-                        # Get type of responsability (business or end consumer)
-                        responsibility_name = billing_additional_info.get('TAXPAYER_TYPE_ID', 'Consumidor Final') # Consumidor Final is get of l10n_ar
-                        # Get AFIP local data
-                        #identification_type_id = l10n_latam_identification_type_obj.search([('name', '=', billing_info.get('doc_type'))])
-                        #responsibility_type_id = l10n_ar_afip_responsibility_type.search([('name', '=', responsibility_name)])
-                        # Get the state ID
-                        state_id = res_country_state_obj.search([('country_id', '=', main_partner_id.country_id.id), ('name', '=', billing_additional_info.get('STATE_NAME'))])
-                        if not state_id:
-                            # Add the new state data
-                            state_data = {
-                                'code': 'Z-{}'.format(len(res_country_state_obj.search([]).ids)+1), # TODO: improve country-state-code
-                                'country_id': main_partner_id.country_id.id,
-                                'name': billing_additional_info.get('STATE_NAME'),
-                            }
-                            # Create the new state
-                            state_id = res_country_state_obj.create(state_data)
-                        # Search invoice partner or create
-                        invoice_partner_data = {
-                            'parent_id': main_partner_id.id, # Parent partner ID (invoice partner is children)
-                            # Partner data
-                            'company_type': 'person', # Type person
-                            'type': 'invoice', # Address type
-                            'name': '{} - {} ({})'.format(main_partner_id.name, billing_info.get('doc_number'), _('invoice')),
-                            # Invoice AFIP data
-                            #'l10n_latam_identification_type_id': identification_type_id.id, # Type of identification (CUIT/DNI)
-                            'vat': billing_info.get('doc_number'), # Document number
-                            # Address info
-                            'country_id': main_partner_id.country_id.id, # Search ARGENTINA
-                            'city': main_partner_id.city, # City
-                            'state_id': state_id.id, # State
-                            'zip': billing_additional_info.get('ZIP_CODE'),
-                            'street': '{} {} - {}'.format(billing_additional_info.get('STREET_NAME'), billing_additional_info.get('STREET_NUMBER'), billing_additional_info.get('COMMENT')),
-                            # Save fiscal data
-                            'comment': _('Fiscal information: {} ({}: {})').format(responsibility_name, billing_info.get('doc_type'), billing_info.get('doc_number'))
-                        }
-                        # Create the invoice partner
-                        invoice_partner_id = res_partner_obj.create(invoice_partner_data)
-                        # Partner update data
-                        update_data = {}
-                        # If get the AFIP Data.
-                        #if responsibility_type_id:
-                        #    update_data['l10n_ar_afip_responsibility_type_id'] = responsibility_type_id.id, # AFIP Responsibility
-                        # If is company to invoice
-                        if billing_additional_info.get('BUSINESS_NAME'):
-                            update_data['name'] = '{} ({})'.format(invoice_partner_data['name'], billing_additional_info.get('BUSINESS_NAME'))
-                        # Update partner invoice data.
-                        invoice_partner_id.write(update_data)
-                    """
+                    # invoice_partner_id = res_partner_obj.search([('type', '=', 'invoice'), ('vat', '=', billing_info.get('doc_number'))])
+                    # # If invoice partner not exists.
+                    # if not invoice_partner_id:
+                    #     billing_additional_info = {}
+                    #     # Loop additional info keys/values.
+                    #     for i in billing_info.get('additional_info'):
+                    #         key, value = i.values()
+                    #         # And save in dict
+                    #         billing_additional_info[key] = value
+                    #     # Get type of responsability (business or end consumer)
+                    #     responsibility_name = billing_additional_info.get('TAXPAYER_TYPE_ID', 'Consumidor Final') # Consumidor Final is get of l10n_ar
+                    #     # Get AFIP local data
+                    #     #identification_type_id = l10n_latam_identification_type_obj.search([('name', '=', billing_info.get('doc_type'))])
+                    #     #responsibility_type_id = l10n_ar_afip_responsibility_type.search([('name', '=', responsibility_name)])
+                    #     # Get the state ID
+                    #     state_id = res_country_state_obj.search([('country_id', '=', main_partner_id.country_id.id), ('name', '=', billing_additional_info.get('STATE_NAME'))])
+                    #     if not state_id:
+                    #         # Add the new state data
+                    #         state_data = {
+                    #             'code': 'Z-{}'.format(len(res_country_state_obj.search([]).ids)+1), # TODO: improve country-state-code
+                    #             'country_id': main_partner_id.country_id.id,
+                    #             'name': billing_additional_info.get('STATE_NAME'),
+                    #         }
+                    #         # Create the new state
+                    #         state_id = res_country_state_obj.create(state_data)
+                    #     # Search invoice partner or create
+                    #     invoice_partner_data = {
+                    #         'parent_id': main_partner_id.id, # Parent partner ID (invoice partner is children)
+                    #         # Partner data
+                    #         'company_type': 'person', # Type person
+                    #         'type': 'invoice', # Address type
+                    #         'name': '{} - {} ({})'.format(main_partner_id.name, billing_info.get('doc_number'), _('invoice')),
+                    #         # Invoice AFIP data
+                    #         #'l10n_latam_identification_type_id': identification_type_id.id, # Type of identification (CUIT/DNI)
+                    #         'vat': billing_info.get('doc_number'), # Document number
+                    #         # Address info
+                    #         'country_id': main_partner_id.country_id.id, # Search ARGENTINA
+                    #         'city': main_partner_id.city, # City
+                    #         'state_id': state_id.id, # State
+                    #         'zip': billing_additional_info.get('ZIP_CODE'),
+                    #         'street': '{} {} - {}'.format(billing_additional_info.get('STREET_NAME'), billing_additional_info.get('STREET_NUMBER'), billing_additional_info.get('COMMENT')),
+                    #         # Save fiscal data
+                    #         'comment': _('Fiscal information: {} ({}: {})').format(responsibility_name, billing_info.get('doc_type'), billing_info.get('doc_number'))
+                    #     }
+                    #     # Create the invoice partner
+                    #     invoice_partner_id = res_partner_obj.create(invoice_partner_data)
+                    #     # Partner update data
+                    #     update_data = {}
+                    #     # If get the AFIP Data.
+                    #     #if responsibility_type_id:
+                    #     #    update_data['l10n_ar_afip_responsibility_type_id'] = responsibility_type_id.id, # AFIP Responsibility
+                    #     # If is company to invoice
+                    #     if billing_additional_info.get('BUSINESS_NAME'):
+                    #         update_data['name'] = '{} ({})'.format(invoice_partner_data['name'], billing_additional_info.get('BUSINESS_NAME'))
+                    #     # Update partner invoice data.
+                    #     invoice_partner_id.write(update_data)
+                    
                     # Loop order lines
                     order_data = {
                         'meli_id': meli_order_id,
@@ -211,7 +236,10 @@ class SaleOrder(models.Model):
                     # Create order
                     order_id = self.create(order)
                     # Confirm
-                    order_id.action_confirm()
+                    try:
+                        order_id.action_confirm()
+                    except Exception as e:
+                        logger.warning(_('Cannot confirm order {}:\nError: {}'.format(order.get('meli_id'), e)))
                 except Exception as e:
                     logger.warning(_('Cannot create order {}:\nError: {}'.format(order.get('meli_id'), e)))
         except Exception as e:
