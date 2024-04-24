@@ -33,7 +33,6 @@ class MaterialPurchaseRequisition(models.Model):
         ('cancel', 'Cancelled'),
         ('reject', 'Rejected')],
         default='draft',
-        track_visibility='onchange',
     )
     request_date = fields.Date(
         string='Requisition Date',
