@@ -5,3 +5,4 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     meli_id = fields.Char(string=_('Meli ID'))
+    meli_shipping_id = fields.Char(unique=True, string=_('Mercado Libre Shipping ID:')) 
