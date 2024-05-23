@@ -102,8 +102,14 @@ class SaleOrder(models.Model):
                     # Get buyer partner ID
                     main_partner_id = res_partner_obj.search([('meli_id', '=', buyer_id), ('type', '=', 'contact')])
                     shipping_address_ids = res_partner_obj.search([('meli_id', '=', buyer_id), ('type', '=', 'delivery')])
-                    shipping_info = client.get_shipping(meli_order['shipping']['id'])
+                    shipping_info = False
+                    if meli_order['shipping']['id'] != None:
+                        try:
+                            shipping_info = client.get_shipping(meli_order['shipping']['id'])
+                        except Exception as e:
+                            logger.warning(_('Cannot process order {}:\nError: {}'.format(meli_order.get('id'), e)))
                     exist = False
+                    
                     # If partner not registered
 
                     if not main_partner_id:
@@ -120,70 +126,86 @@ class SaleOrder(models.Model):
 
                         # Parse billing data 
                         billing = billing_info['additional_info']
-                        
-                        billing_user_data = {
-                            'last_name': billing[0]['value'],
-                            'doc_number': billing[1]['value'],
-                            'doc_type': billing[2]['value'],
-                            'zip_code': billing[3]['value'],
-                            'street_name': billing[4]['value'],
-                            'city_name': billing[5]['value'],
-                            'state_name': billing[6]['value'],
-                            'street_number': billing[7]['value'],
-                            'site_id': billing[8]['value'],
-                            'invoice_type': billing[9]['value'],
-                            'state_code': billing[10]['value'],
-                            'first_name': billing[11]['value'],
-                            'taxpayer_type_id': billing[12]['value'],
-                            'country_id': billing[13]['value'],
-                        }
+
+                        billing_dict = {item['type']: item['value'] for item in billing}
+
+                        if billing_dict.get('DOC_TYPE') == 'DNI':
+                            billing_user_data = {
+                                'name': f"{billing_dict.get('FIRST_NAME')} {billing_dict.get('LAST_NAME')}",
+                                'doc_number': billing_dict.get('DOC_NUMBER'),
+                                'doc_type': billing_dict.get('DOC_TYPE'),
+                                'zip_code': billing_dict.get('ZIP_CODE'),
+                                'street_name': billing_dict.get('STREET_NAME'),
+                                'city_name': billing_dict.get('CITY_NAME'),
+                                'state_name': billing_dict.get('STATE_NAME'),
+                                'street_number': billing_dict.get('STREET_NUMBER'),
+                                'site_id': billing_dict.get('SITE_ID'),
+                                'invoice_type': billing_dict.get('INVOICE_TYPE'),
+                                'state_code': billing_dict.get('STATE_CODE'),
+                                'taxpayer_type_id': billing_dict.get('TAXPAYER_TYPE_ID'),
+                                'country_id': billing_dict.get('COUNTRY_ID')
+                            }
+                        else:
+                            billing_user_data = {
+                                'name': f"{billing_dict.get('BUSINESS_NAME')}",
+                                'doc_number': billing_dict.get('DOC_NUMBER'),
+                                'doc_type': billing_dict.get('DOC_TYPE'),
+                                'zip_code': billing_dict.get('ZIP_CODE'),
+                                'street_name': billing_dict.get('STREET_NAME'),
+                                'city_name': billing_dict.get('CITY_NAME'),
+                                'state_name': billing_dict.get('STATE_NAME'),
+                                'street_number': billing_dict.get('STREET_NUMBER'),
+                                'site_id': billing_dict.get('SITE_ID'),
+                                'invoice_type': billing_dict.get('INVOICE_TYPE'),
+                                'state_code': billing_dict.get('STATE_CODE'),
+                                'taxpayer_type_id': billing_dict.get('TAXPAYER_TYPE_ID'),
+                                'country_id': billing_dict.get('COUNTRY_ID')
+                            }
 
                         #Search responsability and identification ids
                         type_of_responsability = self.env['l10n_ar.afip.responsibility.type'].search([('name', '=', billing_user_data['taxpayer_type_id'])])
                         type_of_identification = self.env['l10n_latam.identification.type'].search([('name', '=', billing_user_data['doc_type']),('country_id', '=', 10)])
 
-                        responsability_id = type_of_responsability.id
-                        identification_id = type_of_identification.id
-
-                        name = f"{billing_user_data['first_name']} {billing_user_data['last_name']}"
-
                         buyer_data = {
                             'company_type': 'person',
+                            'type': 'contact',
                             'meli_id': buyer_info.get('id'),
-                            'name': name,
+                            'name': billing_user_data['name'],
                             'country_id': buyer_country_id.id,
                             'city': billing_user_data['city_name'],
                             'zip':  billing_user_data['zip_code'],
                             'street': billing_user_data['street_name'],
                             'vat': billing_user_data['doc_number'],
-                            'l10n_ar_afip_responsibility_type_id': responsability_id,
-                            'l10n_latam_identification_type_id': identification_id,
+                            'l10n_ar_afip_responsibility_type_id': type_of_responsability.id,
+                            'l10n_latam_identification_type_id': type_of_identification.id,
                             'email': buyer_info.get('email', ''),
                             'phone': '{area_code} {number}'.format(area_code=buyer_phone.get('area_code', ''), number=buyer_phone.get('number', '')),
                         }
+                        
                         # Create the main partner
                         main_partner_id = res_partner_obj.create(buyer_data)
                     
                     for rec in shipping_address_ids:
-                        if rec.meli_shipping_id == int(shipping_info['receiver_address']['id']):
+                        if int(rec.meli_shipping_id) == int(shipping_info['receiver_address']['id']):
                             exist = True
                             shipping_address_id = rec.id
 
-                    if not exist:
-                        buyer_shipping = {
-                            'name': f"{name} (entrega)",
-                            'meli_id': buyer_info.get('id'),
-                            'meli_shipping_id': f"{shipping_info['receiver_address']['id']}",
-                            'company_type': 'person',
-                            'parent_id': main_partner_id.id,
-                            'type': 'delivery',
-                            'street': f"{shipping_info['receiver_address']['street_name']} {shipping_info['receiver_address']['street_number']}",
-                            'city': shipping_info['receiver_address']['city']['name'],
-                            'zip': shipping_info['receiver_address']['zip_code'],
-                            'country_id': buyer_country_id.id,
-                        }
-                        # Create the shipping address
-                        shipping_address_id = main_partner_id.create(buyer_shipping)
+                    if shipping_info:
+                        if not exist:
+                            buyer_shipping = {
+                                'name': f"{main_partner_id.name} (entrega)",
+                                'meli_id': buyer_info.get('id'),
+                                'meli_shipping_id': f"{shipping_info['receiver_address']['id']}",
+                                'company_type': 'person',
+                                'parent_id': main_partner_id.id,
+                                'type': 'delivery',
+                                'street': f"{shipping_info['receiver_address']['street_name']} {shipping_info['receiver_address']['street_number']}",
+                                'city': shipping_info['receiver_address']['city']['name'],
+                                'zip': shipping_info['receiver_address']['zip_code'],
+                                'country_id': buyer_country_id.id,
+                            }
+                            # Create the shipping address
+                            shipping_address_id = main_partner_id.create(buyer_shipping)
 
                     
                     #TODO: loop and repair
@@ -251,7 +273,7 @@ class SaleOrder(models.Model):
                     
                     order_shipping_id = main_partner_id.id
                     if shipping_address_id:
-                        order_shipping_id = shipping_address_id.id
+                        order_shipping_id = shipping_address_id
 
                     order_data = {
                         'meli_id': meli_order_id,
