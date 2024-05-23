@@ -315,7 +315,7 @@ class MercadoLibreClient(object):
 
     def get_shipping(self, shipping_id):
         """
-            Retirn shipping info
+            Return shipping info
             Parameters:
                 - shipping_id: shipping ID.
         """
