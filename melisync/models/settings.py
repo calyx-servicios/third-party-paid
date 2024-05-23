@@ -83,7 +83,7 @@ class Settings(models.Model):
         melisync_publications_obj = self.env['melisync.publications']
         for rec in self:
             try:
-                rec.published_count = len(melisync_publications_obj.search(self._get_published_domain()))
+                rec.published_count = len(melisync_publications_obj.search(rec._get_published_domain()))
             except Exception as e:
                 logger.warning(_('Error on get published_count for setting ID {}: {}').format(rec.id, e))
 
