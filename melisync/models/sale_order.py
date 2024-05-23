@@ -181,6 +181,7 @@ class SaleOrder(models.Model):
                             'email': buyer_info.get('email', ''),
                             'phone': '{area_code} {number}'.format(area_code=buyer_phone.get('area_code', ''), number=buyer_phone.get('number', '')),
                         }
+                        
                         # Create the main partner
                         main_partner_id = res_partner_obj.create(buyer_data)
                     
