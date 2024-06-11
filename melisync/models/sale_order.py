@@ -129,7 +129,7 @@ class SaleOrder(models.Model):
 
                         billing_dict = {item['type']: item['value'] for item in billing}
 
-                        if billing_dict.get('DOC_TYPE') == 'DNI':
+                        if billing_dict.get('DOC_TYPE', ' ') == 'DNI':
                             billing_user_data = {
                                 'name': f"{billing_dict.get('FIRST_NAME')} {billing_dict.get('LAST_NAME')}",
                                 'doc_number': billing_dict.get('DOC_NUMBER'),
@@ -145,7 +145,7 @@ class SaleOrder(models.Model):
                                 'taxpayer_type_id': billing_dict.get('TAXPAYER_TYPE_ID'),
                                 'country_id': billing_dict.get('COUNTRY_ID')
                             }
-                        else:
+                        elif billing.get('DOC_TYPE', ' ') in ['CUIL','CUIT']:
                             billing_user_data = {
                                 'name': f"{billing_dict.get('BUSINESS_NAME')}",
                                 'doc_number': billing_dict.get('DOC_NUMBER'),
@@ -161,6 +161,8 @@ class SaleOrder(models.Model):
                                 'taxpayer_type_id': billing_dict.get('TAXPAYER_TYPE_ID'),
                                 'country_id': billing_dict.get('COUNTRY_ID')
                             }
+                        else:
+                            raise UserError(_(f'Not doc_type in order: {meli_order_id}'))
 
                         #Search responsability and identification ids
                         type_of_responsability = self.env['l10n_ar.afip.responsibility.type'].search([('name', '=', billing_user_data['taxpayer_type_id'])])
@@ -205,7 +207,7 @@ class SaleOrder(models.Model):
                                 'country_id': buyer_country_id.id,
                             }
                             # Create the shipping address
-                            shipping_address_id = main_partner_id.create(buyer_shipping)
+                            shipping_address_id = main_partner_id.create(buyer_shipping).id
 
                     
                     #TODO: loop and repair
@@ -271,9 +273,7 @@ class SaleOrder(models.Model):
                     
                     # Loop order lines
                     
-                    order_shipping_id = main_partner_id.id
-                    if shipping_address_id:
-                        order_shipping_id = shipping_address_id
+                    order_shipping_id = shipping_address_id if shipping_address_id else main_partner_id.id
 
                     order_data = {
                         'meli_id': meli_order_id,
